@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="achievement_only_xs_or_os" translatable="false">CgkI06v4vNAdEAIQAQ</string>
+    <string name="achievement_chaotic_draw" translatable="false">CgkI06v4vNAdEAIQAg</string>
+    <string name="achievement_deja_vu" translatable="false">CgkI06v4vNAdEAIQAw</string>
+    <string name="achievement_long_haul" translatable="false">CgkI06v4vNAdEAIQBA</string>
+    <string name="achievement_plain_jane" translatable="false">CgkI06v4vNAdEAIQBQ</string>
+    <string name="achievement_reversi" translatable="false">CgkI06v4vNAdEAIQBg</string>
+    <string name="achievement_customer" translatable="false">CgkI06v4vNAdEAIQBw</string>
+    <string name="achievement_with_a_little_help" translatable="false">CgkI06v4vNAdEAIQCA</string>
+
+</resources>
