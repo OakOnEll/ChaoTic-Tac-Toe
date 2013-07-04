@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,12 +91,24 @@ public class GameFragment extends SherlockFragment {
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
-		MenuItem chat = menu.findItem(R.id.action_chat);
-		chat.setVisible(getMainActivity().getRoomListener() != null);
+		chatMenuItem = menu.findItem(R.id.action_chat);
+		handleMenu();
+	}
+
+	private void invalidateMenu() {
+		if (!ActivityCompat.invalidateOptionsMenu(getActivity())) {
+			handleMenu();
+		}	else {
+			getActivity().invalidateOptionsMenu();			
+		}
+	}
+	
+	private void handleMenu() {
+		chatMenuItem.setVisible(getMainActivity().getRoomListener() != null);
 		if (hasNewMessage) {
-			chat.setIcon(android.R.drawable.ic_dialog_email);
+			chatMenuItem.setIcon(android.R.drawable.ic_dialog_email);
 		} else {
-			chat.setIcon(android.R.drawable.ic_menu_call);			
+			chatMenuItem.setIcon(android.R.drawable.ic_menu_call);			
 		}
 	}
 
@@ -107,7 +120,7 @@ public class GameFragment extends SherlockFragment {
 			chatDialog.initialize(this, messages, getMainActivity().getRoomListener().getMe());
 			chatDialog.show(getChildFragmentManager(), "chat");
 			hasNewMessage = false;
-			getActivity().invalidateOptionsMenu();
+			invalidateMenu();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -429,6 +442,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private ChatDialogFragment chatDialog;
+	private MenuItem chatMenuItem;
 
 	public void messageRecieved(Participant opponentParticipant, String string) {
 		messages.add(new ChatMessage(opponentParticipant, string));
@@ -436,7 +450,7 @@ public class GameFragment extends SherlockFragment {
 			chatDialog.newMessage();
 		} else {
 			hasNewMessage=true;
-			getActivity().invalidateOptionsMenu();
+			invalidateMenu();
 		}
 	}
 
