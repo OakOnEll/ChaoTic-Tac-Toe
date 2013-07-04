@@ -1,5 +1,6 @@
 package com.oakonell.chaotictactoe;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -19,6 +20,8 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 
 public class NewLocalGameDialog extends SherlockFragmentActivity {
+	public static final String X_NAME_KEY = "X-name";
+	public static final String O_NAME_KEY = "O-name";
 
 	private String xName;
 	private String oName;
@@ -36,7 +39,7 @@ public class NewLocalGameDialog extends SherlockFragmentActivity {
 		final MarkerChanceFragment frag = new MarkerChanceFragment();
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
-		transaction.add(R.id.fragmentContainer, frag);
+		transaction.replace(R.id.fragmentContainer, frag);
 		transaction.commit();
 
 		xNameText.setText(xName);
@@ -56,19 +59,19 @@ public class NewLocalGameDialog extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO valid the names are not blank
+				// TODO validate the names are not blank
 				xName = xNameText.getText().toString();
 				oName = oNameText.getText().toString();
 				MarkerChance chance = frag.getChance();
 				writeNamesToPreferences();
 
-				Intent intent = new Intent(NewLocalGameDialog.this,
-						GameActivity.class);
+				Intent intent = new Intent();
 				chance.putIntentExtras(intent);
 
-				intent.putExtra(GameActivity.X_NAME_KEY, xName);
-				intent.putExtra(GameActivity.O_NAME_KEY, oName);
-				startActivity(intent);
+				intent.putExtra(X_NAME_KEY, xName);
+				intent.putExtra(O_NAME_KEY, oName);
+				
+				setResult(Activity.RESULT_OK, intent);
 				finish();
 			}
 		});
@@ -81,6 +84,7 @@ public class NewLocalGameDialog extends SherlockFragmentActivity {
 	private void defaultNamesFromPreferences() {
 		SharedPreferences sharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
+		// TODO store multiple names of the last players, and hook "search" into the text entry
 		xName = sharedPrefs.getString(X_NAME, "");
 		oName = sharedPrefs.getString(O_NAME, "");
 	}

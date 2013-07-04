@@ -1,10 +1,18 @@
 package com.oakonell.chaotictactoe;
 
+public class PlayerStrategy {
+	private String name;
 
+	protected PlayerStrategy(String name) {
+		this.name = name;
+	}
 
-public interface PlayerStrategy {
+	public boolean isHuman() {
+		return false;
+	}
 
-	boolean isHuman();
-	//Cell move(Board board, Marker me, Marker toPlay);
+	public String getName() {
+		return name;
+	}
 
 }

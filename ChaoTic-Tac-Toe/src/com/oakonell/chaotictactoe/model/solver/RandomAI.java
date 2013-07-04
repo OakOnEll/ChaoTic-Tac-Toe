@@ -6,7 +6,11 @@ import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 
-public class RandomAI implements PlayerStrategy {	
+public class RandomAI extends PlayerStrategy {	
+
+	public RandomAI(String name) {
+		super(name);
+	}
 
 	public Cell move(Board board, Marker me, Marker toPlay) {
 		int numEmpty = 0;
@@ -31,8 +35,5 @@ public class RandomAI implements PlayerStrategy {
 		}
 		throw new RuntimeException("Can't get here");
 	}
-	@Override
-	public boolean isHuman() {
-		return false;
-	}
+
 }

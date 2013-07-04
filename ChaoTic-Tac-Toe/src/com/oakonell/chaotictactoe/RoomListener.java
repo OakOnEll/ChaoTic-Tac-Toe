@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
@@ -22,18 +21,18 @@ import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListene
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
+import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
+import com.oakonell.chaotictactoe.model.ScoreCard;
 
 public class RoomListener implements RoomUpdateListener,
 		RealTimeMessageReceivedListener, RoomStatusUpdateListener {
 	private static final Random random = new Random();
 	private static final String TAG = RoomListener.class.getName();
 
-	private Activity activity;
-	private MoveListener moveListener;
+	private MainActivity activity;
 
-	private Context context;
 	private GameHelper helper;
 
 	private String mRoomId;
@@ -51,11 +50,9 @@ public class RoomListener implements RoomUpdateListener,
 		return helper.getGamesClient();
 	}
 
-	RoomListener(Activity activity, GameHelper helper) {
-		this.context = activity.getApplicationContext();
+	RoomListener(MainActivity activity, GameHelper helper) {
 		this.activity = activity;
 		this.helper = helper;
-		((ChaoTicTacToe) activity.getApplication()).setRoomListener(this);
 	}
 
 	// Called when we are connected to the room. We're not ready to play yet!
@@ -64,7 +61,6 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onConnectedToRoom(Room room) {
 		announce("onConnectedToRoom");
-		Log.d(TAG, "onConnectedToRoom.");
 
 		// get room ID, participants and my ID:
 		mRoomId = room.getRoomId();
@@ -82,8 +78,11 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onDisconnectedFromRoom(Room arg0) {
 		announce("onDisconnectedFromRoom");
-		// TODO Auto-generated method stub
-
+		
+		// TODO 
+		activity.showAlert("Disconnected from room?!");
+		// TODO pop if the current is game
+		activity.getSupportFragmentManager().popBackStack();
 	}
 
 	// We treat most of the room update callbacks in the same way: we update our
@@ -166,7 +165,7 @@ public class RoomListener implements RoomUpdateListener,
 			int y = buffer.getInt();
 			// TODO is it possible that the moveListener is null?
 			//   should we store the pending move, until a move listener is set
-			moveListener.makeMove(marker, new Cell(x, y));
+			activity.makeMove(marker, new Cell(x, y));
 		} else if (type == MSG_MESSAGE) {
 			int numBytes = buffer.getInt();
 			byte[] bytes = new byte[numBytes];
@@ -185,30 +184,27 @@ public class RoomListener implements RoomUpdateListener,
 	}
 
 	private void startGame(boolean iAmX) {
-		Intent intent = new Intent(context, GameActivity.class);
 		MarkerChance chance = MarkerChance.NORMAL;
 
-		chance.putIntentExtras(intent);
-
 		// TODO if we have account permission, can get account name
+		GameFragment gameFragment = new GameFragment();
+		Game game = new Game(3, Marker.X, chance);
+		ScoreCard score = new ScoreCard(0, 0, 0);
 		if (iAmX) {
-			intent.putExtra(GameActivity.X_NAME_KEY, "Me");
-			intent.putExtra(GameActivity.X_STRATEGY_KEY, GameActivity.HUMAN_STRATEGY_KEY);
-			intent.putExtra(GameActivity.O_NAME_KEY, getOpponentName());
-			intent.putExtra(GameActivity.O_STRATEGY_KEY, GameActivity.ONLINE_OPPONENT_STRATEGY_KEY);
+			gameFragment.startGame(new HumanStrategy("Me"), new OnlineStrategy(getOpponentName()), game, score);
 		} else {
-			intent.putExtra(GameActivity.O_NAME_KEY, "Me");
-			intent.putExtra(GameActivity.O_STRATEGY_KEY, GameActivity.HUMAN_STRATEGY_KEY);
-			intent.putExtra(GameActivity.X_NAME_KEY, getOpponentName());
-			intent.putExtra(GameActivity.X_STRATEGY_KEY, GameActivity.ONLINE_OPPONENT_STRATEGY_KEY);
+			gameFragment.startGame(new OnlineStrategy(getOpponentName()),new HumanStrategy("Me"),  game, score);
 		}
-		activity.startActivity(intent);
+		FragmentManager manager = activity.getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		transaction.replace(R.id.main_frame, gameFragment, "game");
+		transaction.addToBackStack(null);
+		transaction.commit();		
 	}
 
 	@Override
 	public void onJoinedRoom(int statusCode, Room room) {
 		announce("onJoinedRoom");
-		Log.d(TAG, "onJoinedRoom(" + statusCode + ", " + room + ")");
 		if (statusCode != GamesClient.STATUS_OK) {
 			Log.e(TAG, "*** Error: onRoomConnected, status " + statusCode);
 			showGameError();
@@ -225,16 +221,16 @@ public class RoomListener implements RoomUpdateListener,
 	// onDisconnectedFromRoom()).
 	@Override
 	public void onLeftRoom(int arg0, String arg1) {
-		// TODO Auto-generated method stub
 		announce("onLeftRoom");
-
+		// TODO pop if the current is game
+		activity.getSupportFragmentManager().popBackStack();
 	}
 
 	// Called when room is fully connected.
 	@Override
 	public void onRoomConnected(int statusCode, Room room) {
 		announce("onRoomConnected");
-		Log.d(TAG, "onRoomConnected(" + statusCode + ", " + room + ")");
+
 		if (statusCode != GamesClient.STATUS_OK) {
 			Log.e(TAG, "*** Error: onRoomConnected, status " + statusCode);
 			showGameError();
@@ -247,7 +243,7 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onRoomCreated(int statusCode, Room room) {
 		announce("onRoomCreated");
-		Log.d(TAG, "onRoomCreated(" + statusCode + ", " + room + ")");
+
 		if (statusCode != GamesClient.STATUS_OK) {
 			Log.e(TAG, "*** Error: onRoomCreated, status " + statusCode);
 			showGameError();
@@ -259,7 +255,7 @@ public class RoomListener implements RoomUpdateListener,
 	}
 
 	private void announce(String string) {
-		Toast.makeText(context, string, Toast.LENGTH_LONG).show();
+		Log.d(TAG, string);
 	}
 
 	private void showGameError() {
@@ -271,9 +267,6 @@ public class RoomListener implements RoomUpdateListener,
 	// enter the
 	// room and get connected.
 	void showWaitingRoom(Room room) {
-		if (activity == null) {
-			// TODO
-		}
 		// mWaitRoomDismissedFromCode = false;
 
 		// minimum number of players required for our game
@@ -282,7 +275,7 @@ public class RoomListener implements RoomUpdateListener,
 				MIN_PLAYERS);
 
 		// show waiting room UI
-		activity.startActivityForResult(i, MainActivity.RC_WAITING_ROOM);
+		activity.startActivityForResult(i, MenuFragment.RC_WAITING_ROOM);
 	}
 
 	public void leaveRoom() {
@@ -315,7 +308,7 @@ public class RoomListener implements RoomUpdateListener,
 		Log.d(TAG, "Starting game because user requested via waiting room UI.");
 
 		// let other players know we're starting.
-		Toast.makeText(context, "Start the game!", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(context, "Start the game!", Toast.LENGTH_SHORT).show();
 
 		myRandom = random.nextLong();
 		checkWhoIsFirstAndAttemptToStart(true);
@@ -372,18 +365,6 @@ public class RoomListener implements RoomUpdateListener,
 		if (start) {
 			startGame(iAmX);
 		}
-	}
-
-	public void clearActivity() {
-		activity = null;
-	}
-
-	public void setActivity(Activity activity) {
-		this.activity = activity;
-	}
-
-	public void setMoveListener(MoveListener listener) {
-		this.moveListener = listener;
 	}
 
 	public void sendMove(Marker marker, Cell cell) {

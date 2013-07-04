@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.oakonell.chaotictactoe.GameActivity"
+            android:name="com.oakonell.chaotictactoe.GameFragment"
             android:label="@string/app_name" >
             >
         </activity>

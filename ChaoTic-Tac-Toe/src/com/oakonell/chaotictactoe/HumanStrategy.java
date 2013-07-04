@@ -1,10 +1,10 @@
 package com.oakonell.chaotictactoe;
 
 
-public class HumanStrategy implements PlayerStrategy {
+public class HumanStrategy extends PlayerStrategy {
 
-	public HumanStrategy(String playerName, boolean multiplayer) {
-		// TODO Auto-generated constructor stub
+	public HumanStrategy(String playerName) {
+		super(playerName);
 	}
 
 	@Override

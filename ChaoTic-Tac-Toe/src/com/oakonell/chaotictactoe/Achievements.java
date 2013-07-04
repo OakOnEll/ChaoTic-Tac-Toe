@@ -19,7 +19,8 @@ public class Achievements {
 			R.string.achievement_only_xs_or_os,
 			R.string.offline_achievement_only_xs_or_os) {
 		@Override
-		public void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome) {
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
 			Board board = game.getBoard();
 			int size = board.getSize();
 			int numX = 0;
@@ -47,7 +48,8 @@ public class Achievements {
 			R.string.offline_achievement_chaotic_draw) {
 
 		@Override
-		public void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome) {
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
 			if (game.getMarkerChance().isChaotic()) {
 				if (outcome.isDraw()) {
 					unlock(gameHelper, context);
@@ -60,7 +62,8 @@ public class Achievements {
 			R.string.achievement_deja_vu, R.string.offline_achievement_deja_vu) {
 
 		@Override
-		public void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome) {
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
 			// TODO this should be implemented while playing?
 		}
 	};
@@ -70,7 +73,8 @@ public class Achievements {
 			R.string.offline_achievement_long_haul) {
 
 		@Override
-		public void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome) {
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
 			if (game.getMarkerChance().isChaotic()
 					&& game.getNumberOfMoves() > 20) {
 				unlock(gameHelper, context);
@@ -83,7 +87,8 @@ public class Achievements {
 			R.string.offline_achievement_with_a_little_help) {
 
 		@Override
-		public void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome) {
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
 			if (game.getNumberOfMoves() == game.getBoard().getSize()) {
 				// SHould this only apply to the winner?
 				unlock(gameHelper, context);
@@ -95,7 +100,8 @@ public class Achievements {
 	private IncrementalAchievement plainJaneCount = new IncrementalAchievement(
 			R.string.achievement_plain_jane) {
 		@Override
-		public void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome) {
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
 			if (game.getMarkerChance().isNormal()) {
 				increment(gameHelper, context);
 			}
@@ -105,7 +111,8 @@ public class Achievements {
 	private IncrementalAchievement reversiCount = new IncrementalAchievement(
 			R.string.achievement_reversi) {
 		@Override
-		public void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome) {
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
 			if (game.getMarkerChance().isReverse()) {
 				increment(gameHelper, context);
 			}
@@ -115,7 +122,8 @@ public class Achievements {
 	private IncrementalAchievement customCount = new IncrementalAchievement(
 			R.string.achievement_customer) {
 		@Override
-		public void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome) {
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
 			if (game.getMarkerChance().isCustom()) {
 				increment(gameHelper, context);
 			}
@@ -139,7 +147,10 @@ public class Achievements {
 	private interface Achievement {
 		void push(GamesClient client, Context context);
 
-		void testAndSet(GameHelper gameHelper, Context context, Game game, State outcome);
+		void testAndSet(GameHelper gameHelper, Context context, Game game,
+				State outcome);
+
+		boolean isPending();
 	}
 
 	private abstract static class BooleanAchievement implements Achievement {
@@ -150,6 +161,11 @@ public class Achievements {
 		BooleanAchievement(int achievementId, int stringId) {
 			this.achievementId = achievementId;
 			this.stringId = stringId;
+		}
+
+		@Override
+		public boolean isPending() {
+			return value;
 		}
 
 		public void push(GamesClient client, Context context) {
@@ -184,6 +200,11 @@ public class Achievements {
 			this.achievementId = achievementId;
 		}
 
+		@Override
+		public boolean isPending() {
+			return count > 0;
+		}
+
 		public void push(GamesClient client, Context context) {
 			if (count > 0) {
 				client.incrementAchievement(context.getString(achievementId),
@@ -200,6 +221,14 @@ public class Achievements {
 				count++;
 			}
 		}
+	}
+
+	public boolean hasPending() {
+		for (Achievement each : achievements) {
+			if (each.isPending())
+				return true;
+		}
+		return false;
 	}
 
 	public void pushToGoogle(GameHelper helper, Context context) {

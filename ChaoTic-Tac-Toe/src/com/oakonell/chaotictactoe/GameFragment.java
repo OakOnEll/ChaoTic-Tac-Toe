@@ -8,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
@@ -16,39 +18,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
-import com.google.analytics.tracking.android.EasyTracker;
-import com.oakonell.chaotictactoe.googleapi.BaseGameActivity;
-import com.oakonell.chaotictactoe.googleapi.GameHelper;
+import com.actionbarsherlock.view.MenuInflater;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.InvalidMoveException;
 import com.oakonell.chaotictactoe.model.Marker;
-import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
 import com.oakonell.chaotictactoe.utils.Utils;
 
-public class GameActivity extends BaseGameActivity {
-	public static final String X_NAME_KEY = "X-name";
-	public static final String O_NAME_KEY = "O-name";
-	public static final String X_STRATEGY_KEY = "X-strat";
-	public static final String O_STRATEGY_KEY = "O-strat";
-	public static final String X_FIRST_KEY = "xFirst";
-
-	public static final int HUMAN_STRATEGY_KEY = 1;
-	public static final int ONLINE_OPPONENT_STRATEGY_KEY = 2;
-	public static final int AI_STRATEGY_KEY = 3;
-
-	private String playerXName = null;
-	private String playerOName = null;
-	private PlayerStrategy xStrategy;
-	private PlayerStrategy oStrategy;
-
+public class GameFragment extends SherlockFragment {	
 	private ImageView markerToPlayView;
 	private View xHeaderLayout;
 	private View oHeaderLayout;
+	private TextView xWins;
+	private TextView oWins;
+	private TextView draws;
 
 	private List<ImageButton> buttons = new ArrayList<ImageButton>();
 	private WinOverlayView winOverlayView;
@@ -57,18 +44,20 @@ public class GameActivity extends BaseGameActivity {
 	private Marker firstPlayer;
 	private ScoreCard score;
 
-	PlayerStrategy currentStrategy;
-	private RoomListener appListener;
+	private PlayerStrategy xStrategy;
+	private PlayerStrategy oStrategy;
 
+	private PlayerStrategy currentStrategy;
+	
 	@Override
 	public void onResume() {
 		super.onResume();
 		// adjust the width or height to make sure the board is a square
-		findViewById(R.id.grid_container).getViewTreeObserver()
+		getActivity().findViewById(R.id.grid_container).getViewTreeObserver()
 				.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
-						View squareView = findViewById(R.id.grid_container);
+						View squareView = getActivity().findViewById(R.id.grid_container);
 						LayoutParams layout = squareView.getLayoutParams();
 						int min = Math.min(squareView.getWidth(),
 								squareView.getHeight());
@@ -87,139 +76,89 @@ public class GameActivity extends BaseGameActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.game, menu);
-		return true;
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.game, menu);
 	}
 
-	@Override
-	public void onSignInSucceeded() {
-		// ignore this... we should be connected for online, and it is a bonus
-		// if connected for on-device play
-		Toast.makeText(GameActivity.this, "sign in succeeded!?",
-				Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onSignInFailed() {
-		// TODO raise an error for an online game, otherwise silently fail
-		Toast.makeText(GameActivity.this, "sign in failure!?",
-				Toast.LENGTH_SHORT).show();
-	}
-
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Utils.enableStrictMode();
-		setContentView(R.layout.activity_game);
-
-		appListener = ((ChaoTicTacToe) getApplication()).getRoomListener();
-		if (appListener != null) {
-			appListener.setActivity(this);
-			appListener.setMoveListener(new MoveListener() {
-				@Override
-				public void makeMove(Marker marker, Cell cell) {
-						GameActivity.this.makeMove(marker, cell)			;
-				}
-			});
-		}
-
-		final ActionBar ab = getSupportActionBar();
-		ab.setDisplayUseLogoEnabled(true);
-		ab.setDisplayHomeAsUpEnabled(true);
-		ab.setTitle(R.string.title_game);
-
-		String stringExtra = getIntent().getStringExtra(X_NAME_KEY);
-		if (stringExtra != null) {
-			playerXName = stringExtra;
-		}
-		stringExtra = getIntent().getStringExtra(O_NAME_KEY);
-		if (stringExtra != null) {
-			playerOName = stringExtra;
-		}
-		int xPlayerStrategyKey = getIntent().getIntExtra(X_STRATEGY_KEY,
-				HUMAN_STRATEGY_KEY);
-		int oPlayerStrategyKey = getIntent().getIntExtra(O_STRATEGY_KEY,
-				HUMAN_STRATEGY_KEY);
-		boolean multiplayer = xPlayerStrategyKey == ONLINE_OPPONENT_STRATEGY_KEY
-				|| oPlayerStrategyKey == ONLINE_OPPONENT_STRATEGY_KEY;
-		xStrategy = getPlayerStrategy(xPlayerStrategyKey, playerXName,
-				multiplayer);
-		oStrategy = getPlayerStrategy(oPlayerStrategyKey, playerOName,
-				multiplayer);
-
-		TextView xName = (TextView) findViewById(R.id.xName);
-		xName.setText(getPlayerTitle(Marker.X));
-		TextView oName = (TextView) findViewById(R.id.oName);
-		oName.setText(getPlayerTitle(Marker.O));
-		xHeaderLayout = findViewById(R.id.x_name_layout);
-		oHeaderLayout = findViewById(R.id.o_name_layout);
+	public void startGame(PlayerStrategy xStrategy, PlayerStrategy oStrategy, Game game, ScoreCard score) {
+		this.xStrategy = xStrategy;
+		this.oStrategy = oStrategy;
 
 		firstPlayer = Marker.X;
 		currentStrategy = xStrategy;
-		if (!getIntent().getBooleanExtra(X_FIRST_KEY, true)) {
-			firstPlayer = Marker.O;
+		
+		firstPlayer = game.getCurrentPlayer();
+		if (firstPlayer == Marker.X) {				
+			currentStrategy = xStrategy;
+		} else {
 			currentStrategy = oStrategy;
 		}
+		
+		this.score = score;
+		this.game = game;
+	}
 
-		MarkerChance chance = MarkerChance.fromIntentExtras(getIntent());
-		score = ScoreCard.fromIntentExtras(getIntent());
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_game, container, false);
+		setHasOptionsMenu(true);
 
-		game = new Game(3, firstPlayer, chance);
+		TextView xName = (TextView) view.findViewById(R.id.xName);
+		xName.setText(getPlayerTitle(Marker.X));
+		TextView oName = (TextView) view.findViewById(R.id.oName);
+		oName.setText(getPlayerTitle(Marker.O));
+		xHeaderLayout = view.findViewById(R.id.x_name_layout);
+		oHeaderLayout = view.findViewById(R.id.o_name_layout);
 
-		markerToPlayView = (ImageView) findViewById(R.id.marker_to_play);
-		winOverlayView = (WinOverlayView) findViewById(R.id.win_overlay);
+		markerToPlayView = (ImageView) view.findViewById(R.id.marker_to_play);
+		winOverlayView = (WinOverlayView) view.findViewById(R.id.win_overlay);
 
-		ImageButton button = (ImageButton) findViewById(R.id.button_r1c1);
+		ImageButton button = (ImageButton) view.findViewById(R.id.button_r1c1);
 		button.setOnClickListener(new ButtonPressListener(new Cell(0, 0)));
 		buttons.add(button);
 
-		button = (ImageButton) findViewById(R.id.button_r1c2);
+		button = (ImageButton) view.findViewById(R.id.button_r1c2);
 		button.setOnClickListener(new ButtonPressListener(new Cell(0, 1)));
 		buttons.add(button);
 
-		button = (ImageButton) findViewById(R.id.button_r1c3);
+		button = (ImageButton) view.findViewById(R.id.button_r1c3);
 		button.setOnClickListener(new ButtonPressListener(new Cell(0, 2)));
 		buttons.add(button);
 
-		button = (ImageButton) findViewById(R.id.button_r2c1);
+		button = (ImageButton) view.findViewById(R.id.button_r2c1);
 		button.setOnClickListener(new ButtonPressListener(new Cell(1, 0)));
 		buttons.add(button);
 
-		button = (ImageButton) findViewById(R.id.button_r2c2);
+		button = (ImageButton) view.findViewById(R.id.button_r2c2);
 		button.setOnClickListener(new ButtonPressListener(new Cell(1, 1)));
 		buttons.add(button);
 
-		button = (ImageButton) findViewById(R.id.button_r2c3);
+		button = (ImageButton) view.findViewById(R.id.button_r2c3);
 		button.setOnClickListener(new ButtonPressListener(new Cell(1, 2)));
 		buttons.add(button);
 
-		button = (ImageButton) findViewById(R.id.button_r3c1);
+		button = (ImageButton) view.findViewById(R.id.button_r3c1);
 		button.setOnClickListener(new ButtonPressListener(new Cell(2, 0)));
 		buttons.add(button);
 
-		button = (ImageButton) findViewById(R.id.button_r3c2);
+		button = (ImageButton) view.findViewById(R.id.button_r3c2);
 		button.setOnClickListener(new ButtonPressListener(new Cell(2, 1)));
 		buttons.add(button);
 
-		button = (ImageButton) findViewById(R.id.button_r3c3);
+		button = (ImageButton) view.findViewById(R.id.button_r3c3);
 		button.setOnClickListener(new ButtonPressListener(new Cell(2, 2)));
 		buttons.add(button);
 
+		xWins = (TextView) view.findViewById(R.id.num_x_wins);
+		oWins = (TextView) view.findViewById(R.id.num_o_wins);
+		draws = (TextView) view.findViewById(R.id.num_draws);
+		
 		updateHeader();
+		return view;
 	}
 
-	private PlayerStrategy getPlayerStrategy(int playerStrategyKey,
-			String playerName, boolean multiplayer) {
-		if (playerStrategyKey == HUMAN_STRATEGY_KEY) {
-			return new HumanStrategy(playerName, multiplayer);
-		} else if (playerStrategyKey == ONLINE_OPPONENT_STRATEGY_KEY) {
-			return new OnlineStrategy(playerName, multiplayer);
-		} else if (playerStrategyKey == AI_STRATEGY_KEY) {
-			// return new AiStrategy(playerName);
-		}
-		throw new RuntimeException("Unhandled player strategy!");
-	}
 
 	private final class ButtonPressListener implements View.OnClickListener {
 		private final Cell cell;
@@ -237,6 +176,7 @@ public class GameActivity extends BaseGameActivity {
 			Marker marker = game.getMarkerToPlay();
 			makeMove(marker, cell);
 			// send move to opponent
+			RoomListener appListener = getMainActivity().getRoomListener();
 			if (appListener != null) {
 				appListener.sendMove(marker, cell);
 			}
@@ -275,12 +215,9 @@ public class GameActivity extends BaseGameActivity {
 			markerToPlayView.setImageResource(R.drawable.system_dot);
 		}
 
-		((TextView) findViewById(R.id.num_x_wins)).setText(""
-				+ score.getXWins());
-		((TextView) findViewById(R.id.num_o_wins)).setText(""
-				+ score.getOWins());
-		((TextView) findViewById(R.id.num_draws))
-				.setText("" + score.getDraws());
+		xWins.setText(""+ score.getXWins());
+		oWins.setText(""+ score.getOWins());
+		draws.setText("" + score.getDraws());
 	}
 
 	public void makeMove(Marker markerToPlay, Cell cell) {
@@ -292,7 +229,7 @@ public class GameActivity extends BaseGameActivity {
 		try {
 			outcome = game.placeMarker(cell);
 		} catch (InvalidMoveException e) {
-			Toast toast = Toast.makeText(GameActivity.this,
+			Toast toast = Toast.makeText(getActivity(),
 					R.string.invalid_move, Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
@@ -314,8 +251,8 @@ public class GameActivity extends BaseGameActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO leave room,notify opponent of leaving
-					finish();
 					dialog.dismiss();
+					getMainActivity().getSupportFragmentManager().popBackStack();
 				}
 			};
 			OnClickListener playAgainListener = new DialogInterface.OnClickListener() {
@@ -338,7 +275,7 @@ public class GameActivity extends BaseGameActivity {
 				winOverlayView.invalidate();
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(
-						GameActivity.this);
+						getActivity());
 				builder.setTitle(getString(R.string.player_won,
 						getPlayerName(outcome.getWinner())));
 				builder.setMessage(R.string.play_again);
@@ -353,7 +290,7 @@ public class GameActivity extends BaseGameActivity {
 			} else {
 				score.incrementScore(null);
 				AlertDialog.Builder builder = new AlertDialog.Builder(
-						GameActivity.this);
+						getActivity());
 				builder.setTitle(getString(R.string.draw));
 				builder.setMessage(R.string.play_again);
 				builder.setCancelable(false);
@@ -408,7 +345,7 @@ public class GameActivity extends BaseGameActivity {
 		} else {
 			throw new RuntimeException("Invalid cell");
 		}
-		return (ImageButton) findViewById(id);
+		return (ImageButton) getActivity().findViewById(id);
 	}
 
 	public void switchPlayerStrategy() {
@@ -422,9 +359,9 @@ public class GameActivity extends BaseGameActivity {
 	private String getPlayerTitle(Marker player) {
 		String playerTurnString;
 		if (player == Marker.X) {
-			playerTurnString = playerXName;
+			playerTurnString = xStrategy.getName();
 		} else {
-			playerTurnString = playerOName;
+			playerTurnString = oStrategy.getName();
 		}
 		playerTurnString = (playerTurnString != null && playerTurnString.trim()
 				.length() > 0) ? (playerTurnString + " (" + player.name() + ")")
@@ -435,9 +372,9 @@ public class GameActivity extends BaseGameActivity {
 	private String getPlayerName(Marker player) {
 		String playerTurnString;
 		if (player == Marker.X) {
-			playerTurnString = playerXName;
+			playerTurnString = xStrategy.getName();
 		} else {
-			playerTurnString = playerOName;
+			playerTurnString = oStrategy.getName();
 		}
 		playerTurnString = (playerTurnString != null && playerTurnString.trim()
 				.length() > 0) ? (playerTurnString + " (" + player.name() + ")")
@@ -445,26 +382,18 @@ public class GameActivity extends BaseGameActivity {
 		return playerTurnString;
 	}
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		// ((ChaoTicTacToe) getApplication()).getGameHelper().onStart(this);
-		EasyTracker.getInstance().activityStart(this);
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		// ((ChaoTicTacToe) getApplication()).getGameHelper().onStop();
-		EasyTracker.getInstance().activityStop(this);
-	}
+	
 
 	private void evaluateGameEndAchievements(State outcome) {
-		ChaoTicTacToe application = ((ChaoTicTacToe) getApplication());
-		GameHelper gameHelper = getGameHelper();
+		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity().getApplication());
 
 		Achievements achievements = application.getAchievements();
-		achievements.testAndSetForGameEndAchievements(gameHelper, this, game,
+		achievements.testAndSetForGameEndAchievements(getMainActivity().getGameHelper(), getActivity(), game,
 				outcome);
 	}
+	
+	public MainActivity getMainActivity() {
+		return (MainActivity) super.getActivity();
+	}
+
 }
