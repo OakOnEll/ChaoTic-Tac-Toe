@@ -176,7 +176,8 @@ public class RoomListener implements RoomUpdateListener,
 			} catch (UnsupportedEncodingException e) {
 				throw new RuntimeException("UTF-8 charset not present!?");
 			}
-			// TODO send text to client
+			
+			activity.messageRecieved(getOpponentParticipant(), string);
 		} else {
 			throw new RuntimeException("unexpected message type! " + type);
 		}
@@ -390,6 +391,46 @@ public class RoomListener implements RoomUpdateListener,
 						}
 					}
 				}, buffer.array(), getRoomId(), getOpponentId());
+	}
+
+	public void sendMessage(String string) {
+		ByteBuffer buffer = ByteBuffer
+				.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
+		buffer.put(MSG_MESSAGE);
+		
+		byte[] bytes;
+		try {
+			bytes = string.getBytes("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException("Unsupported UTF-8?!");
+		}
+		
+		buffer.putInt(bytes.length);
+		buffer.put(bytes);
+		getGamesClient().sendReliableRealTimeMessage(
+				new RealTimeReliableMessageSentListener() {
+					@Override
+					public void onRealTimeMessageSent(int statusCode,
+							int token, String recipientParticipantId) {
+						if (statusCode == GamesClient.STATUS_OK) {
+
+						} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
+
+						} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
+
+						} else {
+
+						}
+					}
+				}, buffer.array(), getRoomId(), getOpponentId());	
+		
+	}
+
+	public Participant getMe() {
+		if (mParticipants.get(0).getParticipantId().equals(mMyId)) {
+			return mParticipants.get(0);
+		}
+		return mParticipants.get(1);
 	}
 
 }

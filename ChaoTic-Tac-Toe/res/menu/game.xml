@@ -7,4 +7,10 @@
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/action_settings"/>
  -->
-</menu>
+   <item
+        android:id="@+id/action_chat"
+        android:orderInCategory="101"
+        android:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_call"
+        android:title="@string/action_chat"/>
+ </menu>

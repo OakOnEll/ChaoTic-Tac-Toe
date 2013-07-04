@@ -10,6 +10,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.games.GamesClient;
+import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.googleapi.BaseGameActivity;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
@@ -141,5 +142,9 @@ public class MainActivity extends BaseGameActivity {
 
 	public void setRoomListener(RoomListener roomListener) {
 		this.roomListener = roomListener;
+	}
+
+	public void messageRecieved(Participant opponentParticipant, String string) {
+		getGameFragment().messageRecieved(opponentParticipant, string);		
 	}
 }

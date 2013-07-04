@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.InvalidMoveException;
@@ -29,7 +31,7 @@ import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
 import com.oakonell.chaotictactoe.utils.Utils;
 
-public class GameFragment extends SherlockFragment {	
+public class GameFragment extends SherlockFragment {
 	private ImageView markerToPlayView;
 	private View xHeaderLayout;
 	private View oHeaderLayout;
@@ -48,7 +50,10 @@ public class GameFragment extends SherlockFragment {
 	private PlayerStrategy oStrategy;
 
 	private PlayerStrategy currentStrategy;
-	
+
+	private List<ChatMessage> messages = new ArrayList<ChatMessage>();
+	private boolean hasNewMessage;
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -57,7 +62,8 @@ public class GameFragment extends SherlockFragment {
 				.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
-						View squareView = getActivity().findViewById(R.id.grid_container);
+						View squareView = getActivity().findViewById(
+								R.id.grid_container);
 						LayoutParams layout = squareView.getLayoutParams();
 						int min = Math.min(squareView.getWidth(),
 								squareView.getHeight());
@@ -81,20 +87,47 @@ public class GameFragment extends SherlockFragment {
 		inflater.inflate(R.menu.game, menu);
 	}
 
-	public void startGame(PlayerStrategy xStrategy, PlayerStrategy oStrategy, Game game, ScoreCard score) {
+	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		MenuItem chat = menu.findItem(R.id.action_chat);
+		chat.setVisible(getMainActivity().getRoomListener() != null);
+		if (hasNewMessage) {
+			chat.setIcon(android.R.drawable.ic_dialog_email);
+		} else {
+			chat.setIcon(android.R.drawable.ic_menu_call);			
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_chat:
+			chatDialog = new ChatDialogFragment();
+			chatDialog.initialize(this, messages, getMainActivity().getRoomListener().getMe());
+			chatDialog.show(getChildFragmentManager(), "chat");
+			hasNewMessage = false;
+			getActivity().invalidateOptionsMenu();
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	public void startGame(PlayerStrategy xStrategy, PlayerStrategy oStrategy,
+			Game game, ScoreCard score) {
 		this.xStrategy = xStrategy;
 		this.oStrategy = oStrategy;
 
 		firstPlayer = Marker.X;
 		currentStrategy = xStrategy;
-		
+
 		firstPlayer = game.getCurrentPlayer();
-		if (firstPlayer == Marker.X) {				
+		if (firstPlayer == Marker.X) {
 			currentStrategy = xStrategy;
 		} else {
 			currentStrategy = oStrategy;
 		}
-		
+
 		this.score = score;
 		this.game = game;
 	}
@@ -154,11 +187,10 @@ public class GameFragment extends SherlockFragment {
 		xWins = (TextView) view.findViewById(R.id.num_x_wins);
 		oWins = (TextView) view.findViewById(R.id.num_o_wins);
 		draws = (TextView) view.findViewById(R.id.num_draws);
-		
+
 		updateHeader();
 		return view;
 	}
-
 
 	private final class ButtonPressListener implements View.OnClickListener {
 		private final Cell cell;
@@ -215,8 +247,8 @@ public class GameFragment extends SherlockFragment {
 			markerToPlayView.setImageResource(R.drawable.system_dot);
 		}
 
-		xWins.setText(""+ score.getXWins());
-		oWins.setText(""+ score.getOWins());
+		xWins.setText("" + score.getXWins());
+		oWins.setText("" + score.getOWins());
 		draws.setText("" + score.getDraws());
 	}
 
@@ -229,8 +261,8 @@ public class GameFragment extends SherlockFragment {
 		try {
 			outcome = game.placeMarker(cell);
 		} catch (InvalidMoveException e) {
-			Toast toast = Toast.makeText(getActivity(),
-					R.string.invalid_move, Toast.LENGTH_SHORT);
+			Toast toast = Toast.makeText(getActivity(), R.string.invalid_move,
+					Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return;
@@ -252,7 +284,8 @@ public class GameFragment extends SherlockFragment {
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO leave room,notify opponent of leaving
 					dialog.dismiss();
-					getMainActivity().getSupportFragmentManager().popBackStack();
+					getMainActivity().getSupportFragmentManager()
+							.popBackStack();
 				}
 			};
 			OnClickListener playAgainListener = new DialogInterface.OnClickListener() {
@@ -382,18 +415,33 @@ public class GameFragment extends SherlockFragment {
 		return playerTurnString;
 	}
 
-	
-
 	private void evaluateGameEndAchievements(State outcome) {
-		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity().getApplication());
+		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity()
+				.getApplication());
 
 		Achievements achievements = application.getAchievements();
-		achievements.testAndSetForGameEndAchievements(getMainActivity().getGameHelper(), getActivity(), game,
-				outcome);
+		achievements.testAndSetForGameEndAchievements(getMainActivity()
+				.getGameHelper(), getActivity(), game, outcome);
 	}
-	
+
 	public MainActivity getMainActivity() {
 		return (MainActivity) super.getActivity();
+	}
+
+	private ChatDialogFragment chatDialog;
+
+	public void messageRecieved(Participant opponentParticipant, String string) {
+		messages.add(new ChatMessage(opponentParticipant, string));
+		if (chatDialog != null) {
+			chatDialog.newMessage();
+		} else {
+			hasNewMessage=true;
+			getActivity().invalidateOptionsMenu();
+		}
+	}
+
+	public void chatClosed() {
+		chatDialog = null;
 	}
 
 }

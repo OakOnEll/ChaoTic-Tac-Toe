@@ -72,5 +72,7 @@
         <string name="signing_in">Signing in with Google</string>
     <string name="signing_out">Signing out</string>
     <string name="new_quick_game">New Quick Game</string>
-        
+    <string name="button_send">Send</string>
+    <string name="action_chat">Chat</string>
+            
 </resources>
