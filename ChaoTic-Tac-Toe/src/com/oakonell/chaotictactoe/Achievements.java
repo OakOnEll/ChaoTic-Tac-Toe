@@ -15,6 +15,9 @@ import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.State;
 
 public class Achievements {
+	private static final int NUM_MOVES_LONG_HAUL = 20;
+	private static final int NUM_MOVES_CLEAN_SLATE = 5;
+
 	private BooleanAchievement onlyXsOrOs = new BooleanAchievement(
 			R.string.achievement_only_xs_or_os,
 			R.string.offline_achievement_only_xs_or_os) {
@@ -76,7 +79,7 @@ public class Achievements {
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
 			if (game.getMarkerChance().isChaotic()
-					&& game.getNumberOfMoves() > 20) {
+					&& game.getNumberOfMoves() > NUM_MOVES_LONG_HAUL) {
 				unlock(gameHelper, context);
 			}
 		}
@@ -90,11 +93,23 @@ public class Achievements {
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
 			if (game.getNumberOfMoves() == game.getBoard().getSize()) {
-				// SHould this only apply to the winner?
+				// TODO SHould this only apply to the winner?
 				unlock(gameHelper, context);
 			}
 		}
 
+	};
+	private BooleanAchievement cleanSlate = new BooleanAchievement(
+			R.string.achievement_clean_slate,
+			R.string.offline_achievement_chaotic_draw) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (game.getNumberOfMoves() >= NUM_MOVES_CLEAN_SLATE && game.getBoard().isEmpty()) {
+				unlock(gameHelper, context);
+			}
+		}
 	};
 
 	private IncrementalAchievement plainJaneCount = new IncrementalAchievement(
@@ -130,18 +145,21 @@ public class Achievements {
 		}
 	};
 
-	private List<Achievement> achievements = new ArrayList<Achievements.Achievement>();
+	private List<Achievement> endGameAchievements = new ArrayList<Achievements.Achievement>();
+	private List<Achievement> inGameAchievements = new ArrayList<Achievements.Achievement>();
 
 	public Achievements() {
-		achievements.add(onlyXsOrOs);
-		achievements.add(chaoticDraw);
-		achievements.add(dejaVu);
-		achievements.add(longHaul);
-		achievements.add(withALittleHelp);
+		inGameAchievements.add(dejaVu);
+		inGameAchievements.add(cleanSlate);
 
-		achievements.add(plainJaneCount);
-		achievements.add(reversiCount);
-		achievements.add(customCount);
+		endGameAchievements.add(onlyXsOrOs);
+		endGameAchievements.add(chaoticDraw);
+		endGameAchievements.add(longHaul);
+		endGameAchievements.add(withALittleHelp);
+
+		endGameAchievements.add(plainJaneCount);
+		endGameAchievements.add(reversiCount);
+		endGameAchievements.add(customCount);
 	}
 
 	private interface Achievement {
@@ -224,7 +242,11 @@ public class Achievements {
 	}
 
 	public boolean hasPending() {
-		for (Achievement each : achievements) {
+		for (Achievement each : endGameAchievements) {
+			if (each.isPending())
+				return true;
+		}
+		for (Achievement each : inGameAchievements) {
 			if (each.isPending())
 				return true;
 		}
@@ -236,14 +258,24 @@ public class Achievements {
 			return;
 
 		GamesClient client = helper.getGamesClient();
-		for (Achievement each : achievements) {
+		for (Achievement each : endGameAchievements) {
 			each.push(client, context);
+		}
+		for (Achievement each : inGameAchievements) {
+			each.push(client, context);
+		}
+	}
+
+	public void testAndSetForInGameAchievements(GameHelper gameHelper,
+			Context context, Game game, State outcome) {
+		for (Achievement each : inGameAchievements) {
+			each.testAndSet(gameHelper, context, game, outcome);
 		}
 	}
 
 	public void testAndSetForGameEndAchievements(GameHelper gameHelper,
 			Context context, Game game, State outcome) {
-		for (Achievement each : achievements) {
+		for (Achievement each : endGameAchievements) {
 			each.testAndSet(gameHelper, context, game, outcome);
 		}
 	}

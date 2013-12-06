@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -27,10 +28,13 @@ import com.google.android.gms.games.multiplayer.InvitationBuffer;
 import com.google.android.gms.games.multiplayer.OnInvitationReceivedListener;
 import com.google.android.gms.games.multiplayer.OnInvitationsLoadedListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
+import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
+import com.oakonell.chaotictactoe.settings.SettingsActivity;
+import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
 
 public class MenuFragment extends SherlockFragment {
 	private String TAG = MenuFragment.class.getName();
@@ -116,7 +120,7 @@ public class MenuFragment extends SherlockFragment {
 			acceptInviteToRoom(inv.getInvitationId());
 			break;
 		}
-//		super.onActivityResult(request, response, data);
+		// super.onActivityResult(request, response, data);
 	}
 
 	void leaveRoom() {
@@ -210,6 +214,22 @@ public class MenuFragment extends SherlockFragment {
 			}
 		});
 
+		Button viewLeaderboards = (Button) view
+				.findViewById(R.id.view_leaderboards);
+		viewLeaderboards.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (getMainActivity().isSignedIn()) {
+					startActivityForResult(getMainActivity().getGamesClient()
+							.getAllLeaderboardsIntent(), RC_UNUSED);
+				} else {
+					// TODO display pending achievements
+					getMainActivity().showAlert(
+							getString(R.string.achievements_not_available));
+				}
+			}
+		});
+
 		SignInButton signInButton = (SignInButton) view
 				.findViewById(R.id.sign_in_button);
 		signInButton.setOnClickListener(new OnClickListener() {
@@ -289,12 +309,20 @@ public class MenuFragment extends SherlockFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// switch (item.getItemId()) {
-		// case R.id.action_settings:
-		// Intent intent = new Intent(this, Preferences.class);
-		// startActivity(intent);
-		// return true;
-		// }
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			// create special intent
+			Intent prefIntent = new Intent(getActivity(),
+					SettingsActivity.class);
+
+			GameHelper helper = getMainActivity().getGameHelper();
+			Info info = new Info(helper);
+			ChaoTicTacToe app = (ChaoTicTacToe) getActivity().getApplication();
+			app.setDevelopInfo(info);
+
+			getActivity().startActivity(prefIntent);
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -342,6 +370,8 @@ public class MenuFragment extends SherlockFragment {
 		signInView.setVisibility(View.INVISIBLE);
 		// show sign out button
 		signOutView.setVisibility(View.VISIBLE);
+		TextView signedInAsText= (TextView) getActivity().findViewById(R.id.signed_in_as_text);
+		signedInAsText.setText("You are signed into Google+ as " + getMainActivity().getGamesClient().getCurrentAccountName());
 	}
 
 	private void refreshInvites() {

@@ -30,7 +30,7 @@ import com.oakonell.chaotictactoe.model.InvalidMoveException;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
-import com.oakonell.chaotictactoe.utils.Utils;
+import com.oakonell.utils.Utils;
 
 public class GameFragment extends SherlockFragment {
 	private ImageView markerToPlayView;
@@ -292,6 +292,7 @@ public class GameFragment extends SherlockFragment {
 		}
 		if (outcome.isOver()) {
 			evaluateGameEndAchievements(outcome);
+			evaluateLeaderboards(outcome);
 			OnClickListener cancelListener = new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -350,9 +351,12 @@ public class GameFragment extends SherlockFragment {
 			}
 
 		} else {
+			evaluateInGameAchievements(outcome);
 			updateHeader();
 		}
 	}
+
+
 
 	private ImageButton findButtonFor(Cell cell) {
 		int id;
@@ -436,7 +440,24 @@ public class GameFragment extends SherlockFragment {
 		achievements.testAndSetForGameEndAchievements(getMainActivity()
 				.getGameHelper(), getActivity(), game, outcome);
 	}
+	private void evaluateInGameAchievements(State outcome) {
+		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity()
+				.getApplication());
 
+		Achievements achievements = application.getAchievements();
+		achievements.testAndSetForInGameAchievements(getMainActivity()
+				.getGameHelper(), getActivity(), game, outcome);
+	}
+	private void evaluateLeaderboards(State outcome) {
+		// TODO Auto-generated method stub
+		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity()
+				.getApplication());
+
+		Leaderboards leaderboards = application.getLeaderboards();
+		leaderboards.submitGame(getMainActivity()
+				.getGameHelper(), getActivity(), game, outcome);
+		
+	}
 	public MainActivity getMainActivity() {
 		return (MainActivity) super.getActivity();
 	}

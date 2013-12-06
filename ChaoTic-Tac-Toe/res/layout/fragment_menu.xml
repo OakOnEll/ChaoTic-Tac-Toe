@@ -15,8 +15,8 @@
         android:orientation="horizontal"
         android:padding="10dp" >
 
-
         <TextView
+            android:id="@+id/signed_in_as_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -98,6 +98,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/achievements" />
+
+        <Button
+            android:id="@+id/view_leaderboards"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/leaderboards" />
     </LinearLayout>
 
     <Button

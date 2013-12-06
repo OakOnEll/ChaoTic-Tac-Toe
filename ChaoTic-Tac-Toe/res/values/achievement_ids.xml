@@ -9,5 +9,6 @@
     <string name="achievement_reversi" translatable="false">CgkI06v4vNAdEAIQBg</string>
     <string name="achievement_customer" translatable="false">CgkI06v4vNAdEAIQBw</string>
     <string name="achievement_with_a_little_help" translatable="false">CgkI06v4vNAdEAIQCA</string>
-
+	<string name="achievement_clean_slate" translatable="false">CgkI06v4vNAdEAIQCQ</string>
+    
 </resources>

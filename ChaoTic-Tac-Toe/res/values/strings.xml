@@ -46,7 +46,8 @@
         <string name="lbl_draws">Draws</string>
 
 
-    <string name="achievements">View Achievements</string>    
+    <string name="achievements">View Achievements</string>
+    <string name="leaderboards">View Leaderboards</string>        
     <string name="player_label">Player</string>    
     
     <string name="offline_achievement_label">Achievement</string>
@@ -55,7 +56,8 @@
     <string name="offline_achievement_deja_vu" >Same Game state three moves in a game</string>
     <string name="offline_achievement_long_haul" >Play a Chaotic game with 20 moves</string>
     <string name="offline_achievement_with_a_little_help" >Win in 3 moves</string>
-
+    <string name="offline_achievement_clean_slate" >Return to initial state after 5 moves.</string>
+    
     <string name="sign_in_why">Sign in with Google to share achievements and play with your friends.</string>
     <string name="you_are_signed_in">You are signed in with Google.</string>
     <string name="sign_out">Sign out</string>

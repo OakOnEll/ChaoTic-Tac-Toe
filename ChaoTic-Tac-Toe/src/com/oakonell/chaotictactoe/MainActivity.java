@@ -15,7 +15,8 @@ import com.oakonell.chaotictactoe.googleapi.BaseGameActivity;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
-import com.oakonell.chaotictactoe.utils.Utils;
+import com.oakonell.utils.Utils;
+import com.oakonell.utils.activity.AppLaunchUtils;
 
 public class MainActivity extends BaseGameActivity {
 	private static final String TAG = MainActivity.class.getName();
@@ -27,7 +28,8 @@ public class MainActivity extends BaseGameActivity {
 	protected void onActivityResult(int request, int response, Intent data) {
 		super.onActivityResult(request, response, data);
 		if (request == MenuFragment.RC_WAITING_ROOM) {
-			// TODO currently specially launched from listener, with access to activity only
+			// TODO currently specially launched from listener, with access to
+			// activity only
 			getMenuFragment().onActivityResult(request, response, data);
 		}
 	}
@@ -37,6 +39,8 @@ public class MainActivity extends BaseGameActivity {
 		super.onCreate(savedInstanceState);
 		Utils.enableStrictMode();
 		setContentView(R.layout.main_activity);
+
+		AppLaunchUtils.appLaunched(this, null);
 
 		final ActionBar ab = getSupportActionBar();
 		ab.setDisplayHomeAsUpEnabled(false);
@@ -145,6 +149,6 @@ public class MainActivity extends BaseGameActivity {
 	}
 
 	public void messageRecieved(Participant opponentParticipant, String string) {
-		getGameFragment().messageRecieved(opponentParticipant, string);		
+		getGameFragment().messageRecieved(opponentParticipant, string);
 	}
 }

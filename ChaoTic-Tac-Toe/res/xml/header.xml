@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <header
+        android:fragment="com.oakonell.chaotictactoe.settings.Preferences"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="Account Preferences" >
+        <extra
+            android:name="resource"
+            android:value="prefs_account" />
+    </header>
+    <header
+        android:fragment="com.oakonell.chaotictactoe.settings.Preferences"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Development Preferences" >
+        <extra
+            android:name="resource"
+            android:value="prefs_develop" />
+    </header>
+    <header
+        android:fragment="com.oakonell.chaotictactoe.settings.Preferences"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="App Info" >
+        <extra
+            android:name="resource"
+            android:value="prefs_about" />
+    </header>
+
+</preference-headers>
