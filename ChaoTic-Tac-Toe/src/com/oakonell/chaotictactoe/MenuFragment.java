@@ -33,6 +33,7 @@ import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
+import com.oakonell.chaotictactoe.model.solver.RandomAI;
 import com.oakonell.chaotictactoe.settings.SettingsActivity;
 import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
 
@@ -56,23 +57,26 @@ public class MenuFragment extends SherlockFragment {
 		switch (request) {
 		case RC_LOCAL_SELECT_PLAYERS: {
 			if (response == Activity.RESULT_OK) {
-			MarkerChance chance = MarkerChance.fromIntentExtras(data);
-			GameFragment gameFragment = new GameFragment();
-			Game game = new Game(3, Marker.X, chance);
-			ScoreCard score = new ScoreCard(0, 0, 0);
-			String xName = data.getStringExtra(NewLocalGameDialog.X_NAME_KEY);
-			String oName = data.getStringExtra(NewLocalGameDialog.O_NAME_KEY);
-			gameFragment.startGame(new HumanStrategy(xName), new HumanStrategy(
-					oName), game, score);
+				MarkerChance chance = MarkerChance.fromIntentExtras(data);
+				GameFragment gameFragment = new GameFragment();
+				Game game = new Game(3, Marker.X, chance);
+				ScoreCard score = new ScoreCard(0, 0, 0);
+				String xName = data
+						.getStringExtra(NewLocalGameDialog.X_NAME_KEY);
+				String oName = data
+						.getStringExtra(NewLocalGameDialog.O_NAME_KEY);
+				gameFragment.startGame(new HumanStrategy(xName,Marker.X),
+						new HumanStrategy(oName,Marker.O), game, score);
 
-			FragmentManager manager = getActivity().getSupportFragmentManager();
-			FragmentTransaction transaction = manager.beginTransaction();
-			transaction.replace(R.id.main_frame, gameFragment, "game");
-			transaction.addToBackStack(null);
-			transaction.commit();
+				FragmentManager manager = getActivity()
+						.getSupportFragmentManager();
+				FragmentTransaction transaction = manager.beginTransaction();
+				transaction.replace(R.id.main_frame, gameFragment, "game");
+				transaction.addToBackStack(null);
+				transaction.commit();
 			} else {
 				Toast.makeText(getActivity(), "Local game canceled",
-						Toast.LENGTH_SHORT).show();				
+						Toast.LENGTH_SHORT).show();
 			}
 		}
 			break;
@@ -297,6 +301,15 @@ public class MenuFragment extends SherlockFragment {
 			}
 		});
 
+		Button ai = (Button) view.findViewById(R.id.new_game_vs_ai);
+		ai.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				startGameAgainstAI();
+			}
+		});
+
 		if (getMainActivity().isSignedIn()) {
 			showLogout();
 		} else {
@@ -304,6 +317,25 @@ public class MenuFragment extends SherlockFragment {
 		}
 
 		return view;
+	}
+
+	protected void startGameAgainstAI() {
+		// need dialog to choose AI level and game mode
+		MarkerChance chance = MarkerChance.CHAOTIC;
+		GameFragment gameFragment = new GameFragment();
+		Game game = new Game(3, Marker.X, chance);
+
+		ScoreCard score = new ScoreCard(0, 0, 0);
+		String xName = "Me";
+		String oName = "AI";
+		gameFragment.startGame(new HumanStrategy(xName, Marker.X),
+				new RandomAI(oName, Marker.O), game, score);
+
+		FragmentManager manager = getActivity().getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		transaction.replace(R.id.main_frame, gameFragment, "game");
+		transaction.addToBackStack(null);
+		transaction.commit();
 	}
 
 	@Override
@@ -375,9 +407,12 @@ public class MenuFragment extends SherlockFragment {
 		signInView.setVisibility(View.INVISIBLE);
 		// show sign out button
 		signOutView.setVisibility(View.VISIBLE);
-		TextView signedInAsText= (TextView) getActivity().findViewById(R.id.signed_in_as_text);
-		if (signedInAsText == null) return;
-		signedInAsText.setText("You are signed into Google+ as " + getMainActivity().getGamesClient().getCurrentAccountName());
+		TextView signedInAsText = (TextView) getActivity().findViewById(
+				R.id.signed_in_as_text);
+		if (signedInAsText == null)
+			return;
+		signedInAsText.setText("You are signed into Google+ as "
+				+ getMainActivity().getGamesClient().getCurrentAccountName());
 	}
 
 	private void refreshInvites() {

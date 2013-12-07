@@ -192,9 +192,9 @@ public class RoomListener implements RoomUpdateListener,
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		if (iAmX) {
-			gameFragment.startGame(new HumanStrategy("Me"), new OnlineStrategy(getOpponentName()), game, score);
+			gameFragment.startGame(new HumanStrategy("Me", Marker.X), new OnlineStrategy(getOpponentName(), Marker.O), game, score);
 		} else {
-			gameFragment.startGame(new OnlineStrategy(getOpponentName()),new HumanStrategy("Me"),  game, score);
+			gameFragment.startGame(new OnlineStrategy(getOpponentName(),Marker.X),new HumanStrategy("Me",Marker.O),  game, score);
 		}
 		FragmentManager manager = activity.getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();

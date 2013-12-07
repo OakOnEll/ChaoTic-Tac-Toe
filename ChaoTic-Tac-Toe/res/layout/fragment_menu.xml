@@ -120,7 +120,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/new_game_same_device"
         android:layout_centerHorizontal="true"
-        android:enabled="false"
         android:text="@string/new_game_vs_ai" />
 
     <ImageView

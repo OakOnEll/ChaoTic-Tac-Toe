@@ -6,7 +6,9 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -98,17 +100,17 @@ public class GameFragment extends SherlockFragment {
 	private void invalidateMenu() {
 		if (!ActivityCompat.invalidateOptionsMenu(getActivity())) {
 			handleMenu();
-		}	else {
-			getActivity().invalidateOptionsMenu();			
+		} else {
+			getActivity().invalidateOptionsMenu();
 		}
 	}
-	
+
 	private void handleMenu() {
 		chatMenuItem.setVisible(getMainActivity().getRoomListener() != null);
 		if (hasNewMessage) {
 			chatMenuItem.setIcon(android.R.drawable.ic_dialog_email);
 		} else {
-			chatMenuItem.setIcon(android.R.drawable.ic_menu_call);			
+			chatMenuItem.setIcon(android.R.drawable.ic_menu_call);
 		}
 	}
 
@@ -117,7 +119,8 @@ public class GameFragment extends SherlockFragment {
 		switch (item.getItemId()) {
 		case R.id.action_chat:
 			chatDialog = new ChatDialogFragment();
-			chatDialog.initialize(this, messages, getMainActivity().getRoomListener().getMe());
+			chatDialog.initialize(this, messages, getMainActivity()
+					.getRoomListener().getMe());
 			chatDialog.show(getChildFragmentManager(), "chat");
 			hasNewMessage = false;
 			invalidateMenu();
@@ -314,6 +317,7 @@ public class GameFragment extends SherlockFragment {
 					for (ImageButton each : buttons) {
 						each.setImageDrawable(null);
 					}
+					moveIfAI();
 				}
 			};
 			if (outcome.getWinner() != null) {
@@ -353,10 +357,30 @@ public class GameFragment extends SherlockFragment {
 		} else {
 			evaluateInGameAchievements(outcome);
 			updateHeader();
+			moveIfAI();
 		}
 	}
 
+	private void moveIfAI() {
+		if (currentStrategy.isAI()) {
+			final Cell move = currentStrategy.move(game.getBoard(),
+					game.getMarkerToPlay());
+			// delay and highlight the move so the human player has a
+			// chance to see it
 
+			final ImageButton cellButton = findButtonFor(move);
+			final Drawable originalBackGround = cellButton.getBackground();
+			cellButton.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_light));
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					cellButton.setBackground(originalBackGround);
+					makeMove(game.getMarkerToPlay(), move);
+				}
+			}, 350);
+		}
+	}
 
 	private ImageButton findButtonFor(Cell cell) {
 		int id;
@@ -440,6 +464,7 @@ public class GameFragment extends SherlockFragment {
 		achievements.testAndSetForGameEndAchievements(getMainActivity()
 				.getGameHelper(), getActivity(), game, outcome);
 	}
+
 	private void evaluateInGameAchievements(State outcome) {
 		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity()
 				.getApplication());
@@ -448,16 +473,18 @@ public class GameFragment extends SherlockFragment {
 		achievements.testAndSetForInGameAchievements(getMainActivity()
 				.getGameHelper(), getActivity(), game, outcome);
 	}
+
 	private void evaluateLeaderboards(State outcome) {
 		// TODO Auto-generated method stub
 		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity()
 				.getApplication());
 
 		Leaderboards leaderboards = application.getLeaderboards();
-		leaderboards.submitGame(getMainActivity()
-				.getGameHelper(), getActivity(), game, outcome);
-		
+		leaderboards.submitGame(getMainActivity().getGameHelper(),
+				getActivity(), game, outcome);
+
 	}
+
 	public MainActivity getMainActivity() {
 		return (MainActivity) super.getActivity();
 	}
@@ -470,7 +497,7 @@ public class GameFragment extends SherlockFragment {
 		if (chatDialog != null) {
 			chatDialog.newMessage();
 		} else {
-			hasNewMessage=true;
+			hasNewMessage = true;
 			invalidateMenu();
 		}
 	}
