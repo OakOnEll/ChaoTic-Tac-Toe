@@ -25,7 +25,6 @@ public class MarkerChance {
 	private int total;
 
 	public MarkerChance(int myMarker, int opponentMarker, int removeMarker) {
-		super();
 		this.myMarker = myMarker;
 		this.opponentMarker = opponentMarker;
 		this.removeMarker = removeMarker;
@@ -45,6 +44,10 @@ public class MarkerChance {
 		return removeMarker;
 	}
 
+	public double getRemoveMarkerPercentage() {
+		return ((double)removeMarker)/total; 
+	}
+	
 	public Marker pickMove(Board board, Marker player) {
 		int chance;
 		boolean isEmpty = board.isEmpty();

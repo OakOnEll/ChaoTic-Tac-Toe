@@ -9,8 +9,10 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +20,7 @@ import android.widget.ImageButton;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
+import com.oakonell.utils.StringUtils;
 
 public class NewLocalGameDialog extends SherlockFragmentActivity {
 	public static final String X_NAME_KEY = "X-name";
@@ -45,6 +48,51 @@ public class NewLocalGameDialog extends SherlockFragmentActivity {
 		xNameText.setText(xName);
 		oNameText.setText(oName);
 
+		OnFocusChangeListener onNameFocusChangeListener = new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (!hasFocus) {
+					validate(xNameText, oNameText, frag);
+				}
+			}
+		};
+		xNameText.setOnFocusChangeListener(onNameFocusChangeListener);
+		xNameText.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				xNameText.setError(null);
+			}
+		});
+		oNameText.setOnFocusChangeListener(onNameFocusChangeListener);
+		oNameText.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				oNameText.setError(null);
+			}
+		});
+
 		switchPlayers.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -59,7 +107,9 @@ public class NewLocalGameDialog extends SherlockFragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO validate the names are not blank
+				if (!validate(xNameText, oNameText, frag)) {
+					return;
+				}
 				xName = xNameText.getText().toString();
 				oName = oNameText.getText().toString();
 				MarkerChance chance = frag.getChance();
@@ -70,12 +120,35 @@ public class NewLocalGameDialog extends SherlockFragmentActivity {
 
 				intent.putExtra(X_NAME_KEY, xName);
 				intent.putExtra(O_NAME_KEY, oName);
-				
+
 				setResult(Activity.RESULT_OK, intent);
 				finish();
 			}
 		});
 
+	}
+
+	protected boolean validate(EditText xNameText, EditText oNameText,
+			MarkerChanceFragment frag) {
+		boolean isValid = true;
+		String xName = xNameText.getText().toString();
+		if (StringUtils.isEmpty(xName)) {
+			isValid = false;
+			xNameText.setError("Enter a name for X");
+		}
+		String oName = oNameText.getText().toString();
+		if (StringUtils.isEmpty(oName)) {
+			isValid = false;
+			oNameText.setError("Enter a name for O");
+		}
+
+		if (xName.equals(oName)) {
+			isValid = false;
+			oNameText.setError("Enter a unique name for O");
+		}
+
+		isValid &= frag.validate();
+		return isValid;
 	}
 
 	private static final String X_NAME = "x-name";
@@ -84,7 +157,8 @@ public class NewLocalGameDialog extends SherlockFragmentActivity {
 	private void defaultNamesFromPreferences() {
 		SharedPreferences sharedPrefs = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		// TODO store multiple names of the last players, and hook "search" into the text entry
+		// TODO store multiple names of the last players, and hook "search" into
+		// the text entry
 		xName = sharedPrefs.getString(X_NAME, "");
 		oName = sharedPrefs.getString(O_NAME, "");
 	}

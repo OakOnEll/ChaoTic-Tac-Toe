@@ -1284,7 +1284,7 @@ containing a value of this type.
         public static final int menu=0x7f0e0002;
     }
     public static final class string {
-        public static final int about_title=0x7f08003d;
+        public static final int about_title=0x7f08003c;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abs__action_bar_home_description=0x7f080015;
@@ -1324,22 +1324,22 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f08001c;
-        public static final int achievement_chaotic_draw=0x7f08003f;
-        public static final int achievement_clean_slate=0x7f080046;
-        public static final int achievement_customer=0x7f080044;
-        public static final int achievement_deja_vu=0x7f080040;
-        public static final int achievement_long_haul=0x7f080041;
-        public static final int achievement_only_xs_or_os=0x7f08003e;
-        public static final int achievement_plain_jane=0x7f080042;
-        public static final int achievement_reversi=0x7f080043;
-        public static final int achievement_with_a_little_help=0x7f080045;
-        public static final int achievements=0x7f080067;
-        public static final int achievements_not_available=0x7f080076;
-        public static final int action_chat=0x7f08007b;
-        public static final int action_settings=0x7f08004d;
-        public static final int admob_id=0x7f080048;
-        public static final int app_id=0x7f080049;
-        public static final int app_name=0x7f08004c;
+        public static final int achievement_chaotic_draw=0x7f080041;
+        public static final int achievement_clean_slate=0x7f080048;
+        public static final int achievement_customer=0x7f080046;
+        public static final int achievement_deja_vu=0x7f080042;
+        public static final int achievement_long_haul=0x7f080043;
+        public static final int achievement_only_xs_or_os=0x7f080040;
+        public static final int achievement_plain_jane=0x7f080044;
+        public static final int achievement_reversi=0x7f080045;
+        public static final int achievement_with_a_little_help=0x7f080047;
+        public static final int achievements=0x7f080069;
+        public static final int achievements_not_available=0x7f080078;
+        public static final int action_chat=0x7f08007d;
+        public static final int action_settings=0x7f08004f;
+        public static final int admob_id=0x7f08004a;
+        public static final int app_id=0x7f08004b;
+        public static final int app_name=0x7f08004e;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=70] 
          */
         public static final int auth_client_availability_notification_title=0x7f08000f;
@@ -1349,14 +1349,14 @@ containing a value of this type.
         /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
          */
         public static final int auth_client_requested_by_msg=0x7f080011;
-        public static final int button_send=0x7f08007a;
-        public static final int cancel=0x7f080056;
-        public static final int chance_chaotic=0x7f08005f;
-        public static final int chance_custom=0x7f080060;
-        public static final int chance_label_my_marker=0x7f080061;
-        public static final int chance_label_opponent_marker=0x7f080062;
-        public static final int chance_label_remove_marker=0x7f080063;
-        public static final int chance_normal=0x7f08005e;
+        public static final int button_send=0x7f08007c;
+        public static final int cancel=0x7f080058;
+        public static final int chance_chaotic=0x7f080061;
+        public static final int chance_custom=0x7f080062;
+        public static final int chance_label_my_marker=0x7f080063;
+        public static final int chance_label_opponent_marker=0x7f080064;
+        public static final int chance_label_remove_marker=0x7f080065;
+        public static final int chance_normal=0x7f080060;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1412,21 +1412,21 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f08000e;
-        public static final int connectionProblem=0x7f08002c;
-        public static final int copied_to_clipboard=0x7f080030;
-        public static final int copySubjectToClipboardAsWorkAroundForFacebookAppBug=0x7f08002f;
-        public static final int draw=0x7f080053;
-        public static final int ga_trackingId=0x7f080047;
-        public static final int hello_world=0x7f08004e;
-        public static final int httpError=0x7f08002b;
-        public static final int invalid_move=0x7f080058;
-        public static final int invalid_move_title=0x7f080057;
-        public static final int label_player_o_name=0x7f08005d;
-        public static final int label_player_x_name=0x7f08005c;
-        public static final int lbl_draws=0x7f080066;
-        public static final int leaderboard_longest_choatic_game=0x7f08004a;
-        public static final int leaderboard_shortest_choatic_game=0x7f08004b;
-        public static final int leaderboards=0x7f080068;
+        public static final int connectionProblem=0x7f08002b;
+        public static final int copied_to_clipboard=0x7f08002f;
+        public static final int copySubjectToClipboardAsWorkAroundForFacebookAppBug=0x7f08002e;
+        public static final int draw=0x7f080055;
+        public static final int ga_trackingId=0x7f080049;
+        public static final int hello_world=0x7f080050;
+        public static final int httpError=0x7f08002a;
+        public static final int invalid_move=0x7f08005a;
+        public static final int invalid_move_title=0x7f080059;
+        public static final int label_player_o_name=0x7f08005f;
+        public static final int label_player_x_name=0x7f08005e;
+        public static final int lbl_draws=0x7f080068;
+        public static final int leaderboard_longest_choatic_game=0x7f08004c;
+        public static final int leaderboard_shortest_choatic_game=0x7f08004d;
+        public static final int leaderboards=0x7f08006a;
         /**  Location client code resources (prefix with location_client) 
 
         Begin strings for location.reporting
@@ -1438,66 +1438,68 @@ containing a value of this type.
         public static final int location_client_ulr_inactive_age_under_13=0x7f080012;
         public static final int location_client_ulr_inactive_age_unknown=0x7f080013;
         public static final int location_client_ulr_inactive_unknown_restriction=0x7f080014;
-        public static final int marker_to_play_label=0x7f080051;
-        public static final int new_game_live=0x7f080075;
-        public static final int new_game_same_device=0x7f08004f;
+        public static final int marker_to_play_label=0x7f080053;
+        public static final int new_game_live=0x7f080077;
+        public static final int new_game_same_device=0x7f080051;
         /**    
   <string name="offline_achievement_plain_jane" >CgkI06v4vNAdEAIQBQ</string>
     <string name="offline_achievement_reversi" >CgkI06v4vNAdEAIQBg</string>
     <string name="offline_achievement_customer" >CgkI06v4vNAdEAIQBw</string>
     
          */
-        public static final int new_game_vs_ai=0x7f080074;
-        public static final int new_quick_game=0x7f080079;
-        public static final int no=0x7f080032;
-        public static final int offline_achievement_chaotic_draw=0x7f08006c;
-        public static final int offline_achievement_clean_slate=0x7f080070;
-        public static final int offline_achievement_deja_vu=0x7f08006d;
-        public static final int offline_achievement_label=0x7f08006a;
-        public static final int offline_achievement_long_haul=0x7f08006e;
-        public static final int offline_achievement_only_xs_or_os=0x7f08006b;
-        public static final int offline_achievement_with_a_little_help=0x7f08006f;
-        public static final int ok=0x7f080055;
-        public static final int play_again=0x7f080054;
-        public static final int player_label=0x7f080069;
-        public static final int player_turn_label=0x7f080050;
-        public static final int player_won=0x7f080052;
-        public static final int pref_about=0x7f080028;
-        public static final int pref_about_key=0x7f080024;
-        public static final int pref_changes=0x7f080029;
-        public static final int pref_changes_key=0x7f080025;
-        public static final int pref_confirm_reset_preferences=0x7f08002a;
-        public static final int pref_copy_for_face_book=0x7f080034;
-        public static final int pref_copy_for_face_book_key=0x7f080026;
-        public static final int pref_other_category=0x7f080023;
-        public static final int pref_rate_app=0x7f08003c;
-        public static final int pref_rate_app_key=0x7f08003b;
+        public static final int new_game_vs_ai=0x7f080076;
+        public static final int new_quick_game=0x7f08007b;
+        public static final int no=0x7f080031;
+        public static final int num_picker_add_sign=0x7f08003e;
+        public static final int num_picker_minus_sign=0x7f08003f;
+        public static final int offline_achievement_chaotic_draw=0x7f08006e;
+        public static final int offline_achievement_clean_slate=0x7f080072;
+        public static final int offline_achievement_deja_vu=0x7f08006f;
+        public static final int offline_achievement_label=0x7f08006c;
+        public static final int offline_achievement_long_haul=0x7f080070;
+        public static final int offline_achievement_only_xs_or_os=0x7f08006d;
+        public static final int offline_achievement_with_a_little_help=0x7f080071;
+        public static final int ok=0x7f080057;
+        public static final int play_again=0x7f080056;
+        public static final int player_label=0x7f08006b;
+        public static final int player_turn_label=0x7f080052;
+        public static final int player_won=0x7f080054;
+        public static final int pref_about=0x7f080027;
+        public static final int pref_about_key=0x7f080023;
+        public static final int pref_changes=0x7f080028;
+        public static final int pref_changes_key=0x7f080024;
+        public static final int pref_confirm_reset_preferences=0x7f080029;
+        public static final int pref_copy_for_face_book=0x7f080033;
+        public static final int pref_copy_for_face_book_key=0x7f080025;
+        public static final int pref_rate_app=0x7f08003b;
+        public static final int pref_rate_app_key=0x7f08003a;
         /**  translate 
          */
-        public static final int pref_reset_preferences=0x7f080027;
+        public static final int pref_reset_preferences=0x7f080026;
         /**  do not translate 
          */
         public static final int pref_reset_preferences_key=0x7f080022;
-        public static final int prompt_player_name=0x7f08005b;
-        public static final int prompt_title_player_name=0x7f08005a;
-        public static final int rate_app=0x7f080035;
-        public static final int rate_no_thanks=0x7f080038;
-        public static final int rate_redirects_to_market=0x7f08003a;
-        public static final int rate_remind_later=0x7f080037;
-        public static final int rate_text=0x7f080036;
-        public static final int rate_unknown_app_title=0x7f080039;
-        public static final int remember_this_choice=0x7f080033;
-        public static final int reverse=0x7f080064;
-        public static final int share=0x7f08002d;
-        public static final int shareVia=0x7f08002e;
-        public static final int sign_in_why=0x7f080071;
-        public static final int sign_out=0x7f080073;
-        public static final int signing_in=0x7f080077;
-        public static final int signing_out=0x7f080078;
-        public static final int start=0x7f080065;
-        public static final int title_game=0x7f080059;
-        public static final int yes=0x7f080031;
-        public static final int you_are_signed_in=0x7f080072;
+        public static final int prompt_player_name=0x7f08005d;
+        public static final int prompt_title_player_name=0x7f08005c;
+        public static final int rate_app=0x7f080034;
+        public static final int rate_no_thanks=0x7f080037;
+        public static final int rate_redirects_to_market=0x7f080039;
+        public static final int rate_remind_later=0x7f080036;
+        public static final int rate_text=0x7f080035;
+        public static final int rate_unknown_app_title=0x7f080038;
+        public static final int remember_this_choice=0x7f080032;
+        public static final int reverse=0x7f080066;
+        public static final int settings=0x7f08003d;
+        public static final int share=0x7f08002c;
+        public static final int shareVia=0x7f08002d;
+        public static final int sign_in_why=0x7f080073;
+        public static final int sign_out=0x7f080075;
+        public static final int signing_in=0x7f080079;
+        public static final int signing_out=0x7f08007a;
+        public static final int start=0x7f080067;
+        public static final int title_game=0x7f08005b;
+        public static final int yes=0x7f080030;
+        public static final int you_are_signed_in=0x7f080074;
     }
     public static final class style {
         /** 

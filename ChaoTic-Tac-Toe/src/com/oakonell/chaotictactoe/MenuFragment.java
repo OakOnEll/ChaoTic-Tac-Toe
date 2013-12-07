@@ -55,6 +55,7 @@ public class MenuFragment extends SherlockFragment {
 	public void onActivityResult(int request, int response, Intent data) {
 		switch (request) {
 		case RC_LOCAL_SELECT_PLAYERS: {
+			if (response == Activity.RESULT_OK) {
 			MarkerChance chance = MarkerChance.fromIntentExtras(data);
 			GameFragment gameFragment = new GameFragment();
 			Game game = new Game(3, Marker.X, chance);
@@ -69,6 +70,10 @@ public class MenuFragment extends SherlockFragment {
 			transaction.replace(R.id.main_frame, gameFragment, "game");
 			transaction.addToBackStack(null);
 			transaction.commit();
+			} else {
+				Toast.makeText(getActivity(), "Local game canceled",
+						Toast.LENGTH_SHORT).show();				
+			}
 		}
 			break;
 		case RC_SELECT_PLAYERS: {
@@ -371,6 +376,7 @@ public class MenuFragment extends SherlockFragment {
 		// show sign out button
 		signOutView.setVisibility(View.VISIBLE);
 		TextView signedInAsText= (TextView) getActivity().findViewById(R.id.signed_in_as_text);
+		if (signedInAsText == null) return;
 		signedInAsText.setText("You are signed into Google+ as " + getMainActivity().getGamesClient().getCurrentAccountName());
 	}
 

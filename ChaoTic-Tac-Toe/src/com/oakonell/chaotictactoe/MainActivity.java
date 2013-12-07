@@ -1,5 +1,8 @@
 package com.oakonell.chaotictactoe;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -150,5 +153,31 @@ public class MainActivity extends BaseGameActivity {
 
 	public void messageRecieved(Participant opponentParticipant, String string) {
 		getGameFragment().messageRecieved(opponentParticipant, string);
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (getGameFragment().isVisible()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Leave game?");
+			builder.setMessage("Leave the game in progress?");
+			builder.setPositiveButton("Yes", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					// TODO inform possible opponent of leaving room 
+					MainActivity.super.onBackPressed();
+				}
+			});
+			builder.setNegativeButton("No", new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();					
+				}
+			});
+			builder.show();
+			return;
+		}
+		super.onBackPressed();
 	}
 }
