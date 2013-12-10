@@ -6,14 +6,17 @@ import java.util.List;
 import com.oakonell.chaotictactoe.model.Board;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
+import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.State;
 
 public class MiniMaxAlg {
 	private final Marker player;
 	private final int depth;
+	private MarkerChance chance;
 
-	public MiniMaxAlg(Marker player, int depth) {
+	public MiniMaxAlg(Marker player, int depth, MarkerChance chance) {
 		this.player = player;
+		this.chance = chance;
 		if (depth < 0)
 			throw new RuntimeException("Search-tree depth cannot be negative");
 		this.depth = depth;
@@ -25,17 +28,15 @@ public class MiniMaxAlg {
 
 	public Cell solve(Board board, Marker toPlay) {
 		Board copy = board.copy();
-		if (toPlay != player) {
-			throw new RuntimeException("Only works for normal play for now");
-		}
-		MoveAndScore solve = solve(copy, depth, toPlay);
+		MoveAndScore solve = solve(copy, depth, player, toPlay);
 		if (solve.move == null) {
 			throw new RuntimeException("Move should not be null!");
 		}
 		return solve.move;
 	}
 
-	private MoveAndScore solve(Board board, int depth, Marker toPlay) {
+	private MoveAndScore solve(Board board, int depth, Marker currentPlayer,
+			Marker toPlay) {
 		State state = board.getState();
 		if (state.isOver()) {
 			// how can moves be empty is state is not over?!
@@ -54,27 +55,39 @@ public class MiniMaxAlg {
 		}
 
 		Cell bestMove = null;
-		int bestScore = (player == toPlay) ? Integer.MIN_VALUE
-				: Integer.MAX_VALUE;
-		int currentScore;
+		double bestScore = (player == currentPlayer) ? Double.NEGATIVE_INFINITY
+				: Double.POSITIVE_INFINITY;
+		double currentScore;
 
-		List<Cell> moves = getValidMoves(board, toPlay);
-		for (Cell move : moves) {
-			board.placeMarker(move, toPlay);
-			if (toPlay == player) {
-				currentScore = solve(board, depth - 1, toPlay.opponent()).score;
+		List<MoveAndWeight> moves = getValidMoves(board, currentPlayer, toPlay);
+		for (MoveAndWeight move : moves) {
+			Marker original = null;
+			if (move.marker == Marker.EMPTY) {
+				original = board.getCell(move.move.getX(), move.move.getY());
+				board.removeMarker(move.move, move.marker);
+			} else {
+				board.placeMarker(move.move, move.marker);
+			}
+			if (currentPlayer == player) {
+				currentScore = solve(board, depth - 1,
+						currentPlayer.opponent(), null).score * move.weight;
 				if (currentScore > bestScore) {
 					bestScore = currentScore;
-					bestMove = move;
+					bestMove = move.move;
 				}
 			} else {
-				currentScore = solve(board, depth - 1, toPlay.opponent()).score;
+				currentScore = solve(board, depth - 1,
+						currentPlayer.opponent(), null).score * move.weight;
 				if (currentScore < bestScore) {
 					bestScore = currentScore;
-					bestMove = move;
+					bestMove = move.move;
 				}
 			}
-			board.clearMarker(move, toPlay);
+			if (move.marker == Marker.EMPTY) {
+				board.placeMarker(move.move, original);
+			} else {
+				board.clearMarker(move.move, move.marker);
+			}
 		}
 		if (bestMove == null) {
 			throw new RuntimeException("best move is null!");
@@ -82,17 +95,43 @@ public class MiniMaxAlg {
 		return new MoveAndScore(bestMove, bestScore);
 	}
 
-	private List<Cell> getValidMoves(Board board, Marker marker) {
-		List<Cell> result = new ArrayList<Cell>();
+	private List<MoveAndWeight> getValidMoves(Board board, Marker player,
+			Marker toPlay) {
+		List<MoveAndWeight> result = new ArrayList<MoveAndWeight>();
+		if (toPlay != null) {
+			addMoves(result, board, toPlay, 1);
+			return result;
+		}
+		if (chance.getMyMarker() != 0) {
+			addMoves(result, board, player, chance.getMyMarkerPercentage());
+		}
+		if (chance.getOpponentMarker() != 0) {
+			addMoves(result, board, player.opponent(),
+					chance.getMyMarkerPercentage());
+		}
+		if (chance.getRemoveMarker() != 0) {
+			addMoves(result, board, Marker.EMPTY,
+					chance.getRemoveMarkerPercentage());
+		}
+		return result;
+	}
+
+	private void addMoves(List<MoveAndWeight> result, Board board,
+			Marker marker, double weight) {
 		int size = board.getSize();
 		for (int x = 0; x < size; ++x) {
 			for (int y = 0; y < size; ++y) {
-				if (board.getCell(x, y) == Marker.EMPTY) {
-					result.add(new Cell(x, y));
+				Marker boardMarker = board.getCell(x, y);
+				Cell cell = new Cell(x, y);
+				MoveAndWeight move = new MoveAndWeight(cell, marker, weight);
+				if (boardMarker == Marker.EMPTY && marker != Marker.EMPTY) {
+					result.add(move);
+				} else if (boardMarker != Marker.EMPTY
+						&& marker == Marker.EMPTY) {
+					result.add(move);
 				}
 			}
 		}
-		return result;
 	}
 
 	private int scoreLine(int numMine, int numOpponent) {
@@ -190,11 +229,23 @@ public class MiniMaxAlg {
 		return score;
 	}
 
+	public static class MoveAndWeight {
+		Cell move;
+		Marker marker;
+		double weight;
+
+		public MoveAndWeight(Cell move, Marker marker, double weight) {
+			this.move = move;
+			this.marker = marker;
+			this.weight = weight;
+		}
+	}
+
 	public static class MoveAndScore {
 		Cell move;
-		int score;
+		double score;
 
-		MoveAndScore(Cell move, int score) {
+		MoveAndScore(Cell move, double score) {
 			this.score = score;
 			this.move = move;
 		}

@@ -44,6 +44,13 @@ public class MarkerChance {
 		return removeMarker;
 	}
 
+	public double getOpponentMarkerPercentage() {
+		return ((double)opponentMarker)/total; 
+	}
+
+	public double getMyMarkerPercentage() {
+		return ((double)myMarker)/total; 
+	}
 	public double getRemoveMarkerPercentage() {
 		return ((double)removeMarker)/total; 
 	}
@@ -95,6 +102,10 @@ public class MarkerChance {
 		return opponentMarker == total;
 	}
 
+	public int getTotal() {
+		return total;
+	}
+	
 	public boolean isChaotic() {
 		return (myMarker == opponentMarker) && (opponentMarker == removeMarker);
 	}

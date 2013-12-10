@@ -323,8 +323,8 @@ public class MenuFragment extends SherlockFragment {
 
 	protected void startGameAgainstAI() {
 		// need dialog to choose AI level and game mode
-		//MarkerChance chance = MarkerChance.CHAOTIC;
-		MarkerChance chance = MarkerChance.NORMAL;
+		MarkerChance chance = MarkerChance.CHAOTIC;
+		//MarkerChance chance = MarkerChance.NORMAL;
 		GameFragment gameFragment = new GameFragment();
 		Game game = new Game(3, Marker.X, chance);
 
@@ -332,7 +332,7 @@ public class MenuFragment extends SherlockFragment {
 		String xName = "Me";
 		String oName = "AI";
 		//PlayerStrategy ai = new RandomAI(oName, Marker.O);
-		PlayerStrategy ai = new MinMaxAI(oName, Marker.O, 5);
+		PlayerStrategy ai = new MinMaxAI(oName, Marker.O, 5, game.getMarkerChance());
 		gameFragment.startGame(new HumanStrategy(xName, Marker.X),
 				ai, game, score);
 

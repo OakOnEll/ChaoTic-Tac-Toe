@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -135,7 +136,7 @@ public class GameFragment extends SherlockFragment {
 
 		currentStrategy = xStrategy;
 
-		if (game.getCurrentPlayer()== Marker.X) {
+		if (game.getCurrentPlayer() == Marker.X) {
 			currentStrategy = xStrategy;
 		} else {
 			currentStrategy = oStrategy;
@@ -359,24 +360,37 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void moveIfAI() {
-		if (currentStrategy.isAI()) {
-			final Cell move = currentStrategy.move(game.getBoard(),
-					game.getMarkerToPlay());
-			// delay and highlight the move so the human player has a
-			// chance to see it
-
-			final ImageButton cellButton = findButtonFor(move);
-			final Drawable originalBackGround = cellButton.getBackground();
-			cellButton.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_light));
-			Handler handler = new Handler();
-			handler.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					cellButton.setBackground(originalBackGround);
-					makeMove(game.getMarkerToPlay(), move);
-				}
-			}, 200);
+		if (!currentStrategy.isAI()) {
+			return;
 		}
+
+		AsyncTask<Void, Void, Cell> aiMove = new AsyncTask<Void, Void, Cell>() {
+			@Override
+			protected Cell doInBackground(Void... params) {
+				return currentStrategy.move(game.getBoard(),
+						game.getMarkerToPlay());
+			}
+
+			@Override
+			protected void onPostExecute(final Cell move) {
+				// delay and highlight the move so the human player has a
+				// chance to see it
+				final ImageButton cellButton = findButtonFor(move);
+				final Drawable originalBackGround = cellButton.getBackground();
+				cellButton.setBackgroundColor(getResources().getColor(
+						android.R.color.holo_orange_light));
+				Handler handler = new Handler();
+				handler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						cellButton.setBackground(originalBackGround);
+						makeMove(game.getMarkerToPlay(), move);
+					}
+				}, 200);
+			}
+
+		};
+		aiMove.execute((Void) null);
 	}
 
 	private ImageButton findButtonFor(Cell cell) {
