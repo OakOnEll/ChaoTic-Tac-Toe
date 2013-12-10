@@ -49,6 +49,7 @@ public class MenuFragment extends SherlockFragment {
 	final static int RC_INVITATION_INBOX = 10001;
 	public final static int RC_WAITING_ROOM = 10002;
 	public static final int RC_LOCAL_SELECT_PLAYERS = 10003;
+	public static final int RC_LOCAL_SELECT_AI = 10004;
 
 	private View signInView;
 	private View signOutView;
@@ -57,25 +58,18 @@ public class MenuFragment extends SherlockFragment {
 	@Override
 	public void onActivityResult(int request, int response, Intent data) {
 		switch (request) {
+		case RC_LOCAL_SELECT_AI: {
+			if (response == Activity.RESULT_OK) {
+				startAIGame(data);
+			} else {
+				Toast.makeText(getActivity(), "Local AI game canceled",
+						Toast.LENGTH_SHORT).show();
+			}
+		}
+			break;
 		case RC_LOCAL_SELECT_PLAYERS: {
 			if (response == Activity.RESULT_OK) {
-				MarkerChance chance = MarkerChance.fromIntentExtras(data);
-				GameFragment gameFragment = new GameFragment();
-				Game game = new Game(3, Marker.X, chance);
-				ScoreCard score = new ScoreCard(0, 0, 0);
-				String xName = data
-						.getStringExtra(NewLocalGameDialog.X_NAME_KEY);
-				String oName = data
-						.getStringExtra(NewLocalGameDialog.O_NAME_KEY);
-				gameFragment.startGame(new HumanStrategy(xName,Marker.X),
-						new HumanStrategy(oName,Marker.O), game, score);
-
-				FragmentManager manager = getActivity()
-						.getSupportFragmentManager();
-				FragmentTransaction transaction = manager.beginTransaction();
-				transaction.replace(R.id.main_frame, gameFragment, "game");
-				transaction.addToBackStack(null);
-				transaction.commit();
+				startLocalTwoPlayerGame(data);
 			} else {
 				Toast.makeText(getActivity(), "Local game canceled",
 						Toast.LENGTH_SHORT).show();
@@ -308,7 +302,10 @@ public class MenuFragment extends SherlockFragment {
 
 			@Override
 			public void onClick(View v) {
-				startGameAgainstAI();
+				// prompt for player names, and then in onDialogPositiveClick
+				// callback, start the game activity
+				Intent intent = new Intent(getActivity(), NewAIGameDialog.class);
+				startActivityForResult(intent, RC_LOCAL_SELECT_AI);
 			}
 		});
 
@@ -321,23 +318,40 @@ public class MenuFragment extends SherlockFragment {
 		return view;
 	}
 
-	protected void startGameAgainstAI() {
-		// need dialog to choose AI level and game mode
-		MarkerChance chance = MarkerChance.CHAOTIC;
-		//MarkerChance chance = MarkerChance.NORMAL;
+	private void startLocalTwoPlayerGame(Intent data) {
+		MarkerChance chance = MarkerChance.fromIntentExtras(data);
 		GameFragment gameFragment = new GameFragment();
 		Game game = new Game(3, Marker.X, chance);
+		ScoreCard score = new ScoreCard(0, 0, 0);
+		String xName = data.getStringExtra(NewLocalGameDialog.X_NAME_KEY);
+		String oName = data.getStringExtra(NewLocalGameDialog.O_NAME_KEY);
+		gameFragment.startGame(new HumanStrategy(xName, Marker.X),
+				new HumanStrategy(oName, Marker.O), game, score);
 
+		FragmentManager manager = getActivity().getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		transaction.replace(R.id.main_frame, gameFragment, "game");
+		transaction.addToBackStack(null);
+		transaction.commit();
+	}
+
+	private void startAIGame(Intent data) {
+		MarkerChance chance = MarkerChance.fromIntentExtras(data);
+		GameFragment gameFragment = new GameFragment();
+		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		String xName = "Me";
-		String oName = "AI";
-		//PlayerStrategy ai = new RandomAI(oName, Marker.O);
-		PlayerStrategy ai = new MinMaxAI(oName, Marker.O, 5, game.getMarkerChance());
-		gameFragment.startGame(new HumanStrategy(xName, Marker.X),
-				ai, game, score);
+		String oName = data.getStringExtra(NewAIGameDialog.AI_NAME_KEY);
+		int aiDepth = data.getIntExtra(NewAIGameDialog.AI_DEPTH, 1);
+		PlayerStrategy ai;
+		if (aiDepth < 0) {
+			ai = new RandomAI(oName, Marker.O);
+		} else {
+			ai = new MinMaxAI(oName, Marker.O, aiDepth, game.getMarkerChance());
+		}
+		gameFragment.startGame(new HumanStrategy(xName, Marker.X), ai, game,
+				score);
 
-		
-		
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.replace(R.id.main_frame, gameFragment, "game");
