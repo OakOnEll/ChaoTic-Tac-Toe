@@ -53,7 +53,7 @@ public class Board {
 					+ ", unable to place a " + mark + " there");
 		}
 		board[cell.x][cell.y] = mark;
-		return evaluate(mark);
+		return evaluateAndStore(mark);
 	}
 
 	public State clearMarker(Cell cell, Marker mark) {
@@ -73,8 +73,13 @@ public class Board {
 		board[cell.x][cell.y] = Marker.EMPTY;
 
 		// removing a marker shouldn't expose a win?
-		return evaluate(mark);
+		return evaluateAndStore(mark);
 
+	}
+
+	private State evaluateAndStore(Marker mark) {
+		state = evaluate(mark);
+		return state;
 	}
 
 	public State removeMarker(Cell cell, Marker mark) {
@@ -163,7 +168,7 @@ public class Board {
 		if (Math.abs(score) == size) {
 			if (mark != board[cell.x][cell.y]) {
 				// player made opponent win?
-				throw new RuntimeException("You made the opponent win?!");
+				//throw new RuntimeException("You made the opponent win?!");
 			}
 			return State.winner(cell, cell2, board[cell.x][cell.y], score, winStyle);
 		}
@@ -193,5 +198,19 @@ public class Board {
 			}
 		}		
 		return sum==0;
+	}
+
+	public Board copy() {
+		return this;
+//		Board copy = new Board(size);
+//		for (int x=0;x< size; x++) {
+//			for (int y=0;y<size; y++) {
+//				Marker marker = board[x][y];
+//				if (marker != Marker.EMPTY) {
+//					copy.placeMarker(new Cell(x, y), marker);
+//				}
+//			}
+//		}
+//		return copy;
 	}
 }

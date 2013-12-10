@@ -46,7 +46,6 @@ public class GameFragment extends SherlockFragment {
 	private WinOverlayView winOverlayView;
 
 	private Game game;
-	private Marker firstPlayer;
 	private ScoreCard score;
 
 	private PlayerStrategy xStrategy;
@@ -134,11 +133,9 @@ public class GameFragment extends SherlockFragment {
 		this.xStrategy = xStrategy;
 		this.oStrategy = oStrategy;
 
-		firstPlayer = Marker.X;
 		currentStrategy = xStrategy;
 
-		firstPlayer = game.getCurrentPlayer();
-		if (firstPlayer == Marker.X) {
+		if (game.getCurrentPlayer()== Marker.X) {
 			currentStrategy = xStrategy;
 		} else {
 			currentStrategy = oStrategy;
@@ -309,7 +306,7 @@ public class GameFragment extends SherlockFragment {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO notify opponent playing again
-					game = new Game(3, firstPlayer.opponent(),
+					game = new Game(3, currentStrategy.getMarker(),
 							game.getMarkerChance());
 					updateHeader();
 					winOverlayView.setWinStyle(null);
@@ -378,7 +375,7 @@ public class GameFragment extends SherlockFragment {
 					cellButton.setBackground(originalBackGround);
 					makeMove(game.getMarkerToPlay(), move);
 				}
-			}, 350);
+			}, 200);
 		}
 	}
 

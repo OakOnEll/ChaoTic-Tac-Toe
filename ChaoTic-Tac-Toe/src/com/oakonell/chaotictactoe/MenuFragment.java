@@ -2,6 +2,8 @@ package com.oakonell.chaotictactoe;
 
 import java.util.ArrayList;
 
+import com.oakonell.chaotictactoe.model.solver.MinMaxAI;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -321,16 +323,21 @@ public class MenuFragment extends SherlockFragment {
 
 	protected void startGameAgainstAI() {
 		// need dialog to choose AI level and game mode
-		MarkerChance chance = MarkerChance.CHAOTIC;
+		//MarkerChance chance = MarkerChance.CHAOTIC;
+		MarkerChance chance = MarkerChance.NORMAL;
 		GameFragment gameFragment = new GameFragment();
 		Game game = new Game(3, Marker.X, chance);
 
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		String xName = "Me";
 		String oName = "AI";
+		//PlayerStrategy ai = new RandomAI(oName, Marker.O);
+		PlayerStrategy ai = new MinMaxAI(oName, Marker.O, 5);
 		gameFragment.startGame(new HumanStrategy(xName, Marker.X),
-				new RandomAI(oName, Marker.O), game, score);
+				ai, game, score);
 
+		
+		
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.replace(R.id.main_frame, gameFragment, "game");
