@@ -28,7 +28,7 @@ public class MiniMaxAlg {
 
 	public Cell solve(Board board, Marker toPlay) {
 		Board copy = board.copy();
-		MoveAndScore solve = solve(copy, depth, player, toPlay);
+		MoveAndScore solve = solve(copy, depth, player, toPlay, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 		if (solve.move == null) {
 			throw new RuntimeException("Move should not be null!");
 		}
@@ -36,7 +36,7 @@ public class MiniMaxAlg {
 	}
 
 	private MoveAndScore solve(Board board, int depth, Marker currentPlayer,
-			Marker toPlay) {
+			Marker toPlay, double theAlpha, double theBeta) {
 		State state = board.getState();
 		if (state.isOver()) {
 			// how can moves be empty is state is not over?!
@@ -55,9 +55,8 @@ public class MiniMaxAlg {
 		}
 
 		Cell bestMove = null;
-		double bestScore = (player == currentPlayer) ? Double.NEGATIVE_INFINITY
-				: Double.POSITIVE_INFINITY;
-		double currentScore;
+		double alpha = theAlpha;
+		double beta = theBeta;
 
 		List<MoveAndWeight> moves = getValidMoves(board, currentPlayer, toPlay);
 		for (MoveAndWeight move : moves) {
@@ -68,18 +67,19 @@ public class MiniMaxAlg {
 			} else {
 				board.placeMarker(move.move, move.marker);
 			}
+			double currentScore;
 			if (currentPlayer == player) {
 				currentScore = solve(board, depth - 1,
-						currentPlayer.opponent(), null).score * move.weight;
-				if (currentScore > bestScore) {
-					bestScore = currentScore;
+						currentPlayer.opponent(), null, alpha, beta).score * move.weight;
+				if (currentScore > alpha) {
+					alpha = currentScore;
 					bestMove = move.move;
 				}
 			} else {
 				currentScore = solve(board, depth - 1,
-						currentPlayer.opponent(), null).score * move.weight;
-				if (currentScore < bestScore) {
-					bestScore = currentScore;
+						currentPlayer.opponent(), null, alpha, beta).score * move.weight;
+				if (currentScore < beta) {
+					beta = currentScore;
 					bestMove = move.move;
 				}
 			}
@@ -88,10 +88,9 @@ public class MiniMaxAlg {
 			} else {
 				board.clearMarker(move.move, move.marker);
 			}
+			if (alpha >= beta) break;
 		}
-		if (bestMove == null) {
-			throw new RuntimeException("best move is null!");
-		}
+		double bestScore = currentPlayer == player ? alpha : beta;
 		return new MoveAndScore(bestMove, bestScore);
 	}
 
