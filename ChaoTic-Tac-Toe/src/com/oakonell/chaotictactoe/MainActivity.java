@@ -12,6 +12,10 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.googleapi.BaseGameActivity;
@@ -28,6 +32,7 @@ public class MainActivity extends BaseGameActivity {
 	private static final String FRAG_TAG_MENU = "menu";
 
 	private RoomListener roomListener;
+	private InterstitialAd mInterstitial;
 
 	@Override
 	protected void onActivityResult(int request, int response, Intent data) {
@@ -44,6 +49,12 @@ public class MainActivity extends BaseGameActivity {
 		super.onCreate(savedInstanceState);
 		Utils.enableStrictMode();
 		setContentView(R.layout.main_activity);
+
+		initializeInterstitialAd();
+
+		mAdView = (AdView) findViewById(R.id.adView);
+		// mAdView.setAdListener(new ToastAdListener(this));
+		mAdView.loadAd(new AdRequest.Builder().build());
 
 		AppLaunchUtils.appLaunched(this, null);
 
@@ -66,6 +77,12 @@ public class MainActivity extends BaseGameActivity {
 		setSignInMessages(getString(R.string.signing_in),
 				getString(R.string.signing_out));
 
+	}
+
+	private void initializeInterstitialAd() {
+		mInterstitial = new InterstitialAd(this);
+		mInterstitial.setAdUnitId(getResources().getString(R.string.admob_id));
+		mInterstitial.loadAd(new AdRequest.Builder().build());
 	}
 
 	@Override
@@ -105,7 +122,7 @@ public class MainActivity extends BaseGameActivity {
 
 	@Override
 	public void signOut() {
-		// TODO Auto-generated method stub
+		getMenuFragment().signOut();
 		super.signOut();
 	}
 
@@ -173,14 +190,21 @@ public class MainActivity extends BaseGameActivity {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
-					// TODO inform possible opponent of leaving room 
+
+					// TODO inform possible opponent of leaving room
+					if (roomListener != null ) {
+						roomListener.leaveRoom();
+					}
 					MainActivity.super.onBackPressed();
+
+					// show an ad
+					possiblyShowInterstitialAd();
 				}
 			});
 			builder.setNegativeButton("No", new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();					
+					dialog.dismiss();
 				}
 			});
 			builder.show();
@@ -188,4 +212,44 @@ public class MainActivity extends BaseGameActivity {
 		}
 		super.onBackPressed();
 	}
+
+	private AdView mAdView;
+
+	@Override
+	protected void onPause() {
+		mAdView.pause();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mAdView.resume();
+	}
+
+	@Override
+	protected void onDestroy() {
+		mAdView.destroy();
+		super.onDestroy();
+	}
+
+	private void possiblyShowInterstitialAd() {
+		// show an ad
+		// possibly only show with some probability (50%?)
+		if (mInterstitial.isLoaded()) {
+			mInterstitial.show();
+			mInterstitial.setAdListener(new AdListener() {
+				@Override
+				public void onAdClosed() {
+					super.onAdClosed();
+					initializeInterstitialAd();
+				}
+			});
+		}
+	}
+
+	public void gameEnded() {
+		possiblyShowInterstitialAd();
+	}
+
 }

@@ -437,4 +437,16 @@ public class RoomListener implements RoomUpdateListener,
 		return mParticipants.get(1);
 	}
 
+	@Override
+	public void onP2PConnected(String arg0) {
+		// TODO Auto-generated method stub
+		Log.i(TAG, "Connected to " + arg0);
+	}
+
+	@Override
+	public void onP2PDisconnected(String arg0) {
+		// TODO Auto-generated method stub
+		Log.i(TAG, "Disconnected from " + arg0);
+	}
+
 }

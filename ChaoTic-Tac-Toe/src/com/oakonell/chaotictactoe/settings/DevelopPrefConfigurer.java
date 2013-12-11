@@ -3,6 +3,7 @@ package com.oakonell.chaotictactoe.settings;
 import android.app.Activity;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.widget.Toast;
 
 import com.oakonell.chaotictactoe.ChaoTicTacToe;
 import com.oakonell.chaotictactoe.utils.DevelopmentUtil;
@@ -30,6 +31,10 @@ public class DevelopPrefConfigurer implements PreferenceConfigurer {
 						ChaoTicTacToe app = (ChaoTicTacToe) activity
 								.getApplication();
 						Info info = app.getDevelopInfo();
+						if (info== null) {
+							Toast.makeText(activity, "Not connected", Toast.LENGTH_SHORT).show();;
+							return true;
+						}
 
 						DevelopmentUtil.resetAchievements(activity, info);
 						return true;
@@ -45,6 +50,10 @@ public class DevelopPrefConfigurer implements PreferenceConfigurer {
 						ChaoTicTacToe app = (ChaoTicTacToe) activity
 								.getApplication();
 						Info info = app.getDevelopInfo();
+						if (info== null) {
+							Toast.makeText(activity, "Not connected", Toast.LENGTH_SHORT).show();
+							return true;
+						}
 
 						DevelopmentUtil.resetLeaderboards(activity, info);
 						return true;

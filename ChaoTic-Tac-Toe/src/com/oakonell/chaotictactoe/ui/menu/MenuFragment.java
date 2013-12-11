@@ -64,6 +64,8 @@ public class MenuFragment extends SherlockFragment {
 	private View signOutView;
 	private Button invitesButton;
 
+	private View playRelated;
+
 	@Override
 	public void onActivityResult(int request, int response, Intent data) {
 		switch (request) {
@@ -148,6 +150,9 @@ public class MenuFragment extends SherlockFragment {
 		signInView = view.findViewById(R.id.sign_in_bar);
 		signOutView = view.findViewById(R.id.sign_out_bar);
 		invitesButton = (Button) view.findViewById(R.id.invites);
+
+		playRelated = view.findViewById(R.id.google_play_related);
+		playRelated.setEnabled(false);
 
 		Button newGameOnSameDevice = (Button) view
 				.findViewById(R.id.new_game_same_device);
@@ -415,8 +420,12 @@ public class MenuFragment extends SherlockFragment {
 					SettingsActivity.class);
 
 			GameHelper helper = getMainActivity().getGameHelper();
-			Info info = new Info(helper);
-			ChaoTicTacToe app = (ChaoTicTacToe) getActivity().getApplication();
+			Info info = null;
+			ChaoTicTacToe app = (ChaoTicTacToe) getActivity()
+					.getApplication();
+			if (helper.isSignedIn()) {
+				info = new Info(helper);
+			}
 			app.setDevelopInfo(info);
 
 			getActivity().startActivity(prefIntent);
@@ -443,6 +452,7 @@ public class MenuFragment extends SherlockFragment {
 
 	public void onSignInSucceeded() {
 		showLogout();
+		playRelated.setEnabled(true);
 
 		// install invitation listener so we get notified if we receive an
 		// invitation to play
@@ -462,6 +472,10 @@ public class MenuFragment extends SherlockFragment {
 				});
 
 		refreshInvites();
+	}
+
+	public void signOut() {
+		playRelated.setEnabled(false);
 	}
 
 	private void showLogout() {
@@ -520,4 +534,5 @@ public class MenuFragment extends SherlockFragment {
 	public MainActivity getMainActivity() {
 		return (MainActivity) super.getActivity();
 	}
+
 }

@@ -57,15 +57,34 @@
             android:textColor="#808080" />
     </LinearLayout>
 
- 
-    <LinearLayout
-        android:id="@+id/google_play_related"
+    <Button
+        android:id="@+id/new_game_same_device"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/sign_in_bar"
         android:layout_centerHorizontal="true"
+        android:text="@string/new_game_same_device" />
+
+    <Button
+        android:id="@+id/new_game_vs_ai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_game_same_device"
+        android:layout_centerHorizontal="true"
+        android:text="@string/new_game_vs_ai" />
+    
+    
+    <LinearLayout
+        android:id="@+id/google_play_related"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_game_vs_ai"        
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:background="@drawable/border"
+        android:padding="5dip"
+        >
 
         <Button
             android:id="@+id/new_quick_play"
@@ -106,27 +125,11 @@
             android:text="@string/leaderboards" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/new_game_same_device"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/google_play_related"
-        android:layout_centerHorizontal="true"
-        android:text="@string/new_game_same_device" />
-
-    <Button
-        android:id="@+id/new_game_vs_ai"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/new_game_same_device"
-        android:layout_centerHorizontal="true"
-        android:text="@string/new_game_vs_ai" />
-
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/new_game_same_device"
+        android:layout_alignTop="@+id/google_play_related"
         android:layout_toLeftOf="@+id/google_play_related"
         android:src="@drawable/games_controller_green_med" />
 

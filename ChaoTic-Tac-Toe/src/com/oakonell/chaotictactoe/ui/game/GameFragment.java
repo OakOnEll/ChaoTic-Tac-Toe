@@ -313,6 +313,7 @@ public class GameFragment extends SherlockFragment {
 					dialog.dismiss();
 					getMainActivity().getSupportFragmentManager()
 							.popBackStack();
+					getMainActivity().gameEnded();
 				}
 			};
 			OnClickListener playAgainListener = new DialogInterface.OnClickListener() {
