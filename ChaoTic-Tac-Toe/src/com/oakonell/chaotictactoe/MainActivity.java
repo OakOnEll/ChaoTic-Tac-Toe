@@ -102,6 +102,12 @@ public class MainActivity extends BaseGameActivity {
 	}
 
 	@Override
+	public void signOut() {
+		// TODO Auto-generated method stub
+		super.signOut();
+	}
+
+	@Override
 	public void onSignInSucceeded() {
 		getMenuFragment().onSignInSucceeded();
 
@@ -157,7 +163,7 @@ public class MainActivity extends BaseGameActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (getGameFragment().isVisible()) {
+		if (getGameFragment() != null && getGameFragment().isVisible()) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Leave game?");
 			builder.setMessage("Leave the game in progress?");

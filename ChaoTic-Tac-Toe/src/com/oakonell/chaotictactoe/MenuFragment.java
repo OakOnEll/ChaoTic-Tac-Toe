@@ -2,8 +2,6 @@ package com.oakonell.chaotictactoe;
 
 import java.util.ArrayList;
 
-import com.oakonell.chaotictactoe.model.solver.MinMaxAI;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,11 +28,15 @@ import com.google.android.gms.games.multiplayer.InvitationBuffer;
 import com.google.android.gms.games.multiplayer.OnInvitationReceivedListener;
 import com.google.android.gms.games.multiplayer.OnInvitationsLoadedListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
+import com.oakonell.chaotictactoe.NewAIGameDialog.LocalAIGameModeListener;
+import com.oakonell.chaotictactoe.NewLocalGameDialog.LocalGameModeListener;
+import com.oakonell.chaotictactoe.OnlineGameModeDialog.OnlineGameModeListener;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
+import com.oakonell.chaotictactoe.model.solver.MinMaxAI;
 import com.oakonell.chaotictactoe.model.solver.RandomAI;
 import com.oakonell.chaotictactoe.settings.SettingsActivity;
 import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
@@ -48,8 +50,8 @@ public class MenuFragment extends SherlockFragment {
 	final static int RC_SELECT_PLAYERS = 10000;
 	final static int RC_INVITATION_INBOX = 10001;
 	public final static int RC_WAITING_ROOM = 10002;
-	public static final int RC_LOCAL_SELECT_PLAYERS = 10003;
-	public static final int RC_LOCAL_SELECT_AI = 10004;
+
+	// public static final int RC_SELECT_ONLINE_INVITE_TYPE = 10005;
 
 	private View signInView;
 	private View signOutView;
@@ -58,33 +60,25 @@ public class MenuFragment extends SherlockFragment {
 	@Override
 	public void onActivityResult(int request, int response, Intent data) {
 		switch (request) {
-		case RC_LOCAL_SELECT_AI: {
-			if (response == Activity.RESULT_OK) {
-				startAIGame(data);
-			} else {
-				Toast.makeText(getActivity(), "Local AI game canceled",
-						Toast.LENGTH_SHORT).show();
-			}
-		}
-			break;
-		case RC_LOCAL_SELECT_PLAYERS: {
-			if (response == Activity.RESULT_OK) {
-				startLocalTwoPlayerGame(data);
-			} else {
-				Toast.makeText(getActivity(), "Local game canceled",
-						Toast.LENGTH_SHORT).show();
-			}
-		}
-			break;
+
 		case RC_SELECT_PLAYERS: {
 			if (response == Activity.RESULT_OK) {
-				handleSelectPlayer(data);
+				final ArrayList<String> invitees = data
+						.getStringArrayListExtra(GamesClient.EXTRA_PLAYERS);
+				int minAutoMatchPlayers = data.getIntExtra(
+						GamesClient.EXTRA_MIN_AUTOMATCH_PLAYERS, 0);
+				int maxAutoMatchPlayers = data.getIntExtra(
+						GamesClient.EXTRA_MAX_AUTOMATCH_PLAYERS, 0);
+
+				createOnlineRoom(invitees, minAutoMatchPlayers,
+						maxAutoMatchPlayers);
 			} else {
 				Toast.makeText(getActivity(), "Select players canceled",
 						Toast.LENGTH_SHORT).show();
 			}
 		}
 			break;
+
 		case RC_WAITING_ROOM:
 			// ignore result if we dismissed the waiting room from code:
 			// if (mWaitRoomDismissedFromCode)
@@ -137,48 +131,6 @@ public class MenuFragment extends SherlockFragment {
 		}
 	}
 
-	private void handleSelectPlayer(Intent data) {
-		final ArrayList<String> invitees = data
-				.getStringArrayListExtra(GamesClient.EXTRA_PLAYERS);
-		Log.d(TAG, "Invitee count: " + invitees.size());
-
-		StringBuilder stringBuilder = new StringBuilder();
-		for (String each : invitees) {
-			stringBuilder.append(each);
-			stringBuilder.append(",\n");
-		}
-
-		// new AlertDialog.Builder(this).setTitle("Invited to play...")
-		// .setMessage(stringBuilder.toString()).show();
-
-		// get the automatch criteria
-		Bundle autoMatchCriteria = null;
-		int minAutoMatchPlayers = data.getIntExtra(
-				GamesClient.EXTRA_MIN_AUTOMATCH_PLAYERS, 0);
-		int maxAutoMatchPlayers = data.getIntExtra(
-				GamesClient.EXTRA_MAX_AUTOMATCH_PLAYERS, 0);
-		if (minAutoMatchPlayers > 0 || maxAutoMatchPlayers > 0) {
-			autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
-					minAutoMatchPlayers, maxAutoMatchPlayers, 0);
-			Log.d(TAG, "Automatch criteria: " + autoMatchCriteria);
-		}
-
-		RoomListener roomListener = new RoomListener(getMainActivity(),
-				getMainActivity().getGameHelper());
-		getMainActivity().setRoomListener(roomListener);
-		// create the room
-		Log.d(TAG, "Creating room...");
-		RoomConfig.Builder rtmConfigBuilder = RoomConfig.builder(roomListener);
-		rtmConfigBuilder.addPlayersToInvite(invitees);
-		rtmConfigBuilder.setMessageReceivedListener(roomListener);
-		rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
-		if (autoMatchCriteria != null) {
-			rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
-		}
-		getMainActivity().getGamesClient().createRoom(rtmConfigBuilder.build());
-		Log.d(TAG, "Room created, waiting for it to be ready...");
-	}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -195,12 +147,9 @@ public class MenuFragment extends SherlockFragment {
 		newGameOnSameDevice.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// prompt for player names, and then in onDialogPositiveClick
-				// callback, start the game activity
-				Intent intent = new Intent(getActivity(),
-						NewLocalGameDialog.class);
-				startActivityForResult(intent, RC_LOCAL_SELECT_PLAYERS);
+				selectLocalGame();
 			}
+
 		});
 
 		Button viewAchievements = (Button) view
@@ -262,9 +211,7 @@ public class MenuFragment extends SherlockFragment {
 		invite.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = getMainActivity().getGamesClient()
-						.getSelectPlayersIntent(1, 1);
-				startActivityForResult(intent, RC_SELECT_PLAYERS);
+				selectOnlineGameMode();
 			}
 		});
 
@@ -272,19 +219,7 @@ public class MenuFragment extends SherlockFragment {
 		quick.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final int MIN_OPPONENTS = 1, MAX_OPPONENTS = 1;
-				Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
-						MIN_OPPONENTS, MAX_OPPONENTS, 0);
-				RoomListener roomListener = new RoomListener(getMainActivity(),
-						getMainActivity().getGameHelper());
-				getMainActivity().setRoomListener(roomListener);
-				RoomConfig.Builder rtmConfigBuilder = RoomConfig
-						.builder(roomListener);
-				rtmConfigBuilder.setMessageReceivedListener(roomListener);
-				rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
-				rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
-				getMainActivity().getGamesClient().createRoom(
-						rtmConfigBuilder.build());
+				selectQuickMode();
 			}
 		});
 
@@ -299,13 +234,9 @@ public class MenuFragment extends SherlockFragment {
 
 		Button ai = (Button) view.findViewById(R.id.new_game_vs_ai);
 		ai.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
-				// prompt for player names, and then in onDialogPositiveClick
-				// callback, start the game activity
-				Intent intent = new Intent(getActivity(), NewAIGameDialog.class);
-				startActivityForResult(intent, RC_LOCAL_SELECT_AI);
+				selectAIGame();
 			}
 		});
 
@@ -318,13 +249,81 @@ public class MenuFragment extends SherlockFragment {
 		return view;
 	}
 
-	private void startLocalTwoPlayerGame(Intent data) {
-		MarkerChance chance = MarkerChance.fromIntentExtras(data);
+	private void selectAIGame() {
+		// prompt for AI level and game mode
+		// then start the game activity
+		NewAIGameDialog dialog = new NewAIGameDialog();
+		dialog.initialize(new LocalAIGameModeListener() {
+			@Override
+			public void chosenMode(MarkerChance chance, String aiName, int level) {
+				startAIGame(chance, aiName, level);
+
+			}
+		});
+		dialog.show(getFragmentManager(), "aidialog");
+	}
+
+	private void selectLocalGame() {
+		// prompt for player names, and game type
+		// then start the game activity
+		NewLocalGameDialog dialog = new NewLocalGameDialog();
+		dialog.initialize(new LocalGameModeListener() {
+			@Override
+			public void chosenMode(MarkerChance chance, String xName,
+					String oName) {
+				startLocalTwoPlayerGame(chance, xName, oName);
+			}
+		});
+		dialog.show(getFragmentManager(), "localgame");
+	}
+
+	private void selectQuickMode() {
+		OnlineGameModeDialog dialog = new OnlineGameModeDialog();
+		dialog.initialize(true, new OnlineGameModeListener() {
+			@Override
+			public void chosenMode(MarkerChance chance) {
+				// TODO use the chance argument as a flag to the auto match criteria
+				int modeMask = 0;
+				final int MIN_OPPONENTS = 1, MAX_OPPONENTS = 1;
+				Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
+						MIN_OPPONENTS, MAX_OPPONENTS, modeMask);
+				RoomListener roomListener = new RoomListener(getMainActivity(),
+						getMainActivity().getGameHelper());
+				getMainActivity().setRoomListener(roomListener);
+				RoomConfig.Builder rtmConfigBuilder = RoomConfig
+						.builder(roomListener);
+				rtmConfigBuilder.setMessageReceivedListener(roomListener);
+				rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
+				rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
+				getMainActivity().getGamesClient().createRoom(
+						rtmConfigBuilder.build());
+			}
+		});
+		dialog.show(getSherlockActivity().getSupportFragmentManager(),
+				"gameMode");
+
+	}
+
+	private void selectOnlineGameMode() {
+		// first choose Game mode
+		OnlineGameModeDialog dialog = new OnlineGameModeDialog();
+		dialog.initialize(false, new OnlineGameModeListener() {
+			@Override
+			public void chosenMode(MarkerChance chance) {
+				Intent intent = getMainActivity().getGamesClient()
+						.getSelectPlayersIntent(1, 1);
+				startActivityForResult(intent, RC_SELECT_PLAYERS);
+			}
+		});
+		dialog.show(getSherlockActivity().getSupportFragmentManager(),
+				"gameMode");
+	}
+
+	private void startLocalTwoPlayerGame(MarkerChance chance, String xName,
+			String oName) {
 		GameFragment gameFragment = new GameFragment();
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
-		String xName = data.getStringExtra(NewLocalGameDialog.X_NAME_KEY);
-		String oName = data.getStringExtra(NewLocalGameDialog.O_NAME_KEY);
 		gameFragment.startGame(new HumanStrategy(xName, Marker.X),
 				new HumanStrategy(oName, Marker.O), game, score);
 
@@ -335,14 +334,11 @@ public class MenuFragment extends SherlockFragment {
 		transaction.commit();
 	}
 
-	private void startAIGame(Intent data) {
-		MarkerChance chance = MarkerChance.fromIntentExtras(data);
+	private void startAIGame(MarkerChance chance, String oName, int aiDepth) {
 		GameFragment gameFragment = new GameFragment();
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		String xName = "Me";
-		String oName = data.getStringExtra(NewAIGameDialog.AI_NAME_KEY);
-		int aiDepth = data.getIntExtra(NewAIGameDialog.AI_DEPTH, 1);
 		PlayerStrategy ai;
 		if (aiDepth < 0) {
 			ai = new RandomAI(oName, Marker.O);
@@ -357,6 +353,43 @@ public class MenuFragment extends SherlockFragment {
 		transaction.replace(R.id.main_frame, gameFragment, "game");
 		transaction.addToBackStack(null);
 		transaction.commit();
+	}
+
+	private void createOnlineRoom(final ArrayList<String> invitees,
+			int minAutoMatchPlayers, int maxAutoMatchPlayers) {
+		Log.d(TAG, "Invitee count: " + invitees.size());
+
+		StringBuilder stringBuilder = new StringBuilder();
+		for (String each : invitees) {
+			stringBuilder.append(each);
+			stringBuilder.append(",\n");
+		}
+
+		// new AlertDialog.Builder(this).setTitle("Invited to play...")
+		// .setMessage(stringBuilder.toString()).show();
+
+		// get the automatch criteria
+		Bundle autoMatchCriteria = null;
+		if (minAutoMatchPlayers > 0 || maxAutoMatchPlayers > 0) {
+			autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
+					minAutoMatchPlayers, maxAutoMatchPlayers, 0);
+			Log.d(TAG, "Automatch criteria: " + autoMatchCriteria);
+		}
+
+		RoomListener roomListener = new RoomListener(getMainActivity(),
+				getMainActivity().getGameHelper());
+		getMainActivity().setRoomListener(roomListener);
+		// create the room
+		Log.d(TAG, "Creating room...");
+		RoomConfig.Builder rtmConfigBuilder = RoomConfig.builder(roomListener);
+		rtmConfigBuilder.addPlayersToInvite(invitees);
+		rtmConfigBuilder.setMessageReceivedListener(roomListener);
+		rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
+		if (autoMatchCriteria != null) {
+			rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
+		}
+		getMainActivity().getGamesClient().createRoom(rtmConfigBuilder.build());
+		Log.d(TAG, "Room created, waiting for it to be ready...");
 	}
 
 	@Override

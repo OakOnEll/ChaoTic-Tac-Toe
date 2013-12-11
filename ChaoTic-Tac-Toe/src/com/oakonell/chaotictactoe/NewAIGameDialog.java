@@ -3,33 +3,38 @@ package com.oakonell.chaotictactoe;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.google.analytics.tracking.android.EasyTracker;
+import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 
-public class NewAIGameDialog extends SherlockFragmentActivity {
-	public static final String AI_NAME_KEY = "aiName";
-	public static final String AI_DEPTH = "aiDepth";
-	
-	private String oName;
+public class NewAIGameDialog extends SherlockDialogFragment {
+
+	public interface LocalAIGameModeListener {
+		void chosenMode(MarkerChance chance, String aiName, int level);
+	}
+
+	private LocalAIGameModeListener listener;
+
+	public void initialize(LocalAIGameModeListener listener) {
+		this.listener = listener;
+	}
 
 	public static class AiDropDownItem {
 		private final String text;
 		private final int level;
 
 		public AiDropDownItem(String string, int level) {
-			this.level =level;
+			this.level = level;
 			this.text = string;
 		}
 
@@ -39,30 +44,33 @@ public class NewAIGameDialog extends SherlockFragmentActivity {
 		}
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dialog_local_ai);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater
+				.inflate(R.layout.dialog_local_ai, container, false);
+
+		getDialog().setTitle("Choose AI Game Mode");
 
 		List<AiDropDownItem> aiLevels = new ArrayList<NewAIGameDialog.AiDropDownItem>();
 		aiLevels.add(new AiDropDownItem("Random", -1));
 		aiLevels.add(new AiDropDownItem("Easy", 1));
 		aiLevels.add(new AiDropDownItem("Medium", 2));
 		aiLevels.add(new AiDropDownItem("Hard", 3));
-		
-		final Spinner aiLevelSpinner = (Spinner) findViewById(R.id.ai_level);
+
+		final Spinner aiLevelSpinner = (Spinner) view
+				.findViewById(R.id.ai_level);
 		ArrayAdapter<AiDropDownItem> aiLevelAdapter = new ArrayAdapter<AiDropDownItem>(
-				this, android.R.layout.simple_spinner_item, aiLevels);
+				getActivity(), android.R.layout.simple_spinner_dropdown_item, aiLevels);
 		aiLevelSpinner.setAdapter(aiLevelAdapter);
 		aiLevelSpinner.setSelection(1);
 
 		final MarkerChanceFragment frag = new MarkerChanceFragment();
-		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentManager fragmentManager = getChildFragmentManager();
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
 		transaction.replace(R.id.fragmentContainer, frag);
 		transaction.commit();
 
-		Button start = (Button) findViewById(R.id.start);
+		Button start = (Button) view.findViewById(R.id.start);
 		start.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -71,23 +79,17 @@ public class NewAIGameDialog extends SherlockFragmentActivity {
 					return;
 				}
 
-				AiDropDownItem selectedItem = (AiDropDownItem) aiLevelSpinner.getSelectedItem();
-				
-				oName = selectedItem.text + " AI";
-				
+				AiDropDownItem selectedItem = (AiDropDownItem) aiLevelSpinner
+						.getSelectedItem();
+
+				String oName = selectedItem.text + " AI";
 				MarkerChance chance = frag.getChance();
 
-				Intent intent = new Intent();
-				chance.putIntentExtras(intent);
-
-				intent.putExtra(AI_NAME_KEY, oName);				
-				intent.putExtra(AI_DEPTH, selectedItem.level);
-
-				setResult(Activity.RESULT_OK, intent);
-				finish();
+				dismiss();
+				listener.chosenMode(chance, oName, selectedItem.level);
 			}
 		});
-
+		return view;
 	}
 
 	protected boolean validate(MarkerChanceFragment frag) {
@@ -95,18 +97,6 @@ public class NewAIGameDialog extends SherlockFragmentActivity {
 
 		isValid &= frag.validate();
 		return isValid;
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		EasyTracker.getInstance().activityStart(this);
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		EasyTracker.getInstance().activityStop(this);
 	}
 
 }

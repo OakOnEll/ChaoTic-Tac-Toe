@@ -1,5 +1,10 @@
 package com.oakonell.chaotictactoe;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -9,6 +14,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
@@ -33,6 +39,12 @@ public class MarkerChanceFragment extends SherlockFragment {
 	private boolean isAdjusting;
 	private Spinner spinner;
 
+	private boolean allowCustom = true;
+
+	public void allowCustomType(boolean allowCustom) {
+		this.allowCustom = allowCustom;
+	}
+
 	public MarkerChance getChance() {
 		int position = spinner.getSelectedItemPosition();
 		if (position == 0) {
@@ -54,15 +66,39 @@ public class MarkerChanceFragment extends SherlockFragment {
 	}
 
 	protected void updatePercentages() {
-		myMarkerPercent.setText((myMarkerSeek.getProgress() / 3) + "%");
-		opponentMarkerPercent.setText((opponentMarkerSeek.getProgress() / 3)
-				+ "%");
-		int removalPercent = removeMarkerSeek.getProgress() / 3;
-		removeMarkerPercent.setText(removalPercent + "%");
+		myMarkerPercent.setText(displayablePercentage(myMarkerSeek));
+		opponentMarkerPercent
+				.setText(displayablePercentage(opponentMarkerSeek));
+		removeMarkerPercent.setText(displayablePercentage(removeMarkerSeek));
+
+		double removalPercent = (double) removeMarkerSeek.getProgress() / 3;
 		if (removalPercent > MAX_REMOVAL_PERCENT) {
 			markRemovalTooHigh();
 		} else {
 			removeMarkerPercent.setError(null);
+		}
+	}
+	
+	private DecimalFormat format = new DecimalFormat("###.#");
+	private String displayablePercentage(SeekBar seek) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(format.format(((double) seek.getProgress() / 3)));
+		builder.append("%");
+		return builder.toString();
+	}
+
+	public static class GameTypeDropDownItem {
+		private final String text;
+		private final int level;
+
+		public GameTypeDropDownItem(String string, int level) {
+			this.level = level;
+			this.text = string;
+		}
+
+		@Override
+		public String toString() {
+			return text;
 		}
 	}
 
@@ -76,6 +112,27 @@ public class MarkerChanceFragment extends SherlockFragment {
 		custom.setVisibility(View.GONE);
 
 		spinner = (Spinner) view.findViewById(R.id.choice_chance);
+
+		// <string-array name="chance_array">
+		// <item>Normal</item>
+		// <item>Reverse</item>
+		// <item>Chaotic</item>
+		// <item>Custom</item>
+		// </string-array>
+		List<GameTypeDropDownItem> aiLevels = new ArrayList<GameTypeDropDownItem>();
+		aiLevels.add(new GameTypeDropDownItem("Normal", -0));
+		aiLevels.add(new GameTypeDropDownItem("Reverse", 1));
+		aiLevels.add(new GameTypeDropDownItem("Chaotic", 2));
+		if (allowCustom) {
+			aiLevels.add(new GameTypeDropDownItem("Custom", 3));
+		}
+
+		ArrayAdapter<GameTypeDropDownItem> aiLevelAdapter = new ArrayAdapter<GameTypeDropDownItem>(
+				getActivity(), android.R.layout.simple_spinner_dropdown_item,
+				aiLevels);
+		spinner.setAdapter(aiLevelAdapter);
+		spinner.setSelection(0);
+
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -178,15 +235,17 @@ public class MarkerChanceFragment extends SherlockFragment {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				String errorText = removeMarkerPercent.getError().toString();
-				if (StringUtils.isEmpty(errorText)) return false;
-				
+				if (StringUtils.isEmpty(errorText))
+					return false;
+
 				int[] pos = new int[2];
 				removeMarkerPercent.getLocationInWindow(pos);
 
-				Toast t = Toast.makeText(getActivity(), errorText, Toast.LENGTH_SHORT);
+				Toast t = Toast.makeText(getActivity(), errorText,
+						Toast.LENGTH_SHORT);
 				t.setGravity(Gravity.TOP | Gravity.LEFT,
 						pos[0] - ((errorText.length() / 2) * 12), pos[1] - 128);
-				t.show();				
+				t.show();
 				return true;
 			}
 		});
