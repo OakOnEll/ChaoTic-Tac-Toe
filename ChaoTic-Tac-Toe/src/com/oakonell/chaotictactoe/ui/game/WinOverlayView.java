@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.game;
 
 import android.content.Context;
 import android.graphics.BlurMaskFilter;

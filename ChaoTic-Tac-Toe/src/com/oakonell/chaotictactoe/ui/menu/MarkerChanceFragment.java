@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.menu;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -22,6 +22,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.oakonell.chaotictactoe.R;
+import com.oakonell.chaotictactoe.R.id;
+import com.oakonell.chaotictactoe.R.layout;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.utils.StringUtils;
 

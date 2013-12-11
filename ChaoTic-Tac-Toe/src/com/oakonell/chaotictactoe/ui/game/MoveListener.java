@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.game;
 
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;

@@ -35,7 +35,7 @@
         </activity>
         <!--
              <activity
-            android:name="com.oakonell.chaotictactoe.GameFragment"
+            android:name="com.oakonell.chaotictactoe.ui.game.GameFragment"
             android:label="@string/app_name" 
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
@@ -44,14 +44,14 @@
         -->
 
         <activity
-            android:name="com.oakonell.chaotictactoe.NewLocalGameDialog"
+            android:name="com.oakonell.chaotictactoe.ui.menu.NewLocalGameDialog"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             >        </activity>
         
         <activity
-            android:name="com.oakonell.chaotictactoe.NewAIGameDialog"
+            android:name="com.oakonell.chaotictactoe.ui.menu.NewAIGameDialog"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
@@ -59,7 +59,7 @@
         </activity>
         
         <activity
-            android:name="com.oakonell.chaotictactoe.OnlineGameModeDialog"
+            android:name="com.oakonell.chaotictactoe.ui.menu.OnlineGameModeDialog"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >

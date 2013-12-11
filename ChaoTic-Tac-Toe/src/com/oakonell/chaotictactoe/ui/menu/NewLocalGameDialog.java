@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.menu;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -18,6 +18,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
+import com.oakonell.chaotictactoe.R;
+import com.oakonell.chaotictactoe.R.id;
+import com.oakonell.chaotictactoe.R.layout;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.utils.StringUtils;
 

@@ -35,7 +35,7 @@
 
             <SeekBar
                 android:id="@+id/chance_seek_my_marker"
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="300" />
@@ -44,7 +44,7 @@
                 android:id="@+id/chance_percent_my_marker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="33.3%" />
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -62,7 +62,7 @@
 
             <SeekBar
                 android:id="@+id/chance_seek_opponent_marker"
-                android:layout_width="wrap_content"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="300" />
@@ -71,7 +71,7 @@
                 android:id="@+id/chance_percent_opponent_marker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="33.3%" />
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +88,7 @@
 
             <SeekBar
                 android:id="@+id/chance_seek_remove_marker"
-                android:layout_width="match_parent"
+                android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" 
                 android:max="300"/>
@@ -97,7 +97,7 @@
                 android:id="@+id/chance_percent_remove_marker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="33.3%" />
+                 />
         </LinearLayout>
     </LinearLayout>
 

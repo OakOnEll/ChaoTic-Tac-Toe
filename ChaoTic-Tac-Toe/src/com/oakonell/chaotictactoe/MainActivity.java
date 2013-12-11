@@ -18,6 +18,8 @@ import com.oakonell.chaotictactoe.googleapi.BaseGameActivity;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
+import com.oakonell.chaotictactoe.ui.game.GameFragment;
+import com.oakonell.chaotictactoe.ui.menu.MenuFragment;
 import com.oakonell.utils.Utils;
 import com.oakonell.utils.activity.AppLaunchUtils;
 

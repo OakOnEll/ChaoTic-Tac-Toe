@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.game;
 
 import com.google.android.gms.games.multiplayer.Participant;
 

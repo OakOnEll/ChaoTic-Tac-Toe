@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.game;
 
 import java.util.List;
 
@@ -17,6 +17,10 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.google.android.gms.games.multiplayer.Participant;
+import com.oakonell.chaotictactoe.MainActivity;
+import com.oakonell.chaotictactoe.R;
+import com.oakonell.chaotictactoe.R.id;
+import com.oakonell.chaotictactoe.R.layout;
 
 public class ChatDialogFragment extends SherlockDialogFragment {
 	private List<ChatMessage> messages;

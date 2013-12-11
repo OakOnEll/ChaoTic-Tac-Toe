@@ -12,15 +12,11 @@ public class ChaoTicTacToe extends Application {
 		return achievements;
 	}
 
-	// public void setAchievements(Achievements achievements) {
-	// this.achievements = achievements;
-	// }
-
 	public Leaderboards getLeaderboards() {
 		return leaderboards;
 	}
 
-	Info info;
+	private Info info;
 
 	public void setDevelopInfo(Info info) {
 		this.info = info;

@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
+import com.oakonell.chaotictactoe.R;
+import com.oakonell.chaotictactoe.R.id;
+import com.oakonell.chaotictactoe.R.layout;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 
 public class NewAIGameDialog extends SherlockDialogFragment {

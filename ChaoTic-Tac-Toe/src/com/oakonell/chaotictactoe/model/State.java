@@ -1,6 +1,6 @@
 package com.oakonell.chaotictactoe.model;
 
-import com.oakonell.chaotictactoe.WinOverlayView.WinStyle;
+import com.oakonell.chaotictactoe.ui.game.WinOverlayView.WinStyle;
 
 public class State {
 	private enum SimpleState {

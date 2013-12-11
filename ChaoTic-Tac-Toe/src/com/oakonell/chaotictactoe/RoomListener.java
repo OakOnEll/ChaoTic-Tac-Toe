@@ -25,6 +25,10 @@ import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
+import com.oakonell.chaotictactoe.ui.game.GameFragment;
+import com.oakonell.chaotictactoe.ui.game.HumanStrategy;
+import com.oakonell.chaotictactoe.ui.game.OnlineStrategy;
+import com.oakonell.chaotictactoe.ui.menu.MenuFragment;
 
 public class RoomListener implements RoomUpdateListener,
 		RealTimeMessageReceivedListener, RoomStatusUpdateListener {
@@ -50,7 +54,7 @@ public class RoomListener implements RoomUpdateListener,
 		return helper.getGamesClient();
 	}
 
-	RoomListener(MainActivity activity, GameHelper helper) {
+	public RoomListener(MainActivity activity, GameHelper helper) {
 		this.activity = activity;
 		this.helper = helper;
 	}

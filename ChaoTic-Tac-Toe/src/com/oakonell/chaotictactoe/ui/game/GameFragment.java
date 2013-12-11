@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,18 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.android.gms.games.multiplayer.Participant;
+import com.oakonell.chaotictactoe.Achievements;
+import com.oakonell.chaotictactoe.ChaoTicTacToe;
+import com.oakonell.chaotictactoe.Leaderboards;
+import com.oakonell.chaotictactoe.MainActivity;
+import com.oakonell.chaotictactoe.PlayerStrategy;
+import com.oakonell.chaotictactoe.R;
+import com.oakonell.chaotictactoe.RoomListener;
+import com.oakonell.chaotictactoe.R.drawable;
+import com.oakonell.chaotictactoe.R.id;
+import com.oakonell.chaotictactoe.R.layout;
+import com.oakonell.chaotictactoe.R.menu;
+import com.oakonell.chaotictactoe.R.string;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.InvalidMoveException;

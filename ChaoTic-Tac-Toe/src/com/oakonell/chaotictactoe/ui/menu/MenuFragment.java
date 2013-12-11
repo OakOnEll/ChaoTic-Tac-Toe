@@ -1,4 +1,4 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.ui.menu;
 
 import java.util.ArrayList;
 
@@ -28,9 +28,11 @@ import com.google.android.gms.games.multiplayer.InvitationBuffer;
 import com.google.android.gms.games.multiplayer.OnInvitationReceivedListener;
 import com.google.android.gms.games.multiplayer.OnInvitationsLoadedListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
-import com.oakonell.chaotictactoe.NewAIGameDialog.LocalAIGameModeListener;
-import com.oakonell.chaotictactoe.NewLocalGameDialog.LocalGameModeListener;
-import com.oakonell.chaotictactoe.OnlineGameModeDialog.OnlineGameModeListener;
+import com.oakonell.chaotictactoe.ChaoTicTacToe;
+import com.oakonell.chaotictactoe.MainActivity;
+import com.oakonell.chaotictactoe.PlayerStrategy;
+import com.oakonell.chaotictactoe.R;
+import com.oakonell.chaotictactoe.RoomListener;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
@@ -39,6 +41,11 @@ import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.solver.MinMaxAI;
 import com.oakonell.chaotictactoe.model.solver.RandomAI;
 import com.oakonell.chaotictactoe.settings.SettingsActivity;
+import com.oakonell.chaotictactoe.ui.game.GameFragment;
+import com.oakonell.chaotictactoe.ui.game.HumanStrategy;
+import com.oakonell.chaotictactoe.ui.menu.NewAIGameDialog.LocalAIGameModeListener;
+import com.oakonell.chaotictactoe.ui.menu.NewLocalGameDialog.LocalGameModeListener;
+import com.oakonell.chaotictactoe.ui.menu.OnlineGameModeDialog.OnlineGameModeListener;
 import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
 
 public class MenuFragment extends SherlockFragment {
@@ -282,7 +289,8 @@ public class MenuFragment extends SherlockFragment {
 		dialog.initialize(true, new OnlineGameModeListener() {
 			@Override
 			public void chosenMode(MarkerChance chance) {
-				// TODO use the chance argument as a flag to the auto match criteria
+				// TODO use the chance argument as a flag to the auto match
+				// criteria
 				int modeMask = 0;
 				final int MIN_OPPONENTS = 1, MAX_OPPONENTS = 1;
 				Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
@@ -496,7 +504,7 @@ public class MenuFragment extends SherlockFragment {
 	}
 
 	// Accept the given invitation.
-	void acceptInviteToRoom(String invId) {
+	public void acceptInviteToRoom(String invId) {
 		RoomListener roomListener = new RoomListener(getMainActivity(),
 				getMainActivity().getGameHelper());
 		getMainActivity().setRoomListener(roomListener);
