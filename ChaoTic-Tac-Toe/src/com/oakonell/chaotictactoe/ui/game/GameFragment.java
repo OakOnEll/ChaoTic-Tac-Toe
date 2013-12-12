@@ -391,12 +391,13 @@ public class GameFragment extends SherlockFragment {
 				final ImageButton cellButton = findButtonFor(move);
 				final Drawable originalBackGround = cellButton.getBackground();
 				cellButton.setBackgroundColor(getResources().getColor(
-						android.R.color.holo_orange_light));
+						android.R.color.holo_blue_light));
 				Handler handler = new Handler();
 				handler.postDelayed(new Runnable() {
 					@Override
 					public void run() {
-						cellButton.setBackground(originalBackGround);
+						// TODO not 
+						cellButton.setBackgroundDrawable(originalBackGround);
 						makeMove(game.getMarkerToPlay(), move);
 					}
 				}, 200);

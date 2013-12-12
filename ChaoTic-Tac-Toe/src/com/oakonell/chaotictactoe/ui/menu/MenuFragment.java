@@ -294,17 +294,27 @@ public class MenuFragment extends SherlockFragment {
 		dialog.initialize(true, new OnlineGameModeListener() {
 			@Override
 			public void chosenMode(MarkerChance chance) {
-				// TODO use the chance argument as a flag to the auto match
-				// criteria
-				int modeMask = 0;
+				// use the chance argument as a variant of the game
+				int variant = 0;
+				if (chance.isNormal()) {
+					variant = 1;
+				} else if (chance.isReverse()) {
+					variant = 2;
+				} else if (chance.isChaotic()) {
+					variant = 3;
+				} else {
+					// shouldn't be possible
+					throw new RuntimeException("Invalid Game type!");
+				}
 				final int MIN_OPPONENTS = 1, MAX_OPPONENTS = 1;
 				Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
-						MIN_OPPONENTS, MAX_OPPONENTS, modeMask);
+						MIN_OPPONENTS, MAX_OPPONENTS, 0);
 				RoomListener roomListener = new RoomListener(getMainActivity(),
 						getMainActivity().getGameHelper());
 				getMainActivity().setRoomListener(roomListener);
 				RoomConfig.Builder rtmConfigBuilder = RoomConfig
 						.builder(roomListener);
+				rtmConfigBuilder.setVariant(variant);				
 				rtmConfigBuilder.setMessageReceivedListener(roomListener);
 				rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
 				rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
