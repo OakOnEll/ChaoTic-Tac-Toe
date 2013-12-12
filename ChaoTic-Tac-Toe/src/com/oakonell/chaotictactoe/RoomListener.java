@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
@@ -19,6 +20,7 @@ import com.google.android.gms.games.multiplayer.realtime.RealTimeReliableMessage
 import com.google.android.gms.games.multiplayer.realtime.Room;
 import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
+import com.google.android.gms.maps.model.TileOverlay;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
@@ -46,17 +48,20 @@ public class RoomListener implements RoomUpdateListener,
 	private static final byte MSG_WHO_IS_X = 1;
 	private static final byte MSG_MOVE = 2;
 	private static final byte MSG_MESSAGE = 3;
+	private static final byte MSG_SEND_TYPE = 4;
 
 	private volatile Long myRandom;
 	private volatile Long theirRandom;
+	private MarkerChance chance;
 
 	GamesClient getGamesClient() {
 		return helper.getGamesClient();
 	}
 
-	public RoomListener(MainActivity activity, GameHelper helper) {
+	public RoomListener(MainActivity activity, GameHelper helper, MarkerChance chance) {
 		this.activity = activity;
 		this.helper = helper;
+		this.chance = chance;
 	}
 
 	// Called when we are connected to the room. We're not ready to play yet!
@@ -182,6 +187,21 @@ public class RoomListener implements RoomUpdateListener,
 			}
 			
 			activity.messageRecieved(getOpponentParticipant(), string);
+		} else if (type == MSG_SEND_TYPE) {
+			MarkerChance sentChance = MarkerChance.fromMsgBuffer(buffer);
+			if (chance != null) {
+				// verify that the chances agree
+				if (chance.getMyMarker() != sentChance.getMyMarker()
+						|| chance.getOpponentMarker() != sentChance.getOpponentMarker()
+						|| chance.getRemoveMarker() != sentChance.getRemoveMarker()
+						) {
+					throw new RuntimeException("Opponent's chance setting does not match!");
+				}			
+			} else {
+				// TODO notify the user of the chance sent from the originating player 
+				chance = sentChance;
+				Toast.makeText(activity, "Received chance ", Toast.LENGTH_SHORT).show();
+			}
 		} else {
 			throw new RuntimeException("unexpected message type! " + type);
 		}
@@ -189,8 +209,6 @@ public class RoomListener implements RoomUpdateListener,
 	}
 
 	private void startGame(boolean iAmX) {
-		MarkerChance chance = MarkerChance.NORMAL;
-
 		// TODO if we have account permission, can get account name
 		GameFragment gameFragment = new GameFragment();
 		Game game = new Game(3, Marker.X, chance);
@@ -315,6 +333,29 @@ public class RoomListener implements RoomUpdateListener,
 		// let other players know we're starting.
 		//Toast.makeText(context, "Start the game!", Toast.LENGTH_SHORT).show();
 
+		if (chance != null) {
+		ByteBuffer buffer = ByteBuffer
+				.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
+		buffer.put(MSG_SEND_TYPE);
+		chance.writeToMsgBuffer(buffer);
+		getGamesClient().sendReliableRealTimeMessage(
+				new RealTimeReliableMessageSentListener() {
+					@Override
+					public void onRealTimeMessageSent(int statusCode,
+							int token, String recipientParticipantId) {
+						if (statusCode == GamesClient.STATUS_OK) {
+
+						} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
+
+						} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
+
+						} else {
+
+						}
+					}
+				}, buffer.array(), getRoomId(), getOpponentId());
+		}
+		
 		myRandom = random.nextLong();
 		checkWhoIsFirstAndAttemptToStart(true);
 	}
@@ -367,7 +408,7 @@ public class RoomListener implements RoomUpdateListener,
 						}
 					}, buffer.array(), getRoomId(), getOpponentId());
 		}
-		if (start) {
+		if (start && chance != null) {
 			startGame(iAmX);
 		}
 	}

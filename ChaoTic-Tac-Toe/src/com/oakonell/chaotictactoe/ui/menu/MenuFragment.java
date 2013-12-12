@@ -66,6 +66,8 @@ public class MenuFragment extends SherlockFragment {
 
 	private View playRelated;
 
+	protected MarkerChance onlineChance;
+
 	@Override
 	public void onActivityResult(int request, int response, Intent data) {
 		switch (request) {
@@ -78,8 +80,9 @@ public class MenuFragment extends SherlockFragment {
 						GamesClient.EXTRA_MIN_AUTOMATCH_PLAYERS, 0);
 				int maxAutoMatchPlayers = data.getIntExtra(
 						GamesClient.EXTRA_MAX_AUTOMATCH_PLAYERS, 0);
-
-				createOnlineRoom(invitees, minAutoMatchPlayers,
+				MarkerChance chance = onlineChance;
+				onlineChance = null;
+				createOnlineRoom(invitees, chance, minAutoMatchPlayers,
 						maxAutoMatchPlayers);
 			} else {
 				Toast.makeText(getActivity(), "Select players canceled",
@@ -295,26 +298,17 @@ public class MenuFragment extends SherlockFragment {
 			@Override
 			public void chosenMode(MarkerChance chance) {
 				// use the chance argument as a variant of the game
-				int variant = 0;
-				if (chance.isNormal()) {
-					variant = 1;
-				} else if (chance.isReverse()) {
-					variant = 2;
-				} else if (chance.isChaotic()) {
-					variant = 3;
-				} else {
-					// shouldn't be possible
-					throw new RuntimeException("Invalid Game type!");
-				}
+				int variant = chance.type();
+
 				final int MIN_OPPONENTS = 1, MAX_OPPONENTS = 1;
 				Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
 						MIN_OPPONENTS, MAX_OPPONENTS, 0);
 				RoomListener roomListener = new RoomListener(getMainActivity(),
-						getMainActivity().getGameHelper());
+						getMainActivity().getGameHelper(), chance);
 				getMainActivity().setRoomListener(roomListener);
 				RoomConfig.Builder rtmConfigBuilder = RoomConfig
 						.builder(roomListener);
-				rtmConfigBuilder.setVariant(variant);				
+				rtmConfigBuilder.setVariant(variant);
 				rtmConfigBuilder.setMessageReceivedListener(roomListener);
 				rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
 				rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
@@ -333,6 +327,7 @@ public class MenuFragment extends SherlockFragment {
 		dialog.initialize(false, new OnlineGameModeListener() {
 			@Override
 			public void chosenMode(MarkerChance chance) {
+				MenuFragment.this.onlineChance = chance;
 				Intent intent = getMainActivity().getGamesClient()
 						.getSelectPlayersIntent(1, 1);
 				startActivityForResult(intent, RC_SELECT_PLAYERS);
@@ -379,7 +374,8 @@ public class MenuFragment extends SherlockFragment {
 	}
 
 	private void createOnlineRoom(final ArrayList<String> invitees,
-			int minAutoMatchPlayers, int maxAutoMatchPlayers) {
+			MarkerChance chance, int minAutoMatchPlayers,
+			int maxAutoMatchPlayers) {
 		Log.d(TAG, "Invitee count: " + invitees.size());
 
 		StringBuilder stringBuilder = new StringBuilder();
@@ -400,7 +396,7 @@ public class MenuFragment extends SherlockFragment {
 		}
 
 		RoomListener roomListener = new RoomListener(getMainActivity(),
-				getMainActivity().getGameHelper());
+				getMainActivity().getGameHelper(), chance);
 		getMainActivity().setRoomListener(roomListener);
 		// create the room
 		Log.d(TAG, "Creating room...");
@@ -431,8 +427,7 @@ public class MenuFragment extends SherlockFragment {
 
 			GameHelper helper = getMainActivity().getGameHelper();
 			Info info = null;
-			ChaoTicTacToe app = (ChaoTicTacToe) getActivity()
-					.getApplication();
+			ChaoTicTacToe app = (ChaoTicTacToe) getActivity().getApplication();
 			if (helper.isSignedIn()) {
 				info = new Info(helper);
 			}
@@ -530,7 +525,7 @@ public class MenuFragment extends SherlockFragment {
 	// Accept the given invitation.
 	public void acceptInviteToRoom(String invId) {
 		RoomListener roomListener = new RoomListener(getMainActivity(),
-				getMainActivity().getGameHelper());
+				getMainActivity().getGameHelper(), null);
 		getMainActivity().setRoomListener(roomListener);
 		// accept the invitation
 		Log.d(TAG, "Accepting invitation: " + invId);

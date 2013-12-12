@@ -1,5 +1,6 @@
 package com.oakonell.chaotictactoe.model;
 
+import java.nio.ByteBuffer;
 import java.util.Random;
 
 import android.content.Intent;
@@ -45,16 +46,17 @@ public class MarkerChance {
 	}
 
 	public double getOpponentMarkerPercentage() {
-		return ((double)opponentMarker)/total; 
+		return ((double) opponentMarker) / total;
 	}
 
 	public double getMyMarkerPercentage() {
-		return ((double)myMarker)/total; 
+		return ((double) myMarker) / total;
 	}
+
 	public double getRemoveMarkerPercentage() {
-		return ((double)removeMarker)/total; 
+		return ((double) removeMarker) / total;
 	}
-	
+
 	public Marker pickMove(Board board, Marker player) {
 		int chance;
 		boolean isEmpty = board.isEmpty();
@@ -105,12 +107,54 @@ public class MarkerChance {
 	public int getTotal() {
 		return total;
 	}
-	
+
 	public boolean isChaotic() {
 		return (myMarker == opponentMarker) && (opponentMarker == removeMarker);
 	}
+
 	public boolean isCustom() {
 		return !isNormal() && !isReverse() && !isChaotic();
+	}
+
+	public int type() {
+		if (isNormal()) {
+			return 1;
+		}
+		if (isReverse()) {
+			return 2;
+		}
+		if (isChaotic()) {
+			return 3;
+		}
+		return 4;
+
+	}
+
+	public void writeToMsgBuffer(ByteBuffer buffer) {
+		buffer.putInt(type());
+		if (isCustom()) {
+			buffer.putInt(myMarker);
+			buffer.putInt(opponentMarker);
+			buffer.putInt(removeMarker);
+		}
+	}
+
+	public static MarkerChance fromMsgBuffer(ByteBuffer buffer) {
+		int gameMode = buffer.getInt();
+		if (gameMode == 1) {
+			return NORMAL;
+		}
+		if (gameMode == 2) {
+			return REVERSE;
+		}
+		if (gameMode == 3) {
+			return CHAOTIC;
+		}
+		// custom, read the chances
+		int mine = buffer.getInt();
+		int opponent = buffer.getInt();
+		int removal = buffer.getInt();
+		return new MarkerChance(mine, opponent, removal);
 	}
 
 }
