@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.Achievements;
 import com.oakonell.chaotictactoe.ChaoTicTacToe;
@@ -48,12 +50,16 @@ import com.oakonell.chaotictactoe.model.State;
 import com.oakonell.utils.Utils;
 
 public class GameFragment extends SherlockFragment {
+	private ImageManager imgManager;
+
 	private ImageView markerToPlayView;
 	private View xHeaderLayout;
 	private View oHeaderLayout;
 	private TextView xWins;
 	private TextView oWins;
 	private TextView draws;
+
+	private TextView numMoves;
 
 	private List<ImageButton> buttons = new ArrayList<ImageButton>();
 	private WinOverlayView winOverlayView;
@@ -163,11 +169,19 @@ public class GameFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_game, container, false);
 		setHasOptionsMenu(true);
+		imgManager = ImageManager.create(getMainActivity());
 
 		TextView xName = (TextView) view.findViewById(R.id.xName);
 		xName.setText(getPlayerTitle(Marker.X));
 		TextView oName = (TextView) view.findViewById(R.id.oName);
 		oName.setText(getPlayerTitle(Marker.O));
+
+		ImageView xImage = (ImageView) view.findViewById(R.id.x_back);
+		ImageView oImage = (ImageView) view.findViewById(R.id.o_back);
+
+		updatePlayerImage(xImage, xStrategy.getIconImageUri(), R.drawable.system_cross_faded);
+		updatePlayerImage(oImage, oStrategy.getIconImageUri(), R.drawable.system_dot_faded);
+
 		xHeaderLayout = view.findViewById(R.id.x_name_layout);
 		oHeaderLayout = view.findViewById(R.id.o_name_layout);
 
@@ -214,8 +228,24 @@ public class GameFragment extends SherlockFragment {
 		oWins = (TextView) view.findViewById(R.id.num_o_wins);
 		draws = (TextView) view.findViewById(R.id.num_draws);
 
+		numMoves = (TextView) view.findViewById(R.id.num_moves);
+		if (game.getMarkerChance().isNormal()
+				|| game.getMarkerChance().isReverse()) {
+			numMoves.setVisibility(View.GONE);
+			view.findViewById(R.id.num_moves_lbl).setVisibility(View.GONE);
+		}
+
 		updateHeader();
 		return view;
+	}
+
+	private void updatePlayerImage(ImageView xImage, Uri xUri,
+			int defaultResource) {
+		if (xUri.getEncodedSchemeSpecificPart().contains("gms.games")) {
+			imgManager.loadImage(xImage, xUri, defaultResource);
+		} else {
+			xImage.setImageURI(xUri);
+		}
 	}
 
 	private final class ButtonPressListener implements View.OnClickListener {
@@ -244,6 +274,7 @@ public class GameFragment extends SherlockFragment {
 
 	private void updateHeader() {
 		Marker player = game.getCurrentPlayer();
+		numMoves.setText("" + game.getNumberOfMoves());
 		float notTurnAlpha = 0.25f;
 		if (player == Marker.X) {
 			xHeaderLayout.setBackgroundResource(R.drawable.current_player);
@@ -396,7 +427,7 @@ public class GameFragment extends SherlockFragment {
 				handler.postDelayed(new Runnable() {
 					@Override
 					public void run() {
-						// TODO not 
+						// TODO not
 						cellButton.setBackgroundDrawable(originalBackGround);
 						makeMove(game.getMarkerToPlay(), move);
 					}

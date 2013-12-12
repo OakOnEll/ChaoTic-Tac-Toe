@@ -1,6 +1,9 @@
 package com.oakonell.chaotictactoe.model.solver;
 
+import android.net.Uri;
+
 import com.oakonell.chaotictactoe.PlayerStrategy;
+import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.model.Board;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
@@ -9,7 +12,8 @@ import com.oakonell.chaotictactoe.model.MarkerChance;
 public class RandomAI extends PlayerStrategy {
 
 	public RandomAI(String name, Marker marker) {
-		super(name, marker);
+		super(name, marker, Uri.parse("android.resource://com.oakonell.chaotictactoe/"
+				+ R.drawable.einstein));
 	}
 
 	@Override
@@ -58,7 +62,7 @@ public class RandomAI extends PlayerStrategy {
 				}
 			}
 		}
-		int cellNum = MarkerChance.random.nextInt(9-numEmpty);
+		int cellNum = MarkerChance.random.nextInt(9 - numEmpty);
 		int count = cellNum;
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {

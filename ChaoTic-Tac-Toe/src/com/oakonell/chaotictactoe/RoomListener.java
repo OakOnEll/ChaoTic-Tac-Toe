@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
@@ -58,7 +59,8 @@ public class RoomListener implements RoomUpdateListener,
 		return helper.getGamesClient();
 	}
 
-	public RoomListener(MainActivity activity, GameHelper helper, MarkerChance chance) {
+	public RoomListener(MainActivity activity, GameHelper helper,
+			MarkerChance chance) {
 		this.activity = activity;
 		this.helper = helper;
 		this.chance = chance;
@@ -87,8 +89,8 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onDisconnectedFromRoom(Room arg0) {
 		announce("onDisconnectedFromRoom");
-		
-		// TODO 
+
+		// TODO
 		activity.showAlert("Disconnected from room?!");
 		// TODO pop if the current is game
 		activity.getSupportFragmentManager().popBackStack();
@@ -173,7 +175,7 @@ public class RoomListener implements RoomUpdateListener,
 			int x = buffer.getInt();
 			int y = buffer.getInt();
 			// TODO is it possible that the moveListener is null?
-			//   should we store the pending move, until a move listener is set
+			// should we store the pending move, until a move listener is set
 			activity.makeMove(marker, new Cell(x, y));
 		} else if (type == MSG_MESSAGE) {
 			int numBytes = buffer.getInt();
@@ -185,22 +187,26 @@ public class RoomListener implements RoomUpdateListener,
 			} catch (UnsupportedEncodingException e) {
 				throw new RuntimeException("UTF-8 charset not present!?");
 			}
-			
+
 			activity.messageRecieved(getOpponentParticipant(), string);
 		} else if (type == MSG_SEND_TYPE) {
 			MarkerChance sentChance = MarkerChance.fromMsgBuffer(buffer);
 			if (chance != null) {
 				// verify that the chances agree
 				if (chance.getMyMarker() != sentChance.getMyMarker()
-						|| chance.getOpponentMarker() != sentChance.getOpponentMarker()
-						|| chance.getRemoveMarker() != sentChance.getRemoveMarker()
-						) {
-					throw new RuntimeException("Opponent's chance setting does not match!");
-				}			
+						|| chance.getOpponentMarker() != sentChance
+								.getOpponentMarker()
+						|| chance.getRemoveMarker() != sentChance
+								.getRemoveMarker()) {
+					throw new RuntimeException(
+							"Opponent's chance setting does not match!");
+				}
 			} else {
-				// TODO notify the user of the chance sent from the originating player 
+				// TODO notify the user of the chance sent from the originating
+				// player
 				chance = sentChance;
-				Toast.makeText(activity, "Received chance ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Received chance ", Toast.LENGTH_SHORT)
+						.show();
 			}
 		} else {
 			throw new RuntimeException("unexpected message type! " + type);
@@ -213,16 +219,25 @@ public class RoomListener implements RoomUpdateListener,
 		GameFragment gameFragment = new GameFragment();
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
+		PlayerStrategy xStrategy;
+		PlayerStrategy oStrategy;
 		if (iAmX) {
-			gameFragment.startGame(new HumanStrategy("Me", Marker.X), new OnlineStrategy(getOpponentName(), Marker.O), game, score);
+			xStrategy = new HumanStrategy("Me", Marker.X, getMe()
+					.getIconImageUri());
+			oStrategy = new OnlineStrategy(getOpponentName(), Marker.O,
+					getOpponentParticipant().getIconImageUri());
 		} else {
-			gameFragment.startGame(new OnlineStrategy(getOpponentName(),Marker.X),new HumanStrategy("Me",Marker.O),  game, score);
+			xStrategy = new OnlineStrategy(getOpponentName(), Marker.X,
+					getOpponentParticipant().getIconImageUri());
+			oStrategy = new HumanStrategy("Me", Marker.O, getMe()
+					.getIconImageUri());
 		}
+		gameFragment.startGame(xStrategy, oStrategy, game, score);
 		FragmentManager manager = activity.getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.replace(R.id.main_frame, gameFragment, "game");
 		transaction.addToBackStack(null);
-		transaction.commit();		
+		transaction.commit();
 	}
 
 	@Override
@@ -331,31 +346,32 @@ public class RoomListener implements RoomUpdateListener,
 		Log.d(TAG, "Starting game because user requested via waiting room UI.");
 
 		// let other players know we're starting.
-		//Toast.makeText(context, "Start the game!", Toast.LENGTH_SHORT).show();
+		// Toast.makeText(context, "Start the game!",
+		// Toast.LENGTH_SHORT).show();
 
 		if (chance != null) {
-		ByteBuffer buffer = ByteBuffer
-				.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
-		buffer.put(MSG_SEND_TYPE);
-		chance.writeToMsgBuffer(buffer);
-		getGamesClient().sendReliableRealTimeMessage(
-				new RealTimeReliableMessageSentListener() {
-					@Override
-					public void onRealTimeMessageSent(int statusCode,
-							int token, String recipientParticipantId) {
-						if (statusCode == GamesClient.STATUS_OK) {
+			ByteBuffer buffer = ByteBuffer
+					.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
+			buffer.put(MSG_SEND_TYPE);
+			chance.writeToMsgBuffer(buffer);
+			getGamesClient().sendReliableRealTimeMessage(
+					new RealTimeReliableMessageSentListener() {
+						@Override
+						public void onRealTimeMessageSent(int statusCode,
+								int token, String recipientParticipantId) {
+							if (statusCode == GamesClient.STATUS_OK) {
 
-						} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
+							} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
 
-						} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
+							} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
 
-						} else {
+							} else {
 
+							}
 						}
-					}
-				}, buffer.array(), getRoomId(), getOpponentId());
+					}, buffer.array(), getRoomId(), getOpponentId());
 		}
-		
+
 		myRandom = random.nextLong();
 		checkWhoIsFirstAndAttemptToStart(true);
 	}
@@ -442,14 +458,14 @@ public class RoomListener implements RoomUpdateListener,
 		ByteBuffer buffer = ByteBuffer
 				.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
 		buffer.put(MSG_MESSAGE);
-		
+
 		byte[] bytes;
 		try {
 			bytes = string.getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("Unsupported UTF-8?!");
 		}
-		
+
 		buffer.putInt(bytes.length);
 		buffer.put(bytes);
 		getGamesClient().sendReliableRealTimeMessage(
@@ -467,8 +483,8 @@ public class RoomListener implements RoomUpdateListener,
 
 						}
 					}
-				}, buffer.array(), getRoomId(), getOpponentId());	
-		
+				}, buffer.array(), getRoomId(), getOpponentId());
+
 	}
 
 	public Participant getMe() {

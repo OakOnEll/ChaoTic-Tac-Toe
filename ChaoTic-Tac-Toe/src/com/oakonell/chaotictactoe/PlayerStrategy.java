@@ -1,5 +1,7 @@
 package com.oakonell.chaotictactoe;
 
+import android.net.Uri;
+
 import com.oakonell.chaotictactoe.model.Board;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
@@ -7,10 +9,12 @@ import com.oakonell.chaotictactoe.model.Marker;
 public class PlayerStrategy {
 	private String name;
 	private Marker marker;
+	private Uri iconImageUri;
 
-	protected PlayerStrategy(String name, Marker marker) {
+	protected PlayerStrategy(String name, Marker marker, Uri iconImageUri) {
 		this.name = name;
 		this.marker = marker;
+		this.iconImageUri = iconImageUri;
 	}
 
 	public boolean isHuman() {
@@ -28,8 +32,13 @@ public class PlayerStrategy {
 	public Marker getMarker() {
 		return marker;
 	}
-	
+
 	public Cell move(Board board, Marker toPlay) {
 		return null;
 	}
+
+	public Uri getIconImageUri() {
+		return iconImageUri;
+	}
+
 }
