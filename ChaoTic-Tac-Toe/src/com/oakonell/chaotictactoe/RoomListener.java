@@ -217,6 +217,7 @@ public class RoomListener implements RoomUpdateListener,
 	private void startGame(boolean iAmX) {
 		// TODO if we have account permission, can get account name
 		GameFragment gameFragment = new GameFragment();
+		gameFragment.setIsOnline(true);
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		PlayerStrategy xStrategy;

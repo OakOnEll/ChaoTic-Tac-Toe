@@ -18,9 +18,15 @@ public class MinMaxAI extends PlayerStrategy {
 	}
 
 	private static Uri getImageUri(int depth) {
-		Uri parse = Uri.parse("android.resource://com.oakonell.chaotictactoe/"
+		if (depth<=1) {
+			return  Uri.parse("android.resource://com.oakonell.chaotictactoe/"
+					+ R.drawable.dim_bulb);						
+		} else if (depth ==2){
+			return  Uri.parse("android.resource://com.oakonell.chaotictactoe/"
+					+ R.drawable.light_bulb);			
+		} else 
+		return  Uri.parse("android.resource://com.oakonell.chaotictactoe/"
 				+ R.drawable.einstein);
-		return parse;
 	}
 
 	@Override

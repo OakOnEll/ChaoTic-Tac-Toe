@@ -13,7 +13,7 @@ public class RandomAI extends PlayerStrategy {
 
 	public RandomAI(String name, Marker marker) {
 		super(name, marker, Uri.parse("android.resource://com.oakonell.chaotictactoe/"
-				+ R.drawable.einstein));
+				+ R.drawable.dice));
 	}
 
 	@Override

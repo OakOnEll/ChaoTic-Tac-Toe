@@ -1117,20 +1117,23 @@ containing a value of this type.
         public static final int common_signin_btn_text_pressed_dark=0x7f020087;
         public static final int common_signin_btn_text_pressed_light=0x7f020088;
         public static final int current_player=0x7f020089;
-        public static final int einstein=0x7f02008a;
-        public static final int games_controller_green_med=0x7f02008b;
-        public static final int ic_launcher=0x7f02008c;
-        public static final int ic_launcher_old=0x7f02008d;
-        public static final int ic_plusone_medium_off_client=0x7f02008e;
-        public static final int ic_plusone_small_off_client=0x7f02008f;
-        public static final int ic_plusone_standard_off_client=0x7f020090;
-        public static final int ic_plusone_tall_off_client=0x7f020091;
-        public static final int icon=0x7f020092;
-        public static final int inactive_player=0x7f020093;
-        public static final int system_cross=0x7f020094;
-        public static final int system_cross_faded=0x7f020095;
-        public static final int system_dot=0x7f020096;
-        public static final int system_dot_faded=0x7f020097;
+        public static final int dice=0x7f02008a;
+        public static final int dim_bulb=0x7f02008b;
+        public static final int einstein=0x7f02008c;
+        public static final int games_controller_green_med=0x7f02008d;
+        public static final int ic_launcher=0x7f02008e;
+        public static final int ic_launcher_old=0x7f02008f;
+        public static final int ic_plusone_medium_off_client=0x7f020090;
+        public static final int ic_plusone_small_off_client=0x7f020091;
+        public static final int ic_plusone_standard_off_client=0x7f020092;
+        public static final int ic_plusone_tall_off_client=0x7f020093;
+        public static final int icon=0x7f020094;
+        public static final int inactive_player=0x7f020095;
+        public static final int light_bulb=0x7f020096;
+        public static final int system_cross=0x7f020097;
+        public static final int system_cross_faded=0x7f020098;
+        public static final int system_dot=0x7f020099;
+        public static final int system_dot_faded=0x7f02009a;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f070047;

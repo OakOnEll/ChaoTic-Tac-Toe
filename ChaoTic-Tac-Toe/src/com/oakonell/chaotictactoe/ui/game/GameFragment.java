@@ -75,6 +75,11 @@ public class GameFragment extends SherlockFragment {
 	private List<ChatMessage> messages = new ArrayList<ChatMessage>();
 	private boolean hasNewMessage;
 
+	private ChatDialogFragment chatDialog;
+	private MenuItem chatMenuItem;
+
+	private boolean isOnline;
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -168,6 +173,8 @@ public class GameFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_game, container, false);
+		view.setKeepScreenOn(isOnline);
+		
 		setHasOptionsMenu(true);
 		imgManager = ImageManager.create(getMainActivity());
 
@@ -545,8 +552,6 @@ public class GameFragment extends SherlockFragment {
 		return (MainActivity) super.getActivity();
 	}
 
-	private ChatDialogFragment chatDialog;
-	private MenuItem chatMenuItem;
 
 	public void messageRecieved(Participant opponentParticipant, String string) {
 		messages.add(new ChatMessage(opponentParticipant, string));
@@ -560,6 +565,10 @@ public class GameFragment extends SherlockFragment {
 
 	public void chatClosed() {
 		chatDialog = null;
+	}
+
+	public void setIsOnline(boolean isOnline) {
+		this.isOnline = isOnline;		
 	}
 
 }
