@@ -20,6 +20,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +80,7 @@ public class GameFragment extends SherlockFragment {
 	private MenuItem chatMenuItem;
 
 	private boolean isOnline;
+	private ProgressBar thinking;
 
 	@Override
 	public void onResume() {
@@ -167,6 +169,10 @@ public class GameFragment extends SherlockFragment {
 
 		this.score = score;
 		this.game = game;
+		if (!currentStrategy.isHuman()) {
+			// show a thinking/progress icon, suitable for network play and ai thinking..
+			thinking.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override
@@ -176,6 +182,8 @@ public class GameFragment extends SherlockFragment {
 		view.setKeepScreenOn(isOnline);
 		
 		setHasOptionsMenu(true);
+		thinking = (ProgressBar) view.findViewById(R.id.thinking);
+		
 		imgManager = ImageManager.create(getMainActivity());
 
 		TextView xName = (TextView) view.findViewById(R.id.xName);
@@ -269,7 +277,9 @@ public class GameFragment extends SherlockFragment {
 				return;
 			}
 			Marker marker = game.getMarkerToPlay();
-			makeMove(marker, cell);
+			boolean wasValid = makeMove(marker, cell);
+			if (!wasValid) return;
+			
 			// send move to opponent
 			RoomListener appListener = getMainActivity().getRoomListener();
 			if (appListener != null) {
@@ -316,7 +326,7 @@ public class GameFragment extends SherlockFragment {
 		draws.setText("" + score.getDraws());
 	}
 
-	public void makeMove(Marker markerToPlay, Cell cell) {
+	public boolean makeMove(Marker markerToPlay, Cell cell) {
 		Marker marker = game.getMarkerToPlay();
 		if (marker != markerToPlay) {
 			throw new RuntimeException("Invalid marker played!");
@@ -329,8 +339,16 @@ public class GameFragment extends SherlockFragment {
 					Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
-			return;
+			return false;
 		}
+		
+		
+		
+		privateMakeMove(cell, marker, outcome);
+		return true;
+	}
+
+	private void privateMakeMove(Cell cell, Marker marker, State outcome) {
 		switchPlayerStrategy();
 
 		ImageButton cellButton = findButtonFor(cell);
@@ -342,67 +360,7 @@ public class GameFragment extends SherlockFragment {
 			cellButton.setImageResource(resId);
 		}
 		if (outcome.isOver()) {
-			evaluateGameEndAchievements(outcome);
-			evaluateLeaderboards(outcome);
-			OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO leave room,notify opponent of leaving
-					dialog.dismiss();
-					getMainActivity().getSupportFragmentManager()
-							.popBackStack();
-					getMainActivity().gameEnded();
-				}
-			};
-			OnClickListener playAgainListener = new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO notify opponent playing again
-					game = new Game(3, currentStrategy.getMarker(),
-							game.getMarkerChance());
-					updateHeader();
-					winOverlayView.setWinStyle(null);
-					winOverlayView.invalidate();
-					for (ImageButton each : buttons) {
-						each.setImageDrawable(null);
-					}
-					moveIfAI();
-				}
-			};
-			if (outcome.getWinner() != null) {
-				score.incrementScore(outcome.getWinner());
-				winOverlayView.setWinStyle(outcome.getWinStyle());
-				winOverlayView.invalidate();
-
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						getActivity());
-				builder.setTitle(getString(R.string.player_won,
-						getPlayerName(outcome.getWinner())));
-				builder.setMessage(R.string.play_again);
-				builder.setCancelable(false);
-
-				builder.setNegativeButton(R.string.no, cancelListener);
-				builder.setPositiveButton(R.string.yes, playAgainListener);
-
-				AlertDialog dialog = builder.create();
-
-				dialog.show();
-			} else {
-				score.incrementScore(null);
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						getActivity());
-				builder.setTitle(getString(R.string.draw));
-				builder.setMessage(R.string.play_again);
-				builder.setCancelable(false);
-
-				builder.setNegativeButton(R.string.no, cancelListener);
-				builder.setPositiveButton(R.string.yes, playAgainListener);
-
-				AlertDialog dialog = builder.create();
-
-				dialog.show();
-			}
-
+			endGame(outcome);
 		} else {
 			evaluateInGameAchievements(outcome);
 			updateHeader();
@@ -410,7 +368,75 @@ public class GameFragment extends SherlockFragment {
 		}
 	}
 
+	private void endGame(State outcome) {
+		evaluateGameEndAchievements(outcome);
+		evaluateLeaderboards(outcome);
+		OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO leave room,notify opponent of leaving
+				dialog.dismiss();
+				getMainActivity().getSupportFragmentManager()
+						.popBackStack();
+				getMainActivity().gameEnded();
+			}
+		};
+		OnClickListener playAgainListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO notify opponent playing again
+				game = new Game(3, currentStrategy.getMarker(),
+						game.getMarkerChance());
+				updateHeader();
+				winOverlayView.setWinStyle(null);
+				winOverlayView.invalidate();
+				for (ImageButton each : buttons) {
+					each.setImageDrawable(null);
+				}
+				moveIfAI();
+			}
+		};
+		if (outcome.getWinner() != null) {
+			score.incrementScore(outcome.getWinner());
+			winOverlayView.setWinStyle(outcome.getWinStyle());
+			winOverlayView.invalidate();
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					getActivity());
+			builder.setTitle(getString(R.string.player_won,
+					getPlayerName(outcome.getWinner())));
+			builder.setMessage(R.string.play_again);
+			builder.setCancelable(false);
+
+			builder.setNegativeButton(R.string.no, cancelListener);
+			builder.setPositiveButton(R.string.yes, playAgainListener);
+
+			AlertDialog dialog = builder.create();
+
+			dialog.show();
+		} else {
+			score.incrementScore(null);
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					getActivity());
+			builder.setTitle(getString(R.string.draw));
+			builder.setMessage(R.string.play_again);
+			builder.setCancelable(false);
+
+			builder.setNegativeButton(R.string.no, cancelListener);
+			builder.setPositiveButton(R.string.yes, playAgainListener);
+
+			AlertDialog dialog = builder.create();
+
+			dialog.show();
+		}
+	}
+
 	private void moveIfAI() {
+		if (currentStrategy.isHuman()) {
+			return;			
+		}
+		// show a thinking/progress icon, suitable for network play and ai thinking..
+		thinking.setVisibility(View.VISIBLE);
 		if (!currentStrategy.isAI()) {
 			return;
 		}
@@ -424,27 +450,36 @@ public class GameFragment extends SherlockFragment {
 
 			@Override
 			protected void onPostExecute(final Cell move) {
-				// delay and highlight the move so the human player has a
-				// chance to see it
-				final ImageButton cellButton = findButtonFor(move);
-				final Drawable originalBackGround = cellButton.getBackground();
-				cellButton.setBackgroundColor(getResources().getColor(
-						android.R.color.holo_blue_light));
-				Handler handler = new Handler();
-				handler.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						// TODO not
-						cellButton.setBackgroundDrawable(originalBackGround);
-						makeMove(game.getMarkerToPlay(), move);
-					}
-				}, 200);
+				highlightAndMakeMove(game.getMarkerToPlay(), move);
 			}
-
 		};
 		aiMove.execute((Void) null);
 	}
 
+	public void onlineMakeMove(Marker marker, Cell cell) {
+		highlightAndMakeMove(marker, cell);		
+	}
+
+	public void highlightAndMakeMove(final Marker marker, final Cell move) {
+		// hide the progress icon
+		thinking.setVisibility(View.GONE);
+		// delay and highlight the move so the human player has a
+		// chance to see it
+		final ImageButton cellButton = findButtonFor(move);
+		final Drawable originalBackGround = cellButton.getBackground();
+		cellButton.setBackgroundColor(getResources().getColor(
+				android.R.color.holo_blue_light));
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				// TODO not
+				cellButton.setBackgroundDrawable(originalBackGround);
+				makeMove(marker, move);
+			}
+		}, 200);
+	}
+	
 	private ImageButton findButtonFor(Cell cell) {
 		int id;
 		int x = cell.getX();
@@ -538,7 +573,6 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void evaluateLeaderboards(State outcome) {
-		// TODO Auto-generated method stub
 		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity()
 				.getApplication());
 
@@ -570,5 +604,6 @@ public class GameFragment extends SherlockFragment {
 	public void setIsOnline(boolean isOnline) {
 		this.isOnline = isOnline;		
 	}
+
 
 }

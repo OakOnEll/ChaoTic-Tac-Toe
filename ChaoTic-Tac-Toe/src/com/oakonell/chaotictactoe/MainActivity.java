@@ -165,7 +165,7 @@ public class MainActivity extends BaseGameActivity {
 	}
 
 	public void makeMove(Marker marker, Cell cell) {
-		getGameFragment().makeMove(marker, cell);
+		getGameFragment().onlineMakeMove(marker, cell);
 	}
 
 	public RoomListener getRoomListener() {
