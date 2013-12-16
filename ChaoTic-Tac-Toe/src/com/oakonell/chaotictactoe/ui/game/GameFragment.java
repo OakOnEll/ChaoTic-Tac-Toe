@@ -2,6 +2,7 @@ package com.oakonell.chaotictactoe.ui.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -37,20 +38,20 @@ import com.oakonell.chaotictactoe.MainActivity;
 import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.RoomListener;
-import com.oakonell.chaotictactoe.R.drawable;
-import com.oakonell.chaotictactoe.R.id;
-import com.oakonell.chaotictactoe.R.layout;
-import com.oakonell.chaotictactoe.R.menu;
-import com.oakonell.chaotictactoe.R.string;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.InvalidMoveException;
 import com.oakonell.chaotictactoe.model.Marker;
+import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
 import com.oakonell.utils.Utils;
 
 public class GameFragment extends SherlockFragment {
+	private static final int NON_HUMAN_OPPONENT_HIGHLIGHT_MOVE_PAUSE_MS = 300;
+	private static final int MARKER_ROLL_VISIBILITY_PAUSE = 150;
+	private static final int OPPONENT_MARKER_VISIBILITY_PAUSE_MS = 450;
+
 	private ImageManager imgManager;
 
 	private ImageView markerToPlayView;
@@ -170,7 +171,8 @@ public class GameFragment extends SherlockFragment {
 		this.score = score;
 		this.game = game;
 		if (!currentStrategy.isHuman()) {
-			// show a thinking/progress icon, suitable for network play and ai thinking..
+			// show a thinking/progress icon, suitable for network play and ai
+			// thinking..
 			thinking.setVisibility(View.VISIBLE);
 		}
 	}
@@ -180,10 +182,10 @@ public class GameFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_game, container, false);
 		view.setKeepScreenOn(isOnline);
-		
+
 		setHasOptionsMenu(true);
 		thinking = (ProgressBar) view.findViewById(R.id.thinking);
-		
+
 		imgManager = ImageManager.create(getMainActivity());
 
 		TextView xName = (TextView) view.findViewById(R.id.xName);
@@ -194,8 +196,10 @@ public class GameFragment extends SherlockFragment {
 		ImageView xImage = (ImageView) view.findViewById(R.id.x_back);
 		ImageView oImage = (ImageView) view.findViewById(R.id.o_back);
 
-		updatePlayerImage(xImage, xStrategy.getIconImageUri(), R.drawable.system_cross_faded);
-		updatePlayerImage(oImage, oStrategy.getIconImageUri(), R.drawable.system_dot_faded);
+		updatePlayerImage(xImage, xStrategy.getIconImageUri(),
+				R.drawable.system_cross_faded);
+		updatePlayerImage(oImage, oStrategy.getIconImageUri(),
+				R.drawable.system_dot_faded);
 
 		xHeaderLayout = view.findViewById(R.id.x_name_layout);
 		oHeaderLayout = view.findViewById(R.id.o_name_layout);
@@ -278,8 +282,9 @@ public class GameFragment extends SherlockFragment {
 			}
 			Marker marker = game.getMarkerToPlay();
 			boolean wasValid = makeMove(marker, cell);
-			if (!wasValid) return;
-			
+			if (!wasValid)
+				return;
+
 			// send move to opponent
 			RoomListener appListener = getMainActivity().getRoomListener();
 			if (appListener != null) {
@@ -312,6 +317,87 @@ public class GameFragment extends SherlockFragment {
 			}
 		}
 
+		// TODO make the chaotic mode show some "rolling" of the markers
+		// BUT this requires the online/input handling to not accept input until
+		// the roll is done
+		// on device inputs, can simply ignore button presses.
+		// online moves need to be queued while animation is proceeding
+		if (game.getMarkerChance().isChaotic()
+				|| game.getMarkerChance().isCustom()) {
+			displayAnimatedMarkerToPlay();
+		} else {
+			displayMarkerToPlay();
+		}
+
+		xWins.setText("" + score.getXWins());
+		oWins.setText("" + score.getOWins());
+		draws.setText("" + score.getDraws());
+	}
+
+	private Random rollRandom = new Random();
+	private volatile boolean isRolling = false;
+	private Runnable afterRoll;
+
+	private void displayAnimatedMarkerToPlay() {
+		MarkerChance chance = game.getMarkerChance();
+		final List<Integer> resourcesList = new ArrayList<Integer>();
+		if (chance.getMyMarker() > 0) {
+			if (currentStrategy.getMarker() == Marker.X) {
+				resourcesList.add(R.drawable.system_cross);
+			} else {
+				resourcesList.add(R.drawable.system_dot);				
+			}
+		}
+		if (chance.getOpponentMarker() > 0) {
+			if (currentStrategy.getMarker() == Marker.X) {
+				resourcesList.add(R.drawable.system_dot);
+			} else {
+				resourcesList.add(R.drawable.system_cross);				
+			}
+		}
+		if (chance.getRemoveMarker()>0) {
+			resourcesList.add(android.R.drawable.ic_delete);						
+		}
+		final int numPossible = resourcesList.size();
+		// number of rolls cycled through is random between min <-> max
+		//  hold the number in a modifiable int array, as a cheat
+		final int[] rolls = new int[] { rollRandom.nextInt(5) + 5 };
+		isRolling = true;
+		final Drawable originalBackground = markerToPlayView.getBackground();
+		markerToPlayView.setBackgroundColor(getResources().getColor(
+				com.actionbarsherlock.R.color.abs__bright_foreground_disabled_holo_light));
+		final Handler handler = new Handler();
+		// display a way to say "still rolling"
+		final Runnable flip = new Runnable() {
+			@Override
+			public void run() {
+				rolls[0] = rolls[0] - 1;
+				if (rolls[0] == 0) {
+					markerToPlayView.setBackgroundDrawable(originalBackground);
+					displayMarkerToPlay();
+					// let the marker to play show for a bit before allowing the opponent's (AI or online) move
+					handler.postDelayed(new Runnable() {						
+						@Override
+						public void run() {
+							isRolling = false;
+							if (afterRoll != null) {
+								afterRoll.run();
+								afterRoll = null;
+							}							
+						}
+					}, OPPONENT_MARKER_VISIBILITY_PAUSE_MS);
+					return;
+				}
+
+				markerToPlayView.setImageResource(resourcesList.get(rolls[0] % numPossible));
+				handler.postDelayed(this, MARKER_ROLL_VISIBILITY_PAUSE);
+			}
+		};
+
+		flip.run();
+	}
+
+	private void displayMarkerToPlay() {
 		Marker toPlay = game.getMarkerToPlay();
 		if (toPlay == Marker.EMPTY) {
 			markerToPlayView.setImageResource(android.R.drawable.ic_delete);
@@ -320,10 +406,6 @@ public class GameFragment extends SherlockFragment {
 		} else {
 			markerToPlayView.setImageResource(R.drawable.system_dot);
 		}
-
-		xWins.setText("" + score.getXWins());
-		oWins.setText("" + score.getOWins());
-		draws.setText("" + score.getDraws());
 	}
 
 	public boolean makeMove(Marker markerToPlay, Cell cell) {
@@ -341,9 +423,7 @@ public class GameFragment extends SherlockFragment {
 			toast.show();
 			return false;
 		}
-		
-		
-		
+
 		privateMakeMove(cell, marker, outcome);
 		return true;
 	}
@@ -369,6 +449,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void endGame(State outcome) {
+		numMoves.setText("" + game.getNumberOfMoves());
 		evaluateGameEndAchievements(outcome);
 		evaluateLeaderboards(outcome);
 		OnClickListener cancelListener = new DialogInterface.OnClickListener() {
@@ -376,8 +457,7 @@ public class GameFragment extends SherlockFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO leave room,notify opponent of leaving
 				dialog.dismiss();
-				getMainActivity().getSupportFragmentManager()
-						.popBackStack();
+				getMainActivity().getSupportFragmentManager().popBackStack();
 				getMainActivity().gameEnded();
 			}
 		};
@@ -401,8 +481,7 @@ public class GameFragment extends SherlockFragment {
 			winOverlayView.setWinStyle(outcome.getWinStyle());
 			winOverlayView.invalidate();
 
-			AlertDialog.Builder builder = new AlertDialog.Builder(
-					getActivity());
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(getString(R.string.player_won,
 					getPlayerName(outcome.getWinner())));
 			builder.setMessage(R.string.play_again);
@@ -416,8 +495,7 @@ public class GameFragment extends SherlockFragment {
 			dialog.show();
 		} else {
 			score.incrementScore(null);
-			AlertDialog.Builder builder = new AlertDialog.Builder(
-					getActivity());
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(getString(R.string.draw));
 			builder.setMessage(R.string.play_again);
 			builder.setCancelable(false);
@@ -433,9 +511,10 @@ public class GameFragment extends SherlockFragment {
 
 	private void moveIfAI() {
 		if (currentStrategy.isHuman()) {
-			return;			
+			return;
 		}
-		// show a thinking/progress icon, suitable for network play and ai thinking..
+		// show a thinking/progress icon, suitable for network play and ai
+		// thinking..
 		thinking.setVisibility(View.VISIBLE);
 		if (!currentStrategy.isAI()) {
 			return;
@@ -450,14 +529,32 @@ public class GameFragment extends SherlockFragment {
 
 			@Override
 			protected void onPostExecute(final Cell move) {
+				if (isRolling) {
+					afterRoll = new Runnable() {
+						@Override
+						public void run() {
+							highlightAndMakeMove(game.getMarkerToPlay(), move);
+						}
+					};
+					return;
+				}
 				highlightAndMakeMove(game.getMarkerToPlay(), move);
 			}
 		};
 		aiMove.execute((Void) null);
 	}
 
-	public void onlineMakeMove(Marker marker, Cell cell) {
-		highlightAndMakeMove(marker, cell);		
+	public void onlineMakeMove(final Marker marker, final Cell cell) {
+		if (isRolling) {
+			afterRoll = new Runnable() {
+				@Override
+				public void run() {
+					highlightAndMakeMove(marker, cell);
+				}
+			};
+			return;
+		}
+		highlightAndMakeMove(marker, cell);
 	}
 
 	public void highlightAndMakeMove(final Marker marker, final Cell move) {
@@ -477,9 +574,9 @@ public class GameFragment extends SherlockFragment {
 				cellButton.setBackgroundDrawable(originalBackGround);
 				makeMove(marker, move);
 			}
-		}, 200);
+		}, NON_HUMAN_OPPONENT_HIGHLIGHT_MOVE_PAUSE_MS);
 	}
-	
+
 	private ImageButton findButtonFor(Cell cell) {
 		int id;
 		int x = cell.getX();
@@ -586,7 +683,6 @@ public class GameFragment extends SherlockFragment {
 		return (MainActivity) super.getActivity();
 	}
 
-
 	public void messageRecieved(Participant opponentParticipant, String string) {
 		messages.add(new ChatMessage(opponentParticipant, string));
 		if (chatDialog != null) {
@@ -602,8 +698,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void setIsOnline(boolean isOnline) {
-		this.isOnline = isOnline;		
+		this.isOnline = isOnline;
 	}
-
 
 }

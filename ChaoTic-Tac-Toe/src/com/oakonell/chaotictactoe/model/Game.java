@@ -1,5 +1,10 @@
 package com.oakonell.chaotictactoe.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import android.util.Log;
+
 public class Game {
 	private int moves;
 	private final MarkerChance markerChance;
@@ -7,6 +12,7 @@ public class Game {
 
 	private Marker player;
 	private Marker toPlay;
+	private Map<Long, Integer> numVisitsPerState = new HashMap<Long, Integer>(); 
 
 	public Game(int size, Marker firstPlayer, MarkerChance chance) {
 		board = new Board(size);
@@ -37,7 +43,20 @@ public class Game {
 
 		// pick the next marker to play
 		toPlay = pickMarkerToToplay();
+		
+		recordVisitToState();
+		
 		return outcome;
+	}
+
+	private void recordVisitToState() {
+		long state = board.getBoardStateAsLong();
+		Integer number = numVisitsPerState.get(state);
+		if (number == null) {
+			number =0;
+		}
+		numVisitsPerState.put(state, number+1);
+		Log.i("Game", "Board state " + state);
 	}
 
 	private Marker pickMarkerToToplay() {
@@ -64,6 +83,13 @@ public class Game {
 
 	public int getNumberOfMoves() {
 		return moves;
+	}
+	
+	public int getNumberOfTimesInThisState() {
+		long state = board.getBoardStateAsLong();
+		Integer integer = numVisitsPerState.get(state);
+		if (integer == null) return 0;
+		return integer;
 	}
 	
 	public Board getBoard() {

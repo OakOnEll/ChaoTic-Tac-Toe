@@ -20,7 +20,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public Marker getCell(int x, int y) {
 		if (x < 0 || x >= size) {
 			throw new IllegalArgumentException("x value (" + x
@@ -168,9 +168,10 @@ public class Board {
 		if (Math.abs(score) == size) {
 			if (mark != board[cell.x][cell.y]) {
 				// player made opponent win?
-				//throw new RuntimeException("You made the opponent win?!");
+				// throw new RuntimeException("You made the opponent win?!");
 			}
-			return State.winner(cell, cell2, board[cell.x][cell.y], score, winStyle);
+			return State.winner(cell, cell2, board[cell.x][cell.y], score,
+					winStyle);
 		}
 		if (currentBest == null) {
 			return State.open(cell, cell2, mark, score);
@@ -196,21 +197,39 @@ public class Board {
 				if (board[x][y] != Marker.EMPTY)
 					sum++;
 			}
-		}		
-		return sum==0;
+		}
+		return sum == 0;
 	}
 
 	public Board copy() {
-		return this;
-//		Board copy = new Board(size);
-//		for (int x=0;x< size; x++) {
-//			for (int y=0;y<size; y++) {
-//				Marker marker = board[x][y];
-//				if (marker != Marker.EMPTY) {
-//					copy.placeMarker(new Cell(x, y), marker);
-//				}
-//			}
-//		}
-//		return copy;
+		// return this;
+		Board copy = new Board(size);
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				Marker marker = board[x][y];
+				if (marker != Marker.EMPTY) {
+					copy.placeMarker(new Cell(x, y), marker);
+				}
+			}
+		}
+		return copy;
 	}
+
+	public long getBoardStateAsLong() {
+		StringBuilder builder = new StringBuilder();
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				String squareChar = "0";
+				if (board[x][y] == Marker.X) {
+					squareChar = "1";
+				} else if (board[x][y] == Marker.O) {
+					squareChar = "2";
+				}
+				builder.append(squareChar);
+			}
+		}
+		return Long.parseLong(builder.toString());
+
+	}
+
 }

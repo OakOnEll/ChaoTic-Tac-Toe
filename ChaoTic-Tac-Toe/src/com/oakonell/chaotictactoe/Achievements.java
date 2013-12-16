@@ -17,6 +17,7 @@ import com.oakonell.chaotictactoe.model.State;
 public class Achievements {
 	private static final int NUM_MOVES_LONG_HAUL = 20;
 	private static final int NUM_MOVES_CLEAN_SLATE = 5;
+	protected static final int NUM_MOVES_DEJA_VU = 3;
 
 	private BooleanAchievement onlyXsOrOs = new BooleanAchievement(
 			R.string.achievement_only_xs_or_os,
@@ -67,7 +68,10 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			// TODO this should be implemented while playing?
+			if (game.getBoard().isEmpty()) return;
+			if (game.getNumberOfTimesInThisState() > NUM_MOVES_DEJA_VU) {
+				unlock(gameHelper, context);
+			}
 		}
 	};
 
