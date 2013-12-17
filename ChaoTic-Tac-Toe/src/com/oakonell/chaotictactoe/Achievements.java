@@ -16,8 +16,8 @@ import com.oakonell.chaotictactoe.model.State;
 
 public class Achievements {
 	private static final int NUM_MOVES_LONG_HAUL = 20;
-	private static final int NUM_MOVES_CLEAN_SLATE = 5;
-	protected static final int NUM_MOVES_DEJA_VU = 3;
+	private static final int NUM_MOVES_BEFORE_CLEAN_SLATE = 5;
+	protected static final int NUM_BOARD_REVISITS_FOR_DEJA_VU = 3;
 
 	private BooleanAchievement onlyXsOrOs = new BooleanAchievement(
 			R.string.achievement_only_xs_or_os,
@@ -42,6 +42,8 @@ public class Achievements {
 				}
 			}
 			if (numX == 0 || numO == 0) {
+				// TODO only apply to winner?
+				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
 			}
 		}
@@ -56,6 +58,7 @@ public class Achievements {
 				Game game, State outcome) {
 			if (game.getMarkerChance().isChaotic()) {
 				if (outcome.isDraw()) {
+					// TODO only apply to person vs remote/ai?
 					unlock(gameHelper, context);
 				}
 			}
@@ -69,7 +72,8 @@ public class Achievements {
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
 			if (game.getBoard().isEmpty()) return;
-			if (game.getNumberOfTimesInThisState() > NUM_MOVES_DEJA_VU) {
+			if (game.getNumberOfTimesInThisState() > NUM_BOARD_REVISITS_FOR_DEJA_VU) {
+				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
 			}
 		}
@@ -84,6 +88,7 @@ public class Achievements {
 				Game game, State outcome) {
 			if (game.getMarkerChance().isChaotic()
 					&& game.getNumberOfMoves() > NUM_MOVES_LONG_HAUL) {
+				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
 			}
 		}
@@ -98,6 +103,7 @@ public class Achievements {
 				Game game, State outcome) {
 			if (game.getNumberOfMoves() == game.getBoard().getSize()) {
 				// TODO SHould this only apply to the winner?
+				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
 			}
 		}
@@ -110,7 +116,7 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			if (game.getNumberOfMoves() >= NUM_MOVES_CLEAN_SLATE && game.getBoard().isEmpty()) {
+			if (game.getNumberOfMoves() >= NUM_MOVES_BEFORE_CLEAN_SLATE && game.getBoard().isEmpty()) {
 				unlock(gameHelper, context);
 			}
 		}

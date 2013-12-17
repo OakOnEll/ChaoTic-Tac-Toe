@@ -18,7 +18,7 @@ import com.oakonell.chaotictactoe.model.State;
 
 public class Leaderboards {
 
-	public  List<String> getLeaderboardIds(Context context) {
+	public List<String> getLeaderboardIds(Context context) {
 		List<String> result = new ArrayList<String>();
 		result.add(context
 				.getString(R.string.leaderboard_shortest_choatic_game));
@@ -26,7 +26,7 @@ public class Leaderboards {
 		return result;
 	}
 
-	public  void submitGame(GameHelper gameHelper, final Context context,
+	public void submitGame(GameHelper gameHelper, final Context context,
 			Game game, State outcome) {
 
 		if (game.getMarkerChance().isChaotic()) {
@@ -39,114 +39,126 @@ public class Leaderboards {
 		}
 	}
 
-	private  void submitShortestGame(final Context context,
+	private void submitShortestGame(final Context context,
 			GamesClient gamesClient, int submittedScore) {
 		final String id = context
 				.getString(R.string.leaderboard_shortest_choatic_game);
-		gamesClient.submitScoreImmediate(new OnScoreSubmittedListener() {
+		gamesClient.submitScoreImmediate(new BasicOnScoreSubmittedListener(
+				context, id) {
 
 			@Override
-			public void onScoreSubmitted(int status, SubmitScoreResult result) {
-				if (status != GamesClient.STATUS_OK) {
-					// report an error?
-					Log.e("Leaderboard", "Error submitting leaderboard score- "
-							+ status);
-					Toast.makeText(
-							context,
-							"Error submitting leaderboard score- status="
-									+ status, Toast.LENGTH_SHORT).show();
-					return;
-				}
-				if (!result.getLeaderboardId().equals(id))
-					return;
+			protected void beatDaily(Context context, Result daily) {
+				Toast.makeText(
+						context,
+						"You beat your daily minimum moves in a chaotic game - "
+								+ daily.rawScore, Toast.LENGTH_SHORT).show();
+			}
 
-				Result allTime = result
-						.getScoreResult(LeaderboardVariant.TIME_SPAN_ALL_TIME);
-				if (allTime != null && allTime.newBest) {
-					Toast.makeText(
-							context,
-							"You beat your all time minimum moves in a chaotic game - "
-									+ allTime.rawScore, Toast.LENGTH_SHORT)
-							.show();
-					return;
-				}
-				Result weekly = result
-						.getScoreResult(LeaderboardVariant.TIME_SPAN_WEEKLY);
-				if (weekly != null && weekly.newBest) {
-					Toast.makeText(
-							context,
-							"You beat your weekly minimum moves in a chaotic game - "
-									+ weekly.rawScore, Toast.LENGTH_SHORT)
-							.show();
-					return;
-				}
-				Result daily = result
-						.getScoreResult(LeaderboardVariant.TIME_SPAN_DAILY);
-				if (daily != null && daily.newBest) {
-					Toast.makeText(
-							context,
-							"You beat your daily minimum moves in a chaotic game - "
-									+ daily.rawScore, Toast.LENGTH_SHORT)
-							.show();
-					return;
-				}
+			@Override
+			protected void beatWeekly(Context context, Result weekly) {
+				Toast.makeText(
+						context,
+						"You beat your weekly minimum moves in a chaotic game - "
+								+ weekly.rawScore, Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			protected void beatAllTime(Context context, Result allTime) {
+				Toast.makeText(
+						context,
+						"You beat your all time minimum moves in a chaotic game - "
+								+ allTime.rawScore, Toast.LENGTH_SHORT).show();
 			}
 		}, id, submittedScore);
 	}
 
-	private  void submitLongestGame(final Context context,
+	private void submitLongestGame(final Context context,
 			GamesClient gamesClient, int submittedScore) {
 		final String id = context
 				.getString(R.string.leaderboard_longest_choatic_game);
-		gamesClient.submitScoreImmediate(new OnScoreSubmittedListener() {
+		gamesClient.submitScoreImmediate(new BasicOnScoreSubmittedListener(
+				context, id) {
 
 			@Override
-			public void onScoreSubmitted(int status, SubmitScoreResult result) {
-				if (status != GamesClient.STATUS_OK) {
-					// report an error?
-					Log.e("Leaderboard", "Error submitting leaderboard score- "
-							+ status);
-					Toast.makeText(
-							context,
-							"Error submitting leaderboard score- status="
-									+ status, Toast.LENGTH_SHORT).show();
-					return;
-				}
-				if (!result.getLeaderboardId().equals(id))
-					return;
+			protected void beatDaily(final Context context, Result daily) {
+				Toast.makeText(
+						context,
+						"You beat your daily maximum moves in a chaotic game - "
+								+ daily.rawScore, Toast.LENGTH_SHORT).show();
+			}
 
-				Result allTime = result
-						.getScoreResult(LeaderboardVariant.TIME_SPAN_ALL_TIME);
-				if (allTime != null && allTime.newBest) {
-					Toast.makeText(
-							context,
-							"You beat your all time maximum moves in a chaotic game - "
-									+ allTime.rawScore, Toast.LENGTH_SHORT)
-							.show();
-					return;
-				}
-				Result weekly = result
-						.getScoreResult(LeaderboardVariant.TIME_SPAN_WEEKLY);
-				if (weekly != null && weekly.newBest) {
-					Toast.makeText(
-							context,
-							"You beat your weekly maximum moves in a chaotic game - "
-									+ weekly.rawScore, Toast.LENGTH_SHORT)
-							.show();
-					return;
-				}
-				Result daily = result
-						.getScoreResult(LeaderboardVariant.TIME_SPAN_DAILY);
-				if (daily != null && daily.newBest) {
-					Toast.makeText(
-							context,
-							"You beat your daily maximum moves in a chaotic game - "
-									+ daily.rawScore, Toast.LENGTH_SHORT)
-							.show();
-					return;
-				}
+			@Override
+			protected void beatWeekly(final Context context, Result weekly) {
+				Toast.makeText(
+						context,
+						"You beat your weekly maximum moves in a chaotic game - "
+								+ weekly.rawScore, Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			protected void beatAllTime(final Context context, Result allTime) {
+				Toast.makeText(
+						context,
+						"You beat your all time maximum moves in a chaotic game - "
+								+ allTime.rawScore, Toast.LENGTH_SHORT).show();
 			}
 		}, id, submittedScore);
 	}
 
+	public abstract static class BasicOnScoreSubmittedListener implements
+			OnScoreSubmittedListener {
+		private Context context;
+		private String id;
+
+		BasicOnScoreSubmittedListener(Context context, String id) {
+			this.id = id;
+			this.context = context;
+		}
+
+		@Override
+		public void onScoreSubmitted(int status, SubmitScoreResult result) {
+			if (status != GamesClient.STATUS_OK) {
+				// report an error?
+				Log.e("Leaderboard", "Error submitting leaderboard score- "
+						+ status);
+				Toast.makeText(context,
+						"Error submitting leaderboard score- status=" + status,
+						Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if (!result.getLeaderboardId().equals(id))
+				return;
+			onScoreSubmitSuccess(result);
+		}
+
+		protected void onScoreSubmitSuccess(SubmitScoreResult result) {
+			Result allTime = result
+					.getScoreResult(LeaderboardVariant.TIME_SPAN_ALL_TIME);
+			if (allTime != null && allTime.newBest) {
+				beatAllTime(context, allTime);
+				return;
+			}
+			Result weekly = result
+					.getScoreResult(LeaderboardVariant.TIME_SPAN_WEEKLY);
+			if (weekly != null && weekly.newBest) {
+				beatWeekly(context, weekly);
+				return;
+			}
+			Result daily = result
+					.getScoreResult(LeaderboardVariant.TIME_SPAN_DAILY);
+			if (daily != null && daily.newBest) {
+				beatDaily(context, daily);
+				return;
+			}
+		}
+
+		protected void beatDaily(final Context context, Result daily) {
+		}
+
+		protected void beatWeekly(final Context context, Result weekly) {
+		}
+
+		protected void beatAllTime(final Context context, Result allTime) {
+		}
+	}
 }

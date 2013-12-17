@@ -4,7 +4,7 @@
     <string name="app_name">ChaoTic-Tac-Toe</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="new_game_same_device">Human v Human /\n Shared Device</string>
+    <string name="new_game_same_device">Pass \'N Play</string>
     <string name="player_turn_label">Player Turn:</string>
     <string name="marker_to_play_label">Marker To Play:</string>
 

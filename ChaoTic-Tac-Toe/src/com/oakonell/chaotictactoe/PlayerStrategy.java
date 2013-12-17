@@ -7,9 +7,9 @@ import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
 
 public class PlayerStrategy {
-	private String name;
-	private Marker marker;
-	private Uri iconImageUri;
+	private final String name;
+	private final Marker marker;
+	private final Uri iconImageUri;
 
 	protected PlayerStrategy(String name, Marker marker, Uri iconImageUri) {
 		this.name = name;

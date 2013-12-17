@@ -9,10 +9,13 @@ import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.State;
 
+/**
+ * MiniMax solving algorithm with Alpha/Beta pruning
+ */
 public class MiniMaxAlg {
 	private final Marker player;
 	private final int depth;
-	private MarkerChance chance;
+	private final MarkerChance chance;
 
 	public MiniMaxAlg(Marker player, int depth, MarkerChance chance) {
 		this.player = player;
@@ -28,7 +31,8 @@ public class MiniMaxAlg {
 
 	public Cell solve(Board board, Marker toPlay) {
 		Board copy = board.copy();
-		MoveAndScore solve = solve(copy, depth, player, toPlay, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+		MoveAndScore solve = solve(copy, depth, player, toPlay,
+				Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 		if (solve.move == null) {
 			throw new RuntimeException("Move should not be null!");
 		}
@@ -70,14 +74,16 @@ public class MiniMaxAlg {
 			double currentScore;
 			if (currentPlayer == player) {
 				currentScore = solve(board, depth - 1,
-						currentPlayer.opponent(), null, alpha, beta).score * move.weight;
+						currentPlayer.opponent(), null, alpha, beta).score
+						* move.weight;
 				if (currentScore > alpha) {
 					alpha = currentScore;
 					bestMove = move.move;
 				}
 			} else {
 				currentScore = solve(board, depth - 1,
-						currentPlayer.opponent(), null, alpha, beta).score * move.weight;
+						currentPlayer.opponent(), null, alpha, beta).score
+						* move.weight;
 				if (currentScore < beta) {
 					beta = currentScore;
 					bestMove = move.move;
@@ -88,7 +94,8 @@ public class MiniMaxAlg {
 			} else {
 				board.clearMarker(move.move, move.marker);
 			}
-			if (alpha >= beta) break;
+			if (alpha >= beta)
+				break;
 		}
 		double bestScore = currentPlayer == player ? alpha : beta;
 		return new MoveAndScore(bestMove, bestScore);

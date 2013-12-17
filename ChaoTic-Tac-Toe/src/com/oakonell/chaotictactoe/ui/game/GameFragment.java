@@ -276,6 +276,9 @@ public class GameFragment extends SherlockFragment {
 
 		@Override
 		public void onClick(View view) {
+			if (isRolling) {
+				return;
+			}
 			if (!currentStrategy.isHuman()) {
 				// ignore button clicks if the current player is not a human
 				return;

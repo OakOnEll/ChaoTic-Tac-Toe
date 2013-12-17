@@ -28,11 +28,13 @@ import com.oakonell.utils.Utils;
 import com.oakonell.utils.activity.AppLaunchUtils;
 
 public class MainActivity extends BaseGameActivity {
-	private static final String TAG = MainActivity.class.getName();
+	private static final String FRAG_TAG_GAME = "game";
 	private static final String FRAG_TAG_MENU = "menu";
+	private static final String TAG = MainActivity.class.getName();
 
 	private RoomListener roomListener;
-	private InterstitialAd mInterstitial;
+	private InterstitialAd mInterstitialAd;
+	private AdView mAdView;
 
 	@Override
 	protected void onActivityResult(int request, int response, Intent data) {
@@ -80,9 +82,10 @@ public class MainActivity extends BaseGameActivity {
 	}
 
 	private void initializeInterstitialAd() {
-		mInterstitial = new InterstitialAd(this);
-		mInterstitial.setAdUnitId(getResources().getString(R.string.admob_id));
-		mInterstitial.loadAd(new AdRequest.Builder().build());
+		mInterstitialAd = new InterstitialAd(this);
+		mInterstitialAd
+				.setAdUnitId(getResources().getString(R.string.admob_id));
+		mInterstitialAd.loadAd(new AdRequest.Builder().build());
 	}
 
 	@Override
@@ -161,11 +164,19 @@ public class MainActivity extends BaseGameActivity {
 
 	public GameFragment getGameFragment() {
 		return (GameFragment) getSupportFragmentManager().findFragmentByTag(
-				"game");
+				FRAG_TAG_GAME);
 	}
 
-	public void makeMove(Marker marker, Cell cell) {
+	public void onlineMoveReceived(Marker marker, Cell cell) {
 		getGameFragment().onlineMakeMove(marker, cell);
+	}
+
+	public void messageRecieved(Participant opponentParticipant, String string) {
+		getGameFragment().messageRecieved(opponentParticipant, string);
+	}
+
+	public void gameEnded() {
+		possiblyShowInterstitialAd();
 	}
 
 	public RoomListener getRoomListener() {
@@ -176,13 +187,10 @@ public class MainActivity extends BaseGameActivity {
 		this.roomListener = roomListener;
 	}
 
-	public void messageRecieved(Participant opponentParticipant, String string) {
-		getGameFragment().messageRecieved(opponentParticipant, string);
-	}
-
 	@Override
 	public void onBackPressed() {
 		if (getGameFragment() != null && getGameFragment().isVisible()) {
+			// TODO localize these strings
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Leave game?");
 			builder.setMessage("Leave the game in progress?");
@@ -192,7 +200,7 @@ public class MainActivity extends BaseGameActivity {
 					dialog.dismiss();
 
 					// TODO inform possible opponent of leaving room
-					if (roomListener != null ) {
+					if (roomListener != null) {
 						roomListener.leaveRoom();
 					}
 					MainActivity.super.onBackPressed();
@@ -212,8 +220,6 @@ public class MainActivity extends BaseGameActivity {
 		}
 		super.onBackPressed();
 	}
-
-	private AdView mAdView;
 
 	@Override
 	protected void onPause() {
@@ -236,9 +242,9 @@ public class MainActivity extends BaseGameActivity {
 	private void possiblyShowInterstitialAd() {
 		// show an ad
 		// possibly only show with some probability (50%?)
-		if (mInterstitial.isLoaded()) {
-			mInterstitial.show();
-			mInterstitial.setAdListener(new AdListener() {
+		if (mInterstitialAd.isLoaded()) {
+			mInterstitialAd.show();
+			mInterstitialAd.setAdListener(new AdListener() {
 				@Override
 				public void onAdClosed() {
 					super.onAdClosed();
@@ -246,10 +252,6 @@ public class MainActivity extends BaseGameActivity {
 				}
 			});
 		}
-	}
-
-	public void gameEnded() {
-		possiblyShowInterstitialAd();
 	}
 
 }

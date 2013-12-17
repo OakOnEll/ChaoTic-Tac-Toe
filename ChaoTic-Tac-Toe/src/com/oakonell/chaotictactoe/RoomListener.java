@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
@@ -21,7 +19,6 @@ import com.google.android.gms.games.multiplayer.realtime.RealTimeReliableMessage
 import com.google.android.gms.games.multiplayer.realtime.Room;
 import com.google.android.gms.games.multiplayer.realtime.RoomStatusUpdateListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
-import com.google.android.gms.maps.model.TileOverlay;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
@@ -39,17 +36,16 @@ public class RoomListener implements RoomUpdateListener,
 	private static final String TAG = RoomListener.class.getName();
 
 	private MainActivity activity;
-
 	private GameHelper helper;
 
 	private String mRoomId;
 	private ArrayList<Participant> mParticipants;
-	private String mMyId;
+	private String mMyParticipantId;
 
 	private static final byte MSG_WHO_IS_X = 1;
 	private static final byte MSG_MOVE = 2;
 	private static final byte MSG_MESSAGE = 3;
-	private static final byte MSG_SEND_TYPE = 4;
+	private static final byte MSG_SEND_CHANCE = 4;
 
 	private volatile Long myRandom;
 	private volatile Long theirRandom;
@@ -76,11 +72,12 @@ public class RoomListener implements RoomUpdateListener,
 		// get room ID, participants and my ID:
 		mRoomId = room.getRoomId();
 		mParticipants = room.getParticipants();
-		mMyId = room.getParticipantId(getGamesClient().getCurrentPlayerId());
+		mMyParticipantId = room.getParticipantId(getGamesClient()
+				.getCurrentPlayerId());
 
 		// print out the list of participants (for debug purposes)
 		Log.d(TAG, "Room ID: " + mRoomId);
-		Log.d(TAG, "My ID " + mMyId);
+		Log.d(TAG, "My ID " + mMyParticipantId);
 		Log.d(TAG, "<< CONNECTED TO ROOM>>");
 	}
 
@@ -123,6 +120,9 @@ public class RoomListener implements RoomUpdateListener,
 
 	@Override
 	public void onPeerLeft(Room room, List<String> peersWhoLeft) {
+		// TODO
+		activity.showAlert("On Peer left room?!");
+
 		announce("onPeerLeft");
 		updateRoom(room);
 	}
@@ -151,9 +151,18 @@ public class RoomListener implements RoomUpdateListener,
 		updateRoom(room);
 	}
 
+	@Override
+	public void onP2PConnected(String arg0) {
+		announce("Connected to P2P " + arg0);
+	}
+
+	@Override
+	public void onP2PDisconnected(String arg0) {
+		announce("Disconnected from P2P " + arg0);
+	}
+
 	void updateRoom(Room room) {
 		mParticipants = room.getParticipants();
-		// updatePeerScoresDisplay();
 	}
 
 	// Called when we receive a real-time message from the network.
@@ -165,7 +174,7 @@ public class RoomListener implements RoomUpdateListener,
 		if (type == MSG_WHO_IS_X) {
 			theirRandom = buffer.getLong();
 			if (myRandom == null) {
-				// ignore, let the later backFromWaitingRoom reciever handle
+				// ignore, let the later backFromWaitingRoom receiver handle
 				// this
 				return;
 			}
@@ -176,7 +185,7 @@ public class RoomListener implements RoomUpdateListener,
 			int y = buffer.getInt();
 			// TODO is it possible that the moveListener is null?
 			// should we store the pending move, until a move listener is set
-			activity.makeMove(marker, new Cell(x, y));
+			activity.onlineMoveReceived(marker, new Cell(x, y));
 		} else if (type == MSG_MESSAGE) {
 			int numBytes = buffer.getInt();
 			byte[] bytes = new byte[numBytes];
@@ -189,7 +198,7 @@ public class RoomListener implements RoomUpdateListener,
 			}
 
 			activity.messageRecieved(getOpponentParticipant(), string);
-		} else if (type == MSG_SEND_TYPE) {
+		} else if (type == MSG_SEND_CHANCE) {
 			MarkerChance sentChance = MarkerChance.fromMsgBuffer(buffer);
 			if (chance != null) {
 				// verify that the chances agree
@@ -202,11 +211,8 @@ public class RoomListener implements RoomUpdateListener,
 							"Opponent's chance setting does not match!");
 				}
 			} else {
-				// TODO notify the user of the chance sent from the originating
-				// player
 				chance = sentChance;
-				Toast.makeText(activity, "Received chance ", Toast.LENGTH_SHORT)
-						.show();
+				announce("Received chance");
 			}
 		} else {
 			throw new RuntimeException("unexpected message type! " + type);
@@ -223,14 +229,14 @@ public class RoomListener implements RoomUpdateListener,
 		PlayerStrategy xStrategy;
 		PlayerStrategy oStrategy;
 		if (iAmX) {
-			xStrategy = new HumanStrategy("Me", Marker.X, getMe()
+			xStrategy = new HumanStrategy("You", Marker.X, getMe()
 					.getIconImageUri());
 			oStrategy = new OnlineStrategy(getOpponentName(), Marker.O,
 					getOpponentParticipant().getIconImageUri());
 		} else {
 			xStrategy = new OnlineStrategy(getOpponentName(), Marker.X,
 					getOpponentParticipant().getIconImageUri());
-			oStrategy = new HumanStrategy("Me", Marker.O, getMe()
+			oStrategy = new HumanStrategy("You", Marker.O, getMe()
 					.getIconImageUri());
 		}
 		gameFragment.startGame(xStrategy, oStrategy, game, score);
@@ -309,12 +315,12 @@ public class RoomListener implements RoomUpdateListener,
 		// mWaitRoomDismissedFromCode = false;
 
 		// minimum number of players required for our game
-		final int MIN_PLAYERS = 2;
-		Intent i = getGamesClient().getRealTimeWaitingRoomIntent(room,
-				MIN_PLAYERS);
+		int minPlayersToStart = 2;
+		Intent intent = getGamesClient().getRealTimeWaitingRoomIntent(room,
+				minPlayersToStart);
 
 		// show waiting room UI
-		activity.startActivityForResult(i, MenuFragment.RC_WAITING_ROOM);
+		activity.startActivityForResult(intent, MenuFragment.RC_WAITING_ROOM);
 	}
 
 	public void leaveRoom() {
@@ -328,7 +334,7 @@ public class RoomListener implements RoomUpdateListener,
 	}
 
 	private Participant getOpponentParticipant() {
-		if (!mParticipants.get(0).getParticipantId().equals(mMyId)) {
+		if (!mParticipants.get(0).getParticipantId().equals(mMyParticipantId)) {
 			return mParticipants.get(0);
 		}
 		return mParticipants.get(1);
@@ -353,7 +359,7 @@ public class RoomListener implements RoomUpdateListener,
 		if (chance != null) {
 			ByteBuffer buffer = ByteBuffer
 					.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
-			buffer.put(MSG_SEND_TYPE);
+			buffer.put(MSG_SEND_CHANCE);
 			chance.writeToMsgBuffer(buffer);
 			getGamesClient().sendReliableRealTimeMessage(
 					new RealTimeReliableMessageSentListener() {
@@ -445,11 +451,11 @@ public class RoomListener implements RoomUpdateListener,
 						if (statusCode == GamesClient.STATUS_OK) {
 
 						} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
-
+							showGameError();
 						} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
-
+							showGameError();
 						} else {
-
+							showGameError();
 						}
 					}
 				}, buffer.array(), getRoomId(), getOpponentId());
@@ -477,11 +483,11 @@ public class RoomListener implements RoomUpdateListener,
 						if (statusCode == GamesClient.STATUS_OK) {
 
 						} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
-
+							showGameError();
 						} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
-
+							showGameError();
 						} else {
-
+							showGameError();
 						}
 					}
 				}, buffer.array(), getRoomId(), getOpponentId());
@@ -489,22 +495,10 @@ public class RoomListener implements RoomUpdateListener,
 	}
 
 	public Participant getMe() {
-		if (mParticipants.get(0).getParticipantId().equals(mMyId)) {
+		if (mParticipants.get(0).getParticipantId().equals(mMyParticipantId)) {
 			return mParticipants.get(0);
 		}
 		return mParticipants.get(1);
-	}
-
-	@Override
-	public void onP2PConnected(String arg0) {
-		// TODO Auto-generated method stub
-		Log.i(TAG, "Connected to " + arg0);
-	}
-
-	@Override
-	public void onP2PDisconnected(String arg0) {
-		// TODO Auto-generated method stub
-		Log.i(TAG, "Disconnected from " + arg0);
 	}
 
 }

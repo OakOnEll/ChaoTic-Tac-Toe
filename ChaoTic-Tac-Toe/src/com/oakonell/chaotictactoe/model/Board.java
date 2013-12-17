@@ -133,8 +133,9 @@ public class Board {
 		int score = multiplyer * sum;
 		result = createResult(new Cell(0, 0), new Cell(size - 1, size - 1),
 				mark, score, result, WinStyle.TOP_LEFT_DIAG);
-		if (result.getWinner() != null)
+		if (result.getWinner() != null) {
 			return result;
+		}
 
 		sum = 0;
 		// Inspect the bottom-right/top-right
@@ -145,8 +146,9 @@ public class Board {
 		score = multiplyer * sum;
 		result = createResult(new Cell(0, size - 1), new Cell(size - 1, 0),
 				mark, score, result, WinStyle.TOP_RIGHT_DIAG);
-		if (result.getWinner() != null)
+		if (result.getWinner() != null) {
 			return result;
+		}
 
 		// check for draw- no empty spots
 		sum = 0;
