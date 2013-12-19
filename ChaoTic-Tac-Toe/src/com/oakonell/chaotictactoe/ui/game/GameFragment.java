@@ -19,10 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -43,6 +39,7 @@ import com.oakonell.chaotictactoe.MainActivity;
 import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.RoomListener;
+import com.oakonell.chaotictactoe.Sounds;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.InvalidMoveException;
@@ -470,14 +467,18 @@ public class GameFragment extends SherlockFragment {
 		try {
 			outcome = game.placeMarker(cell);
 		} catch (InvalidMoveException e) {
-			// TODO play invalid sound
+			getMainActivity().playSound(Sounds.INVALID_MOVE);
 			Toast toast = Toast.makeText(getActivity(), R.string.invalid_move,
 					Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return false;
 		}
-		// TODO play sound (different for x/o or human vs online?)
+		if (markerToPlay == Marker.X) {
+			getMainActivity().playSound(Sounds.PLAY_X);
+		} else {
+			getMainActivity().playSound(Sounds.PLAY_O);
+		}
 		privateMakeMove(cell, marker, outcome);
 		return true;
 	}
@@ -687,9 +688,10 @@ public class GameFragment extends SherlockFragment {
 		} else {
 			playerTurnString = oStrategy.getName();
 		}
-//		playerTurnString = (playerTurnString != null && playerTurnString.trim()
-//				.length() > 0) ? (playerTurnString + " (" + player.name() + ")")
-//				: (getString(R.string.player_label) + " " + player.name());
+		// playerTurnString = (playerTurnString != null &&
+		// playerTurnString.trim()
+		// .length() > 0) ? (playerTurnString + " (" + player.name() + ")")
+		// : (getString(R.string.player_label) + " " + player.name());
 		return playerTurnString;
 	}
 
@@ -740,6 +742,7 @@ public class GameFragment extends SherlockFragment {
 
 	public void messageRecieved(Participant opponentParticipant, String string) {
 		messages.add(new ChatMessage(opponentParticipant, string, false));
+		getMainActivity().playSound(Sounds.CHAT_RECIEVED);
 		if (chatDialog != null) {
 			chatDialog.newMessage();
 		} else {
@@ -757,5 +760,5 @@ public class GameFragment extends SherlockFragment {
 	public void setIsOnline(boolean isOnline) {
 		this.isOnline = isOnline;
 	}
-	
+
 }

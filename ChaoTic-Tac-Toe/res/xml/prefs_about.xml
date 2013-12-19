@@ -3,6 +3,9 @@
     android:title="Settings" >
     
     <PreferenceCategory android:title="App Info" >
+        <CheckBoxPreference
+            android:key="@string/pref_sound_fx_key"
+            android:title="@string/pref_sound_fx" android:defaultValue="true"/>
         <Preference 
             android:title="About" 
             android:key="@string/pref_about_key"/>

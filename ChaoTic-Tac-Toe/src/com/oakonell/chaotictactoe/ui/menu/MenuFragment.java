@@ -34,6 +34,7 @@ import com.oakonell.chaotictactoe.MainActivity;
 import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.RoomListener;
+import com.oakonell.chaotictactoe.Sounds;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
@@ -476,6 +477,7 @@ public class MenuFragment extends SherlockFragment {
 				new OnInvitationReceivedListener() {
 					@Override
 					public void onInvitationReceived(Invitation invite) {
+						getMainActivity().playSound(Sounds.INVITE_RECEIVED);
 						refreshInvites(true);
 						Toast.makeText(
 								getActivity(),

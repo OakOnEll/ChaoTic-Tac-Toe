@@ -23,6 +23,7 @@ import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.ui.game.GameFragment;
+import com.oakonell.chaotictactoe.ui.game.SoundManager;
 import com.oakonell.chaotictactoe.ui.menu.MenuFragment;
 import com.oakonell.utils.Utils;
 import com.oakonell.utils.activity.AppLaunchUtils;
@@ -35,6 +36,7 @@ public class MainActivity extends BaseGameActivity {
 	private RoomListener roomListener;
 	private InterstitialAd mInterstitialAd;
 	private AdView mAdView;
+	private SoundManager soundManager;
 
 	@Override
 	protected void onActivityResult(int request, int response, Intent data) {
@@ -53,7 +55,13 @@ public class MainActivity extends BaseGameActivity {
 		setContentView(R.layout.main_activity);
 
 		initializeInterstitialAd();
-
+		soundManager = new SoundManager(this);
+		soundManager.addSound(Sounds.PLAY_X, R.raw.play_x_sounds_882_solemn);
+		soundManager.addSound(Sounds.PLAY_O, R.raw.play_o_sounds_913_served);
+		soundManager.addSound(Sounds.INVALID_MOVE, R.raw.invalid_move_sounds_980_thats_a_no);
+		soundManager.addSound(Sounds.CHAT_RECIEVED, R.raw.chat_received_sounds_954_all_eyes_on_me);
+		soundManager.addSound(Sounds.INVITE_RECEIVED, R.raw.invite_received_sounds_1044_inquisitiveness);
+		
 		mAdView = (AdView) findViewById(R.id.adView);
 		// mAdView.setAdListener(new ToastAdListener(this));
 		mAdView.loadAd(new AdRequest.Builder().build());
@@ -241,6 +249,7 @@ public class MainActivity extends BaseGameActivity {
 	@Override
 	protected void onDestroy() {
 		mAdView.destroy();
+        soundManager.release();
 		super.onDestroy();
 	}
 
@@ -257,6 +266,10 @@ public class MainActivity extends BaseGameActivity {
 				}
 			});
 		}
+	}
+	
+	public void playSound(Sounds sound) {
+		soundManager.playSound(sound);
 	}
 
 }
