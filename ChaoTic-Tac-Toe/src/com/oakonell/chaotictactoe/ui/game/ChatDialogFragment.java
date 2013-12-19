@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
+import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.MainActivity;
 import com.oakonell.chaotictactoe.R;
@@ -25,51 +27,91 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 	private MessagesAdapter adapter;
 	private Participant me;
 	private GameFragment parent;
+	private String friendName;
 
 	private static class MessagesAdapter extends ArrayAdapter<ChatMessage> {
-		private Context context;
+		private MainActivity context;
+		private LayoutInflater inflater;
+		private ImageManager imageManager;
 
-		public MessagesAdapter(Context context, int textViewResourceId,
+		private static class MessageHolder {
+			TextView message;
+			ImageView picView;
+
+			String participantId;
+		}
+
+		public MessagesAdapter(MainActivity context, int textViewResourceId,
 				List<ChatMessage> objects) {
 			super(context, textViewResourceId, objects);
 			this.context = context;
+			inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			imageManager = ImageManager.create(context);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			LayoutInflater inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			View rowView = inflater.inflate(R.layout.message_item, parent, false);
-			ImageView picView = (ImageView) rowView.findViewById(R.id.player_pic);
-			TextView messageView = (TextView) rowView.findViewById(R.id.message);
 			ChatMessage item = getItem(position);
-			messageView.setText(item.getMessage());
-			// TODO renders on UI thread
-			picView.setImageURI(item.getParticipant().getIconImageUri());
+			String id = item.getParticipant().getParticipantId();
 
+			MessageHolder holder;
+			View rowView;
+			if (convertView == null
+					|| !((MessageHolder) convertView.getTag()).participantId
+							.equals(id)) {
+				if (item.isLocal()) {
+					rowView = inflater.inflate(R.layout.my_message_item,
+							parent, false);
+				} else {
+					rowView = inflater.inflate(R.layout.friend_message_item,
+							parent, false);
+				}
+				holder = new MessageHolder();
+				holder.message = (TextView) rowView.findViewById(R.id.message);
+				holder.picView = (ImageView) rowView
+						.findViewById(R.id.player_pic);
+				rowView.setTag(holder);
+			} else {
+				rowView = convertView;
+				holder = (MessageHolder) convertView.getTag();
+			}
+
+			holder.message.setText(item.getMessage());
+			Uri imageUri = item.getParticipant().getIconImageUri();
+			if (imageUri == null) {
+				holder.picView.setImageResource(R.drawable.silhouette_icon_4520);
+			} else {
+				imageManager.loadImage(holder.picView, item.getParticipant()
+						.getIconImageUri());
+			}
+			holder.participantId = item.getParticipant().getParticipantId();
 			return rowView;
 		}
 	}
 
-	public void initialize(GameFragment parent, List<ChatMessage> messages, Participant me) {
+	public void initialize(GameFragment parent, List<ChatMessage> messages,
+			Participant me, String friendName) {
 		this.parent = parent;
 		this.messages = messages;
 		this.me = me;
+		this.friendName = friendName;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chat_dialog, container, false);
-		
-		ListView messagesView= (ListView)view.findViewById(R.id.messages);
+		getDialog().setTitle("Chat with " + friendName);
+
+		ListView messagesView = (ListView) view.findViewById(R.id.messages);
 		final TextView messageView = (TextView) view.findViewById(R.id.message);
-		
-		adapter = new MessagesAdapter(getActivity(), R.id.messages, messages);
+
+		adapter = new MessagesAdapter(parent.getMainActivity(), R.id.messages, messages);
 		messagesView.setAdapter(adapter);
-		
+
 		Button sendButton = (Button) view.findViewById(R.id.send);
-		sendButton.setOnClickListener(new OnClickListener() {			
+		sendButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				sendMessage(messageView.getText().toString());
@@ -77,17 +119,16 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 				messageView.setText("");
 			}
 		});
-		
+
 		ImageView closeView = (ImageView) view.findViewById(R.id.close);
-		closeView.setOnClickListener(new OnClickListener() {			
+		closeView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dismiss();
 				parent.chatClosed();
 			}
 		});
-		
-		
+
 		return view;
 	}
 
@@ -96,13 +137,13 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 		super.onCancel(dialog);
 		parent.chatClosed();
 	}
-	
+
 	protected void sendMessage(String string) {
 		((MainActivity) getActivity()).getRoomListener().sendMessage(string);
-		messages.add(new ChatMessage(me, string));
+		messages.add(new ChatMessage(me, string, true));
 	}
 
 	public void newMessage() {
-		adapter.notifyDataSetChanged();		
+		adapter.notifyDataSetChanged();
 	}
 }

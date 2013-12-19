@@ -51,15 +51,18 @@ public class RoomListener implements RoomUpdateListener,
 	private volatile Long theirRandom;
 	private MarkerChance chance;
 
+	private boolean isQuick;
+	
 	GamesClient getGamesClient() {
 		return helper.getGamesClient();
 	}
 
 	public RoomListener(MainActivity activity, GameHelper helper,
-			MarkerChance chance) {
+			MarkerChance chance, boolean isQuick) {
 		this.activity = activity;
 		this.helper = helper;
 		this.chance = chance;
+		this.isQuick = isQuick;
 	}
 
 	// Called when we are connected to the room. We're not ready to play yet!
@@ -87,8 +90,6 @@ public class RoomListener implements RoomUpdateListener,
 	public void onDisconnectedFromRoom(Room arg0) {
 		announce("onDisconnectedFromRoom");
 
-		// TODO
-		activity.showAlert("Disconnected from room?!");
 		// TODO pop if the current is game
 		activity.getSupportFragmentManager().popBackStack();
 	}
@@ -120,9 +121,8 @@ public class RoomListener implements RoomUpdateListener,
 
 	@Override
 	public void onPeerLeft(Room room, List<String> peersWhoLeft) {
-		// TODO
-		activity.showAlert("On Peer left room?!");
-
+		activity.showAlert(activity.getResources().getString(
+				R.string.peer_left_the_game, getOpponentName()));
 		announce("onPeerLeft");
 		updateRoom(room);
 	}
@@ -330,6 +330,9 @@ public class RoomListener implements RoomUpdateListener,
 	}
 
 	public String getOpponentName() {
+		if (isQuick) {
+			return "Anonymous";
+		}
 		return getOpponentParticipant().getDisplayName();
 	}
 

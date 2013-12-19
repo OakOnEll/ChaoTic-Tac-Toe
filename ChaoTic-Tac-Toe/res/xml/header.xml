@@ -2,14 +2,12 @@
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <header
-        android:fragment="com.oakonell.chaotictactoe.settings.Preferences"
+        android:id="@+id/account_settings"
         android:icon="@android:drawable/ic_menu_agenda"
         android:title="Account Preferences" >
-        <extra
-            android:name="resource"
-            android:value="prefs_account" />
     </header>
     <header
+        android:id="@+id/development_preferences"
         android:fragment="com.oakonell.chaotictactoe.settings.Preferences"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="Development Preferences" >
@@ -18,6 +16,7 @@
             android:value="prefs_develop" />
     </header>
     <header
+        android:id="@+id/app_info"
         android:fragment="com.oakonell.chaotictactoe.settings.Preferences"
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="App Info" >

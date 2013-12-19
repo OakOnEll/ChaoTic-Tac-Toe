@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="invalid_move_title">Invalid Move!</string>
+    <string name="invalid_move">That was an invalid move. Try again.</string>
+    <string name="button_send">Send</string>
+    <string name="action_chat">Chat</string>
+    <string name="player_won">%s won!</string>
+    <string name="draw">Draw Game!</string>
+    <string name="play_again">Play again?</string>
+
+    <string name="peer_left_the_game">%s has left the game!</string>
+    
+</resources>

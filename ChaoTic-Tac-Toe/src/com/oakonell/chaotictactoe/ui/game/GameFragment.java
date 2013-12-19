@@ -19,9 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +50,7 @@ import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
+import com.oakonell.utils.StringUtils;
 import com.oakonell.utils.Utils;
 
 public class GameFragment extends SherlockFragment {
@@ -75,7 +81,7 @@ public class GameFragment extends SherlockFragment {
 	private PlayerStrategy currentStrategy;
 
 	private List<ChatMessage> messages = new ArrayList<ChatMessage>();
-	private boolean hasNewMessage;
+	private int numNewMessages;
 
 	private ChatDialogFragment chatDialog;
 	private MenuItem chatMenuItem;
@@ -133,10 +139,33 @@ public class GameFragment extends SherlockFragment {
 
 	private void handleMenu() {
 		chatMenuItem.setVisible(getMainActivity().getRoomListener() != null);
-		if (hasNewMessage) {
-			chatMenuItem.setIcon(android.R.drawable.ic_dialog_email);
+		RelativeLayout actionView = (RelativeLayout) chatMenuItem
+				.getActionView();
+		actionView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openChatDialog();
+			}
+		});
+		TextView textView = (TextView) actionView
+				.findViewById(R.id.actionbar_notifcation_textview);
+		ImageView imageView = (ImageView) actionView
+				.findViewById(R.id.actionbar_notifcation_imageview);
+		imageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openChatDialog();
+			}
+		});
+		if (numNewMessages > 0) {
+			textView.setText("" + numNewMessages);
+			imageView.setImageResource(R.drawable.message_available_icon_1332);
+
+			// TODO play a sound
+			StringUtils.applyFlashEnlargeAnimation(textView);
 		} else {
-			chatMenuItem.setIcon(android.R.drawable.ic_menu_call);
+			imageView.setImageResource(R.drawable.message_icon_27709);
+			textView.setText("");
 		}
 	}
 
@@ -144,15 +173,20 @@ public class GameFragment extends SherlockFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_chat:
-			chatDialog = new ChatDialogFragment();
-			chatDialog.initialize(this, messages, getMainActivity()
-					.getRoomListener().getMe());
-			chatDialog.show(getChildFragmentManager(), "chat");
-			hasNewMessage = false;
-			invalidateMenu();
+			openChatDialog();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void openChatDialog() {
+		chatDialog = new ChatDialogFragment();
+		// TODO get the opponent name in nice fashion- ie, 'Anonymous'
+		// instead of google+'s anonymized string
+		chatDialog.initialize(this, messages, getMainActivity()
+				.getRoomListener().getMe(), getMainActivity().getRoomListener()
+				.getOpponentName());
+		chatDialog.show(getChildFragmentManager(), "chat");
 	}
 
 	public void startGame(PlayerStrategy xStrategy, PlayerStrategy oStrategy,
@@ -171,9 +205,12 @@ public class GameFragment extends SherlockFragment {
 		this.score = score;
 		this.game = game;
 		if (!currentStrategy.isHuman()) {
-			// show a thinking/progress icon, suitable for network play and ai
-			// thinking..
-			thinking.setVisibility(View.VISIBLE);
+			if (thinking != null) {
+				// show a thinking/progress icon, suitable for network play and
+				// ai
+				// thinking..
+				thinking.setVisibility(View.VISIBLE);
+			}
 		}
 	}
 
@@ -185,6 +222,14 @@ public class GameFragment extends SherlockFragment {
 
 		setHasOptionsMenu(true);
 		thinking = (ProgressBar) view.findViewById(R.id.thinking);
+		if (currentStrategy != null && !currentStrategy.isHuman()) {
+			if (thinking != null) {
+				// show a thinking/progress icon, suitable for network play and
+				// ai
+				// thinking..
+				thinking.setVisibility(View.VISIBLE);
+			}
+		}
 
 		imgManager = ImageManager.create(getMainActivity());
 
@@ -260,7 +305,8 @@ public class GameFragment extends SherlockFragment {
 
 	private void updatePlayerImage(ImageView xImage, Uri xUri,
 			int defaultResource) {
-		if (xUri.getEncodedSchemeSpecificPart().contains("gms.games")) {
+		if (xUri == null
+				|| xUri.getEncodedSchemeSpecificPart().contains("gms.games")) {
 			imgManager.loadImage(xImage, xUri, defaultResource);
 		} else {
 			xImage.setImageURI(xUri);
@@ -348,27 +394,29 @@ public class GameFragment extends SherlockFragment {
 			if (currentStrategy.getMarker() == Marker.X) {
 				resourcesList.add(R.drawable.system_cross);
 			} else {
-				resourcesList.add(R.drawable.system_dot);				
+				resourcesList.add(R.drawable.system_dot);
 			}
 		}
 		if (chance.getOpponentMarker() > 0) {
 			if (currentStrategy.getMarker() == Marker.X) {
 				resourcesList.add(R.drawable.system_dot);
 			} else {
-				resourcesList.add(R.drawable.system_cross);				
+				resourcesList.add(R.drawable.system_cross);
 			}
 		}
-		if (chance.getRemoveMarker()>0) {
-			resourcesList.add(android.R.drawable.ic_delete);						
+		if (chance.getRemoveMarker() > 0) {
+			resourcesList.add(android.R.drawable.ic_delete);
 		}
 		final int numPossible = resourcesList.size();
 		// number of rolls cycled through is random between min <-> max
-		//  hold the number in a modifiable int array, as a cheat
+		// hold the number in a modifiable int array, as a cheat
 		final int[] rolls = new int[] { rollRandom.nextInt(5) + 5 };
 		isRolling = true;
 		final Drawable originalBackground = markerToPlayView.getBackground();
-		markerToPlayView.setBackgroundColor(getResources().getColor(
-				com.actionbarsherlock.R.color.abs__bright_foreground_disabled_holo_light));
+		markerToPlayView
+				.setBackgroundColor(getResources()
+						.getColor(
+								com.actionbarsherlock.R.color.abs__bright_foreground_disabled_holo_light));
 		final Handler handler = new Handler();
 		// display a way to say "still rolling"
 		final Runnable flip = new Runnable() {
@@ -378,21 +426,23 @@ public class GameFragment extends SherlockFragment {
 				if (rolls[0] == 0) {
 					markerToPlayView.setBackgroundDrawable(originalBackground);
 					displayMarkerToPlay();
-					// let the marker to play show for a bit before allowing the opponent's (AI or online) move
-					handler.postDelayed(new Runnable() {						
+					// let the marker to play show for a bit before allowing the
+					// opponent's (AI or online) move
+					handler.postDelayed(new Runnable() {
 						@Override
 						public void run() {
 							isRolling = false;
 							if (afterRoll != null) {
 								afterRoll.run();
 								afterRoll = null;
-							}							
+							}
 						}
 					}, OPPONENT_MARKER_VISIBILITY_PAUSE_MS);
 					return;
 				}
 
-				markerToPlayView.setImageResource(resourcesList.get(rolls[0] % numPossible));
+				markerToPlayView.setImageResource(resourcesList.get(rolls[0]
+						% numPossible));
 				handler.postDelayed(this, MARKER_ROLL_VISIBILITY_PAUSE);
 			}
 		};
@@ -420,13 +470,14 @@ public class GameFragment extends SherlockFragment {
 		try {
 			outcome = game.placeMarker(cell);
 		} catch (InvalidMoveException e) {
+			// TODO play invalid sound
 			Toast toast = Toast.makeText(getActivity(), R.string.invalid_move,
 					Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 			return false;
 		}
-
+		// TODO play sound (different for x/o or human vs online?)
 		privateMakeMove(cell, marker, outcome);
 		return true;
 	}
@@ -574,6 +625,7 @@ public class GameFragment extends SherlockFragment {
 			@Override
 			public void run() {
 				// TODO not
+				// TODO play opponent sound
 				cellButton.setBackgroundDrawable(originalBackGround);
 				makeMove(marker, move);
 			}
@@ -635,9 +687,9 @@ public class GameFragment extends SherlockFragment {
 		} else {
 			playerTurnString = oStrategy.getName();
 		}
-		playerTurnString = (playerTurnString != null && playerTurnString.trim()
-				.length() > 0) ? (playerTurnString + " (" + player.name() + ")")
-				: (getString(R.string.player_label) + " " + player.name());
+//		playerTurnString = (playerTurnString != null && playerTurnString.trim()
+//				.length() > 0) ? (playerTurnString + " (" + player.name() + ")")
+//				: (getString(R.string.player_label) + " " + player.name());
 		return playerTurnString;
 	}
 
@@ -687,21 +739,23 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void messageRecieved(Participant opponentParticipant, String string) {
-		messages.add(new ChatMessage(opponentParticipant, string));
+		messages.add(new ChatMessage(opponentParticipant, string, false));
 		if (chatDialog != null) {
 			chatDialog.newMessage();
 		} else {
-			hasNewMessage = true;
+			numNewMessages++;
 			invalidateMenu();
 		}
 	}
 
 	public void chatClosed() {
 		chatDialog = null;
+		numNewMessages = 0;
+		invalidateMenu();
 	}
 
 	public void setIsOnline(boolean isOnline) {
 		this.isOnline = isOnline;
 	}
-
+	
 }

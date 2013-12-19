@@ -2,79 +2,15 @@
 <resources>
 
     <string name="app_name">ChaoTic-Tac-Toe</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="new_game_same_device">Pass \'N Play</string>
-    <string name="player_turn_label">Player Turn:</string>
-    <string name="marker_to_play_label">Marker To Play:</string>
-
-    <string name="player_won">Player %s won!</string>
-    <string name="draw">Draw Game!</string>
-    <string name="play_again">Play again?</string>
-    
     <string name="yes">Yes</string>
     <string name="no">No</string>
-
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    
-    <string name="invalid_move_title">Invalid Move!</string>
-    <string name="invalid_move">That was an invalid move. Try again.</string>
-    
     <string name="title_game">ChaoTic-Tac-Toe</string>
-    
-    <string name="prompt_title_player_name">Enter Player Name</string>
-    <string name="prompt_player_name">Name for player %s</string>
-    <string name="label_player_x_name">Player X\'s name</string>
-    <string name="label_player_o_name">Player O\'s name</string>
-    <string name="chance_normal">Normal</string>
-    <string name="chance_chaotic">Chaotic</string>
-    <string name="chance_custom">Custom</string>
-    <string name="chance_label_my_marker">Your Marker</string>
-    <string name="chance_label_opponent_marker">Their Marker</string>
-    <string name="chance_label_remove_marker">Remove Marker</string>
-    <string name="reverse">Reverse</string>
-    
-    
-    <string-array name="chance_array">
-        <item>Normal</item>
-        <item>Reverse</item>
-        <item>Chaotic</item>
-        <item>Custom</item>
-    </string-array>
-        <string name="start">Start Game</string>
-        <string name="lbl_draws">Draws</string>
 
-
-    <string name="achievements">View Achievements</string>
-    <string name="leaderboards">View Leaderboards</string>        
-    <string name="player_label">Player</string>    
-    
-    <string name="offline_achievement_label">Achievement</string>
-    <string name="offline_achievement_only_xs_or_os">Only Xs or Os</string>
-    <string name="offline_achievement_chaotic_draw" >A Draw in Chaotic Mode</string>
-    <string name="offline_achievement_deja_vu" >Same Game state three moves in a game</string>
-    <string name="offline_achievement_long_haul" >Play a Chaotic game with 20 moves</string>
-    <string name="offline_achievement_with_a_little_help" >Win in 3 moves</string>
-    <string name="offline_achievement_clean_slate" >Return to initial state after 5 moves.</string>
-    
-    <string name="sign_in_why">Sign in with Google to share achievements and play with your friends.</string>
-    <string name="you_are_signed_in">You are signed in with Google.</string>
-    <string name="sign_out">Sign out</string>
-<!--   
-  <string name="offline_achievement_plain_jane" >CgkI06v4vNAdEAIQBQ</string>
-    <string name="offline_achievement_reversi" >CgkI06v4vNAdEAIQBg</string>
-    <string name="offline_achievement_customer" >CgkI06v4vNAdEAIQBw</string>
+    <!--
+<string name="player_label">Player</string> ==>    
     -->
-    <string name="new_game_vs_ai">New Game against AI</string>
-    <string name="new_game_live">New Game Online</string>
-
     
-        <string name="achievements_not_available">Please sign in to view achievements.</string>
-        <string name="signing_in">Signing in with Google</string>
-    <string name="signing_out">Signing out</string>
-    <string name="new_quick_game">New Quick Game</string>
-    <string name="button_send">Send</string>
-    <string name="action_chat">Chat</string>
             
-</resources>
+</resources>

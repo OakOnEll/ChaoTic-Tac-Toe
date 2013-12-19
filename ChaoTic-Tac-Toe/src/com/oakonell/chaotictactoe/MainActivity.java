@@ -132,8 +132,13 @@ public class MainActivity extends BaseGameActivity {
 	@Override
 	public void onSignInSucceeded() {
 		getMenuFragment().onSignInSucceeded();
+		
+		ChaoTicTacToe app = (ChaoTicTacToe) getApplication();
 
-		Achievements achievements = ((ChaoTicTacToe) getApplication())
+		Intent settingsIntent = getGamesClient().getSettingsIntent();
+		app.setSettingsIntent(settingsIntent);
+		
+		Achievements achievements = app
 				.getAchievements();
 		if (achievements.hasPending()) {
 			achievements.pushToGoogle(getGameHelper(), this);

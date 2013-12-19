@@ -6,13 +6,6 @@
     android:layout_gravity="center_vertical|center_horizontal"
     android:orientation="vertical" >
 
-    <!--
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical" >    -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -35,8 +28,8 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical" >
 
                 <TextView
@@ -74,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="22" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -123,16 +115,6 @@
         android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
         android:src="@android:drawable/ic_menu_delete" />
-    <!--
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </LinearLayout>    -->
 
     <RelativeLayout
         android:id="@+id/grid_container"
@@ -154,21 +136,15 @@
 
                 <ImageButton
                     android:id="@+id/button_r1c1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
 
                 <ImageButton
                     android:id="@+id/button_r1c2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
 
                 <ImageButton
                     android:id="@+id/button_r1c3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
             </LinearLayout>
 
             <LinearLayout
@@ -178,21 +154,15 @@
 
                 <ImageButton
                     android:id="@+id/button_r2c1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
 
                 <ImageButton
                     android:id="@+id/button_r2c2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
 
                 <ImageButton
                     android:id="@+id/button_r2c3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
             </LinearLayout>
 
             <LinearLayout
@@ -202,21 +172,15 @@
 
                 <ImageButton
                     android:id="@+id/button_r3c1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
 
                 <ImageButton
                     android:id="@+id/button_r3c2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
 
                 <ImageButton
                     android:id="@+id/button_r3c3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
+                    style="@style/game_button" />
             </LinearLayout>
         </LinearLayout>
 
@@ -234,23 +198,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:visibility="gone" />
-
-
     </RelativeLayout>
-
-    <!--
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-        </LinearLayout>
-        -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -264,7 +212,5 @@
             android:text="TextView"
             android:visibility="gone" />
     </LinearLayout>
-
-    <!-- </LinearLayout> -->
 
 </LinearLayout>

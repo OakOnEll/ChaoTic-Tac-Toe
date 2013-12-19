@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +48,7 @@ import com.oakonell.chaotictactoe.ui.menu.NewAIGameDialog.LocalAIGameModeListene
 import com.oakonell.chaotictactoe.ui.menu.NewLocalGameDialog.LocalGameModeListener;
 import com.oakonell.chaotictactoe.ui.menu.OnlineGameModeDialog.OnlineGameModeListener;
 import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
+import com.oakonell.utils.StringUtils;
 
 public class MenuFragment extends SherlockFragment {
 	private String TAG = MenuFragment.class.getName();
@@ -63,9 +64,8 @@ public class MenuFragment extends SherlockFragment {
 
 	private View signInView;
 	private View signOutView;
-	private Button invitesButton;
-
-	private View playRelated;
+	private ImageView invitesButton;
+	private TextView numInvitesTextView;
 
 	protected MarkerChance onlineChance;
 
@@ -86,8 +86,7 @@ public class MenuFragment extends SherlockFragment {
 				createOnlineRoom(invitees, chance, minAutoMatchPlayers,
 						maxAutoMatchPlayers);
 			} else {
-				Toast.makeText(getActivity(), "Select players canceled",
-						Toast.LENGTH_SHORT).show();
+				Log.i(TAG, "Select players canceled");
 			}
 		}
 			break;
@@ -97,8 +96,6 @@ public class MenuFragment extends SherlockFragment {
 			// if (mWaitRoomDismissedFromCode)
 			// break;
 
-			Toast.makeText(getActivity(), "Returned from waiting room",
-					Toast.LENGTH_SHORT).show();
 			// we got the result from the "waiting room" UI.
 			if (response == Activity.RESULT_OK) {
 				getMainActivity().getRoomListener().backFromWaitingRoom();
@@ -117,14 +114,11 @@ public class MenuFragment extends SherlockFragment {
 			}
 			break;
 		case RC_INVITATION_INBOX:
+			refreshInvites(false);
 			if (response != Activity.RESULT_OK) {
-				Toast.makeText(getActivity(),
-						"Returned from invitation- NOT OK", Toast.LENGTH_SHORT)
-						.show();
+				Log.i(TAG, "Returned from invitation- Canceled");
 				return;
 			}
-			Toast.makeText(getActivity(), "Returned from invitation",
-					Toast.LENGTH_SHORT).show();
 			Invitation inv = data.getExtras().getParcelable(
 					GamesClient.EXTRA_INVITATION);
 
@@ -153,12 +147,10 @@ public class MenuFragment extends SherlockFragment {
 
 		signInView = view.findViewById(R.id.sign_in_bar);
 		signOutView = view.findViewById(R.id.sign_out_bar);
-		invitesButton = (Button) view.findViewById(R.id.invites);
+		invitesButton = (ImageView) view.findViewById(R.id.invites);
+		numInvitesTextView = (TextView) view.findViewById(R.id.num_invites);
 
-		playRelated = view.findViewById(R.id.google_play_related);
-		playRelated.setEnabled(false);
-
-		Button newGameOnSameDevice = (Button) view
+		ImageView newGameOnSameDevice = (ImageView) view
 				.findViewById(R.id.new_game_same_device);
 		newGameOnSameDevice.setOnClickListener(new OnClickListener() {
 			@Override
@@ -168,7 +160,7 @@ public class MenuFragment extends SherlockFragment {
 
 		});
 
-		Button viewAchievements = (Button) view
+		ImageView viewAchievements = (ImageView) view
 				.findViewById(R.id.view_achievements);
 		viewAchievements.setOnClickListener(new OnClickListener() {
 			@Override
@@ -184,7 +176,7 @@ public class MenuFragment extends SherlockFragment {
 			}
 		});
 
-		Button viewLeaderboards = (Button) view
+		ImageView viewLeaderboards = (ImageView) view
 				.findViewById(R.id.view_leaderboards);
 		viewLeaderboards.setOnClickListener(new OnClickListener() {
 			@Override
@@ -193,7 +185,7 @@ public class MenuFragment extends SherlockFragment {
 					startActivityForResult(getMainActivity().getGamesClient()
 							.getAllLeaderboardsIntent(), RC_UNUSED);
 				} else {
-					// TODO display pending achievements
+					// TODO display pending leaderboard
 					getMainActivity().showAlert(
 							getString(R.string.achievements_not_available));
 				}
@@ -223,32 +215,50 @@ public class MenuFragment extends SherlockFragment {
 			}
 		});
 
-		Button invite = (Button) view.findViewById(R.id.new_game_live);
-		invite.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				selectOnlineGameMode();
-			}
-		});
-
-		Button quick = (Button) view.findViewById(R.id.new_quick_play);
+		ImageView quick = (ImageView) view.findViewById(R.id.new_quick_play);
 		quick.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				selectQuickMode();
+				if (getMainActivity().isSignedIn()) {
+					selectQuickMode();
+				} else {
+					getMainActivity().showAlert(
+							getResources().getString(
+									R.string.sign_in_to_play_network_game));
+				}
+			}
+		});
+
+		ImageView inviteFriend = (ImageView) view.findViewById(R.id.new_game_live);
+		inviteFriend.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (getMainActivity().isSignedIn()) {
+					selectOnlineGameMode();
+				} else {
+					getMainActivity().showAlert(
+							getResources().getString(
+									R.string.sign_in_to_play_network_game));
+				}
 			}
 		});
 
 		invitesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = getMainActivity().getGamesClient()
-						.getInvitationInboxIntent();
-				startActivityForResult(intent, RC_INVITATION_INBOX);
+				if (getMainActivity().isSignedIn()) {
+					Intent intent = getMainActivity().getGamesClient()
+							.getInvitationInboxIntent();
+					startActivityForResult(intent, RC_INVITATION_INBOX);
+				} else {
+					getMainActivity().showAlert(
+							getResources().getString(
+									R.string.sign_in_to_view_invites));
+				}
 			}
 		});
 
-		Button ai = (Button) view.findViewById(R.id.new_game_vs_ai);
+		ImageView ai = (ImageView) view.findViewById(R.id.new_game_vs_ai);
 		ai.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -305,7 +315,7 @@ public class MenuFragment extends SherlockFragment {
 				Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
 						MIN_OPPONENTS, MAX_OPPONENTS, 0);
 				RoomListener roomListener = new RoomListener(getMainActivity(),
-						getMainActivity().getGameHelper(), chance);
+						getMainActivity().getGameHelper(), chance, true);
 				getMainActivity().setRoomListener(roomListener);
 				RoomConfig.Builder rtmConfigBuilder = RoomConfig
 						.builder(roomListener);
@@ -357,7 +367,7 @@ public class MenuFragment extends SherlockFragment {
 		GameFragment gameFragment = new GameFragment();
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
-		String xName = "Me";
+		String xName = "You";
 		PlayerStrategy ai;
 		if (aiDepth < 0) {
 			ai = new RandomAI(oName, Marker.O);
@@ -397,7 +407,7 @@ public class MenuFragment extends SherlockFragment {
 		}
 
 		RoomListener roomListener = new RoomListener(getMainActivity(),
-				getMainActivity().getGameHelper(), chance);
+				getMainActivity().getGameHelper(), chance, false);
 		getMainActivity().setRoomListener(roomListener);
 		// create the room
 		Log.d(TAG, "Creating room...");
@@ -458,7 +468,6 @@ public class MenuFragment extends SherlockFragment {
 
 	public void onSignInSucceeded() {
 		showLogout();
-		playRelated.setEnabled(true);
 
 		// install invitation listener so we get notified if we receive an
 		// invitation to play
@@ -467,21 +476,22 @@ public class MenuFragment extends SherlockFragment {
 				new OnInvitationReceivedListener() {
 					@Override
 					public void onInvitationReceived(Invitation invite) {
-						refreshInvites();
+						refreshInvites(true);
 						Toast.makeText(
 								getActivity(),
-								"Got an invite from "
-										+ invite.getParticipants().get(0)
-												.getDisplayName(),
+								getResources().getString(
+										R.string.received_invite_from,
+										invite.getParticipants().get(0)
+												.getDisplayName()),
 								Toast.LENGTH_SHORT).show();
 					}
 				});
 
-		refreshInvites();
+		refreshInvites(true);
 	}
 
 	public void signOut() {
-		playRelated.setEnabled(false);
+
 	}
 
 	private void showLogout() {
@@ -497,21 +507,27 @@ public class MenuFragment extends SherlockFragment {
 				+ getMainActivity().getGamesClient().getCurrentAccountName());
 	}
 
-	private void refreshInvites() {
+	private void refreshInvites(final boolean shouldFlashNumber) {
 		getMainActivity().getGamesClient().loadInvitations(
 				new OnInvitationsLoadedListener() {
 					@Override
 					public void onInvitationsLoaded(int statusCode,
 							InvitationBuffer buffer) {
 						if (statusCode == GamesClient.STATUS_OK) {
-							// TODO update the online invites button with the
-							// count and
-							// enable it
+							// update the online invites button with the count
 							int count = buffer.getCount();
-							Toast.makeText(getActivity(),
-									"Got " + count + " invitations",
-									Toast.LENGTH_SHORT).show();
-							invitesButton.setText(count + " invitation(s)");
+							if (count == 0) {
+								invitesButton
+										.setImageResource(R.drawable.no_invites_icon_15776);
+								numInvitesTextView.setText("");
+							} else {
+								invitesButton
+										.setImageResource(R.drawable.invites_icon_15777);
+								numInvitesTextView.setText("" + count);
+								if (shouldFlashNumber) {
+									StringUtils.applyFlashEnlargeAnimation(numInvitesTextView);
+								}
+							}
 						} else if (statusCode == GamesClient.STATUS_NETWORK_ERROR_STALE_DATA) {
 
 						} else if (statusCode == GamesClient.STATUS_CLIENT_RECONNECT_REQUIRED) {
@@ -526,7 +542,7 @@ public class MenuFragment extends SherlockFragment {
 	// Accept the given invitation.
 	public void acceptInviteToRoom(String invId) {
 		RoomListener roomListener = new RoomListener(getMainActivity(),
-				getMainActivity().getGameHelper(), null);
+				getMainActivity().getGameHelper(), null, false);
 		getMainActivity().setRoomListener(roomListener);
 		// accept the invitation
 		Log.d(TAG, "Accepting invitation: " + invId);

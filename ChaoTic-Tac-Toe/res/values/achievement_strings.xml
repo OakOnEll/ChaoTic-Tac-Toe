@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="offline_achievement_label">Achievement</string>
+    <string name="offline_achievement_only_xs_or_os">Only Xs or Os</string>
+    <string name="offline_achievement_chaotic_draw">A Draw in Chaotic Mode</string>
+    <string name="offline_achievement_deja_vu">Same Game state three moves in a game</string>
+    <string name="offline_achievement_long_haul">Play a Chaotic game with 20 moves</string>
+    <string name="offline_achievement_with_a_little_help">Win in 3 moves</string>
+    <string name="offline_achievement_clean_slate">Return to initial state after 5 moves.</string>
+    
+</resources>

@@ -15,6 +15,10 @@ public class Preferences extends PrefsFragment {
 
 	@Override
 	protected PreferenceConfigurer getPreferenceConfigurer(int resource) {
+		if (resource == R.xml.prefs_account) {
+			return new AccountPrefConfigurer(getActivity(),
+					getPreferenceFinder());
+		}
 		if (resource == R.xml.prefs_develop) {
 			return new DevelopPrefConfigurer(getActivity(),
 					getPreferenceFinder());
