@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateUtils;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +23,7 @@ import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.MainActivity;
 import com.oakonell.chaotictactoe.R;
+import com.oakonell.utils.StringUtils;
 
 public class ChatDialogFragment extends SherlockDialogFragment {
 	private List<ChatMessage> messages;
@@ -37,6 +40,7 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 		private static class MessageHolder {
 			TextView message;
 			ImageView picView;
+			TextView time;
 
 			String participantId;
 		}
@@ -69,6 +73,7 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 				}
 				holder = new MessageHolder();
 				holder.message = (TextView) rowView.findViewById(R.id.message);
+				holder.time = (TextView) rowView.findViewById(R.id.timestamp);
 				holder.picView = (ImageView) rowView
 						.findViewById(R.id.player_pic);
 				rowView.setTag(holder);
@@ -78,6 +83,7 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 			}
 
 			holder.message.setText(item.getMessage());
+			holder.time.setText(item.getTimestamp(getContext()));
 			Uri imageUri = item.getParticipant().getIconImageUri();
 			if (imageUri == null) {
 				holder.picView.setImageResource(R.drawable.silhouette_icon_4520);
@@ -114,7 +120,9 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 		sendButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				sendMessage(messageView.getText().toString());
+				String string = messageView.getText().toString();
+				if (StringUtils.isEmpty(string)) return;
+				sendMessage(string);
 				adapter.notifyDataSetChanged();
 				messageView.setText("");
 			}
@@ -140,7 +148,8 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 
 	protected void sendMessage(String string) {
 		((MainActivity) getActivity()).getRoomListener().sendMessage(string);
-		messages.add(new ChatMessage(me, string, true));
+
+		messages.add(new ChatMessage(me, string, true, System.currentTimeMillis()));
 	}
 
 	public void newMessage() {

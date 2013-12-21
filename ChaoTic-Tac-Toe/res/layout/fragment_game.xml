@@ -34,10 +34,10 @@
 
                 <com.oakonell.chaotictactoe.utils.AutoResizeTextView
                     android:id="@+id/xName"
-                    android:lines="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:lines="1"
                     android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -88,10 +88,10 @@
 
                 <com.oakonell.chaotictactoe.utils.AutoResizeTextView
                     android:id="@+id/oName"
-                    android:lines="1"                    
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
+                    android:lines="1"
                     android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -111,12 +111,46 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/marker_to_play"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@android:drawable/ic_menu_delete" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3" >
+
+        <TextView
+            android:id="@+id/game_mode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/marker_to_play"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_delete" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Game:"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/game_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/grid_container"

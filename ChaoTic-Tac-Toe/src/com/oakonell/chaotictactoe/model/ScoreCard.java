@@ -46,4 +46,7 @@ public class ScoreCard {
 		}
 	}
 
+	public int getTotalGames() {
+		return xWins + oWins + draws;
+	}
 }

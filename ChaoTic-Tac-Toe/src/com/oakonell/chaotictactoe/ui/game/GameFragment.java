@@ -64,6 +64,8 @@ public class GameFragment extends SherlockFragment {
 	private TextView xWins;
 	private TextView oWins;
 	private TextView draws;
+	
+	private TextView gameNumber;
 
 	private TextView numMoves;
 
@@ -290,6 +292,9 @@ public class GameFragment extends SherlockFragment {
 		oWins = (TextView) view.findViewById(R.id.num_o_wins);
 		draws = (TextView) view.findViewById(R.id.num_draws);
 
+		gameNumber = (TextView) view.findViewById(R.id.game_number);
+		gameNumber.setText("" + score.getTotalGames());
+		
 		numMoves = (TextView) view.findViewById(R.id.num_moves);
 		if (game.getMarkerChance().isNormal()
 				|| game.getMarkerChance().isReverse()) {
@@ -298,6 +303,11 @@ public class GameFragment extends SherlockFragment {
 		}
 
 		updateHeader();
+		
+		TextView gameMode = (TextView)view.findViewById(R.id.game_mode);
+		String gameType = game.getMarkerChance().getLabel();
+		gameMode.setText(gameType);
+		
 		return view;
 	}
 
@@ -379,6 +389,7 @@ public class GameFragment extends SherlockFragment {
 		xWins.setText("" + score.getXWins());
 		oWins.setText("" + score.getOWins());
 		draws.setText("" + score.getDraws());
+		gameNumber.setText("" + score.getTotalGames());		
 	}
 
 	private Random rollRandom = new Random();
@@ -765,7 +776,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void messageRecieved(Participant opponentParticipant, String string) {
-		messages.add(new ChatMessage(opponentParticipant, string, false));
+		messages.add(new ChatMessage(opponentParticipant, string, false, System.currentTimeMillis()));
 		getMainActivity().playSound(Sounds.CHAT_RECIEVED);
 		if (chatDialog != null) {
 			chatDialog.newMessage();

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -52,7 +55,7 @@ public class RoomListener implements RoomUpdateListener,
 	private MarkerChance chance;
 
 	private boolean isQuick;
-	
+
 	GamesClient getGamesClient() {
 		return helper.getGamesClient();
 	}
@@ -121,9 +124,17 @@ public class RoomListener implements RoomUpdateListener,
 
 	@Override
 	public void onPeerLeft(Room room, List<String> peersWhoLeft) {
-		activity.showAlert(activity.getResources().getString(
-				R.string.peer_left_the_game, getOpponentName()));
-		activity.possiblyShowInterstitialAd();
+		String message = activity.getResources().getString(
+				R.string.peer_left_the_game, getOpponentName());
+		(new AlertDialog.Builder(activity)).setMessage(message)
+				.setNeutralButton(android.R.string.ok, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						activity.possiblyShowInterstitialAd();
+						dialog.dismiss();
+					}
+				}).create().show();
+
 		announce("onPeerLeft");
 		updateRoom(room);
 	}

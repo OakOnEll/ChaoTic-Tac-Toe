@@ -135,4 +135,17 @@ public class MarkerChance {
 		return new MarkerChance(mine, opponent, removal);
 	}
 
+	
+	public String getLabel() {
+		// TODO localize
+		String gameType = "Custom";
+		if (isNormal()) {
+			gameType = "Normal";
+		} else if (isReverse()) {
+			gameType = "Reverse";
+		} else if (isChaotic()) {
+			gameType = "Chaotic";
+		}
+		return gameType;
+	}
 }
