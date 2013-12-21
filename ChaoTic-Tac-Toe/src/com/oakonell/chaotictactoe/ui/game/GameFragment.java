@@ -34,6 +34,7 @@ import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.Achievements;
 import com.oakonell.chaotictactoe.ChaoTicTacToe;
+import com.oakonell.chaotictactoe.GameMode;
 import com.oakonell.chaotictactoe.Leaderboards;
 import com.oakonell.chaotictactoe.MainActivity;
 import com.oakonell.chaotictactoe.PlayerStrategy;
@@ -83,7 +84,7 @@ public class GameFragment extends SherlockFragment {
 	private ChatDialogFragment chatDialog;
 	private MenuItem chatMenuItem;
 
-	private boolean isOnline;
+	private GameMode mode;
 	private ProgressBar thinking;
 
 	@Override
@@ -215,7 +216,7 @@ public class GameFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_game, container, false);
-		view.setKeepScreenOn(isOnline);
+		view.setKeepScreenOn(mode == GameMode.ONLINE);
 
 		setHasOptionsMenu(true);
 		thinking = (ProgressBar) view.findViewById(R.id.thinking);
@@ -415,12 +416,14 @@ public class GameFragment extends SherlockFragment {
 						.getColor(
 								com.actionbarsherlock.R.color.abs__bright_foreground_disabled_holo_light));
 		final Handler handler = new Handler();
+		final MainActivity mainActivity = getMainActivity();
 		// display a way to say "still rolling"
 		final Runnable flip = new Runnable() {
 			@Override
 			public void run() {
 				rolls[0] = rolls[0] - 1;
 				if (rolls[0] == 0) {
+					diceRollStreamId = 0;
 					markerToPlayView.setBackgroundDrawable(originalBackground);
 					displayMarkerToPlay();
 					// let the marker to play show for a bit before allowing the
@@ -438,6 +441,10 @@ public class GameFragment extends SherlockFragment {
 					return;
 				}
 
+				if (diceRollStreamId >0) {
+					mainActivity.stopSound(diceRollStreamId);
+				}
+				diceRollStreamId = mainActivity.playSound(Sounds.DICE_ROLL);
 				markerToPlayView.setImageResource(resourcesList.get(rolls[0]
 						% numPossible));
 				handler.postDelayed(this, MARKER_ROLL_VISIBILITY_PAUSE);
@@ -446,6 +453,7 @@ public class GameFragment extends SherlockFragment {
 
 		flip.run();
 	}
+	private int diceRollStreamId;
 
 	private void displayMarkerToPlay() {
 		Marker toPlay = game.getMarkerToPlay();
@@ -531,14 +539,28 @@ public class GameFragment extends SherlockFragment {
 				moveIfAI();
 			}
 		};
-		if (outcome.getWinner() != null) {
-			score.incrementScore(outcome.getWinner());
+		Marker winner = outcome.getWinner();
+		if (winner != null) {
+			score.incrementScore(winner);
 			winOverlayView.setWinStyle(outcome.getWinStyle());
 			winOverlayView.invalidate();
 
+			if (mode == GameMode.PASS_N_PLAY) {
+				getMainActivity().playSound(Sounds.GAME_WON);
+			} else {
+				// the player either won or lost
+				if (xStrategy.isHuman() && winner == Marker.X) {
+					getMainActivity().playSound(Sounds.GAME_WON);
+				} else if (oStrategy.isHuman() && winner == Marker.O) {
+					getMainActivity().playSound(Sounds.GAME_WON);
+				} else {
+					getMainActivity().playSound(Sounds.GAME_LOST);
+				}
+			}
+
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(getString(R.string.player_won,
-					getPlayerName(outcome.getWinner())));
+					getPlayerName(winner)));
 			builder.setMessage(R.string.play_again);
 			builder.setCancelable(false);
 
@@ -550,6 +572,8 @@ public class GameFragment extends SherlockFragment {
 			dialog.show();
 		} else {
 			score.incrementScore(null);
+			getMainActivity().playSound(Sounds.GAME_DRAW);
+			
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(getString(R.string.draw));
 			builder.setMessage(R.string.play_again);
@@ -757,8 +781,8 @@ public class GameFragment extends SherlockFragment {
 		invalidateMenu();
 	}
 
-	public void setIsOnline(boolean isOnline) {
-		this.isOnline = isOnline;
+	public void setMode(GameMode mode) {
+		this.mode = mode;
 	}
 
 }

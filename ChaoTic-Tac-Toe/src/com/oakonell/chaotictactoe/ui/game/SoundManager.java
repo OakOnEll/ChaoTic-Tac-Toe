@@ -52,8 +52,8 @@ public class SoundManager {
         mSoundPoolMap.put(key, mSoundPool.load(mContext, soundID, 1));
     }
 
-    public void playSound(Object key) {
-        playSound(key, false);
+    public int playSound(Object key) {
+        return playSound(key, false);
     }
 
     public int playSound(Object key, boolean loop) {

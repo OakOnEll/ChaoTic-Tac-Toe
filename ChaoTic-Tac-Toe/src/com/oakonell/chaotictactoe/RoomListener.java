@@ -123,6 +123,7 @@ public class RoomListener implements RoomUpdateListener,
 	public void onPeerLeft(Room room, List<String> peersWhoLeft) {
 		activity.showAlert(activity.getResources().getString(
 				R.string.peer_left_the_game, getOpponentName()));
+		activity.possiblyShowInterstitialAd();
 		announce("onPeerLeft");
 		updateRoom(room);
 	}
@@ -223,7 +224,7 @@ public class RoomListener implements RoomUpdateListener,
 	private void startGame(boolean iAmX) {
 		// TODO if we have account permission, can get account name
 		GameFragment gameFragment = new GameFragment();
-		gameFragment.setIsOnline(true);
+		gameFragment.setMode(GameMode.ONLINE);
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		PlayerStrategy xStrategy;

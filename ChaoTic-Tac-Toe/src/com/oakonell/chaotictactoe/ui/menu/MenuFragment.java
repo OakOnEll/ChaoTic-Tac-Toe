@@ -4,16 +4,20 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +34,7 @@ import com.google.android.gms.games.multiplayer.OnInvitationReceivedListener;
 import com.google.android.gms.games.multiplayer.OnInvitationsLoadedListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
 import com.oakonell.chaotictactoe.ChaoTicTacToe;
+import com.oakonell.chaotictactoe.GameMode;
 import com.oakonell.chaotictactoe.MainActivity;
 import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
@@ -67,6 +72,7 @@ public class MenuFragment extends SherlockFragment {
 	private View signOutView;
 	private ImageView invitesButton;
 	private TextView numInvitesTextView;
+	private ProgressBar loading_num_invites;
 
 	protected MarkerChance onlineChance;
 
@@ -150,7 +156,36 @@ public class MenuFragment extends SherlockFragment {
 		signOutView = view.findViewById(R.id.sign_out_bar);
 		invitesButton = (ImageView) view.findViewById(R.id.invites);
 		numInvitesTextView = (TextView) view.findViewById(R.id.num_invites);
-
+		loading_num_invites = (ProgressBar) view.findViewById(R.id.loading_num_invites);
+		
+//		// simulate button pressing on ImageView
+//		invitesButton.setOnTouchListener(new OnTouchListener() {
+//	        @Override
+//	        public boolean onTouch(View v, MotionEvent event) {
+//
+//	            switch (event.getAction()) {
+//	                case MotionEvent.ACTION_DOWN: {
+//	                	Toast.makeText(getActivity(), "pressed", Toast.LENGTH_SHORT).show();
+//	                    ImageView view = (ImageView) v;
+//	                    //overlay is black with transparency of 0x77 (119)
+//	                    view.getDrawable().setColorFilter(0x77000000,PorterDuff.Mode.SRC_ATOP);
+//	                    view.invalidate();
+//	                    break;
+//	                }
+//	                case MotionEvent.ACTION_UP:
+//	                case MotionEvent.ACTION_CANCEL: {
+//	                    ImageView view = (ImageView) v;
+//	                    //clear the overlay
+//	                    view.getDrawable().clearColorFilter();
+//	                    view.invalidate();
+//	                    break;
+//	                }
+//	            }
+//
+//	            return true;
+//	        }
+//	    });
+		
 		ImageView newGameOnSameDevice = (ImageView) view
 				.findViewById(R.id.new_game_same_device);
 		newGameOnSameDevice.setOnClickListener(new OnClickListener() {
@@ -352,6 +387,7 @@ public class MenuFragment extends SherlockFragment {
 	private void startLocalTwoPlayerGame(MarkerChance chance, String xName,
 			String oName) {
 		GameFragment gameFragment = new GameFragment();
+		gameFragment.setMode(GameMode.PASS_N_PLAY);
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		gameFragment.startGame(new HumanStrategy(xName, Marker.X),
@@ -366,6 +402,7 @@ public class MenuFragment extends SherlockFragment {
 
 	private void startAIGame(MarkerChance chance, String oName, int aiDepth) {
 		GameFragment gameFragment = new GameFragment();
+		gameFragment.setMode(GameMode.AI);
 		Game game = new Game(3, Marker.X, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		String xName = "You";
@@ -510,11 +547,13 @@ public class MenuFragment extends SherlockFragment {
 	}
 
 	private void refreshInvites(final boolean shouldFlashNumber) {
+		loading_num_invites.setVisibility(View.VISIBLE);
 		getMainActivity().getGamesClient().loadInvitations(
 				new OnInvitationsLoadedListener() {
 					@Override
 					public void onInvitationsLoaded(int statusCode,
 							InvitationBuffer buffer) {
+						loading_num_invites.setVisibility(View.INVISIBLE);
 						if (statusCode == GamesClient.STATUS_OK) {
 							// update the online invites button with the count
 							int count = buffer.getCount();

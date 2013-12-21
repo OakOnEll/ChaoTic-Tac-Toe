@@ -1,0 +1,31 @@
+Bad move
+sounds-980-thats-a-no
+  http://oringz.com/ringtone/thats-a-no/
+X move
+sounds-882-solemn
+  http://oringz.com/ringtone/solemn/
+O-move
+sounds-913-served
+  http://oringz.com/ringtone/served/
+
+
+chat received
+sounds-954-all-eyes-on-me
+  http://oringz.com/ringtone/all-eyes-on-me/
+invite received
+sounds-1044-inquisitiveness
+  http://oringz.com/ringtone/inquisitiveness/
+
+spinning dice/wheel
+  http://soundbible.com/1681-Button-Press-4.html
+
+you won (/local player won)
+   http://soundbible.com/1964-Small-Crowd-Applause.html
+
+
+you lost
+   http://soundbible.com/1830-Sad-Trombone.html
+
+draw?
+   http://www.soundjay.com/mechanical/sounds/clong-1.mp3
+

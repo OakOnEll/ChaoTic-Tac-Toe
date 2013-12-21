@@ -122,7 +122,8 @@
         android:layout_toRightOf="@+id/new_game_live"
         android:text="@string/new_game_live" />
 
-    <ImageView
+    <ImageButton
+        style="@style/menu_button"
         android:id="@+id/invites"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -132,6 +133,14 @@
         android:layout_toRightOf="@+id/new_game_live_text"
         android:src="@drawable/no_invites_icon_15776" />
 
+    <ProgressBar
+        android:id="@+id/loading_num_invites"
+        android:visibility="invisible"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/invites"
+        android:layout_alignLeft="@+id/invites" />
+    
     <RelativeLayout
         
         android:layout_width="wrap_content"
@@ -147,7 +156,7 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
             android:textStyle="bold" 
-            android:text="2"/>
+            android:text=""/>
     </RelativeLayout>
 
     <ImageButton
@@ -178,5 +187,7 @@
         android:layout_alignBottom="@+id/view_leaderboards"
         android:layout_toRightOf="@+id/view_leaderboards"
         android:text="@string/leaderboards" />
+
+
 
 </RelativeLayout>

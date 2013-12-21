@@ -61,6 +61,10 @@ public class MainActivity extends BaseGameActivity {
 		soundManager.addSound(Sounds.INVALID_MOVE, R.raw.invalid_move_sounds_980_thats_a_no);
 		soundManager.addSound(Sounds.CHAT_RECIEVED, R.raw.chat_received_sounds_954_all_eyes_on_me);
 		soundManager.addSound(Sounds.INVITE_RECEIVED, R.raw.invite_received_sounds_1044_inquisitiveness);
+		soundManager.addSound(Sounds.DICE_ROLL, R.raw.dice_roll__button_press_4_marianne_gagnon_570460555);
+		soundManager.addSound(Sounds.GAME_LOST, R.raw.game_lost_sad_trombone_joe_lamb_665429450);
+		soundManager.addSound(Sounds.GAME_WON, R.raw.game_won_small_crowd_applause_yannick_lemieux_1268806408);
+		soundManager.addSound(Sounds.GAME_DRAW, R.raw.game_draw_clong_1);
 		
 		mAdView = (AdView) findViewById(R.id.adView);
 		// mAdView.setAdListener(new ToastAdListener(this));
@@ -253,7 +257,7 @@ public class MainActivity extends BaseGameActivity {
 		super.onDestroy();
 	}
 
-	private void possiblyShowInterstitialAd() {
+	public void possiblyShowInterstitialAd() {
 		// show an ad
 		// possibly only show with some probability (50%?)
 		if (mInterstitialAd.isLoaded()) {
@@ -268,8 +272,12 @@ public class MainActivity extends BaseGameActivity {
 		}
 	}
 	
-	public void playSound(Sounds sound) {
-		soundManager.playSound(sound);
+	public int playSound(Sounds sound) {
+		return soundManager.playSound(sound);
+	}
+
+	public void stopSound(int streamId) {
+		soundManager.stopSound(streamId);		
 	}
 
 }

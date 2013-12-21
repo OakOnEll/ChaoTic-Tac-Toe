@@ -1151,7 +1151,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080049;
-        public static final int about_description=0x7f080086;
+        public static final int about_description=0x7f080087;
         public static final int abs__action_bar=0x7f080024;
         public static final int abs__action_bar_container=0x7f080023;
         public static final int abs__action_bar_subtitle=0x7f080015;
@@ -1191,16 +1191,16 @@ containing a value of this type.
         public static final int abs__textButton=0x7f080017;
         public static final int abs__title=0x7f08001f;
         public static final int abs__up=0x7f08000f;
-        public static final int account_settings=0x7f08008e;
-        public static final int action_chat=0x7f080091;
-        public static final int action_settings=0x7f080092;
+        public static final int account_settings=0x7f08008f;
+        public static final int action_chat=0x7f080092;
+        public static final int action_settings=0x7f080093;
         public static final int actionbar_notifcation_imageview=0x7f08003b;
         public static final int actionbar_notifcation_textview=0x7f08003c;
         public static final int adView=0x7f080036;
-        public static final int ad_frame=0x7f080088;
+        public static final int ad_frame=0x7f080089;
         public static final int ai_level=0x7f080042;
-        public static final int app_info=0x7f080090;
-        public static final int app_name_id=0x7f080083;
+        public static final int app_info=0x7f080091;
+        public static final int app_name_id=0x7f080084;
         public static final int button_r1c1=0x7f080056;
         public static final int button_r1c2=0x7f080057;
         public static final int button_r1c3=0x7f080058;
@@ -1222,22 +1222,23 @@ containing a value of this type.
         public static final int choice_chance=0x7f080062;
         public static final int close=0x7f08003a;
         public static final int custom_layout=0x7f080063;
-        public static final int decrement=0x7f08008b;
-        public static final int development_preferences=0x7f08008f;
+        public static final int decrement=0x7f08008c;
+        public static final int development_preferences=0x7f080090;
         public static final int disableHome=0x7f08000d;
         public static final int edit_query=0x7f08002a;
         public static final int fragmentContainer=0x7f080043;
         public static final int grid_container=0x7f080055;
         public static final int homeAsUp=0x7f08000a;
         public static final int hybrid=0x7f080004;
-        public static final int icon=0x7f08008c;
-        public static final int icon_image=0x7f080082;
-        public static final int increment=0x7f08008a;
+        public static final int icon=0x7f08008d;
+        public static final int icon_image=0x7f080083;
+        public static final int increment=0x7f08008b;
         public static final int invites=0x7f08007b;
-        public static final int label=0x7f08008d;
+        public static final int label=0x7f08008e;
         public static final int linearLayout1=0x7f08003e;
         public static final int listMode=0x7f080006;
-        public static final int main_frame=0x7f080087;
+        public static final int loading_num_invites=0x7f08007c;
+        public static final int main_frame=0x7f080088;
         public static final int marker_to_play=0x7f080054;
         public static final int message=0x7f080038;
         public static final int messages=0x7f080037;
@@ -1253,7 +1254,7 @@ containing a value of this type.
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
         public static final int num_draws=0x7f080061;
-        public static final int num_invites=0x7f08007c;
+        public static final int num_invites=0x7f08007d;
         public static final int num_moves=0x7f08004f;
         public static final int num_moves_lbl=0x7f08004e;
         public static final int num_o_wins=0x7f080052;
@@ -1263,7 +1264,7 @@ containing a value of this type.
         public static final int o_name_layout=0x7f080050;
         public static final int play_icon=0x7f080076;
         public static final int player_o_name=0x7f080048;
-        public static final int player_pic=0x7f080081;
+        public static final int player_pic=0x7f080082;
         public static final int player_x_name=0x7f080045;
         public static final int remember_checkbox=0x7f080041;
         public static final int satellite=0x7f080002;
@@ -1280,17 +1281,17 @@ containing a value of this type.
         public static final int switch_players=0x7f080047;
         public static final int tabMode=0x7f080007;
         public static final int terrain=0x7f080003;
-        public static final int text=0x7f080089;
+        public static final int text=0x7f08008a;
         public static final int textView1=0x7f08003d;
         public static final int textView2=0x7f080046;
         public static final int thinking=0x7f080060;
-        public static final int urlId=0x7f080085;
+        public static final int urlId=0x7f080086;
         public static final int useLogo=0x7f080008;
-        public static final int version=0x7f080084;
-        public static final int view_achievements=0x7f08007d;
-        public static final int view_achievements_text=0x7f08007e;
-        public static final int view_leaderboards=0x7f08007f;
-        public static final int view_leaderboards_text=0x7f080080;
+        public static final int version=0x7f080085;
+        public static final int view_achievements=0x7f08007e;
+        public static final int view_achievements_text=0x7f08007f;
+        public static final int view_leaderboards=0x7f080080;
+        public static final int view_leaderboards_text=0x7f080081;
         public static final int win_overlay=0x7f08005f;
         public static final int wrap_content=0x7f080005;
         public static final int xName=0x7f08004c;
@@ -1350,10 +1351,14 @@ containing a value of this type.
     }
     public static final class raw {
         public static final int chat_received_sounds_954_all_eyes_on_me=0x7f060000;
-        public static final int invalid_move_sounds_980_thats_a_no=0x7f060001;
-        public static final int invite_received_sounds_1044_inquisitiveness=0x7f060002;
-        public static final int play_o_sounds_913_served=0x7f060003;
-        public static final int play_x_sounds_882_solemn=0x7f060004;
+        public static final int dice_roll__button_press_4_marianne_gagnon_570460555=0x7f060001;
+        public static final int game_draw_clong_1=0x7f060002;
+        public static final int game_lost_sad_trombone_joe_lamb_665429450=0x7f060003;
+        public static final int game_won_small_crowd_applause_yannick_lemieux_1268806408=0x7f060004;
+        public static final int invalid_move_sounds_980_thats_a_no=0x7f060005;
+        public static final int invite_received_sounds_1044_inquisitiveness=0x7f060006;
+        public static final int play_o_sounds_913_served=0x7f060007;
+        public static final int play_x_sounds_882_solemn=0x7f060008;
     }
     public static final class string {
         public static final int about_title=0x7f090041;
