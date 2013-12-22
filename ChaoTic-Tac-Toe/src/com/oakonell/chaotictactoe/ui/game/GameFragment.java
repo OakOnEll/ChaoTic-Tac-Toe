@@ -465,6 +465,7 @@ public class GameFragment extends SherlockFragment {
 		flip.run();
 	}
 	private int diceRollStreamId;
+	private PlayAgainFragment playAgainDialog;
 
 	private void displayMarkerToPlay() {
 		Marker toPlay = game.getMarkerToPlay();
@@ -526,30 +527,6 @@ public class GameFragment extends SherlockFragment {
 		numMoves.setText("" + game.getNumberOfMoves());
 		evaluateGameEndAchievements(outcome);
 		evaluateLeaderboards(outcome);
-		OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO leave room,notify opponent of leaving
-				dialog.dismiss();
-				getMainActivity().getSupportFragmentManager().popBackStack();
-				getMainActivity().gameEnded();
-			}
-		};
-		OnClickListener playAgainListener = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO notify opponent playing again
-				game = new Game(3, currentStrategy.getMarker(),
-						game.getMarkerChance());
-				updateHeader();
-				winOverlayView.setWinStyle(null);
-				winOverlayView.invalidate();
-				for (ImageButton each : buttons) {
-					each.setImageDrawable(null);
-				}
-				moveIfAI();
-			}
-		};
 		Marker winner = outcome.getWinner();
 		if (winner != null) {
 			score.incrementScore(winner);
@@ -569,34 +546,58 @@ public class GameFragment extends SherlockFragment {
 				}
 			}
 
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle(getString(R.string.player_won,
-					getPlayerName(winner)));
-			builder.setMessage(R.string.play_again);
-			builder.setCancelable(false);
-
-			builder.setNegativeButton(R.string.no, cancelListener);
-			builder.setPositiveButton(R.string.yes, playAgainListener);
-
-			AlertDialog dialog = builder.create();
-
-			dialog.show();
+			String title = getString(R.string.player_won,
+					getPlayerName(winner));
+			
+			promptToPlayAgain(title);
 		} else {
 			score.incrementScore(null);
 			getMainActivity().playSound(Sounds.GAME_DRAW);
+			String title =getString(R.string.draw);
 			
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle(getString(R.string.draw));
-			builder.setMessage(R.string.play_again);
-			builder.setCancelable(false);
-
-			builder.setNegativeButton(R.string.no, cancelListener);
-			builder.setPositiveButton(R.string.yes, playAgainListener);
-
-			AlertDialog dialog = builder.create();
-
-			dialog.show();
+			promptToPlayAgain(title);
 		}
+	}
+
+	private void promptToPlayAgain(String title) {
+		
+		if (mode == GameMode.ONLINE) {		
+			playAgainDialog = new PlayAgainFragment();
+			playAgainDialog.initialize(this,getMainActivity().getRoomListener().getOpponentName(), title);					
+			playAgainDialog.show(getChildFragmentManager(), "chat");
+			// TODO wire up the play again / not play again message handling via the dialog			
+			return;
+		}
+		
+		OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				leaveGame();
+			}
+
+		};
+		OnClickListener playAgainListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				playAgain();
+			}
+
+		
+		};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(title);
+		builder.setMessage(R.string.play_again);
+		builder.setCancelable(false);
+
+		builder.setNegativeButton(R.string.no, cancelListener);
+		builder.setPositiveButton(R.string.yes, playAgainListener);
+
+		AlertDialog dialog = builder.create();
+
+		dialog.show();
 	}
 
 	private void moveIfAI() {
@@ -795,5 +796,74 @@ public class GameFragment extends SherlockFragment {
 	public void setMode(GameMode mode) {
 		this.mode = mode;
 	}
+	public void leaveGame() {
+		if (playAgainDialog != null) {
+			// let the play again dialog handle it
+			return;
+		}
+		getMainActivity().getSupportFragmentManager().popBackStack();
+		getMainActivity().gameEnded();
+	}
 
+	public void playAgain() {
+		game = new Game(3, currentStrategy.getMarker(),
+				game.getMarkerChance());
+		updateHeader();
+		winOverlayView.setWinStyle(null);
+		winOverlayView.invalidate();
+		for (ImageButton each : buttons) {
+			each.setImageDrawable(null);
+		}
+		moveIfAI();
+	}
+
+	public void opponentWillPlayAgain() {
+		if (playAgainDialog == null) 		 {
+			// TODO is this possible? I suppose if one player just is quitting..
+			return;
+		}
+		playAgainDialog.opponentWillPlayAgain();
+	}
+
+	public void opponentWillNotPlayAgain() {
+		if (playAgainDialog == null) 		 {
+			// TODO is this possible? I suppose if one player just is quitting..
+			return;
+		}
+		playAgainDialog.opponentWillNotPlayAgain();		
+	}
+	
+	public void playAgainClosed() {
+		playAgainDialog = null;
+		getMainActivity().getRoomListener().restartGame();
+	}
+
+	public void opponentLeft() {
+		if (playAgainDialog!= null) {
+			// the user is in the play again dialog, let him read the info 
+			return;
+		
+		}
+		String message = getMainActivity().getResources().getString(
+				R.string.peer_left_the_game, getMainActivity().getRoomListener().getOpponentName());
+		(new AlertDialog.Builder(getMainActivity())).setMessage(message)
+				.setNeutralButton(android.R.string.ok, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						getMainActivity().possiblyShowInterstitialAd();
+						dialog.dismiss();
+					}
+				}).create().show();
+
+		
+	}
+
+	public void onDisconnectedFromRoom() {
+		if (playAgainDialog!= null) {
+			// the user is in the play again dialog, let him read the info 
+			return;
+		
+		}
+		getMainActivity().getSupportFragmentManager().popBackStack();
+	}
 }

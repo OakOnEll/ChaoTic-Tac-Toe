@@ -58,14 +58,20 @@ public class MainActivity extends BaseGameActivity {
 		soundManager = new SoundManager(this);
 		soundManager.addSound(Sounds.PLAY_X, R.raw.play_x_sounds_882_solemn);
 		soundManager.addSound(Sounds.PLAY_O, R.raw.play_o_sounds_913_served);
-		soundManager.addSound(Sounds.INVALID_MOVE, R.raw.invalid_move_sounds_980_thats_a_no);
-		soundManager.addSound(Sounds.CHAT_RECIEVED, R.raw.chat_received_sounds_954_all_eyes_on_me);
-		soundManager.addSound(Sounds.INVITE_RECEIVED, R.raw.invite_received_sounds_1044_inquisitiveness);
-		soundManager.addSound(Sounds.DICE_ROLL, R.raw.dice_roll__button_press_4_marianne_gagnon_570460555);
-		soundManager.addSound(Sounds.GAME_LOST, R.raw.game_lost_sad_trombone_joe_lamb_665429450);
-		soundManager.addSound(Sounds.GAME_WON, R.raw.game_won_small_crowd_applause_yannick_lemieux_1268806408);
+		soundManager.addSound(Sounds.INVALID_MOVE,
+				R.raw.invalid_move_sounds_980_thats_a_no);
+		soundManager.addSound(Sounds.CHAT_RECIEVED,
+				R.raw.chat_received_sounds_954_all_eyes_on_me);
+		soundManager.addSound(Sounds.INVITE_RECEIVED,
+				R.raw.invite_received_sounds_1044_inquisitiveness);
+		soundManager.addSound(Sounds.DICE_ROLL,
+				R.raw.dice_roll__button_press_4_marianne_gagnon_570460555);
+		soundManager.addSound(Sounds.GAME_LOST,
+				R.raw.game_lost_sad_trombone_joe_lamb_665429450);
+		soundManager.addSound(Sounds.GAME_WON,
+				R.raw.game_won_small_crowd_applause_yannick_lemieux_1268806408);
 		soundManager.addSound(Sounds.GAME_DRAW, R.raw.game_draw_clong_1);
-		
+
 		mAdView = (AdView) findViewById(R.id.adView);
 		// mAdView.setAdListener(new ToastAdListener(this));
 		mAdView.loadAd(new AdRequest.Builder().build());
@@ -144,14 +150,13 @@ public class MainActivity extends BaseGameActivity {
 	@Override
 	public void onSignInSucceeded() {
 		getMenuFragment().onSignInSucceeded();
-		
+
 		ChaoTicTacToe app = (ChaoTicTacToe) getApplication();
 
 		Intent settingsIntent = getGamesClient().getSettingsIntent();
 		app.setSettingsIntent(settingsIntent);
-		
-		Achievements achievements = app
-				.getAchievements();
+
+		Achievements achievements = app.getAchievements();
 		if (achievements.hasPending()) {
 			achievements.pushToGoogle(getGameHelper(), this);
 		}
@@ -253,7 +258,7 @@ public class MainActivity extends BaseGameActivity {
 	@Override
 	protected void onDestroy() {
 		mAdView.destroy();
-        soundManager.release();
+		soundManager.release();
 		super.onDestroy();
 	}
 
@@ -271,13 +276,34 @@ public class MainActivity extends BaseGameActivity {
 			});
 		}
 	}
-	
+
 	public int playSound(Sounds sound) {
 		return soundManager.playSound(sound);
 	}
 
 	public void stopSound(int streamId) {
-		soundManager.stopSound(streamId);		
+		soundManager.stopSound(streamId);
+	}
+
+	public void opponentWillPlayAgain() {
+		getGameFragment().opponentWillPlayAgain();
+	}
+
+	public void opponentWillNotPlayAgain() {
+		getGameFragment().opponentWillNotPlayAgain();
+	}
+
+	public void opponentLeft() {
+		if (getGameFragment() != null) {
+			getGameFragment().opponentLeft();
+		}
+		//gameEnded();
+	}
+
+	public void onDisconnectedFromRoom() {
+		if (getGameFragment() != null) {
+			getGameFragment().onDisconnectedFromRoom();
+		}		
 	}
 
 }

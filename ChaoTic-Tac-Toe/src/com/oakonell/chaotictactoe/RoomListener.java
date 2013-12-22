@@ -49,12 +49,14 @@ public class RoomListener implements RoomUpdateListener,
 	private static final byte MSG_MOVE = 2;
 	private static final byte MSG_MESSAGE = 3;
 	private static final byte MSG_SEND_CHANCE = 4;
+	private static final byte MSG_PLAY_AGAIN = 5;
 
 	private volatile Long myRandom;
 	private volatile Long theirRandom;
 	private MarkerChance chance;
 
 	private boolean isQuick;
+	private boolean isConnected;
 
 	GamesClient getGamesClient() {
 		return helper.getGamesClient();
@@ -73,6 +75,7 @@ public class RoomListener implements RoomUpdateListener,
 	// is connected yet).
 	@Override
 	public void onConnectedToRoom(Room room) {
+		isConnected = true;
 		announce("onConnectedToRoom");
 
 		// get room ID, participants and my ID:
@@ -92,9 +95,8 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onDisconnectedFromRoom(Room arg0) {
 		announce("onDisconnectedFromRoom");
-
-		// TODO pop if the current is game
-		activity.getSupportFragmentManager().popBackStack();
+		isConnected = false;
+		activity.onDisconnectedFromRoom();
 	}
 
 	// We treat most of the room update callbacks in the same way: we update our
@@ -124,16 +126,7 @@ public class RoomListener implements RoomUpdateListener,
 
 	@Override
 	public void onPeerLeft(Room room, List<String> peersWhoLeft) {
-		String message = activity.getResources().getString(
-				R.string.peer_left_the_game, getOpponentName());
-		(new AlertDialog.Builder(activity)).setMessage(message)
-				.setNeutralButton(android.R.string.ok, new OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						activity.possiblyShowInterstitialAd();
-						dialog.dismiss();
-					}
-				}).create().show();
+		activity.opponentLeft();
 
 		announce("onPeerLeft");
 		updateRoom(room);
@@ -226,6 +219,10 @@ public class RoomListener implements RoomUpdateListener,
 				chance = sentChance;
 				announce("Received chance");
 			}
+		} else if (type == MSG_PLAY_AGAIN) {
+			boolean playAgain = buffer.getInt() !=0;
+
+			receivePlayAgain(playAgain);
 		} else {
 			throw new RuntimeException("unexpected message type! " + type);
 		}
@@ -476,6 +473,63 @@ public class RoomListener implements RoomUpdateListener,
 				}, buffer.array(), getRoomId(), getOpponentId());
 	}
 
+	
+	public void restartGame() {
+		opponentSendPlayAgain = PlayAgainState.WAITING;
+	}
+	PlayAgainState opponentSendPlayAgain = PlayAgainState.WAITING;
+	private void receivePlayAgain(boolean playAgain) {
+		opponentSendPlayAgain = playAgain ? PlayAgainState.PLAY_AGAIN : PlayAgainState.NOT_PLAY_AGAIN;
+		if (playAgain) {
+			activity.opponentWillPlayAgain();
+		} else {
+			activity.opponentWillNotPlayAgain();
+		}
+	}
+
+	public enum PlayAgainState {
+		WAITING, PLAY_AGAIN, NOT_PLAY_AGAIN;
+	}
+	public PlayAgainState getOpponentPlayAgainState() {
+		return opponentSendPlayAgain;
+	}
+	public void sendPlayAgain(final Runnable success, final Runnable error) {
+		sendPlayAgain(true, success, error);
+	}
+
+	public void sendNotPlayAgain(final Runnable success, final Runnable error) {
+		sendPlayAgain(false, success, error);
+	}
+
+	private void sendPlayAgain(boolean playAgain, final Runnable success,
+			final Runnable error) {
+		if (!isConnected && !playAgain) {
+			success.run();
+			return;
+		}
+		ByteBuffer buffer = ByteBuffer
+				.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
+		buffer.put(MSG_PLAY_AGAIN);
+		buffer.putInt(playAgain ? 1 : 0);
+
+		getGamesClient().sendReliableRealTimeMessage(
+				new RealTimeReliableMessageSentListener() {
+					@Override
+					public void onRealTimeMessageSent(int statusCode,
+							int token, String recipientParticipantId) {
+						if (statusCode == GamesClient.STATUS_OK) {
+							if (success != null) {
+								success.run();
+							}
+						} else {
+							if (error != null) {
+								error.run();
+							}
+						}
+					}
+				}, buffer.array(), getRoomId(), getOpponentId());
+	}
+
 	public void sendMessage(String string) {
 		ByteBuffer buffer = ByteBuffer
 				.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
@@ -515,5 +569,7 @@ public class RoomListener implements RoomUpdateListener,
 		}
 		return mParticipants.get(1);
 	}
+
+
 
 }
