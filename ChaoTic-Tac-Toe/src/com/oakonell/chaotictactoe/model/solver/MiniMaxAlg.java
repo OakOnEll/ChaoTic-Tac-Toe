@@ -113,7 +113,7 @@ public class MiniMaxAlg {
 		}
 		if (chance.getOpponentMarker() != 0) {
 			addMoves(result, board, player.opponent(),
-					chance.getMyMarkerPercentage());
+					chance.getOpponentMarkerPercentage());
 		}
 		if (chance.getRemoveMarker() != 0) {
 			addMoves(result, board, Marker.EMPTY,
