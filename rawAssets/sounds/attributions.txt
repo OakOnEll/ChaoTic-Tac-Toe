@@ -18,6 +18,8 @@ sounds-1044-inquisitiveness
 
 spinning dice/wheel
   http://soundbible.com/1681-Button-Press-4.html
+  http://www.sounddogs.com/previews/2106/mp3/275807_SOUNDDOGS__ca.mp3
+   http://www.sounddogs.com/sound-effects/2515/mp3/691798_SOUNDDOGS__te.mp3
 
 you won (/local player won)
    http://soundbible.com/1964-Small-Crowd-Applause.html

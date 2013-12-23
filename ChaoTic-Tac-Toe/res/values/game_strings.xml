@@ -13,6 +13,8 @@
     <string name="waiting_for_opponent_to_decide_to_play_again">Waiting for %s to decide whether to play again.</string>
     <string name="opponent_wants_to_play_again">%s wants to play again.</string>
     <string name="opponent_does_not_want_to_play_again">%s does not want to play again.</string>
+    <string name="opponent_is_thinking">%s is thinking.</string>
+    <string name="opponent_is_in_chat">%s is in chat.</string>
     
     <string name="peer_left_the_game">%s has left the game!</string>
     

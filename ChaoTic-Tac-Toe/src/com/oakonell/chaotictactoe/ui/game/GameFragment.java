@@ -21,7 +21,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +63,7 @@ public class GameFragment extends SherlockFragment {
 	private TextView xWins;
 	private TextView oWins;
 	private TextView draws;
-	
+
 	private TextView gameNumber;
 
 	private TextView numMoves;
@@ -87,7 +86,8 @@ public class GameFragment extends SherlockFragment {
 	private MenuItem chatMenuItem;
 
 	private GameMode mode;
-	private ProgressBar thinking;
+	private View thinking;
+	private TextView thinkingText;
 
 	@Override
 	public void onResume() {
@@ -180,6 +180,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void openChatDialog() {
+		getMainActivity().getRoomListener().sendInChat(true);
 		chatDialog = new ChatDialogFragment();
 		// TODO get the opponent name in nice fashion- ie, 'Anonymous'
 		// instead of google+'s anonymized string
@@ -221,7 +222,23 @@ public class GameFragment extends SherlockFragment {
 		view.setKeepScreenOn(mode == GameMode.ONLINE);
 
 		setHasOptionsMenu(true);
-		thinking = (ProgressBar) view.findViewById(R.id.thinking);
+		thinkingText = (TextView) view.findViewById(R.id.thinking_text);
+		if (mode == GameMode.ONLINE) {
+			thinkingText.setText(getResources().getString(
+					R.string.opponent_is_thinking,
+					getMainActivity().getRoomListener().getOpponentName()));
+		} else if (mode == GameMode.AI) {
+			String name;
+			if (xStrategy.isAI()) {
+				name = xStrategy.getName();
+			} else {
+				name = oStrategy.getName();
+			}
+			thinkingText.setText(getResources().getString(
+					R.string.opponent_is_thinking, name));
+		}
+		thinking = view.findViewById(R.id.thinking);
+		thinking.setVisibility(View.GONE);
 		if (currentStrategy != null && !currentStrategy.isHuman()) {
 			if (thinking != null) {
 				// show a thinking/progress icon, suitable for network play and
@@ -294,7 +311,7 @@ public class GameFragment extends SherlockFragment {
 
 		gameNumber = (TextView) view.findViewById(R.id.game_number);
 		gameNumber.setText("" + score.getTotalGames());
-		
+
 		numMoves = (TextView) view.findViewById(R.id.num_moves);
 		if (game.getMarkerChance().isNormal()
 				|| game.getMarkerChance().isReverse()) {
@@ -303,11 +320,11 @@ public class GameFragment extends SherlockFragment {
 		}
 
 		updateHeader();
-		
-		TextView gameMode = (TextView)view.findViewById(R.id.game_mode);
+
+		TextView gameMode = (TextView) view.findViewById(R.id.game_mode);
 		String gameType = game.getMarkerChance().getLabel();
 		gameMode.setText(gameType);
-		
+
 		return view;
 	}
 
@@ -389,7 +406,7 @@ public class GameFragment extends SherlockFragment {
 		xWins.setText("" + score.getXWins());
 		oWins.setText("" + score.getOWins());
 		draws.setText("" + score.getDraws());
-		gameNumber.setText("" + score.getTotalGames());		
+		gameNumber.setText("" + score.getTotalGames());
 	}
 
 	private Random rollRandom = new Random();
@@ -429,12 +446,12 @@ public class GameFragment extends SherlockFragment {
 		final Handler handler = new Handler();
 		final MainActivity mainActivity = getMainActivity();
 		// display a way to say "still rolling"
+		diceRollStreamId = mainActivity.playSound(Sounds.DICE_ROLL, true);
 		final Runnable flip = new Runnable() {
 			@Override
 			public void run() {
 				rolls[0] = rolls[0] - 1;
 				if (rolls[0] == 0) {
-					diceRollStreamId = 0;
 					markerToPlayView.setBackgroundDrawable(originalBackground);
 					displayMarkerToPlay();
 					// let the marker to play show for a bit before allowing the
@@ -443,6 +460,10 @@ public class GameFragment extends SherlockFragment {
 						@Override
 						public void run() {
 							isRolling = false;
+							if (diceRollStreamId > 0) {
+								mainActivity.stopSound(diceRollStreamId);
+								diceRollStreamId = 0;
+							}
 							if (afterRoll != null) {
 								afterRoll.run();
 								afterRoll = null;
@@ -452,10 +473,6 @@ public class GameFragment extends SherlockFragment {
 					return;
 				}
 
-				if (diceRollStreamId >0) {
-					mainActivity.stopSound(diceRollStreamId);
-				}
-				diceRollStreamId = mainActivity.playSound(Sounds.DICE_ROLL);
 				markerToPlayView.setImageResource(resourcesList.get(rolls[0]
 						% numPossible));
 				handler.postDelayed(this, MARKER_ROLL_VISIBILITY_PAUSE);
@@ -464,6 +481,7 @@ public class GameFragment extends SherlockFragment {
 
 		flip.run();
 	}
+
 	private int diceRollStreamId;
 	private PlayAgainFragment playAgainDialog;
 
@@ -546,29 +564,30 @@ public class GameFragment extends SherlockFragment {
 				}
 			}
 
-			String title = getString(R.string.player_won,
-					getPlayerName(winner));
-			
+			String title = getString(R.string.player_won, getPlayerName(winner));
+
 			promptToPlayAgain(title);
 		} else {
 			score.incrementScore(null);
 			getMainActivity().playSound(Sounds.GAME_DRAW);
-			String title =getString(R.string.draw);
-			
+			String title = getString(R.string.draw);
+
 			promptToPlayAgain(title);
 		}
 	}
 
 	private void promptToPlayAgain(String title) {
-		
-		if (mode == GameMode.ONLINE) {		
+
+		if (mode == GameMode.ONLINE) {
 			playAgainDialog = new PlayAgainFragment();
-			playAgainDialog.initialize(this,getMainActivity().getRoomListener().getOpponentName(), title);					
+			playAgainDialog.initialize(this, getMainActivity()
+					.getRoomListener().getOpponentName(), title);
 			playAgainDialog.show(getChildFragmentManager(), "chat");
-			// TODO wire up the play again / not play again message handling via the dialog			
+			// TODO wire up the play again / not play again message handling via
+			// the dialog
 			return;
 		}
-		
+
 		OnClickListener cancelListener = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -584,7 +603,6 @@ public class GameFragment extends SherlockFragment {
 				playAgain();
 			}
 
-		
 		};
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -777,7 +795,8 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void messageRecieved(Participant opponentParticipant, String string) {
-		messages.add(new ChatMessage(opponentParticipant, string, false, System.currentTimeMillis()));
+		messages.add(new ChatMessage(opponentParticipant, string, false, System
+				.currentTimeMillis()));
 		getMainActivity().playSound(Sounds.CHAT_RECIEVED);
 		if (chatDialog != null) {
 			chatDialog.newMessage();
@@ -788,6 +807,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void chatClosed() {
+		getMainActivity().getRoomListener().sendInChat(false);
 		chatDialog = null;
 		numNewMessages = 0;
 		invalidateMenu();
@@ -796,6 +816,7 @@ public class GameFragment extends SherlockFragment {
 	public void setMode(GameMode mode) {
 		this.mode = mode;
 	}
+
 	public void leaveGame() {
 		if (playAgainDialog != null) {
 			// let the play again dialog handle it
@@ -806,8 +827,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void playAgain() {
-		game = new Game(3, currentStrategy.getMarker(),
-				game.getMarkerChance());
+		game = new Game(3, currentStrategy.getMarker(), game.getMarkerChance());
 		updateHeader();
 		winOverlayView.setWinStyle(null);
 		winOverlayView.invalidate();
@@ -818,7 +838,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void opponentWillPlayAgain() {
-		if (playAgainDialog == null) 		 {
+		if (playAgainDialog == null) {
 			// TODO is this possible? I suppose if one player just is quitting..
 			return;
 		}
@@ -826,44 +846,59 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void opponentWillNotPlayAgain() {
-		if (playAgainDialog == null) 		 {
+		if (playAgainDialog == null) {
 			// TODO is this possible? I suppose if one player just is quitting..
 			return;
 		}
-		playAgainDialog.opponentWillNotPlayAgain();		
+		playAgainDialog.opponentWillNotPlayAgain();
 	}
-	
+
 	public void playAgainClosed() {
 		playAgainDialog = null;
 		getMainActivity().getRoomListener().restartGame();
 	}
 
 	public void opponentLeft() {
-		if (playAgainDialog!= null) {
-			// the user is in the play again dialog, let him read the info 
+		if (playAgainDialog != null) {
+			// the user is in the play again dialog, let him read the info
 			return;
-		
+
 		}
-		String message = getMainActivity().getResources().getString(
-				R.string.peer_left_the_game, getMainActivity().getRoomListener().getOpponentName());
+		final MainActivity activity = getMainActivity();
+		String message = activity.getResources().getString(
+				R.string.peer_left_the_game,
+				getMainActivity().getRoomListener().getOpponentName());
 		(new AlertDialog.Builder(getMainActivity())).setMessage(message)
 				.setNeutralButton(android.R.string.ok, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						getMainActivity().possiblyShowInterstitialAd();
+						activity.possiblyShowInterstitialAd();
 						dialog.dismiss();
 					}
 				}).create().show();
 
-		
 	}
 
 	public void onDisconnectedFromRoom() {
-		if (playAgainDialog!= null) {
-			// the user is in the play again dialog, let him read the info 
+		if (playAgainDialog != null) {
+			// the user is in the play again dialog, let him read the info
 			return;
-		
+
 		}
 		getMainActivity().getSupportFragmentManager().popBackStack();
+	}
+
+	public void opponentInChat() {
+		// TODO show "animated" menu icon
+		thinkingText.setText(getResources().getString(
+				R.string.opponent_is_in_chat,
+				getMainActivity().getRoomListener().getOpponentName()));
+	}
+
+	public void opponentClosedChat() {
+		// TODO stop animated menu icon
+		thinkingText.setText(getResources().getString(
+				R.string.opponent_is_thinking,
+				getMainActivity().getRoomListener().getOpponentName()));
 	}
 }

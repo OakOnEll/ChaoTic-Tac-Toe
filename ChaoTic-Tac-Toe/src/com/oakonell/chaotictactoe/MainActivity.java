@@ -65,7 +65,7 @@ public class MainActivity extends BaseGameActivity {
 		soundManager.addSound(Sounds.INVITE_RECEIVED,
 				R.raw.invite_received_sounds_1044_inquisitiveness);
 		soundManager.addSound(Sounds.DICE_ROLL,
-				R.raw.dice_roll__button_press_4_marianne_gagnon_570460555);
+				R.raw.wheel_roll_single_275807_sounddogs__ca);
 		soundManager.addSound(Sounds.GAME_LOST,
 				R.raw.game_lost_sad_trombone_joe_lamb_665429450);
 		soundManager.addSound(Sounds.GAME_WON,
@@ -280,6 +280,9 @@ public class MainActivity extends BaseGameActivity {
 	public int playSound(Sounds sound) {
 		return soundManager.playSound(sound);
 	}
+	public int playSound(Sounds sound, boolean loop) {
+		return soundManager.playSound(sound, loop);
+	}
 
 	public void stopSound(int streamId) {
 		soundManager.stopSound(streamId);
@@ -304,6 +307,14 @@ public class MainActivity extends BaseGameActivity {
 		if (getGameFragment() != null) {
 			getGameFragment().onDisconnectedFromRoom();
 		}		
+	}
+
+	public void opponentInChat() {
+		getGameFragment().opponentInChat();
+	}
+
+	public void opponentClosedChat() {
+		getGameFragment().opponentClosedChat();		
 	}
 
 }

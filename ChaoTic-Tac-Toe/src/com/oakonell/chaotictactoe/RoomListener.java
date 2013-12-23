@@ -38,6 +38,8 @@ public class RoomListener implements RoomUpdateListener,
 	private static final Random random = new Random();
 	private static final String TAG = RoomListener.class.getName();
 
+	private static final int PROTOCOL_VERSION = 1;
+	
 	private MainActivity activity;
 	private GameHelper helper;
 
@@ -50,7 +52,13 @@ public class RoomListener implements RoomUpdateListener,
 	private static final byte MSG_MESSAGE = 3;
 	private static final byte MSG_SEND_CHANCE = 4;
 	private static final byte MSG_PLAY_AGAIN = 5;
+	private static final byte MSG_IN_CHAT = 6;
+	private static final byte MSG_CLOSE_CHAT = 7;
+	private static final byte MSG_PROTOCOL_VERSION = 8;
+	
 
+	private int opponentProtocolVersion;
+	
 	private volatile Long myRandom;
 	private volatile Long theirRandom;
 	private MarkerChance chance;
@@ -176,7 +184,9 @@ public class RoomListener implements RoomUpdateListener,
 		byte[] messageData = message.getMessageData();
 		ByteBuffer buffer = ByteBuffer.wrap(messageData);
 		byte type = buffer.get();
-		if (type == MSG_WHO_IS_X) {
+		if (type == MSG_PROTOCOL_VERSION) {
+			opponentProtocolVersion = buffer.getInt();			
+		} else if (type == MSG_WHO_IS_X) {
 			theirRandom = buffer.getLong();
 			if (myRandom == null) {
 				// ignore, let the later backFromWaitingRoom receiver handle
@@ -220,10 +230,18 @@ public class RoomListener implements RoomUpdateListener,
 				announce("Received chance");
 			}
 		} else if (type == MSG_PLAY_AGAIN) {
-			boolean playAgain = buffer.getInt() !=0;
-
+			boolean playAgain = buffer.getInt() != 0;
 			receivePlayAgain(playAgain);
+		} else if (type == MSG_IN_CHAT) {
+			activity.opponentInChat();
+		} else if (type == MSG_CLOSE_CHAT) {
+			activity.opponentClosedChat();
 		} else {
+			// handle later version future support
+			if (opponentProtocolVersion > PROTOCOL_VERSION) {
+				// assume an optional new message type, which can be ignored
+				return;
+			}
 			throw new RuntimeException("unexpected message type! " + type);
 		}
 
@@ -391,8 +409,32 @@ public class RoomListener implements RoomUpdateListener,
 					}, buffer.array(), getRoomId(), getOpponentId());
 		}
 
+		sendProtocolVersion();
 		myRandom = random.nextLong();
 		checkWhoIsFirstAndAttemptToStart(true);
+	}
+
+	private void sendProtocolVersion() {
+		ByteBuffer buffer = ByteBuffer
+				.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
+		buffer.put(MSG_PROTOCOL_VERSION);
+		buffer.putLong(PROTOCOL_VERSION);
+		getGamesClient().sendReliableRealTimeMessage(
+				new RealTimeReliableMessageSentListener() {
+					@Override
+					public void onRealTimeMessageSent(int statusCode,
+							int token, String recipientParticipantId) {
+						if (statusCode == GamesClient.STATUS_OK) {
+
+						} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
+
+						} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
+
+						} else {
+
+						}
+					}
+				}, buffer.array(), getRoomId(), getOpponentId());
 	}
 
 	private void checkWhoIsFirstAndAttemptToStart(boolean send) {
@@ -473,13 +515,15 @@ public class RoomListener implements RoomUpdateListener,
 				}, buffer.array(), getRoomId(), getOpponentId());
 	}
 
-	
 	public void restartGame() {
 		opponentSendPlayAgain = PlayAgainState.WAITING;
 	}
+
 	PlayAgainState opponentSendPlayAgain = PlayAgainState.WAITING;
+
 	private void receivePlayAgain(boolean playAgain) {
-		opponentSendPlayAgain = playAgain ? PlayAgainState.PLAY_AGAIN : PlayAgainState.NOT_PLAY_AGAIN;
+		opponentSendPlayAgain = playAgain ? PlayAgainState.PLAY_AGAIN
+				: PlayAgainState.NOT_PLAY_AGAIN;
 		if (playAgain) {
 			activity.opponentWillPlayAgain();
 		} else {
@@ -490,9 +534,11 @@ public class RoomListener implements RoomUpdateListener,
 	public enum PlayAgainState {
 		WAITING, PLAY_AGAIN, NOT_PLAY_AGAIN;
 	}
+
 	public PlayAgainState getOpponentPlayAgainState() {
 		return opponentSendPlayAgain;
 	}
+
 	public void sendPlayAgain(final Runnable success, final Runnable error) {
 		sendPlayAgain(true, success, error);
 	}
@@ -570,6 +616,26 @@ public class RoomListener implements RoomUpdateListener,
 		return mParticipants.get(1);
 	}
 
+	public void sendInChat(boolean inChat) {
+		if (!isConnected) {
+			return;
+		}
+		ByteBuffer buffer = ByteBuffer
+				.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
+		buffer.put(inChat ? MSG_IN_CHAT : MSG_CLOSE_CHAT);
 
+		getGamesClient().sendReliableRealTimeMessage(
+				new RealTimeReliableMessageSentListener() {
+					@Override
+					public void onRealTimeMessageSent(int statusCode,
+							int token, String recipientParticipantId) {
+						if (statusCode == GamesClient.STATUS_OK) {
+							// hmm..
+						} else {
+							// don't worry
+						}
+					}
+				}, buffer.array(), getRoomId(), getOpponentId());
+	}
 
 }

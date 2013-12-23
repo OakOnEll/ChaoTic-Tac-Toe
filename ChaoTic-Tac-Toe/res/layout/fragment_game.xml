@@ -227,13 +227,26 @@
             android:layout_centerInParent="true" >
         </com.oakonell.chaotictactoe.ui.game.WinOverlayView>
 
-        <ProgressBar
+        <LinearLayout
             android:id="@+id/thinking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:visibility="gone" />
+            android:background="@color/abs__background_holo_light"
+            android:gravity="center_vertical"
+             >
+
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/thinking_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:text="@string/opponent_is_thinking"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
