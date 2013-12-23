@@ -6,6 +6,7 @@ import java.util.Random;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +43,7 @@ import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.RoomListener;
 import com.oakonell.chaotictactoe.Sounds;
+import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.InvalidMoveException;
@@ -48,6 +51,8 @@ import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
+import com.oakonell.chaotictactoe.settings.SettingsActivity;
+import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
 import com.oakonell.utils.StringUtils;
 import com.oakonell.utils.Utils;
 
@@ -93,13 +98,18 @@ public class GameFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		final FragmentActivity activity = getActivity();
 		// adjust the width or height to make sure the board is a square
-		getActivity().findViewById(R.id.grid_container).getViewTreeObserver()
+		activity.findViewById(R.id.grid_container).getViewTreeObserver()
 				.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
-						View squareView = getActivity().findViewById(
+						View squareView = activity.findViewById(
 								R.id.grid_container);
+						if (squareView == null) {
+							// We get this when we are leaving the game?
+							return;
+						}
 						LayoutParams layout = squareView.getLayoutParams();
 						int min = Math.min(squareView.getWidth(),
 								squareView.getHeight());
@@ -126,6 +136,11 @@ public class GameFragment extends SherlockFragment {
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
+		MenuItem settingsMenuItem = menu.findItem(R.id.action_settings);
+		if (mode == GameMode.ONLINE) {
+			settingsMenuItem.setEnabled(false);
+		}
+
 		chatMenuItem = menu.findItem(R.id.action_chat);
 		handleMenu();
 	}
@@ -152,21 +167,22 @@ public class GameFragment extends SherlockFragment {
 				.findViewById(R.id.actionbar_notifcation_textview);
 		ImageView chatMenuItemImageView = (ImageView) actionView
 				.findViewById(R.id.actionbar_notifcation_imageview);
-		View progressView =  actionView
+		View progressView = actionView
 				.findViewById(R.id.actionbar_notifcation_progress);
-		
+
 		chatMenuItemImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				openChatDialog();
 			}
 		});
-		progressView.setVisibility(opponentInChat ? View.VISIBLE : View.INVISIBLE);
+		progressView.setVisibility(opponentInChat ? View.VISIBLE
+				: View.INVISIBLE);
 		if (numNewMessages > 0) {
 			chatMenuItemTextView.setText("" + numNewMessages);
 			chatMenuItemImageView
 					.setImageResource(R.drawable.message_available_icon_1332);
-		
+
 			StringUtils.applyFlashEnlargeAnimation(chatMenuItemTextView);
 		} else {
 			chatMenuItemImageView
@@ -181,6 +197,22 @@ public class GameFragment extends SherlockFragment {
 		case R.id.action_chat:
 			openChatDialog();
 			break;
+
+		case R.id.action_settings:
+			// create special intent
+			Intent prefIntent = new Intent(getActivity(),
+					SettingsActivity.class);
+
+			GameHelper helper = getMainActivity().getGameHelper();
+			Info info = null;
+			ChaoTicTacToe app = (ChaoTicTacToe) getActivity().getApplication();
+			if (helper.isSignedIn()) {
+				info = new Info(helper);
+			}
+			app.setDevelopInfo(info);
+			// ugh.. does going to preferences leave the room!?
+			getActivity().startActivity(prefIntent);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
