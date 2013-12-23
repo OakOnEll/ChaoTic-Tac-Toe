@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -147,25 +148,30 @@ public class GameFragment extends SherlockFragment {
 				openChatDialog();
 			}
 		});
-		TextView textView = (TextView) actionView
+		TextView chatMenuItemTextView = (TextView) actionView
 				.findViewById(R.id.actionbar_notifcation_textview);
-		ImageView imageView = (ImageView) actionView
+		ImageView chatMenuItemImageView = (ImageView) actionView
 				.findViewById(R.id.actionbar_notifcation_imageview);
-		imageView.setOnClickListener(new View.OnClickListener() {
+		View progressView =  actionView
+				.findViewById(R.id.actionbar_notifcation_progress);
+		
+		chatMenuItemImageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				openChatDialog();
 			}
 		});
+		progressView.setVisibility(opponentInChat ? View.VISIBLE : View.INVISIBLE);
 		if (numNewMessages > 0) {
-			textView.setText("" + numNewMessages);
-			imageView.setImageResource(R.drawable.message_available_icon_1332);
-
-			// TODO play a sound
-			StringUtils.applyFlashEnlargeAnimation(textView);
+			chatMenuItemTextView.setText("" + numNewMessages);
+			chatMenuItemImageView
+					.setImageResource(R.drawable.message_available_icon_1332);
+		
+			StringUtils.applyFlashEnlargeAnimation(chatMenuItemTextView);
 		} else {
-			imageView.setImageResource(R.drawable.message_icon_27709);
-			textView.setText("");
+			chatMenuItemImageView
+					.setImageResource(R.drawable.message_icon_27709);
+			chatMenuItemTextView.setText("");
 		}
 	}
 
@@ -888,15 +894,25 @@ public class GameFragment extends SherlockFragment {
 		getMainActivity().getSupportFragmentManager().popBackStack();
 	}
 
+	private boolean opponentInChat = false;
+
 	public void opponentInChat() {
-		// TODO show "animated" menu icon
+		opponentInChat = true;
+		// show "animated" menu icon
+		invalidateMenu();
+
+		// update the display text
 		thinkingText.setText(getResources().getString(
 				R.string.opponent_is_in_chat,
 				getMainActivity().getRoomListener().getOpponentName()));
 	}
 
 	public void opponentClosedChat() {
-		// TODO stop animated menu icon
+		// stop animated menu icon
+		opponentInChat = false;
+		invalidateMenu();
+
+		// update the display text
 		thinkingText.setText(getResources().getString(
 				R.string.opponent_is_thinking,
 				getMainActivity().getRoomListener().getOpponentName()));
