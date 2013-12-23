@@ -59,15 +59,6 @@ import com.oakonell.utils.StringUtils;
 public class MenuFragment extends SherlockFragment {
 	private String TAG = MenuFragment.class.getName();
 
-	// Request codes for the UIs that we show with startActivityForResult:
-	final static int RC_UNUSED = 1;
-	// online play request codes
-	final static int RC_SELECT_PLAYERS = 10000;
-	final static int RC_INVITATION_INBOX = 10001;
-	public final static int RC_WAITING_ROOM = 10002;
-
-	// public static final int RC_SELECT_ONLINE_INVITE_TYPE = 10005;
-
 	private View signInView;
 	private View signOutView;
 	private ImageView invitesButton;
@@ -80,7 +71,7 @@ public class MenuFragment extends SherlockFragment {
 	public void onActivityResult(int request, int response, Intent data) {
 		switch (request) {
 
-		case RC_SELECT_PLAYERS: {
+		case MainActivity.RC_SELECT_PLAYERS: {
 			if (response == Activity.RESULT_OK) {
 				final ArrayList<String> invitees = data
 						.getStringArrayListExtra(GamesClient.EXTRA_PLAYERS);
@@ -98,7 +89,7 @@ public class MenuFragment extends SherlockFragment {
 		}
 			break;
 
-		case RC_WAITING_ROOM:
+		case MainActivity.RC_WAITING_ROOM:
 			// ignore result if we dismissed the waiting room from code:
 			// if (mWaitRoomDismissedFromCode)
 			// break;
@@ -120,7 +111,7 @@ public class MenuFragment extends SherlockFragment {
 				leaveRoom();
 			}
 			break;
-		case RC_INVITATION_INBOX:
+		case MainActivity.RC_INVITATION_INBOX:
 			refreshInvites(false);
 			if (response != Activity.RESULT_OK) {
 				Log.i(TAG, "Returned from invitation- Canceled");
@@ -156,36 +147,37 @@ public class MenuFragment extends SherlockFragment {
 		signOutView = view.findViewById(R.id.sign_out_bar);
 		invitesButton = (ImageView) view.findViewById(R.id.invites);
 		numInvitesTextView = (TextView) view.findViewById(R.id.num_invites);
-		loading_num_invites = (ProgressBar) view.findViewById(R.id.loading_num_invites);
-		
-//		// simulate button pressing on ImageView
-//		invitesButton.setOnTouchListener(new OnTouchListener() {
-//	        @Override
-//	        public boolean onTouch(View v, MotionEvent event) {
-//
-//	            switch (event.getAction()) {
-//	                case MotionEvent.ACTION_DOWN: {
-//	                	Toast.makeText(getActivity(), "pressed", Toast.LENGTH_SHORT).show();
-//	                    ImageView view = (ImageView) v;
-//	                    //overlay is black with transparency of 0x77 (119)
-//	                    view.getDrawable().setColorFilter(0x77000000,PorterDuff.Mode.SRC_ATOP);
-//	                    view.invalidate();
-//	                    break;
-//	                }
-//	                case MotionEvent.ACTION_UP:
-//	                case MotionEvent.ACTION_CANCEL: {
-//	                    ImageView view = (ImageView) v;
-//	                    //clear the overlay
-//	                    view.getDrawable().clearColorFilter();
-//	                    view.invalidate();
-//	                    break;
-//	                }
-//	            }
-//
-//	            return true;
-//	        }
-//	    });
-		
+		loading_num_invites = (ProgressBar) view
+				.findViewById(R.id.loading_num_invites);
+
+		// // simulate button pressing on ImageView
+		// invitesButton.setOnTouchListener(new OnTouchListener() {
+		// @Override
+		// public boolean onTouch(View v, MotionEvent event) {
+		//
+		// switch (event.getAction()) {
+		// case MotionEvent.ACTION_DOWN: {
+		// Toast.makeText(getActivity(), "pressed", Toast.LENGTH_SHORT).show();
+		// ImageView view = (ImageView) v;
+		// //overlay is black with transparency of 0x77 (119)
+		// view.getDrawable().setColorFilter(0x77000000,PorterDuff.Mode.SRC_ATOP);
+		// view.invalidate();
+		// break;
+		// }
+		// case MotionEvent.ACTION_UP:
+		// case MotionEvent.ACTION_CANCEL: {
+		// ImageView view = (ImageView) v;
+		// //clear the overlay
+		// view.getDrawable().clearColorFilter();
+		// view.invalidate();
+		// break;
+		// }
+		// }
+		//
+		// return true;
+		// }
+		// });
+
 		ImageView newGameOnSameDevice = (ImageView) view
 				.findViewById(R.id.new_game_same_device);
 		newGameOnSameDevice.setOnClickListener(new OnClickListener() {
@@ -203,7 +195,7 @@ public class MenuFragment extends SherlockFragment {
 			public void onClick(View v) {
 				if (getMainActivity().isSignedIn()) {
 					startActivityForResult(getMainActivity().getGamesClient()
-							.getAchievementsIntent(), RC_UNUSED);
+							.getAchievementsIntent(), MainActivity.RC_UNUSED);
 				} else {
 					// TODO display pending achievements
 					getMainActivity().showAlert(
@@ -219,7 +211,7 @@ public class MenuFragment extends SherlockFragment {
 			public void onClick(View v) {
 				if (getMainActivity().isSignedIn()) {
 					startActivityForResult(getMainActivity().getGamesClient()
-							.getAllLeaderboardsIntent(), RC_UNUSED);
+							.getAllLeaderboardsIntent(), MainActivity.RC_UNUSED);
 				} else {
 					// TODO display pending leaderboard
 					getMainActivity().showAlert(
@@ -265,7 +257,8 @@ public class MenuFragment extends SherlockFragment {
 			}
 		});
 
-		ImageView inviteFriend = (ImageView) view.findViewById(R.id.new_game_live);
+		ImageView inviteFriend = (ImageView) view
+				.findViewById(R.id.new_game_live);
 		inviteFriend.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -285,7 +278,8 @@ public class MenuFragment extends SherlockFragment {
 				if (getMainActivity().isSignedIn()) {
 					Intent intent = getMainActivity().getGamesClient()
 							.getInvitationInboxIntent();
-					startActivityForResult(intent, RC_INVITATION_INBOX);
+					startActivityForResult(intent,
+							MainActivity.RC_INVITATION_INBOX);
 				} else {
 					getMainActivity().showAlert(
 							getResources().getString(
@@ -377,7 +371,7 @@ public class MenuFragment extends SherlockFragment {
 				MenuFragment.this.onlineChance = chance;
 				Intent intent = getMainActivity().getGamesClient()
 						.getSelectPlayersIntent(1, 1);
-				startActivityForResult(intent, RC_SELECT_PLAYERS);
+				startActivityForResult(intent, MainActivity.RC_SELECT_PLAYERS);
 			}
 		});
 		dialog.show(getSherlockActivity().getSupportFragmentManager(),
@@ -566,7 +560,8 @@ public class MenuFragment extends SherlockFragment {
 										.setImageResource(R.drawable.invites_icon_15777);
 								numInvitesTextView.setText("" + count);
 								if (shouldFlashNumber) {
-									StringUtils.applyFlashEnlargeAnimation(numInvitesTextView);
+									StringUtils
+											.applyFlashEnlargeAnimation(numInvitesTextView);
 								}
 							}
 						} else if (statusCode == GamesClient.STATUS_NETWORK_ERROR_STALE_DATA) {

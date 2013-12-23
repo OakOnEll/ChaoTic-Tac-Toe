@@ -16,6 +16,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.googleapi.BaseGameActivity;
@@ -33,6 +34,14 @@ public class MainActivity extends BaseGameActivity {
 	private static final String FRAG_TAG_MENU = "menu";
 	private static final String TAG = MainActivity.class.getName();
 
+	// Request codes for the UIs that we show with startActivityForResult:
+	public final static int RC_UNUSED = 1;
+	// online play request codes
+	public final static int RC_SELECT_PLAYERS = 10000;
+	public final static int RC_INVITATION_INBOX = 10001;
+	public final static int RC_WAITING_ROOM = 10002;
+
+	
 	private RoomListener roomListener;
 	private InterstitialAd mInterstitialAd;
 	private AdView mAdView;
@@ -41,10 +50,12 @@ public class MainActivity extends BaseGameActivity {
 	@Override
 	protected void onActivityResult(int request, int response, Intent data) {
 		super.onActivityResult(request, response, data);
-		if (request == MenuFragment.RC_WAITING_ROOM) {
+		if (request == RC_WAITING_ROOM) {
 			// TODO currently specially launched from listener, with access to
 			// activity only
 			getMenuFragment().onActivityResult(request, response, data);
+		} else if (request == GamesActivityResultCodes.RESULT_LEFT_ROOM) {
+			getRoomListener().leaveRoom();
 		}
 	}
 

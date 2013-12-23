@@ -347,7 +347,7 @@ public class RoomListener implements RoomUpdateListener,
 				minPlayersToStart);
 
 		// show waiting room UI
-		activity.startActivityForResult(intent, MenuFragment.RC_WAITING_ROOM);
+		activity.startActivityForResult(intent, MainActivity.RC_WAITING_ROOM);
 	}
 
 	public void leaveRoom() {

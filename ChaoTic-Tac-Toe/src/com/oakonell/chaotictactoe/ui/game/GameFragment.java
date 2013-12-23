@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,6 +53,7 @@ import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
 import com.oakonell.chaotictactoe.settings.SettingsActivity;
+import com.oakonell.chaotictactoe.ui.menu.MenuFragment;
 import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
 import com.oakonell.utils.StringUtils;
 import com.oakonell.utils.Utils;
@@ -136,11 +138,6 @@ public class GameFragment extends SherlockFragment {
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
-		MenuItem settingsMenuItem = menu.findItem(R.id.action_settings);
-		if (mode == GameMode.ONLINE) {
-			settingsMenuItem.setEnabled(false);
-		}
-
 		chatMenuItem = menu.findItem(R.id.action_chat);
 		handleMenu();
 	}
@@ -191,6 +188,7 @@ public class GameFragment extends SherlockFragment {
 		}
 	}
 
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -199,6 +197,13 @@ public class GameFragment extends SherlockFragment {
 			break;
 
 		case R.id.action_settings:
+			if (mode == GameMode.ONLINE) {
+				
+				// show an abbreviated "settings"- notably the sound fx and other immediate game play settings
+				OnlineSettingsDialogFragment onlineSettingsFragment = new OnlineSettingsDialogFragment();
+				onlineSettingsFragment.show(getChildFragmentManager(), "settings");
+				return true;
+			}
 			// create special intent
 			Intent prefIntent = new Intent(getActivity(),
 					SettingsActivity.class);
@@ -211,7 +216,7 @@ public class GameFragment extends SherlockFragment {
 			}
 			app.setDevelopInfo(info);
 			// ugh.. does going to preferences leave the room!?
-			getActivity().startActivity(prefIntent);
+			getActivity().startActivityForResult(prefIntent, MainActivity.RC_UNUSED);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -896,12 +901,14 @@ public class GameFragment extends SherlockFragment {
 		getMainActivity().getRoomListener().restartGame();
 	}
 
+	private boolean opponentLeftIsShowing;
 	public void opponentLeft() {
 		if (playAgainDialog != null) {
 			// the user is in the play again dialog, let him read the info
 			return;
 
 		}
+		opponentLeftIsShowing = true;
 		final MainActivity activity = getMainActivity();
 		String message = activity.getResources().getString(
 				R.string.peer_left_the_game,
@@ -910,7 +917,8 @@ public class GameFragment extends SherlockFragment {
 				.setNeutralButton(android.R.string.ok, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						activity.possiblyShowInterstitialAd();
+						activity.gameEnded();
+						activity.getSupportFragmentManager().popBackStack();
 						dialog.dismiss();
 					}
 				}).create().show();
@@ -918,12 +926,14 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void onDisconnectedFromRoom() {
-		if (playAgainDialog != null) {
+		if (playAgainDialog != null || opponentLeftIsShowing) {
 			// the user is in the play again dialog, let him read the info
 			return;
 
 		}
-		getMainActivity().getSupportFragmentManager().popBackStack();
+		// TODO sometimes this is received before the opponentLeft message?
+		// but if this device/user leaves the room, this is only message received..
+		//getMainActivity().getSupportFragmentManager().popBackStack();
 	}
 
 	private boolean opponentInChat = false;
