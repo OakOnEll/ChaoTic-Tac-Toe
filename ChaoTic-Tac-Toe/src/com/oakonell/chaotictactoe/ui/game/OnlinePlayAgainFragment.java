@@ -13,7 +13,7 @@ import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.RoomListener.PlayAgainState;
 
-public class PlayAgainFragment extends SherlockDialogFragment {
+public class OnlinePlayAgainFragment extends SherlockDialogFragment {
 	private String opponentName;
 	private String title;
 
@@ -145,6 +145,10 @@ public class PlayAgainFragment extends SherlockDialogFragment {
 							opponentName));
 			opponentPlayAgainImageView
 					.setImageResource(R.drawable.cancel_icon_18932);
+			TextView playAgainText = (TextView) getView()
+					.findViewById(R.id.play_again_text);
+			playAgainText.setVisibility(View.GONE);
+
 			playAgainButton.setVisibility(View.GONE);
 			notPlayAgainButton.setText(R.string.exit_play_again);
 		}

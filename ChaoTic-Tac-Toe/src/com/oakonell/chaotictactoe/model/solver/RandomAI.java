@@ -8,12 +8,22 @@ import com.oakonell.chaotictactoe.model.Board;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
+import com.oakonell.chaotictactoe.model.Player;
 
 public class RandomAI extends PlayerStrategy {
 
-	public RandomAI(String name, Marker marker) {
-		super(name, marker, Uri.parse("android.resource://com.oakonell.chaotictactoe/"
-				+ R.drawable.dice));
+	public static Player createPlayer(String name, Marker marker) {
+		Player player = new Player(name, getImageUri(), new RandomAI(marker));
+		return player;
+	}
+	
+	private RandomAI(Marker marker) {
+		super(marker);
+	}
+
+	private static Uri getImageUri() {
+		return Uri.parse("android.resource://com.oakonell.chaotictactoe/"
+				+ R.drawable.dice);
 	}
 
 	@Override

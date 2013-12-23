@@ -50,6 +50,7 @@ import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.InvalidMoveException;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
+import com.oakonell.chaotictactoe.model.Player;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
 import com.oakonell.chaotictactoe.settings.SettingsActivity;
@@ -73,7 +74,6 @@ public class GameFragment extends SherlockFragment {
 	private TextView draws;
 
 	private TextView gameNumber;
-
 	private TextView numMoves;
 
 	private List<ImageButton> buttons = new ArrayList<ImageButton>();
@@ -82,18 +82,12 @@ public class GameFragment extends SherlockFragment {
 	private Game game;
 	private ScoreCard score;
 
-	private PlayerStrategy xStrategy;
-	private PlayerStrategy oStrategy;
-
-	private PlayerStrategy currentStrategy;
-
 	private List<ChatMessage> messages = new ArrayList<ChatMessage>();
 	private int numNewMessages;
 
 	private ChatDialogFragment chatDialog;
 	private MenuItem chatMenuItem;
 
-	private GameMode mode;
 	private View thinking;
 	private TextView thinkingText;
 
@@ -101,7 +95,7 @@ public class GameFragment extends SherlockFragment {
 
 	@Override
 	public void onPause() {
-		exitOnResume = mode == GameMode.ONLINE;
+		exitOnResume = game.getMode() == GameMode.ONLINE;
 		// TODO Auto-generated method stub
 		super.onPause();
 	}
@@ -222,7 +216,7 @@ public class GameFragment extends SherlockFragment {
 			break;
 
 		case R.id.action_settings:
-			if (mode == GameMode.ONLINE) {
+			if (game.getMode() == GameMode.ONLINE) {
 
 				// show an abbreviated "settings"- notably the sound fx and
 				// other immediate game play settings
@@ -261,22 +255,10 @@ public class GameFragment extends SherlockFragment {
 		chatDialog.show(getChildFragmentManager(), "chat");
 	}
 
-	public void startGame(PlayerStrategy xStrategy, PlayerStrategy oStrategy,
-			Game game, ScoreCard score) {
-		this.xStrategy = xStrategy;
-		this.oStrategy = oStrategy;
-
-		currentStrategy = xStrategy;
-
-		if (game.getCurrentPlayer() == Marker.X) {
-			currentStrategy = xStrategy;
-		} else {
-			currentStrategy = oStrategy;
-		}
-
+	public void startGame(Game game, ScoreCard score) {
 		this.score = score;
 		this.game = game;
-		if (!currentStrategy.isHuman()) {
+		if (!game.getCurrentPlayer().getStrategy().isHuman()) {
 			if (thinking != null) {
 				// show a thinking/progress icon, suitable for network play and
 				// ai
@@ -290,26 +272,18 @@ public class GameFragment extends SherlockFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_game, container, false);
-		view.setKeepScreenOn(mode == GameMode.ONLINE);
+		view.setKeepScreenOn(game.getMode() == GameMode.ONLINE);
 
 		setHasOptionsMenu(true);
 		thinkingText = (TextView) view.findViewById(R.id.thinking_text);
-		if (mode == GameMode.ONLINE) {
+		if (game.getMode() != GameMode.PASS_N_PLAY) {
 			thinkingText.setText(getResources().getString(
 					R.string.opponent_is_thinking,
-					getMainActivity().getRoomListener().getOpponentName()));
-		} else if (mode == GameMode.AI) {
-			String name;
-			if (xStrategy.isAI()) {
-				name = xStrategy.getName();
-			} else {
-				name = oStrategy.getName();
-			}
-			thinkingText.setText(getResources().getString(
-					R.string.opponent_is_thinking, name));
+					game.getNonLocalPlayer().getName()));
 		}
 		thinking = view.findViewById(R.id.thinking);
 		thinking.setVisibility(View.GONE);
+		PlayerStrategy currentStrategy = game.getCurrentPlayer().getStrategy();
 		if (currentStrategy != null && !currentStrategy.isHuman()) {
 			if (thinking != null) {
 				// show a thinking/progress icon, suitable for network play and
@@ -322,16 +296,16 @@ public class GameFragment extends SherlockFragment {
 		imgManager = ImageManager.create(getMainActivity());
 
 		TextView xName = (TextView) view.findViewById(R.id.xName);
-		xName.setText(getPlayerTitle(Marker.X));
+		xName.setText(game.getXPlayer().getName());
 		TextView oName = (TextView) view.findViewById(R.id.oName);
-		oName.setText(getPlayerTitle(Marker.O));
+		oName.setText(game.getOPlayer().getName());
 
 		ImageView xImage = (ImageView) view.findViewById(R.id.x_back);
 		ImageView oImage = (ImageView) view.findViewById(R.id.o_back);
 
-		updatePlayerImage(xImage, xStrategy.getIconImageUri(),
+		updatePlayerImage(xImage, game.getXPlayer().getIconImageUri(),
 				R.drawable.system_cross_faded);
-		updatePlayerImage(oImage, oStrategy.getIconImageUri(),
+		updatePlayerImage(oImage, game.getOPlayer().getIconImageUri(),
 				R.drawable.system_dot_faded);
 
 		xHeaderLayout = view.findViewById(R.id.x_name_layout);
@@ -421,7 +395,7 @@ public class GameFragment extends SherlockFragment {
 			if (isRolling) {
 				return;
 			}
-			if (!currentStrategy.isHuman()) {
+			if (!game.getCurrentPlayer().getStrategy().isHuman()) {
 				// ignore button clicks if the current player is not a human
 				return;
 			}
@@ -440,10 +414,10 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void updateHeader() {
-		Marker player = game.getCurrentPlayer();
+		Player player = game.getCurrentPlayer();
 		numMoves.setText("" + game.getNumberOfMoves());
 		float notTurnAlpha = 0.25f;
-		if (player == Marker.X) {
+		if (player.getMarker() == Marker.X) {
 			xHeaderLayout.setBackgroundResource(R.drawable.current_player);
 			oHeaderLayout.setBackgroundResource(R.drawable.inactive_player);
 
@@ -488,14 +462,14 @@ public class GameFragment extends SherlockFragment {
 		MarkerChance chance = game.getMarkerChance();
 		final List<Integer> resourcesList = new ArrayList<Integer>();
 		if (chance.getMyMarker() > 0) {
-			if (currentStrategy.getMarker() == Marker.X) {
+			if (game.getCurrentPlayer().getStrategy().getMarker() == Marker.X) {
 				resourcesList.add(R.drawable.system_cross);
 			} else {
 				resourcesList.add(R.drawable.system_dot);
 			}
 		}
 		if (chance.getOpponentMarker() > 0) {
-			if (currentStrategy.getMarker() == Marker.X) {
+			if (game.getCurrentPlayer().getStrategy().getMarker() == Marker.X) {
 				resourcesList.add(R.drawable.system_dot);
 			} else {
 				resourcesList.add(R.drawable.system_cross);
@@ -554,7 +528,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private int diceRollStreamId;
-	private PlayAgainFragment playAgainDialog;
+	private OnlinePlayAgainFragment onlinePlayAgainDialog;
 
 	private void displayMarkerToPlay() {
 		Marker toPlay = game.getMarkerToPlay();
@@ -593,8 +567,6 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void privateMakeMove(Cell cell, Marker marker, State outcome) {
-		switchPlayerStrategy();
-
 		ImageButton cellButton = findButtonFor(cell);
 		if (marker == Marker.EMPTY) {
 			cellButton.setImageDrawable(null);
@@ -616,26 +588,30 @@ public class GameFragment extends SherlockFragment {
 		numMoves.setText("" + game.getNumberOfMoves());
 		evaluateGameEndAchievements(outcome);
 		evaluateLeaderboards(outcome);
-		Marker winner = outcome.getWinner();
+		Player winner = outcome.getWinner();
 		if (winner != null) {
 			score.incrementScore(winner);
 			winOverlayView.setWinStyle(outcome.getWinStyle());
 			winOverlayView.invalidate();
 
-			if (mode == GameMode.PASS_N_PLAY) {
+			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				getMainActivity().playSound(Sounds.GAME_WON);
 			} else {
 				// the player either won or lost
-				if (xStrategy.isHuman() && winner == Marker.X) {
+				// TODO can simplify?
+
+				if (game.getXPlayer().getStrategy().isHuman()
+						&& winner.getMarker() == Marker.X) {
 					getMainActivity().playSound(Sounds.GAME_WON);
-				} else if (oStrategy.isHuman() && winner == Marker.O) {
+				} else if (game.getOPlayer().getStrategy().isHuman()
+						&& winner.getMarker() == Marker.O) {
 					getMainActivity().playSound(Sounds.GAME_WON);
 				} else {
 					getMainActivity().playSound(Sounds.GAME_LOST);
 				}
 			}
 
-			String title = getString(R.string.player_won, getPlayerName(winner));
+			String title = getString(R.string.player_won, winner.getName());
 
 			promptToPlayAgain(title);
 		} else {
@@ -648,12 +624,11 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void promptToPlayAgain(String title) {
-
-		if (mode == GameMode.ONLINE) {
-			playAgainDialog = new PlayAgainFragment();
-			playAgainDialog.initialize(this, getMainActivity()
+		if (game.getMode() == GameMode.ONLINE) {
+			onlinePlayAgainDialog = new OnlinePlayAgainFragment();
+			onlinePlayAgainDialog.initialize(this, getMainActivity()
 					.getRoomListener().getOpponentName(), title);
-			playAgainDialog.show(getChildFragmentManager(), "chat");
+			onlinePlayAgainDialog.show(getChildFragmentManager(), "playAgain");
 			// TODO wire up the play again / not play again message handling via
 			// the dialog
 			return;
@@ -690,6 +665,8 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void moveIfAI() {
+		final PlayerStrategy currentStrategy = game.getCurrentPlayer()
+				.getStrategy();
 		if (currentStrategy.isHuman()) {
 			return;
 		}
@@ -798,41 +775,6 @@ public class GameFragment extends SherlockFragment {
 		return (ImageButton) getActivity().findViewById(id);
 	}
 
-	public void switchPlayerStrategy() {
-		if (currentStrategy == xStrategy) {
-			currentStrategy = oStrategy;
-		} else {
-			currentStrategy = xStrategy;
-		}
-	}
-
-	private String getPlayerTitle(Marker player) {
-		String playerTurnString;
-		if (player == Marker.X) {
-			playerTurnString = xStrategy.getName();
-		} else {
-			playerTurnString = oStrategy.getName();
-		}
-		// playerTurnString = (playerTurnString != null &&
-		// playerTurnString.trim()
-		// .length() > 0) ? (playerTurnString + " (" + player.name() + ")")
-		// : (getString(R.string.player_label) + " " + player.name());
-		return playerTurnString;
-	}
-
-	private String getPlayerName(Marker player) {
-		String playerTurnString;
-		if (player == Marker.X) {
-			playerTurnString = xStrategy.getName();
-		} else {
-			playerTurnString = oStrategy.getName();
-		}
-		playerTurnString = (playerTurnString != null && playerTurnString.trim()
-				.length() > 0) ? (playerTurnString + " (" + player.name() + ")")
-				: player.name();
-		return playerTurnString;
-	}
-
 	private void evaluateGameEndAchievements(State outcome) {
 		ChaoTicTacToe application = ((ChaoTicTacToe) getActivity()
 				.getApplication());
@@ -884,12 +826,8 @@ public class GameFragment extends SherlockFragment {
 		invalidateMenu();
 	}
 
-	public void setMode(GameMode mode) {
-		this.mode = mode;
-	}
-
 	public void leaveGame() {
-		if (playAgainDialog != null) {
+		if (onlinePlayAgainDialog != null) {
 			// let the play again dialog handle it
 			return;
 		}
@@ -898,7 +836,9 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void playAgain() {
-		game = new Game(3, currentStrategy.getMarker(), game.getMarkerChance());
+		Player currentPlayer = game.getCurrentPlayer();
+		game = new Game(3, game.getMode(), currentPlayer,
+				currentPlayer.opponent(), game.getMarkerChance());
 		updateHeader();
 		winOverlayView.setWinStyle(null);
 		winOverlayView.invalidate();
@@ -909,30 +849,30 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void opponentWillPlayAgain() {
-		if (playAgainDialog == null) {
+		if (onlinePlayAgainDialog == null) {
 			// TODO is this possible? I suppose if one player just is quitting..
 			return;
 		}
-		playAgainDialog.opponentWillPlayAgain();
+		onlinePlayAgainDialog.opponentWillPlayAgain();
 	}
 
 	public void opponentWillNotPlayAgain() {
-		if (playAgainDialog == null) {
+		if (onlinePlayAgainDialog == null) {
 			// TODO is this possible? I suppose if one player just is quitting..
 			return;
 		}
-		playAgainDialog.opponentWillNotPlayAgain();
+		onlinePlayAgainDialog.opponentWillNotPlayAgain();
 	}
 
 	public void playAgainClosed() {
-		playAgainDialog = null;
+		onlinePlayAgainDialog = null;
 		getMainActivity().getRoomListener().restartGame();
 	}
 
 	private boolean opponentLeftIsShowing;
 
 	public void opponentLeft() {
-		if (playAgainDialog != null) {
+		if (onlinePlayAgainDialog != null) {
 			// the user is in the play again dialog, let him read the info
 			return;
 
@@ -955,7 +895,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	public void onDisconnectedFromRoom() {
-		if (playAgainDialog != null || opponentLeftIsShowing) {
+		if (onlinePlayAgainDialog != null || opponentLeftIsShowing) {
 			// the user is in the play again dialog, let him read the info
 			return;
 

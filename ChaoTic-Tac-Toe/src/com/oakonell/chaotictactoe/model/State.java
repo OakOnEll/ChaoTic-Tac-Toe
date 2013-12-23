@@ -8,7 +8,7 @@ public class State {
 	}
 
 	private final SimpleState state;
-	private final Marker winner;
+	private final Player winner;
 
 	private final Cell start;
 	private final Cell end;
@@ -16,20 +16,20 @@ public class State {
 	private final int score;
 	private final WinStyle winStyle;
 
-	public static State winner(Cell start, Cell end, Marker winner, int score,
+	public static State winner(Cell start, Cell end, Player winner, int score,
 			WinStyle winStyle) {
 		return new State(start, end, winner, score, SimpleState.WIN, winStyle);
 	}
 
-	public static State draw(Marker player) {
+	public static State draw() {
 		return new State(null, null, null, 0, SimpleState.DRAW, null);
 	}
 
-	public static State open(Cell start, Cell end, Marker player, int score) {
+	public static State open(Cell start, Cell end,  int score) {
 		return new State(start, end, null, score, SimpleState.OPEN, null);
 	}
 
-	public State(Cell start, Cell end, Marker winner, int score,
+	public State(Cell start, Cell end, Player winner, int score,
 			SimpleState state, WinStyle winStyle) {
 		this.winner = winner;
 		this.state = state;
@@ -43,7 +43,7 @@ public class State {
 		return score;
 	}
 
-	public Marker getWinner() {
+	public Player getWinner() {
 		if (state == SimpleState.WIN) {
 			return winner;
 		}

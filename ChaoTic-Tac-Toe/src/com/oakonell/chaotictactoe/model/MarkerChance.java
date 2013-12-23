@@ -48,7 +48,7 @@ public class MarkerChance {
 		return ((double) removeMarker) / total;
 	}
 
-	public Marker pickMove(Board board, Marker player) {
+	public Marker pickMove(Board board, Player player) {
 		int chance;
 		boolean isEmpty = board.isEmpty();
 		if (isEmpty) {
@@ -59,12 +59,12 @@ public class MarkerChance {
 
 		int val = random.nextInt(chance);
 		if (val < getMyMarker()) {
-			return player;
+			return player.getMarker();
 		}
 
 		val -= getMyMarker();
 		if (val < getOpponentMarker()) {
-			return player.opponent();
+			return player.opponent().getMarker();
 		}
 
 		if (isEmpty) {
@@ -135,7 +135,6 @@ public class MarkerChance {
 		return new MarkerChance(mine, opponent, removal);
 	}
 
-	
 	public String getLabel() {
 		// TODO localize
 		String gameType = "Custom";

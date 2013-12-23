@@ -7,7 +7,6 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.google.android.gms.games.GamesClient;
-import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Board;
 import com.oakonell.chaotictactoe.model.Game;
@@ -25,6 +24,9 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (outcome.getWinner() != game.getLocalPlayer())
+				return;
+
 			Board board = game.getBoard();
 			int size = board.getSize();
 			int numX = 0;
@@ -56,6 +58,9 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (game.getMode() == GameMode.PASS_N_PLAY)
+				return;
+
 			if (game.getMarkerChance().isChaotic()) {
 				if (outcome.isDraw()) {
 					// TODO only apply to person vs remote/ai?
@@ -71,7 +76,8 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			if (game.getBoard().isEmpty()) return;
+			if (game.getBoard().isEmpty())
+				return;
 			if (game.getNumberOfTimesInThisState() > NUM_BOARD_REVISITS_FOR_DEJA_VU) {
 				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
@@ -86,6 +92,9 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (game.getMode() == GameMode.PASS_N_PLAY)
+				return;
+
 			if (game.getMarkerChance().isChaotic()
 					&& game.getNumberOfMoves() > NUM_MOVES_LONG_HAUL) {
 				// TODO only apply to person vs remote/ai?
@@ -101,6 +110,8 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (outcome.getWinner() != game.getLocalPlayer())
+				return;
 			if (game.getNumberOfMoves() == game.getBoard().getSize()) {
 				// TODO SHould this only apply to the winner?
 				// TODO only apply to person vs remote/ai?
@@ -116,7 +127,10 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			if (game.getNumberOfMoves() >= NUM_MOVES_BEFORE_CLEAN_SLATE && game.getBoard().isEmpty()) {
+			if (game.getMode() == GameMode.PASS_N_PLAY)
+				return;
+			if (game.getNumberOfMoves() >= NUM_MOVES_BEFORE_CLEAN_SLATE
+					&& game.getBoard().isEmpty()) {
 				unlock(gameHelper, context);
 			}
 		}

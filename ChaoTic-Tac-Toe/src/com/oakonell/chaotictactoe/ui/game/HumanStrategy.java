@@ -5,28 +5,37 @@ import android.net.Uri;
 import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.model.Marker;
+import com.oakonell.chaotictactoe.model.Player;
 
 
 public class HumanStrategy extends PlayerStrategy {
 
-	public HumanStrategy(String playerName, Marker marker ) {
-		super(playerName,marker, getImage(marker));
+	public static Player createPlayer(String name, Marker marker) {
+		Player player = new Player(name, getImage(marker), new HumanStrategy(marker));
+		return player;
+	}
+	
+	public static Player createPlayer(String name, Marker marker, Uri iconImageUri) {
+		Player player = new Player(name, iconImageUri, new HumanStrategy(marker));
+		return player;
+	}
+	
+	private HumanStrategy(Marker marker ) {
+		super(marker);
 	}
 
-	private static Uri getImage(Marker marker) {
+	public static Uri getImage(Marker marker) {
 		if (marker == Marker.X) return Uri.parse("android.resource://com.oakonell.chaotictactoe/"
 				+ R.drawable.system_cross_faded);
 		return Uri.parse("android.resource://com.oakonell.chaotictactoe/"
 				+ R.drawable.system_dot_faded);
 	}
 
-	public HumanStrategy(String string, Marker x, Uri iconImageUri) {
-		super(string, x, iconImageUri);
-	}
-
 	@Override
 	public boolean isHuman() {
 		return true;
 	}
+
+
 
 }

@@ -36,12 +36,12 @@ public class ScoreCard {
 		this.draws = draws;
 	}
 
-	public void incrementScore(Marker winner) {
+	public void incrementScore(Player winner) {
 		if (winner == null) {
 			draws++;
-		} else if (winner == Marker.X) {
+		} else if (winner.getMarker() == Marker.X) {
 			xWins++;
-		} else if (winner == Marker.O) {
+		} else if (winner.getMarker() == Marker.O) {
 			oWins++;
 		}
 	}

@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,11 +24,11 @@ import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
+import com.oakonell.chaotictactoe.model.Player;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.ui.game.GameFragment;
 import com.oakonell.chaotictactoe.ui.game.HumanStrategy;
 import com.oakonell.chaotictactoe.ui.game.OnlineStrategy;
-import com.oakonell.chaotictactoe.ui.menu.MenuFragment;
 
 public class RoomListener implements RoomUpdateListener,
 		RealTimeMessageReceivedListener, RoomStatusUpdateListener {
@@ -39,7 +36,7 @@ public class RoomListener implements RoomUpdateListener,
 	private static final String TAG = RoomListener.class.getName();
 
 	private static final int PROTOCOL_VERSION = 1;
-	
+
 	private MainActivity activity;
 	private GameHelper helper;
 
@@ -55,10 +52,9 @@ public class RoomListener implements RoomUpdateListener,
 	private static final byte MSG_IN_CHAT = 6;
 	private static final byte MSG_CLOSE_CHAT = 7;
 	private static final byte MSG_PROTOCOL_VERSION = 8;
-	
 
 	private int opponentProtocolVersion;
-	
+
 	private volatile Long myRandom;
 	private volatile Long theirRandom;
 	private MarkerChance chance;
@@ -185,7 +181,7 @@ public class RoomListener implements RoomUpdateListener,
 		ByteBuffer buffer = ByteBuffer.wrap(messageData);
 		byte type = buffer.get();
 		if (type == MSG_PROTOCOL_VERSION) {
-			opponentProtocolVersion = buffer.getInt();			
+			opponentProtocolVersion = buffer.getInt();
 		} else if (type == MSG_WHO_IS_X) {
 			theirRandom = buffer.getLong();
 			if (myRandom == null) {
@@ -248,25 +244,22 @@ public class RoomListener implements RoomUpdateListener,
 	}
 
 	private void startGame(boolean iAmX) {
-		// TODO if we have account permission, can get account name
 		GameFragment gameFragment = new GameFragment();
-		gameFragment.setMode(GameMode.ONLINE);
-		Game game = new Game(3, Marker.X, chance);
+
 		ScoreCard score = new ScoreCard(0, 0, 0);
-		PlayerStrategy xStrategy;
-		PlayerStrategy oStrategy;
+		Player xPlayer;
+		Player oPlayer;
 		if (iAmX) {
-			xStrategy = new HumanStrategy("You", Marker.X, getMe()
+			xPlayer = HumanStrategy.createPlayer("You", Marker.X, getMe().getIconImageUri());
+			oPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.O, getOpponentParticipant()
 					.getIconImageUri());
-			oStrategy = new OnlineStrategy(getOpponentName(), Marker.O,
-					getOpponentParticipant().getIconImageUri());
 		} else {
-			xStrategy = new OnlineStrategy(getOpponentName(), Marker.X,
-					getOpponentParticipant().getIconImageUri());
-			oStrategy = new HumanStrategy("You", Marker.O, getMe()
+			oPlayer = HumanStrategy.createPlayer("You", Marker.O, getMe().getIconImageUri());
+			xPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.X, getOpponentParticipant()
 					.getIconImageUri());
 		}
-		gameFragment.startGame(xStrategy, oStrategy, game, score);
+		Game game = new Game(3, GameMode.ONLINE, xPlayer, oPlayer, chance);
+		gameFragment.startGame(game, score);
 		FragmentManager manager = activity.getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.replace(R.id.main_frame, gameFragment, "game");

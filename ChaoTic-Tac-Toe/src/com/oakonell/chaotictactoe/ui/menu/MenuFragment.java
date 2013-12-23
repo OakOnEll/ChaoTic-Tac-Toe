@@ -4,17 +4,14 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,7 +34,6 @@ import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
 import com.oakonell.chaotictactoe.ChaoTicTacToe;
 import com.oakonell.chaotictactoe.GameMode;
 import com.oakonell.chaotictactoe.MainActivity;
-import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.RoomListener;
 import com.oakonell.chaotictactoe.Sounds;
@@ -45,6 +41,7 @@ import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
+import com.oakonell.chaotictactoe.model.Player;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.solver.MinMaxAI;
 import com.oakonell.chaotictactoe.model.solver.RandomAI;
@@ -152,8 +149,7 @@ public class MenuFragment extends SherlockFragment {
 		numInvitesTextView = (TextView) view.findViewById(R.id.num_invites);
 		loading_num_invites = (ProgressBar) view
 				.findViewById(R.id.loading_num_invites);
-		waiting= (ProgressBar) view
-				.findViewById(R.id.waiting);
+		waiting = (ProgressBar) view.findViewById(R.id.waiting);
 
 		// // simulate button pressing on ImageView
 		// invitesButton.setOnTouchListener(new OnTouchListener() {
@@ -399,11 +395,13 @@ public class MenuFragment extends SherlockFragment {
 	private void startLocalTwoPlayerGame(MarkerChance chance, String xName,
 			String oName) {
 		GameFragment gameFragment = new GameFragment();
-		gameFragment.setMode(GameMode.PASS_N_PLAY);
-		Game game = new Game(3, Marker.X, chance);
+
+		Player xPlayer = HumanStrategy.createPlayer(xName, Marker.X);
+		Player oPlayer = HumanStrategy.createPlayer(oName, Marker.O);
+
+		Game game = new Game(3, GameMode.PASS_N_PLAY, xPlayer, oPlayer, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
-		gameFragment.startGame(new HumanStrategy(xName, Marker.X),
-				new HumanStrategy(oName, Marker.O), game, score);
+		gameFragment.startGame(game, score);
 
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
@@ -414,18 +412,22 @@ public class MenuFragment extends SherlockFragment {
 
 	private void startAIGame(MarkerChance chance, String oName, int aiDepth) {
 		GameFragment gameFragment = new GameFragment();
-		gameFragment.setMode(GameMode.AI);
-		Game game = new Game(3, Marker.X, chance);
+
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		String xName = "You";
-		PlayerStrategy ai;
+
+		Player oPlayer;
 		if (aiDepth < 0) {
-			ai = new RandomAI(oName, Marker.O);
+			oPlayer = RandomAI.createPlayer(oName, Marker.O);
 		} else {
-			ai = new MinMaxAI(oName, Marker.O, aiDepth, game.getMarkerChance());
+			oPlayer = MinMaxAI.createPlayer(oName, Marker.O, aiDepth, chance);
 		}
-		gameFragment.startGame(new HumanStrategy(xName, Marker.X), ai, game,
-				score);
+
+		Player xPlayer = HumanStrategy.createPlayer(xName, Marker.X);
+
+		Game game = new Game(3, GameMode.AI, xPlayer, oPlayer, chance);
+
+		gameFragment.startGame(game, score);
 
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
@@ -461,7 +463,8 @@ public class MenuFragment extends SherlockFragment {
 		getMainActivity().setRoomListener(roomListener);
 		// create the room
 		Log.d(TAG, "Creating room...");
-		final RoomConfig.Builder rtmConfigBuilder = RoomConfig.builder(roomListener);
+		final RoomConfig.Builder rtmConfigBuilder = RoomConfig
+				.builder(roomListener);
 		rtmConfigBuilder.addPlayersToInvite(invitees);
 		rtmConfigBuilder.setMessageReceivedListener(roomListener);
 		rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
@@ -474,10 +477,11 @@ public class MenuFragment extends SherlockFragment {
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				getMainActivity().getGamesClient().createRoom(rtmConfigBuilder.build());
+				getMainActivity().getGamesClient().createRoom(
+						rtmConfigBuilder.build());
 			}
 		}, 0);
-		
+
 		Log.d(TAG, "Room created, waiting for it to be ready...");
 	}
 
@@ -622,7 +626,7 @@ public class MenuFragment extends SherlockFragment {
 	}
 
 	public void setActive() {
-		waiting.setVisibility(View.INVISIBLE);		
+		waiting.setVisibility(View.INVISIBLE);
 	}
 
 }

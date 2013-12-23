@@ -7,17 +7,18 @@ import com.oakonell.chaotictactoe.model.Board;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
+import com.oakonell.chaotictactoe.model.Player;
 import com.oakonell.chaotictactoe.model.State;
 
 /**
  * MiniMax solving algorithm with Alpha/Beta pruning
  */
 public class MiniMaxAlg {
-	private final Marker player;
+	private final Player player;
 	private final int depth;
 	private final MarkerChance chance;
 
-	public MiniMaxAlg(Marker player, int depth, MarkerChance chance) {
+	public MiniMaxAlg(Player player, int depth, MarkerChance chance) {
 		this.player = player;
 		this.chance = chance;
 		if (depth < 0)
@@ -39,13 +40,13 @@ public class MiniMaxAlg {
 		return solve.move;
 	}
 
-	private MoveAndScore solve(Board board, int depth, Marker currentPlayer,
+	private MoveAndScore solve(Board board, int depth, Player currentPlayer,
 			Marker toPlay, double theAlpha, double theBeta) {
 		State state = board.getState();
 		if (state.isOver()) {
 			// how can moves be empty is state is not over?!
 			// game is over
-			Marker winner = state.getWinner();
+			Player winner = state.getWinner();
 			if (winner != null) {
 				// someone won, give the heuristic score
 				return new MoveAndScore(null, getHeuristicScore(board));
@@ -67,9 +68,9 @@ public class MiniMaxAlg {
 			Marker original = null;
 			if (move.marker == Marker.EMPTY) {
 				original = board.getCell(move.move.getX(), move.move.getY());
-				board.removeMarker(move.move, move.marker);
+				board.removeMarker(move.move, player);
 			} else {
-				board.placeMarker(move.move, move.marker);
+				board.placeMarker(move.move, player, move.marker);
 			}
 			double currentScore;
 			if (currentPlayer == player) {
@@ -90,9 +91,9 @@ public class MiniMaxAlg {
 				}
 			}
 			if (move.marker == Marker.EMPTY) {
-				board.placeMarker(move.move, original);
+				board.placeMarker(move.move, player, original);
 			} else {
-				board.clearMarker(move.move, move.marker);
+				board.clearMarker(move.move, player);
 			}
 			if (alpha >= beta)
 				break;
@@ -101,7 +102,7 @@ public class MiniMaxAlg {
 		return new MoveAndScore(bestMove, bestScore);
 	}
 
-	private List<MoveAndWeight> getValidMoves(Board board, Marker player,
+	private List<MoveAndWeight> getValidMoves(Board board, Player player,
 			Marker toPlay) {
 		List<MoveAndWeight> result = new ArrayList<MoveAndWeight>();
 		if (toPlay != null) {
@@ -109,10 +110,10 @@ public class MiniMaxAlg {
 			return result;
 		}
 		if (chance.getMyMarker() != 0) {
-			addMoves(result, board, player, chance.getMyMarkerPercentage());
+			addMoves(result, board, player.getMarker(), chance.getMyMarkerPercentage());
 		}
 		if (chance.getOpponentMarker() != 0) {
-			addMoves(result, board, player.opponent(),
+			addMoves(result, board, player.opponent().getMarker(),
 					chance.getOpponentMarkerPercentage());
 		}
 		if (chance.getRemoveMarker() != 0) {
@@ -164,7 +165,7 @@ public class MiniMaxAlg {
 	private int getHeuristicScore(Board board) {
 		int size = board.getSize();
 		int score = 0;
-		Marker opponent = player.opponent();
+		Marker opponent = player.opponent().getMarker();
 
 		// Inspect the columns
 		for (int x = 0; x < size; ++x) {
@@ -173,7 +174,7 @@ public class MiniMaxAlg {
 
 			for (int y = 0; y < size; ++y) {
 				Marker cell = board.getCell(x, y);
-				if (cell == player) {
+				if (cell == player.getMarker()) {
 					numMine++;
 				}
 				if (cell == opponent) {
@@ -191,7 +192,7 @@ public class MiniMaxAlg {
 
 			for (int x = 0; x < size; ++x) {
 				Marker cell = board.getCell(x, y);
-				if (cell == player) {
+				if (cell == player.getMarker()) {
 					numMine++;
 				}
 				if (cell == opponent) {
@@ -207,7 +208,7 @@ public class MiniMaxAlg {
 		int numOpponent = 0;
 		for (int x = 0; x < size; ++x) {
 			Marker cell = board.getCell(x, x);
-			if (cell == player) {
+			if (cell == player.getMarker()) {
 				numMine++;
 			}
 			if (cell == opponent) {
@@ -222,7 +223,7 @@ public class MiniMaxAlg {
 		// Inspect the bottom-right/top-right
 		for (int x = 0; x < size; ++x) {
 			Marker cell = board.getCell(x, size - x - 1);
-			if (cell == player) {
+			if (cell == player.getMarker()) {
 				numMine++;
 			}
 			if (cell == opponent) {

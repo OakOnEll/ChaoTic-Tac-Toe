@@ -8,7 +8,7 @@
     <string name="player_won">%s won!</string>
     <string name="draw">Draw Game!</string>
     <string name="play_again">Play again?</string>
-    <string name="exit_play_again">Exit</string>
+    <string name="exit_play_again">OK</string>
     
     <string name="waiting_for_opponent_to_decide_to_play_again">Waiting for %s to decide whether to play again.</string>
     <string name="opponent_wants_to_play_again">%s wants to play again.</string>
