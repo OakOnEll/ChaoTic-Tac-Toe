@@ -15,8 +15,8 @@ FilePrefix ''
 //
 // Execute Converter
 //
-Array MySvgFiles 'achievements_icon_16419.svg':'ai_game_icon_4955.svg':'dumb_ai_icon_17773.svg':'leaderboard_icon_17975.svg':'message_available_icon_1332.svg':'message_icon_27709.svg':'online_game_icon_27324.svg':'pass_n_play_icon_27531.svg':'quick_game_icon_18148.svg':'no_invites_icon_15776.svg':'invites_icon_15777.svg':'silhouette_icon_4520.svg':'check_icon_835.svg':'cancel_icon_18932.svg'
-Array MyExportFiles 'achievements_icon_16419':'ai_game_icon_4955':'dumb_ai_icon_17773':'leaderboard_icon_17975':'message_available_icon_1332':'message_icon_27709':'online_game_icon_27324':'pass_n_play_icon_27531':'quick_game_icon_18148':'no_invites_icon_15776':'invites_icon_15777':'silhouette_icon_4520':'check_icon_835':'cancel_icon_18932'
+Array MySvgFiles 'achievements_icon_16419.svg':'ai_game_icon_4955.svg':'dumb_ai_icon_17773.svg':'leaderboard_icon_17975.svg':'message_available_icon_1332.svg':'message_icon_27709.svg':'online_game_icon_27324.svg':'pass_n_play_icon_27531.svg':'quick_game_icon_18148.svg':'no_invites_icon_15776.svg':'invites_icon_15777.svg':'silhouette_icon_4520.svg':'check_icon_835.svg':'cancel_icon_18932.svg':'robot_icon_699.svg'
+Array MyExportFiles 'achievements_icon_16419':'ai_game_icon_4955':'dumb_ai_icon_17773':'leaderboard_icon_17975':'message_available_icon_1332':'message_icon_27709':'online_game_icon_27324':'pass_n_play_icon_27531':'quick_game_icon_18148':'no_invites_icon_15776':'invites_icon_15777':'silhouette_icon_4520':'check_icon_835':'cancel_icon_18932':'robot_icon_699'
 
 Loop MySvgFiles 3
     FileSvg MySvgFiles:Index

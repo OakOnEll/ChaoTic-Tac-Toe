@@ -210,6 +210,7 @@ public class MainActivity extends BaseGameActivity {
 
 	public void gameEnded() {
 		possiblyShowInterstitialAd();
+		getMenuFragment().setActive();
 	}
 
 	public RoomListener getRoomListener() {

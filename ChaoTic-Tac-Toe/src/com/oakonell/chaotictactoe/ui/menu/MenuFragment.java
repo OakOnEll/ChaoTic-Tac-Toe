@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -66,11 +67,12 @@ public class MenuFragment extends SherlockFragment {
 	private ProgressBar loading_num_invites;
 
 	protected MarkerChance onlineChance;
+	private ProgressBar waiting;
 
 	@Override
 	public void onActivityResult(int request, int response, Intent data) {
+		waiting.setVisibility(View.INVISIBLE);
 		switch (request) {
-
 		case MainActivity.RC_SELECT_PLAYERS: {
 			if (response == Activity.RESULT_OK) {
 				final ArrayList<String> invitees = data
@@ -96,6 +98,7 @@ public class MenuFragment extends SherlockFragment {
 
 			// we got the result from the "waiting room" UI.
 			if (response == Activity.RESULT_OK) {
+				waiting.setVisibility(View.VISIBLE);
 				getMainActivity().getRoomListener().backFromWaitingRoom();
 			} else if (response == GamesActivityResultCodes.RESULT_LEFT_ROOM) {
 				// player actively indicated that they want to leave the room
@@ -149,6 +152,8 @@ public class MenuFragment extends SherlockFragment {
 		numInvitesTextView = (TextView) view.findViewById(R.id.num_invites);
 		loading_num_invites = (ProgressBar) view
 				.findViewById(R.id.loading_num_invites);
+		waiting= (ProgressBar) view
+				.findViewById(R.id.waiting);
 
 		// // simulate button pressing on ImageView
 		// invitesButton.setOnTouchListener(new OnTouchListener() {
@@ -194,6 +199,7 @@ public class MenuFragment extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				if (getMainActivity().isSignedIn()) {
+					waiting.setVisibility(View.VISIBLE);
 					startActivityForResult(getMainActivity().getGamesClient()
 							.getAchievementsIntent(), MainActivity.RC_UNUSED);
 				} else {
@@ -210,6 +216,7 @@ public class MenuFragment extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				if (getMainActivity().isSignedIn()) {
+					waiting.setVisibility(View.VISIBLE);
 					startActivityForResult(getMainActivity().getGamesClient()
 							.getAllLeaderboardsIntent(), MainActivity.RC_UNUSED);
 				} else {
@@ -278,6 +285,7 @@ public class MenuFragment extends SherlockFragment {
 				if (getMainActivity().isSignedIn()) {
 					Intent intent = getMainActivity().getGamesClient()
 							.getInvitationInboxIntent();
+					waiting.setVisibility(View.VISIBLE);
 					startActivityForResult(intent,
 							MainActivity.RC_INVITATION_INBOX);
 				} else {
@@ -347,14 +355,23 @@ public class MenuFragment extends SherlockFragment {
 				RoomListener roomListener = new RoomListener(getMainActivity(),
 						getMainActivity().getGameHelper(), chance, true);
 				getMainActivity().setRoomListener(roomListener);
-				RoomConfig.Builder rtmConfigBuilder = RoomConfig
+				final RoomConfig.Builder rtmConfigBuilder = RoomConfig
 						.builder(roomListener);
 				rtmConfigBuilder.setVariant(variant);
 				rtmConfigBuilder.setMessageReceivedListener(roomListener);
 				rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
 				rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
-				getMainActivity().getGamesClient().createRoom(
-						rtmConfigBuilder.build());
+				waiting.setVisibility(View.VISIBLE);
+				// post delayed so that the progess is shown
+				Handler handler = new Handler();
+				handler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						getMainActivity().getGamesClient().createRoom(
+								rtmConfigBuilder.build());
+					}
+				}, 0);
+
 			}
 		});
 		dialog.show(getSherlockActivity().getSupportFragmentManager(),
@@ -371,6 +388,7 @@ public class MenuFragment extends SherlockFragment {
 				MenuFragment.this.onlineChance = chance;
 				Intent intent = getMainActivity().getGamesClient()
 						.getSelectPlayersIntent(1, 1);
+				waiting.setVisibility(View.VISIBLE);
 				startActivityForResult(intent, MainActivity.RC_SELECT_PLAYERS);
 			}
 		});
@@ -443,14 +461,23 @@ public class MenuFragment extends SherlockFragment {
 		getMainActivity().setRoomListener(roomListener);
 		// create the room
 		Log.d(TAG, "Creating room...");
-		RoomConfig.Builder rtmConfigBuilder = RoomConfig.builder(roomListener);
+		final RoomConfig.Builder rtmConfigBuilder = RoomConfig.builder(roomListener);
 		rtmConfigBuilder.addPlayersToInvite(invitees);
 		rtmConfigBuilder.setMessageReceivedListener(roomListener);
 		rtmConfigBuilder.setRoomStatusUpdateListener(roomListener);
 		if (autoMatchCriteria != null) {
 			rtmConfigBuilder.setAutoMatchCriteria(autoMatchCriteria);
 		}
-		getMainActivity().getGamesClient().createRoom(rtmConfigBuilder.build());
+		waiting.setVisibility(View.VISIBLE);
+		// post delayed so that the progess is shown
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				getMainActivity().getGamesClient().createRoom(rtmConfigBuilder.build());
+			}
+		}, 0);
+		
 		Log.d(TAG, "Room created, waiting for it to be ready...");
 	}
 
@@ -586,11 +613,16 @@ public class MenuFragment extends SherlockFragment {
 		roomConfigBuilder.setInvitationIdToAccept(invId)
 				.setMessageReceivedListener(roomListener)
 				.setRoomStatusUpdateListener(roomListener);
+		waiting.setVisibility(View.VISIBLE);
 		getMainActivity().getGamesClient().joinRoom(roomConfigBuilder.build());
 	}
 
 	public MainActivity getMainActivity() {
 		return (MainActivity) super.getActivity();
+	}
+
+	public void setActive() {
+		waiting.setVisibility(View.INVISIBLE);		
 	}
 
 }

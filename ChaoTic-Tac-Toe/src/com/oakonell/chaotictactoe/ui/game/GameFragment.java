@@ -97,17 +97,43 @@ public class GameFragment extends SherlockFragment {
 	private View thinking;
 	private TextView thinkingText;
 
+	boolean exitOnResume;
+
+	@Override
+	public void onPause() {
+		exitOnResume = mode == GameMode.ONLINE;
+		// TODO Auto-generated method stub
+		super.onPause();
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (exitOnResume) {
+			final MainActivity activity = getMainActivity();
+			String message = "You left the game";
+			(new AlertDialog.Builder(getMainActivity()))
+					.setMessage(message)
+					.setNeutralButton(android.R.string.ok,
+							new OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									activity.gameEnded();
+									activity.getSupportFragmentManager()
+											.popBackStack();
+									dialog.dismiss();
+								}
+							}).create().show();
+		}
 		final FragmentActivity activity = getActivity();
 		// adjust the width or height to make sure the board is a square
 		activity.findViewById(R.id.grid_container).getViewTreeObserver()
 				.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
-						View squareView = activity.findViewById(
-								R.id.grid_container);
+						View squareView = activity
+								.findViewById(R.id.grid_container);
 						if (squareView == null) {
 							// We get this when we are leaving the game?
 							return;
@@ -188,7 +214,6 @@ public class GameFragment extends SherlockFragment {
 		}
 	}
 
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -198,10 +223,12 @@ public class GameFragment extends SherlockFragment {
 
 		case R.id.action_settings:
 			if (mode == GameMode.ONLINE) {
-				
-				// show an abbreviated "settings"- notably the sound fx and other immediate game play settings
+
+				// show an abbreviated "settings"- notably the sound fx and
+				// other immediate game play settings
 				OnlineSettingsDialogFragment onlineSettingsFragment = new OnlineSettingsDialogFragment();
-				onlineSettingsFragment.show(getChildFragmentManager(), "settings");
+				onlineSettingsFragment.show(getChildFragmentManager(),
+						"settings");
 				return true;
 			}
 			// create special intent
@@ -216,7 +243,8 @@ public class GameFragment extends SherlockFragment {
 			}
 			app.setDevelopInfo(info);
 			// ugh.. does going to preferences leave the room!?
-			getActivity().startActivityForResult(prefIntent, MainActivity.RC_UNUSED);
+			getActivity().startActivityForResult(prefIntent,
+					MainActivity.RC_UNUSED);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -902,6 +930,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private boolean opponentLeftIsShowing;
+
 	public void opponentLeft() {
 		if (playAgainDialog != null) {
 			// the user is in the play again dialog, let him read the info
@@ -932,8 +961,9 @@ public class GameFragment extends SherlockFragment {
 
 		}
 		// TODO sometimes this is received before the opponentLeft message?
-		// but if this device/user leaves the room, this is only message received..
-		//getMainActivity().getSupportFragmentManager().popBackStack();
+		// but if this device/user leaves the room, this is only message
+		// received..
+		// getMainActivity().getSupportFragmentManager().popBackStack();
 	}
 
 	private boolean opponentInChat = false;
