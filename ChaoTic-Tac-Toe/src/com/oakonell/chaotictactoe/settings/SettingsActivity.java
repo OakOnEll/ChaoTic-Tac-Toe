@@ -20,8 +20,7 @@ public class SettingsActivity extends PrefsActivity {
 	protected void beforePreV11BuildFromResource() {
 		PreferenceCategory cat1 = new PreferenceCategory(this);
 		Preference preference = new Preference(this);
-		preference.setTitle("Account settings");
-		preference.setSummary("Account settings");
+		preference.setTitle(R.string.account_settings);
 		preference
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
@@ -40,16 +39,17 @@ public class SettingsActivity extends PrefsActivity {
 	}
 
 	@Override
-	protected int getV11HeaderResourceId() {
-		return R.xml.header;
-	}
-
-	@Override
 	protected PreferenceConfigurer getPreV11PreferenceConfigurer() {
 		return configureMultiple(new DevelopPrefConfigurer(getParent(),
 				getPrefFinder()), new CommonPreferences(this, getPrefFinder(),
 				GenericAboutActivity.class));
 	}
+
+	@Override
+	protected int getV11HeaderResourceId() {
+		return R.xml.header;
+	}
+
 
 	protected boolean isValidFragment(String fragmentName) {
 		return true;

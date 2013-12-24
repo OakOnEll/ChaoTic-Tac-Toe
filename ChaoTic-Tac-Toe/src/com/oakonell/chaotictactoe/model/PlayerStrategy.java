@@ -1,10 +1,5 @@
-package com.oakonell.chaotictactoe;
+package com.oakonell.chaotictactoe.model;
 
-import android.net.Uri;
-
-import com.oakonell.chaotictactoe.model.Board;
-import com.oakonell.chaotictactoe.model.Cell;
-import com.oakonell.chaotictactoe.model.Marker;
 
 public class PlayerStrategy {
 	private final Marker marker;

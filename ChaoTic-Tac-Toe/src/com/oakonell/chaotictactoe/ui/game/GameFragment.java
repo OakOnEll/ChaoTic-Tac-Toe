@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import android.app.Activity;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -22,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -37,24 +37,23 @@ import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.oakonell.chaotictactoe.Achievements;
 import com.oakonell.chaotictactoe.ChaoTicTacToe;
-import com.oakonell.chaotictactoe.GameMode;
 import com.oakonell.chaotictactoe.Leaderboards;
 import com.oakonell.chaotictactoe.MainActivity;
-import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.RoomListener;
 import com.oakonell.chaotictactoe.Sounds;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
+import com.oakonell.chaotictactoe.model.GameMode;
 import com.oakonell.chaotictactoe.model.InvalidMoveException;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.Player;
+import com.oakonell.chaotictactoe.model.PlayerStrategy;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
 import com.oakonell.chaotictactoe.settings.SettingsActivity;
-import com.oakonell.chaotictactoe.ui.menu.MenuFragment;
 import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
 import com.oakonell.utils.StringUtils;
 import com.oakonell.utils.Utils;
@@ -105,9 +104,8 @@ public class GameFragment extends SherlockFragment {
 		super.onResume();
 		if (exitOnResume) {
 			final MainActivity activity = getMainActivity();
-			String message = "You left the game";
 			(new AlertDialog.Builder(getMainActivity()))
-					.setMessage(message)
+					.setMessage(R.string.you_left_the_game)
 					.setNeutralButton(android.R.string.ok,
 							new OnClickListener() {
 								@Override
@@ -166,8 +164,13 @@ public class GameFragment extends SherlockFragment {
 		if (!ActivityCompat.invalidateOptionsMenu(getActivity())) {
 			handleMenu();
 		} else {
-			getActivity().invalidateOptionsMenu();
+			honeyCombInvalidateMenu();
 		}
+	}
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void honeyCombInvalidateMenu() {
+		getActivity().invalidateOptionsMenu();
 	}
 
 	private void handleMenu() {
@@ -287,8 +290,7 @@ public class GameFragment extends SherlockFragment {
 		if (currentStrategy != null && !currentStrategy.isHuman()) {
 			if (thinking != null) {
 				// show a thinking/progress icon, suitable for network play and
-				// ai
-				// thinking..
+				// ai thinking..
 				thinking.setVisibility(View.VISIBLE);
 			}
 		}
@@ -367,7 +369,7 @@ public class GameFragment extends SherlockFragment {
 		updateHeader();
 
 		TextView gameMode = (TextView) view.findViewById(R.id.game_mode);
-		String gameType = game.getMarkerChance().getLabel();
+		String gameType = game.getMarkerChance().getLabel(getActivity());
 		gameMode.setText(gameType);
 
 		return view;
@@ -416,24 +418,17 @@ public class GameFragment extends SherlockFragment {
 	private void updateHeader() {
 		Player player = game.getCurrentPlayer();
 		numMoves.setText("" + game.getNumberOfMoves());
-		float notTurnAlpha = 0.25f;
 		if (player.getMarker() == Marker.X) {
 			xHeaderLayout.setBackgroundResource(R.drawable.current_player);
 			oHeaderLayout.setBackgroundResource(R.drawable.inactive_player);
 
-			if (Utils.hasHoneycomb()) {
-				xHeaderLayout.setAlpha(1f);
-				oHeaderLayout.setAlpha(notTurnAlpha);
-			}
+			highlightPlayerTurn(xHeaderLayout, oHeaderLayout);
 
 		} else {
 			oHeaderLayout.setBackgroundResource(R.drawable.current_player);
 			xHeaderLayout.setBackgroundResource(R.drawable.inactive_player);
 
-			if (Utils.hasHoneycomb()) {
-				oHeaderLayout.setAlpha(1f);
-				xHeaderLayout.setAlpha(notTurnAlpha);
-			}
+			highlightPlayerTurn(oHeaderLayout, xHeaderLayout);
 		}
 
 		// TODO make the chaotic mode show some "rolling" of the markers
@@ -452,6 +447,15 @@ public class GameFragment extends SherlockFragment {
 		oWins.setText("" + score.getOWins());
 		draws.setText("" + score.getDraws());
 		gameNumber.setText("" + score.getTotalGames());
+	}
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void highlightPlayerTurn(View highlight, View dimmed) {
+		float notTurnAlpha = 0.25f;
+		if (Utils.hasHoneycomb()) {
+			highlight.setAlpha(1f);
+			dimmed.setAlpha(notTurnAlpha);
+		}
 	}
 
 	private Random rollRandom = new Random();

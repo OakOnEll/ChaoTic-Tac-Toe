@@ -3,6 +3,10 @@ package com.oakonell.chaotictactoe.model;
 import java.nio.ByteBuffer;
 import java.util.Random;
 
+import com.oakonell.chaotictactoe.R;
+
+import android.content.Context;
+
 public class MarkerChance {
 	public static final MarkerChance CHAOTIC = new MarkerChance(1, 1, 1);
 	public static final MarkerChance NORMAL = new MarkerChance(1, 0, 0);
@@ -135,16 +139,16 @@ public class MarkerChance {
 		return new MarkerChance(mine, opponent, removal);
 	}
 
-	public String getLabel() {
-		// TODO localize
-		String gameType = "Custom";
+	public String getLabel(Context context) {
 		if (isNormal()) {
-			gameType = "Normal";
-		} else if (isReverse()) {
-			gameType = "Reverse";
-		} else if (isChaotic()) {
-			gameType = "Chaotic";
+			return context.getString(R.string.chance_normal);
 		}
-		return gameType;
+		if (isReverse()) {
+			return context.getString(R.string.chance_reverse);
+		}
+		if (isChaotic()) {
+			return context.getString(R.string.chance_chaotic);
+		}
+		return context.getString(R.string.chance_custom);
 	}
 }

@@ -1,15 +1,12 @@
 package com.oakonell.chaotictactoe.model;
 
-import com.oakonell.chaotictactoe.PlayerStrategy;
-
 import android.net.Uri;
 
 public class Player {
-
 	private final String name;
 	private final Uri iconImageUri;
-	private Player opponent;
 	private final PlayerStrategy strategy;
+	private Player opponent;
 
 	public Player(String name, Uri iconImageUri, PlayerStrategy strategy) {
 		this.name = name;

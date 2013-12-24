@@ -41,7 +41,6 @@ public class AccountPrefConfigurer implements PreferenceConfigurer {
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
 					activity.startActivityForResult(settingsIntent, 0);
-					Toast.makeText(activity, "Launched settings?", Toast.LENGTH_SHORT).show();
 					return true;
 				}
 			});

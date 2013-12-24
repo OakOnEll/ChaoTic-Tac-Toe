@@ -14,6 +14,7 @@ import com.google.android.gms.games.leaderboard.SubmitScoreResult;
 import com.google.android.gms.games.leaderboard.SubmitScoreResult.Result;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Game;
+import com.oakonell.chaotictactoe.model.GameMode;
 import com.oakonell.chaotictactoe.model.State;
 
 public class Leaderboards {
@@ -29,14 +30,22 @@ public class Leaderboards {
 	public void submitGame(GameHelper gameHelper, final Context context,
 			Game game, State outcome) {
 
-		if (game.getMarkerChance().isChaotic()) {
-			// TODO only for online? only for winner?
-			GamesClient gamesClient = gameHelper.getGamesClient();
-			int submittedScore = game.getNumberOfMoves();
-
-			submitLongestGame(context, gamesClient, submittedScore);
-			submitShortestGame(context, gamesClient, submittedScore);
+		if (!game.getMarkerChance().isChaotic()) {
+			return;
 		}
+		if (game.getMode() == GameMode.PASS_N_PLAY) {
+			return;
+		}
+		if (game.getLocalPlayer() != outcome.getWinner()) {
+			return;
+		}
+
+		GamesClient gamesClient = gameHelper.getGamesClient();
+		int submittedScore = game.getNumberOfMoves();
+
+		submitLongestGame(context, gamesClient, submittedScore);
+		submitShortestGame(context, gamesClient, submittedScore);
+
 	}
 
 	private void submitShortestGame(final Context context,
@@ -50,24 +59,27 @@ public class Leaderboards {
 			protected void beatDaily(Context context, Result daily) {
 				Toast.makeText(
 						context,
-						"You beat your daily minimum moves in a chaotic game - "
-								+ daily.rawScore, Toast.LENGTH_SHORT).show();
+						context.getResources().getString(
+								R.string.beat_daily_min, daily.rawScore),
+						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			protected void beatWeekly(Context context, Result weekly) {
 				Toast.makeText(
 						context,
-						"You beat your weekly minimum moves in a chaotic game - "
-								+ weekly.rawScore, Toast.LENGTH_SHORT).show();
+						context.getResources().getString(
+								R.string.beat_weekly_min, weekly.rawScore),
+						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			protected void beatAllTime(Context context, Result allTime) {
 				Toast.makeText(
 						context,
-						"You beat your all time minimum moves in a chaotic game - "
-								+ allTime.rawScore, Toast.LENGTH_SHORT).show();
+						context.getResources().getString(
+								R.string.beat_alltime_min, allTime.rawScore),
+						Toast.LENGTH_SHORT).show();
 			}
 		}, id, submittedScore);
 	}
@@ -83,24 +95,27 @@ public class Leaderboards {
 			protected void beatDaily(final Context context, Result daily) {
 				Toast.makeText(
 						context,
-						"You beat your daily maximum moves in a chaotic game - "
-								+ daily.rawScore, Toast.LENGTH_SHORT).show();
+						context.getResources().getString(
+								R.string.beat_daily_max, daily.rawScore),
+						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			protected void beatWeekly(final Context context, Result weekly) {
 				Toast.makeText(
 						context,
-						"You beat your weekly maximum moves in a chaotic game - "
-								+ weekly.rawScore, Toast.LENGTH_SHORT).show();
+						context.getResources().getString(
+								R.string.beat_weekly_max, weekly.rawScore),
+						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			protected void beatAllTime(final Context context, Result allTime) {
 				Toast.makeText(
 						context,
-						"You beat your all time maximum moves in a chaotic game - "
-								+ allTime.rawScore, Toast.LENGTH_SHORT).show();
+						context.getResources().getString(
+								R.string.beat_alltime_max, allTime.rawScore),
+						Toast.LENGTH_SHORT).show();
 			}
 		}, id, submittedScore);
 	}
@@ -121,9 +136,6 @@ public class Leaderboards {
 				// report an error?
 				Log.e("Leaderboard", "Error submitting leaderboard score- "
 						+ status);
-				Toast.makeText(context,
-						"Error submitting leaderboard score- status=" + status,
-						Toast.LENGTH_SHORT).show();
 				return;
 			}
 			if (!result.getLeaderboardId().equals(id))

@@ -10,6 +10,7 @@ import com.google.android.gms.games.GamesClient;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Board;
 import com.oakonell.chaotictactoe.model.Game;
+import com.oakonell.chaotictactoe.model.GameMode;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.State;
 
@@ -44,8 +45,6 @@ public class Achievements {
 				}
 			}
 			if (numX == 0 || numO == 0) {
-				// TODO only apply to winner?
-				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
 			}
 		}
@@ -63,7 +62,6 @@ public class Achievements {
 
 			if (game.getMarkerChance().isChaotic()) {
 				if (outcome.isDraw()) {
-					// TODO only apply to person vs remote/ai?
 					unlock(gameHelper, context);
 				}
 			}
@@ -76,10 +74,12 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (game.getMode() == GameMode.PASS_N_PLAY)
+				return;
+
 			if (game.getBoard().isEmpty())
 				return;
 			if (game.getNumberOfTimesInThisState() > NUM_BOARD_REVISITS_FOR_DEJA_VU) {
-				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
 			}
 		}
@@ -97,7 +97,6 @@ public class Achievements {
 
 			if (game.getMarkerChance().isChaotic()
 					&& game.getNumberOfMoves() > NUM_MOVES_LONG_HAUL) {
-				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
 			}
 		}
@@ -113,8 +112,6 @@ public class Achievements {
 			if (outcome.getWinner() != game.getLocalPlayer())
 				return;
 			if (game.getNumberOfMoves() == game.getBoard().getSize()) {
-				// TODO SHould this only apply to the winner?
-				// TODO only apply to person vs remote/ai?
 				unlock(gameHelper, context);
 			}
 		}

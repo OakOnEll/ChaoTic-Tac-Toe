@@ -2,7 +2,7 @@
 <resources>
 
     <string name="sign_in_why">Sign in with Google to share achievements and play with your friends.</string>
-    <string name="you_are_signed_in">You are signed in with Google.</string>
+    <string name="you_are_signed_in_as">You are signed into Google+ as %s</string>
     <string name="sign_out">Sign out</string>
     <string name="signing_in">Signing in with Google</string>
     <string name="signing_out">Signing out</string>
@@ -25,10 +25,10 @@
     <string name="chance_normal">Normal</string>
     <string name="chance_chaotic">Chaotic</string>
     <string name="chance_custom">Custom</string>
+    <string name="chance_reverse">Reverse</string>
     <string name="chance_label_my_marker">Your Marker</string>
     <string name="chance_label_opponent_marker">Their Marker</string>
     <string name="chance_label_remove_marker">Remove Marker</string>
-    <string name="reverse">Reverse</string>
 
     <string-array name="chance_array">
         <item>Normal</item>
@@ -38,5 +38,18 @@
     </string-array>
 
     <string name="start">Start Game</string>
-
+    <string name="account_settings">Account Settings</string>
+    <string name="choose_ai_mode_title">Choose AI Game Mode</string>
+    <string name="ai_random">Random</string>
+    <string name="ai_easy">Easy</string>
+    <string name="ai_medium">Medium</string>
+    <string name="ai_hard">Hard</string>
+    <string name="choose_local_game_mode_title">Choose Game Mode</string>
+    <string name="error_x_name">Enter a name for X</string>
+    <string name="error_o_name">Enter a name for O</string>
+    <string name="unique_error_o_name">Enter a unique name for O</string>
+    <string name="choose_quick_game_mode_title">Choose Quick Game Mode</string>
+    <string name="choose_online_game_mode_title">Choose Online Game Mode</string>
+    <string name="choose_online_opponent">Find Opponent</string>
+    
 </resources>

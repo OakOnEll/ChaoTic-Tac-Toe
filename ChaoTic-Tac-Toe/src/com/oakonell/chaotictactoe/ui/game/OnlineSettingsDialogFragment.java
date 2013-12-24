@@ -19,8 +19,9 @@ public class OnlineSettingsDialogFragment extends SherlockDialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.online_settings_dialog, container, false);
-		getDialog().setTitle("Settings");
+		View view = inflater.inflate(R.layout.online_settings_dialog,
+				container, false);
+		getDialog().setTitle(R.string.online_setting_title);
 		// TODO move the pref get/set off main thread...
 		final CheckBox sounds = (CheckBox) view
 				.findViewById(R.id.pref_sound_fx_key);
@@ -45,7 +46,6 @@ public class OnlineSettingsDialogFragment extends SherlockDialogFragment {
 				R.string.pref_sound_fx_key);
 		sounds.setChecked(preferences.getBoolean(soundFxPrefKey, false));
 
-		
 		Button okButton = (Button) view.findViewById(R.id.ok);
 		okButton.setOnClickListener(new OnClickListener() {
 			@Override

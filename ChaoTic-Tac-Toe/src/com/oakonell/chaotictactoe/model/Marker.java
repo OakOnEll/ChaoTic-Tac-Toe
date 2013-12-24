@@ -13,12 +13,6 @@ public enum Marker {
 		return val;
 	}
 	
-	public Marker opponent() {
-		if (this == X) return O;
-		if (this == O) return X;
-		return EMPTY;		
-	}
-	
 	public static Marker fromInt(int i) {
 		for (Marker each : values()) {
 			if (each.getVal() == i) {

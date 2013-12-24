@@ -16,8 +16,6 @@ import android.widget.Spinner;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.oakonell.chaotictactoe.R;
-import com.oakonell.chaotictactoe.R.id;
-import com.oakonell.chaotictactoe.R.layout;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 
 public class NewAIGameDialog extends SherlockDialogFragment {
@@ -52,18 +50,23 @@ public class NewAIGameDialog extends SherlockDialogFragment {
 		View view = inflater
 				.inflate(R.layout.dialog_local_ai, container, false);
 
-		getDialog().setTitle("Choose AI Game Mode");
+		getDialog().setTitle(R.string.choose_ai_mode_title);
 
 		List<AiDropDownItem> aiLevels = new ArrayList<NewAIGameDialog.AiDropDownItem>();
-		aiLevels.add(new AiDropDownItem("Random", -1));
-		aiLevels.add(new AiDropDownItem("Easy", 1));
-		aiLevels.add(new AiDropDownItem("Medium", 2));
-		aiLevels.add(new AiDropDownItem("Hard", 3));
+		aiLevels.add(new AiDropDownItem(getResources().getString(
+				R.string.ai_random), -1));
+		aiLevels.add(new AiDropDownItem(getResources().getString(
+				R.string.ai_easy), 1));
+		aiLevels.add(new AiDropDownItem(getResources().getString(
+				R.string.ai_medium), 2));
+		aiLevels.add(new AiDropDownItem(getResources().getString(
+				R.string.ai_hard), 3));
 
 		final Spinner aiLevelSpinner = (Spinner) view
 				.findViewById(R.id.ai_level);
 		ArrayAdapter<AiDropDownItem> aiLevelAdapter = new ArrayAdapter<AiDropDownItem>(
-				getActivity(), android.R.layout.simple_spinner_dropdown_item, aiLevels);
+				getActivity(), android.R.layout.simple_spinner_dropdown_item,
+				aiLevels);
 		aiLevelSpinner.setAdapter(aiLevelAdapter);
 		aiLevelSpinner.setSelection(1);
 

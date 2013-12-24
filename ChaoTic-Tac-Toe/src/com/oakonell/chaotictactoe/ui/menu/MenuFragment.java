@@ -32,13 +32,13 @@ import com.google.android.gms.games.multiplayer.OnInvitationReceivedListener;
 import com.google.android.gms.games.multiplayer.OnInvitationsLoadedListener;
 import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
 import com.oakonell.chaotictactoe.ChaoTicTacToe;
-import com.oakonell.chaotictactoe.GameMode;
 import com.oakonell.chaotictactoe.MainActivity;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.RoomListener;
 import com.oakonell.chaotictactoe.Sounds;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Game;
+import com.oakonell.chaotictactoe.model.GameMode;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.Player;
@@ -150,34 +150,6 @@ public class MenuFragment extends SherlockFragment {
 		loading_num_invites = (ProgressBar) view
 				.findViewById(R.id.loading_num_invites);
 		waiting = (ProgressBar) view.findViewById(R.id.waiting);
-
-		// // simulate button pressing on ImageView
-		// invitesButton.setOnTouchListener(new OnTouchListener() {
-		// @Override
-		// public boolean onTouch(View v, MotionEvent event) {
-		//
-		// switch (event.getAction()) {
-		// case MotionEvent.ACTION_DOWN: {
-		// Toast.makeText(getActivity(), "pressed", Toast.LENGTH_SHORT).show();
-		// ImageView view = (ImageView) v;
-		// //overlay is black with transparency of 0x77 (119)
-		// view.getDrawable().setColorFilter(0x77000000,PorterDuff.Mode.SRC_ATOP);
-		// view.invalidate();
-		// break;
-		// }
-		// case MotionEvent.ACTION_UP:
-		// case MotionEvent.ACTION_CANCEL: {
-		// ImageView view = (ImageView) v;
-		// //clear the overlay
-		// view.getDrawable().clearColorFilter();
-		// view.invalidate();
-		// break;
-		// }
-		// }
-		//
-		// return true;
-		// }
-		// });
 
 		ImageView newGameOnSameDevice = (ImageView) view
 				.findViewById(R.id.new_game_same_device);
@@ -405,7 +377,8 @@ public class MenuFragment extends SherlockFragment {
 
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.replace(R.id.main_frame, gameFragment, "game");
+		transaction.replace(R.id.main_frame, gameFragment,
+				MainActivity.FRAG_TAG_GAME);
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
@@ -414,7 +387,7 @@ public class MenuFragment extends SherlockFragment {
 		GameFragment gameFragment = new GameFragment();
 
 		ScoreCard score = new ScoreCard(0, 0, 0);
-		String xName = "You";
+		String xName = getResources().getString(R.string.local_player_name);
 
 		Player oPlayer;
 		if (aiDepth < 0) {
@@ -431,7 +404,8 @@ public class MenuFragment extends SherlockFragment {
 
 		FragmentManager manager = getActivity().getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.replace(R.id.main_frame, gameFragment, "game");
+		transaction.replace(R.id.main_frame, gameFragment,
+				MainActivity.FRAG_TAG_GAME);
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
@@ -567,8 +541,8 @@ public class MenuFragment extends SherlockFragment {
 				R.id.signed_in_as_text);
 		if (signedInAsText == null)
 			return;
-		signedInAsText.setText("You are signed into Google+ as "
-				+ getMainActivity().getGamesClient().getCurrentAccountName());
+		signedInAsText.setText(getResources().getString(R.string.you_are_signed_in_as,
+				getMainActivity().getGamesClient().getCurrentAccountName()));
 	}
 
 	private void refreshInvites(final boolean shouldFlashNumber) {

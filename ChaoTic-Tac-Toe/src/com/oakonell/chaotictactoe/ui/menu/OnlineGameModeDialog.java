@@ -1,7 +1,6 @@
 package com.oakonell.chaotictactoe.ui.menu;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -12,8 +11,6 @@ import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.oakonell.chaotictactoe.R;
-import com.oakonell.chaotictactoe.R.id;
-import com.oakonell.chaotictactoe.R.layout;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 
 public class OnlineGameModeDialog extends SherlockDialogFragment {
@@ -31,18 +28,16 @@ public class OnlineGameModeDialog extends SherlockDialogFragment {
 		this.isQuick = isQuick;
 	}
 
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.dialog_online_type, container,
 				false);
 
-		// TODO utilize isQuick to remove custom option from chance fragment
 		if (isQuick) {
-			getDialog().setTitle("Choose Quick Game Mode");
+			getDialog().setTitle(R.string.choose_quick_game_mode_title);
 		} else {
-			getDialog().setTitle("Choose Game Mode");
+			getDialog().setTitle(R.string.choose_online_game_mode_title);
 		}
 
 		final MarkerChanceFragment frag = new MarkerChanceFragment();
@@ -55,7 +50,7 @@ public class OnlineGameModeDialog extends SherlockDialogFragment {
 
 		Button start = (Button) view.findViewById(R.id.start);
 		if (isQuick) {
-			start.setText("Find Opponent");
+			start.setText(R.string.choose_online_opponent);
 		}
 		start.setOnClickListener(new OnClickListener() {
 

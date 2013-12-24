@@ -3,11 +3,6 @@ package com.oakonell.chaotictactoe.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.util.Log;
-
-import com.google.android.gms.games.multiplayer.Participant;
-import com.oakonell.chaotictactoe.GameMode;
-
 public class Game {
 	private int moves;
 	private final MarkerChance markerChance;
@@ -50,11 +45,6 @@ public class Game {
 
 		// switch to next player
 		player = player.opponent();
-		// if (player == Marker.O) {
-		// player = Marker.X;
-		// } else {
-		// player = Marker.O;
-		// }
 
 		// pick the next marker to play
 		toPlay = pickMarkerToToplay();
@@ -71,7 +61,6 @@ public class Game {
 			number = 0;
 		}
 		numVisitsPerState.put(state, number + 1);
-		Log.i("Game", "Board state " + state);
 	}
 
 	private Marker pickMarkerToToplay() {
@@ -85,16 +74,6 @@ public class Game {
 	public Player getCurrentPlayer() {
 		return player;
 	}
-
-	// private PlayerStrategy xPlayerStrategy;
-	// private PlayerStrategy oPlayerStrategy;
-	// public void setxPlayerStrategy(PlayerStrategy xPlayerStrategy) {
-	// this.xPlayerStrategy = xPlayerStrategy;
-	// }
-	//
-	// public void setoPlayerStrategy(PlayerStrategy oPlayerStrategy) {
-	// this.oPlayerStrategy = oPlayerStrategy;
-	// }
 
 	public int getNumberOfMoves() {
 		return moves;
@@ -116,6 +95,10 @@ public class Game {
 		return mode;
 	}
 
+	/**
+	 * Return the human player in a game with only one human player, else null
+	 * @return
+	 */
 	public Player getLocalPlayer() {
 		if (getMode() == GameMode.PASS_N_PLAY) {
 			return null;
@@ -126,6 +109,10 @@ public class Game {
 		return secondPlayer;
 	}
 
+	/**
+	 * Return the non-human player in a game with only one human player, else null
+	 * @return
+	 */
 	public Player getNonLocalPlayer() {
 		if (getMode() == GameMode.PASS_N_PLAY) {
 			return null;

@@ -19,8 +19,6 @@ import android.widget.ImageButton;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.oakonell.chaotictactoe.R;
-import com.oakonell.chaotictactoe.R.id;
-import com.oakonell.chaotictactoe.R.layout;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.utils.StringUtils;
 
@@ -43,7 +41,7 @@ public class NewLocalGameDialog extends SherlockDialogFragment {
 		View view = inflater.inflate(R.layout.dialog_local_game, container,
 				false);
 
-		getDialog().setTitle("Choose Game Mode");
+		getDialog().setTitle(R.string.choose_local_game_mode_title);
 		defaultNamesFromPreferences();
 
 		ImageButton switchPlayers = (ImageButton) view
@@ -144,17 +142,17 @@ public class NewLocalGameDialog extends SherlockDialogFragment {
 		String xName = xNameText.getText().toString();
 		if (StringUtils.isEmpty(xName)) {
 			isValid = false;
-			xNameText.setError("Enter a name for X");
+			xNameText.setError(getResources().getString(R.string.error_x_name));
 		}
 		String oName = oNameText.getText().toString();
 		if (StringUtils.isEmpty(oName)) {
 			isValid = false;
-			oNameText.setError("Enter a name for O");
+			oNameText.setError(getResources().getString(R.string.error_o_name));
 		}
 
 		if (xName.equals(oName)) {
 			isValid = false;
-			oNameText.setError("Enter a unique name for O");
+			oNameText.setError(getResources().getString(R.string.unique_error_o_name));
 		}
 
 		isValid &= frag.validate();

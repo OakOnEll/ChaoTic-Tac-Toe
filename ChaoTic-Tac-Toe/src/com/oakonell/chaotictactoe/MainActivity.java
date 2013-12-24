@@ -1,5 +1,7 @@
 package com.oakonell.chaotictactoe;
 
+import java.util.Random;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -9,8 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -30,9 +30,8 @@ import com.oakonell.utils.Utils;
 import com.oakonell.utils.activity.AppLaunchUtils;
 
 public class MainActivity extends BaseGameActivity {
-	private static final String FRAG_TAG_GAME = "game";
+	public static final String FRAG_TAG_GAME = "game";
 	private static final String FRAG_TAG_MENU = "menu";
-	private static final String TAG = MainActivity.class.getName();
 
 	// Request codes for the UIs that we show with startActivityForResult:
 	public final static int RC_UNUSED = 1;
@@ -41,7 +40,6 @@ public class MainActivity extends BaseGameActivity {
 	public final static int RC_INVITATION_INBOX = 10001;
 	public final static int RC_WAITING_ROOM = 10002;
 
-	
 	private RoomListener roomListener;
 	private InterstitialAd mInterstitialAd;
 	private AdView mAdView;
@@ -65,7 +63,32 @@ public class MainActivity extends BaseGameActivity {
 		Utils.enableStrictMode();
 		setContentView(R.layout.main_activity);
 
-		initializeInterstitialAd();
+		initializeAds();
+
+		initializeSoundManager();
+
+		AppLaunchUtils.appLaunched(this, null);
+
+		final ActionBar ab = getSupportActionBar();
+		ab.setDisplayHomeAsUpEnabled(false);
+		ab.setDisplayUseLogoEnabled(true);
+		ab.setDisplayShowTitleEnabled(true);
+
+		Fragment menuFrag = getSupportFragmentManager().findFragmentByTag(
+				FRAG_TAG_MENU);
+		if (menuFrag == null) {
+			menuFrag = new MenuFragment();
+			FragmentTransaction transaction = getSupportFragmentManager()
+					.beginTransaction();
+			transaction.add(R.id.main_frame, menuFrag, FRAG_TAG_MENU);
+			transaction.commit();
+		}
+
+		setSignInMessages(getString(R.string.signing_in),
+				getString(R.string.signing_out));
+	}
+
+	private void initializeSoundManager() {
 		soundManager = new SoundManager(this);
 		soundManager.addSound(Sounds.PLAY_X, R.raw.play_x_sounds_882_solemn);
 		soundManager.addSound(Sounds.PLAY_O, R.raw.play_o_sounds_913_served);
@@ -82,69 +105,21 @@ public class MainActivity extends BaseGameActivity {
 		soundManager.addSound(Sounds.GAME_WON,
 				R.raw.game_won_small_crowd_applause_yannick_lemieux_1268806408);
 		soundManager.addSound(Sounds.GAME_DRAW, R.raw.game_draw_clong_1);
+	}
 
+	private void initializeAds() {
+		initializeInterstitialAd();
+
+		// initialize banner ad
 		mAdView = (AdView) findViewById(R.id.adView);
-		// mAdView.setAdListener(new ToastAdListener(this));
 		mAdView.loadAd(new AdRequest.Builder().build());
-
-		AppLaunchUtils.appLaunched(this, null);
-
-		final ActionBar ab = getSupportActionBar();
-		ab.setDisplayHomeAsUpEnabled(false);
-		ab.setDisplayUseLogoEnabled(true);
-		ab.setDisplayShowTitleEnabled(true);
-		// ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		Fragment menuFrag = getSupportFragmentManager().findFragmentByTag(
-				FRAG_TAG_MENU);
-		if (menuFrag == null) {
-			menuFrag = new MenuFragment();
-			FragmentTransaction transaction = getSupportFragmentManager()
-					.beginTransaction();
-			transaction.add(R.id.main_frame, menuFrag, FRAG_TAG_MENU);
-			transaction.commit();
-		}
-
-		setSignInMessages(getString(R.string.signing_in),
-				getString(R.string.signing_out));
-
 	}
 
 	private void initializeInterstitialAd() {
-		mInterstitialAd = new InterstitialAd(this);
+		mInterstitialAd = new InterstitialAd(MainActivity.this);
 		mInterstitialAd
 				.setAdUnitId(getResources().getString(R.string.admob_id));
 		mInterstitialAd.loadAd(new AdRequest.Builder().build());
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getSupportMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// switch (item.getItemId()) {
-		// case R.id.action_settings:
-		// Intent intent = new Intent(this, Preferences.class);
-		// startActivity(intent);
-		// return true;
-		// }
-		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		EasyTracker.getInstance().activityStart(this);
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-		EasyTracker.getInstance().activityStop(this);
 	}
 
 	@Override
@@ -174,8 +149,9 @@ public class MainActivity extends BaseGameActivity {
 
 		// if we received an invite via notification, accept it; otherwise, go
 		// to main screen
-		if (getInvitationId() != null) {
-			getMenuFragment().acceptInviteToRoom(getInvitationId());
+		String invitationId = getInvitationId();
+		if (invitationId != null) {
+			getMenuFragment().acceptInviteToRoom(invitationId);
 			return;
 		}
 	}
@@ -200,14 +176,6 @@ public class MainActivity extends BaseGameActivity {
 				FRAG_TAG_GAME);
 	}
 
-	public void onlineMoveReceived(Marker marker, Cell cell) {
-		getGameFragment().onlineMakeMove(marker, cell);
-	}
-
-	public void messageRecieved(Participant opponentParticipant, String string) {
-		getGameFragment().messageRecieved(opponentParticipant, string);
-	}
-
 	public void gameEnded() {
 		possiblyShowInterstitialAd();
 		getMenuFragment().setActive();
@@ -224,16 +192,14 @@ public class MainActivity extends BaseGameActivity {
 	@Override
 	public void onBackPressed() {
 		if (getGameFragment() != null && getGameFragment().isVisible()) {
-			// TODO localize these strings
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("Leave game?");
-			builder.setMessage("Leave the game in progress?");
-			builder.setPositiveButton("Yes", new OnClickListener() {
+			builder.setTitle(R.string.leave_game_title);
+			builder.setMessage(R.string.leave_game_message);
+			builder.setPositiveButton(R.string.yes, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
 
-					// TODO inform possible opponent of leaving room
 					if (roomListener != null) {
 						roomListener.leaveRoom();
 					}
@@ -243,7 +209,7 @@ public class MainActivity extends BaseGameActivity {
 					possiblyShowInterstitialAd();
 				}
 			});
-			builder.setNegativeButton("No", new OnClickListener() {
+			builder.setNegativeButton(R.string.no, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
@@ -253,6 +219,18 @@ public class MainActivity extends BaseGameActivity {
 			return;
 		}
 		super.onBackPressed();
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance().activityStart(this);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(this);
 	}
 
 	@Override
@@ -275,8 +253,11 @@ public class MainActivity extends BaseGameActivity {
 	}
 
 	public void possiblyShowInterstitialAd() {
-		// show an ad
-		// possibly only show with some probability (50%?)
+		// show an ad with some probability (~50%?)
+		Random random = new Random();
+		if (random.nextInt(10) > 5)
+			return;
+
 		if (mInterstitialAd.isLoaded()) {
 			mInterstitialAd.show();
 			mInterstitialAd.setAdListener(new AdListener() {
@@ -292,12 +273,19 @@ public class MainActivity extends BaseGameActivity {
 	public int playSound(Sounds sound) {
 		return soundManager.playSound(sound);
 	}
+
 	public int playSound(Sounds sound, boolean loop) {
 		return soundManager.playSound(sound, loop);
 	}
 
 	public void stopSound(int streamId) {
 		soundManager.stopSound(streamId);
+	}
+
+	public void onDisconnectedFromRoom() {
+		if (getGameFragment() != null) {
+			getGameFragment().onDisconnectedFromRoom();
+		}
 	}
 
 	public void opponentWillPlayAgain() {
@@ -312,13 +300,6 @@ public class MainActivity extends BaseGameActivity {
 		if (getGameFragment() != null) {
 			getGameFragment().opponentLeft();
 		}
-		//gameEnded();
-	}
-
-	public void onDisconnectedFromRoom() {
-		if (getGameFragment() != null) {
-			getGameFragment().onDisconnectedFromRoom();
-		}		
 	}
 
 	public void opponentInChat() {
@@ -326,7 +307,15 @@ public class MainActivity extends BaseGameActivity {
 	}
 
 	public void opponentClosedChat() {
-		getGameFragment().opponentClosedChat();		
+		getGameFragment().opponentClosedChat();
+	}
+
+	public void onlineMoveReceived(Marker marker, Cell cell) {
+		getGameFragment().onlineMakeMove(marker, cell);
+	}
+
+	public void messageRecieved(Participant opponentParticipant, String string) {
+		getGameFragment().messageRecieved(opponentParticipant, string);
 	}
 
 }

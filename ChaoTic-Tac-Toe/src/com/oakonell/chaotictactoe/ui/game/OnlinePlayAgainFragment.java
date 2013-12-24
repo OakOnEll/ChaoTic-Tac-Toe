@@ -89,7 +89,6 @@ public class OnlinePlayAgainFragment extends SherlockDialogFragment {
 					@Override
 					public void run() {
 						willPlayAgain = true;
-						// TODO if opponent already chose to play, start
 						if (gameFragment.getMainActivity().getRoomListener()
 								.getOpponentPlayAgainState() == PlayAgainState.PLAY_AGAIN) {
 							gameFragment.playAgain();
@@ -98,15 +97,15 @@ public class OnlinePlayAgainFragment extends SherlockDialogFragment {
 						} else {
 							playAgainButton.setEnabled(true);
 						}
+						// else wait:
+						// change dialog to waiting for other player
+						// hide yes button, but leave no button as an option
 						TextView playAgainText = (TextView) view
 								.findViewById(R.id.play_again_text);
 						playAgainText.setVisibility(View.GONE);
-						playAgainText.setText("Waiting for " + opponentName);
+						playAgainText.setText(getResources().getString(R.string.play_again_waiting, opponentName));
 						playAgainButton.setVisibility(View.GONE);
 						notPlayAgainButton.setText(R.string.exit_play_again);
-						// else wait:
-						// change dialog to waiting for other player
-						// disable yes button, but leave no button as an option
 					}
 				};
 				Runnable error = new Runnable() {

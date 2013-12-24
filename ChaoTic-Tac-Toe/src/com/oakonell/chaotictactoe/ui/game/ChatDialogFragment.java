@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,7 +31,6 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 	private String friendName;
 
 	private static class MessagesAdapter extends ArrayAdapter<ChatMessage> {
-		private MainActivity context;
 		private LayoutInflater inflater;
 		private ImageManager imageManager;
 
@@ -48,7 +45,6 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 		public MessagesAdapter(MainActivity context, int textViewResourceId,
 				List<ChatMessage> objects) {
 			super(context, textViewResourceId, objects);
-			this.context = context;
 			inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			imageManager = ImageManager.create(context);
@@ -86,7 +82,8 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 			holder.time.setText(item.getTimestamp(getContext()));
 			Uri imageUri = item.getParticipant().getIconImageUri();
 			if (imageUri == null) {
-				holder.picView.setImageResource(R.drawable.silhouette_icon_4520);
+				holder.picView
+						.setImageResource(R.drawable.silhouette_icon_4520);
 			} else {
 				imageManager.loadImage(holder.picView, item.getParticipant()
 						.getIconImageUri());
@@ -108,12 +105,14 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.chat_dialog, container, false);
-		getDialog().setTitle("Chat with " + friendName);
+		getDialog().setTitle(
+				getResources().getString(R.string.chat_title, friendName));
 
 		ListView messagesView = (ListView) view.findViewById(R.id.messages);
 		final TextView messageView = (TextView) view.findViewById(R.id.message);
 
-		adapter = new MessagesAdapter(parent.getMainActivity(), R.id.messages, messages);
+		adapter = new MessagesAdapter(parent.getMainActivity(), R.id.messages,
+				messages);
 		messagesView.setAdapter(adapter);
 
 		Button sendButton = (Button) view.findViewById(R.id.send);
@@ -121,7 +120,8 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 			@Override
 			public void onClick(View v) {
 				String string = messageView.getText().toString();
-				if (StringUtils.isEmpty(string)) return;
+				if (StringUtils.isEmpty(string))
+					return;
 				sendMessage(string);
 				adapter.notifyDataSetChanged();
 				messageView.setText("");
@@ -149,7 +149,8 @@ public class ChatDialogFragment extends SherlockDialogFragment {
 	protected void sendMessage(String string) {
 		((MainActivity) getActivity()).getRoomListener().sendMessage(string);
 
-		messages.add(new ChatMessage(me, string, true, System.currentTimeMillis()));
+		messages.add(new ChatMessage(me, string, true, System
+				.currentTimeMillis()));
 	}
 
 	public void newMessage() {

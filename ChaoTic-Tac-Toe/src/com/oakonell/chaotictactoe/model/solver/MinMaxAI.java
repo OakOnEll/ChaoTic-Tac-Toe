@@ -2,13 +2,13 @@ package com.oakonell.chaotictactoe.model.solver;
 
 import android.net.Uri;
 
-import com.oakonell.chaotictactoe.PlayerStrategy;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.model.Board;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.Player;
+import com.oakonell.chaotictactoe.model.PlayerStrategy;
 
 public class MinMaxAI extends PlayerStrategy {
 	private MiniMaxAlg minmax;

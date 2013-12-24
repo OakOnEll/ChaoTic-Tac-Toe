@@ -22,6 +22,7 @@ import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
+import com.oakonell.chaotictactoe.model.GameMode;
 import com.oakonell.chaotictactoe.model.Marker;
 import com.oakonell.chaotictactoe.model.MarkerChance;
 import com.oakonell.chaotictactoe.model.Player;
@@ -36,14 +37,6 @@ public class RoomListener implements RoomUpdateListener,
 	private static final String TAG = RoomListener.class.getName();
 
 	private static final int PROTOCOL_VERSION = 1;
-
-	private MainActivity activity;
-	private GameHelper helper;
-
-	private String mRoomId;
-	private ArrayList<Participant> mParticipants;
-	private String mMyParticipantId;
-
 	private static final byte MSG_WHO_IS_X = 1;
 	private static final byte MSG_MOVE = 2;
 	private static final byte MSG_MESSAGE = 3;
@@ -55,6 +48,13 @@ public class RoomListener implements RoomUpdateListener,
 
 	private int opponentProtocolVersion;
 
+	private MainActivity activity;
+	private GameHelper helper;
+
+	private String mRoomId;
+	private ArrayList<Participant> mParticipants;
+	private String mMyParticipantId;
+
 	private volatile Long myRandom;
 	private volatile Long theirRandom;
 	private MarkerChance chance;
@@ -62,7 +62,7 @@ public class RoomListener implements RoomUpdateListener,
 	private boolean isQuick;
 	private boolean isConnected;
 
-	GamesClient getGamesClient() {
+	private GamesClient getGamesClient() {
 		return helper.getGamesClient();
 	}
 
@@ -93,7 +93,6 @@ public class RoomListener implements RoomUpdateListener,
 		Log.d(TAG, "My ID " + mMyParticipantId);
 		Log.d(TAG, "<< CONNECTED TO ROOM>>");
 	}
-
 	// Called when we get disconnected from the room. We return to the main
 	// screen.
 	@Override
@@ -103,13 +102,9 @@ public class RoomListener implements RoomUpdateListener,
 		activity.onDisconnectedFromRoom();
 	}
 
+	
 	// We treat most of the room update callbacks in the same way: we update our
-	// list of
-	// participants and update the display. In a real game we would also have to
-	// check if that
-	// change requires some action like removing the corresponding player avatar
-	// from the screen,
-	// etc.
+	// list of participants 
 	@Override
 	public void onPeerDeclined(Room room, List<String> arg1) {
 		announce("onPeerDeclined");
@@ -125,14 +120,6 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onPeerJoined(Room room, List<String> arg1) {
 		announce("onPeerJoined");
-		updateRoom(room);
-	}
-
-	@Override
-	public void onPeerLeft(Room room, List<String> peersWhoLeft) {
-		activity.opponentLeft();
-
-		announce("onPeerLeft");
 		updateRoom(room);
 	}
 
@@ -168,12 +155,21 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onP2PDisconnected(String arg0) {
 		announce("Disconnected from P2P " + arg0);
-	}
-
+	}	
+	
 	void updateRoom(Room room) {
 		mParticipants = room.getParticipants();
 	}
 
+	@Override
+	public void onPeerLeft(Room room, List<String> peersWhoLeft) {
+		// opponent left, notify the main game
+		activity.opponentLeft();
+
+		announce("onPeerLeft");
+		updateRoom(room);
+	}
+	
 	// Called when we receive a real-time message from the network.
 	@Override
 	public void onRealTimeMessageReceived(RealTimeMessage message) {
@@ -249,20 +245,23 @@ public class RoomListener implements RoomUpdateListener,
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		Player xPlayer;
 		Player oPlayer;
+		String localPlayerName = activity.getString(R.string.local_player_name);
 		if (iAmX) {
-			xPlayer = HumanStrategy.createPlayer("You", Marker.X, getMe().getIconImageUri());
-			oPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.O, getOpponentParticipant()
+			xPlayer = HumanStrategy.createPlayer(localPlayerName, Marker.X, getMe()
 					.getIconImageUri());
+			oPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.O,
+					getOpponentParticipant().getIconImageUri());
 		} else {
-			oPlayer = HumanStrategy.createPlayer("You", Marker.O, getMe().getIconImageUri());
-			xPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.X, getOpponentParticipant()
+			oPlayer = HumanStrategy.createPlayer(localPlayerName, Marker.O, getMe()
 					.getIconImageUri());
+			xPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.X,
+					getOpponentParticipant().getIconImageUri());
 		}
 		Game game = new Game(3, GameMode.ONLINE, xPlayer, oPlayer, chance);
 		gameFragment.startGame(game, score);
 		FragmentManager manager = activity.getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.replace(R.id.main_frame, gameFragment, "game");
+		transaction.replace(R.id.main_frame, gameFragment, MainActivity.FRAG_TAG_GAME);
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
@@ -287,7 +286,6 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onLeftRoom(int arg0, String arg1) {
 		announce("onLeftRoom");
-		// TODO pop if the current is game
 		activity.getSupportFragmentManager().popBackStack();
 	}
 
@@ -379,6 +377,7 @@ public class RoomListener implements RoomUpdateListener,
 		// Toast.makeText(context, "Start the game!",
 		// Toast.LENGTH_SHORT).show();
 
+		sendProtocolVersion();
 		if (chance != null) {
 			ByteBuffer buffer = ByteBuffer
 					.allocate(GamesClient.MAX_RELIABLE_MESSAGE_LEN);
@@ -402,7 +401,6 @@ public class RoomListener implements RoomUpdateListener,
 					}, buffer.array(), getRoomId(), getOpponentId());
 		}
 
-		sendProtocolVersion();
 		myRandom = random.nextLong();
 		checkWhoIsFirstAndAttemptToStart(true);
 	}
