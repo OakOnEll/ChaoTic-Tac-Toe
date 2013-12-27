@@ -9,11 +9,11 @@
     <string name="new_game_same_device">Pass \'N Play</string>
     <string name="new_game_vs_ai">Beat the Bot</string>
     <string name="new_quick_game">New Quick Game</string>
-    <string name="new_game_live">New Game Online</string>
+    <string name="new_game_live">Play a Friend</string>
     <string name="achievements">View Achievements</string>
     <string name="leaderboards">View Leaderboards</string>
     <string name="achievements_not_available">Please sign in to view achievements.</string>
-    <string name="leaderboards_not_available">Please sign in to view achievements.</string>
+    <string name="leaderboards_not_available">Please sign in to view leaderboards.</string>
     <string name="sign_in_to_play_network_game">Please sign in to start a networked game.</string>
     <string name="sign_in_to_view_invites">Please sign in to view network game invitations.</string>
     <string name="action_settings">Settings</string>
@@ -50,6 +50,6 @@
     <string name="unique_error_o_name">Enter a unique name for O</string>
     <string name="choose_quick_game_mode_title">Choose Quick Game Mode</string>
     <string name="choose_online_game_mode_title">Choose Online Game Mode</string>
-    <string name="choose_online_opponent">Find Opponent</string>
+    <string name="choose_online_opponent">Find Friend</string>
     
 </resources>

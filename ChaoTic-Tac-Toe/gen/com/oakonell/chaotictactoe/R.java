@@ -1564,8 +1564,8 @@ containing a value of this type.
         public static final int exit_play_again=0x7f090086;
         public static final int ga_trackingId=0x7f090094;
         public static final int httpError=0x7f09002f;
-        public static final int invalid_move=0x7f090080;
-        public static final int invalid_move_title=0x7f09007f;
+        public static final int invalid_move_need_empty=0x7f09007f;
+        public static final int invalid_move_need_nonempty=0x7f090080;
         public static final int label_player_o_name=0x7f090069;
         public static final int label_player_x_name=0x7f090068;
         public static final int leaderboard_longest_choatic_game=0x7f090097;

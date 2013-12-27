@@ -9,7 +9,7 @@
     <string name="title_game">ChaoTic-Tac-Toe</string>
 
     <string name="pref_sound_fx_key" >pref_sound_fx_key</string>
-    <string name="pref_sound_fx" >Sound Effects</string>
+    <string name="pref_sound_fx" >Play sound effects</string>
     
     
     <!--

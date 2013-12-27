@@ -95,7 +95,6 @@ public class GameFragment extends SherlockFragment {
 	@Override
 	public void onPause() {
 		exitOnResume = game.getMode() == GameMode.ONLINE;
-		// TODO Auto-generated method stub
 		super.onPause();
 	}
 
@@ -261,14 +260,7 @@ public class GameFragment extends SherlockFragment {
 	public void startGame(Game game, ScoreCard score) {
 		this.score = score;
 		this.game = game;
-		if (!game.getCurrentPlayer().getStrategy().isHuman()) {
-			if (thinking != null) {
-				// show a thinking/progress icon, suitable for network play and
-				// ai
-				// thinking..
-				thinking.setVisibility(View.VISIBLE);
-			}
-		}
+		configureNonLocalProgresses();
 	}
 
 	@Override
@@ -285,15 +277,7 @@ public class GameFragment extends SherlockFragment {
 					game.getNonLocalPlayer().getName()));
 		}
 		thinking = view.findViewById(R.id.thinking);
-		thinking.setVisibility(View.GONE);
-		PlayerStrategy currentStrategy = game.getCurrentPlayer().getStrategy();
-		if (currentStrategy != null && !currentStrategy.isHuman()) {
-			if (thinking != null) {
-				// show a thinking/progress icon, suitable for network play and
-				// ai thinking..
-				thinking.setVisibility(View.VISIBLE);
-			}
-		}
+		configureNonLocalProgresses();
 
 		imgManager = ImageManager.create(getMainActivity());
 
@@ -431,10 +415,10 @@ public class GameFragment extends SherlockFragment {
 			highlightPlayerTurn(oHeaderLayout, xHeaderLayout);
 		}
 
-		// TODO make the chaotic mode show some "rolling" of the markers
-		// BUT this requires the online/input handling to not accept input until
-		// the roll is done
-		// on device inputs, can simply ignore button presses.
+		// make the chaotic mode show some "rolling" of the markers.
+		// This requires the online/input handling to not accept input until
+		// the roll is done.
+		// On device inputs, can simply ignore button presses.
 		// online moves need to be queued while animation is proceeding
 		if (game.getMarkerChance().isChaotic()
 				|| game.getMarkerChance().isCustom()) {
@@ -463,6 +447,8 @@ public class GameFragment extends SherlockFragment {
 	private Runnable afterRoll;
 
 	private void displayAnimatedMarkerToPlay() {
+		isRolling = true;
+		configureNonLocalProgresses();
 		MarkerChance chance = game.getMarkerChance();
 		final List<Integer> resourcesList = new ArrayList<Integer>();
 		if (chance.getMyMarker() > 0) {
@@ -486,7 +472,6 @@ public class GameFragment extends SherlockFragment {
 		// number of rolls cycled through is random between min <-> max
 		// hold the number in a modifiable int array, as a cheat
 		final int[] rolls = new int[] { rollRandom.nextInt(5) + 5 };
-		isRolling = true;
 		final Drawable originalBackground = markerToPlayView.getBackground();
 		markerToPlayView
 				.setBackgroundColor(getResources()
@@ -509,6 +494,7 @@ public class GameFragment extends SherlockFragment {
 						@Override
 						public void run() {
 							isRolling = false;
+							configureNonLocalProgresses();
 							if (diceRollStreamId > 0) {
 								mainActivity.stopSound(diceRollStreamId);
 								diceRollStreamId = 0;
@@ -555,7 +541,13 @@ public class GameFragment extends SherlockFragment {
 			outcome = game.placeMarker(cell);
 		} catch (InvalidMoveException e) {
 			getMainActivity().playSound(Sounds.INVALID_MOVE);
-			Toast toast = Toast.makeText(getActivity(), R.string.invalid_move,
+			int messageId;
+			if (markerToPlay == Marker.EMPTY) {
+				messageId = R.string.invalid_move_need_nonempty;
+			} else {
+				messageId = R.string.invalid_move_need_empty;
+			}
+			Toast toast = Toast.makeText(getActivity(), messageId,
 					Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
@@ -584,7 +576,7 @@ public class GameFragment extends SherlockFragment {
 		} else {
 			evaluateInGameAchievements(outcome);
 			updateHeader();
-			moveIfAI();
+			acceptMove();
 		}
 	}
 
@@ -602,13 +594,7 @@ public class GameFragment extends SherlockFragment {
 				getMainActivity().playSound(Sounds.GAME_WON);
 			} else {
 				// the player either won or lost
-				// TODO can simplify?
-
-				if (game.getXPlayer().getStrategy().isHuman()
-						&& winner.getMarker() == Marker.X) {
-					getMainActivity().playSound(Sounds.GAME_WON);
-				} else if (game.getOPlayer().getStrategy().isHuman()
-						&& winner.getMarker() == Marker.O) {
+				if (winner.equals(game.getLocalPlayer())) {
 					getMainActivity().playSound(Sounds.GAME_WON);
 				} else {
 					getMainActivity().playSound(Sounds.GAME_LOST);
@@ -668,15 +654,16 @@ public class GameFragment extends SherlockFragment {
 		dialog.show();
 	}
 
-	private void moveIfAI() {
+	private void acceptMove() {
 		final PlayerStrategy currentStrategy = game.getCurrentPlayer()
 				.getStrategy();
 		if (currentStrategy.isHuman()) {
+			// let the buttons be pressed for a human interaction
 			return;
 		}
 		// show a thinking/progress icon, suitable for network play and ai
 		// thinking..
-		thinking.setVisibility(View.VISIBLE);
+		configureNonLocalProgresses();
 		if (!currentStrategy.isAI()) {
 			return;
 		}
@@ -703,6 +690,21 @@ public class GameFragment extends SherlockFragment {
 			}
 		};
 		aiMove.execute((Void) null);
+	}
+
+	private void configureNonLocalProgresses() {
+		if (thinking == null || thinkingText == null) {
+			// safety for when start called before activity is created
+			return;
+		}
+		PlayerStrategy strategy = game.getCurrentPlayer().getStrategy();
+		if (strategy.isHuman() && !isRolling) {
+			thinking.setVisibility(View.GONE);
+			return;
+		}
+		thinking.setVisibility(View.VISIBLE);
+		thinkingText.setVisibility(isRolling ? View.GONE : View.VISIBLE);
+
 	}
 
 	public void onlineMakeMove(final Marker marker, final Cell cell) {
@@ -849,12 +851,11 @@ public class GameFragment extends SherlockFragment {
 		for (ImageButton each : buttons) {
 			each.setImageDrawable(null);
 		}
-		moveIfAI();
+		acceptMove();
 	}
 
 	public void opponentWillPlayAgain() {
 		if (onlinePlayAgainDialog == null) {
-			// TODO is this possible? I suppose if one player just is quitting..
 			return;
 		}
 		onlinePlayAgainDialog.opponentWillPlayAgain();
@@ -862,7 +863,6 @@ public class GameFragment extends SherlockFragment {
 
 	public void opponentWillNotPlayAgain() {
 		if (onlinePlayAgainDialog == null) {
-			// TODO is this possible? I suppose if one player just is quitting..
 			return;
 		}
 		onlinePlayAgainDialog.opponentWillNotPlayAgain();
@@ -904,10 +904,6 @@ public class GameFragment extends SherlockFragment {
 			return;
 
 		}
-		// TODO sometimes this is received before the opponentLeft message?
-		// but if this device/user leaves the room, this is only message
-		// received..
-		// getMainActivity().getSupportFragmentManager().popBackStack();
 	}
 
 	private boolean opponentInChat = false;
