@@ -45,7 +45,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical"
-                    
                     android:orientation="horizontal" >
 
                     <TextView
@@ -57,9 +56,9 @@
 
                     <TextView
                         android:id="@+id/num_x_wins"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:text="TextView" />
                 </LinearLayout>
             </LinearLayout>
@@ -113,7 +112,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"                    
+                    android:layout_gravity="right|center_vertical"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -140,16 +139,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="3" >
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/game_mode"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="Large Text"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -157,124 +156,118 @@
             android:id="@+id/marker_to_play"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_weight="1"
+            android:layout_centerHorizontal="true"
             android:src="@android:drawable/ic_menu_delete" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Game:"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/game_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/grid_container"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_weight="1" >
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_centerInParent="true"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" >
-
-                <ImageButton
-                    android:id="@+id/button_r1c1"
-                    style="@style/game_button" />
-
-                <ImageButton
-                    android:id="@+id/button_r1c2"
-                    style="@style/game_button" />
-
-                <ImageButton
-                    android:id="@+id/button_r1c3"
-                    style="@style/game_button" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" >
-
-                <ImageButton
-                    android:id="@+id/button_r2c1"
-                    style="@style/game_button" />
-
-                <ImageButton
-                    android:id="@+id/button_r2c2"
-                    style="@style/game_button" />
-
-                <ImageButton
-                    android:id="@+id/button_r2c3"
-                    style="@style/game_button" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" >
-
-                <ImageButton
-                    android:id="@+id/button_r3c1"
-                    style="@style/game_button" />
-
-                <ImageButton
-                    android:id="@+id/button_r3c2"
-                    style="@style/game_button" />
-
-                <ImageButton
-                    android:id="@+id/button_r3c3"
-                    style="@style/game_button" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <com.oakonell.chaotictactoe.ui.game.WinOverlayView
-            android:id="@+id/win_overlay"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_centerInParent="true" >
-        </com.oakonell.chaotictactoe.ui.game.WinOverlayView>
-
-        <LinearLayout
-            android:id="@+id/thinking"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@color/abs__background_holo_light"
-            android:gravity="center_vertical" >
+            android:layout_toLeftOf="@+id/game_number"
+            android:text="Game:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <ProgressBar
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/game_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/thinking_text"
+        <RelativeLayout
+            android:id="@+id/grid_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/marker_to_play"
+            android:layout_gravity="center_horizontal|center_vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <ImageButton
+                        android:id="@+id/button_r1c1"
+                        style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r1c2"
+                        style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r1c3"
+                        style="@style/game_button" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <ImageButton
+                        android:id="@+id/button_r2c1"
+                        style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r2c2"
+                        style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r2c3"
+                        style="@style/game_button" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1" >
+
+                    <ImageButton
+                        android:id="@+id/button_r3c1"
+                        style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r3c2"
+                        style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r3c3"
+                        style="@style/game_button" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.oakonell.chaotictactoe.ui.game.WinOverlayView
+                android:id="@+id/win_overlay"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true" >
+            </com.oakonell.chaotictactoe.ui.game.WinOverlayView>
+
+            <LinearLayout
+                android:id="@+id/thinking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/opponent_is_thinking" />
-        </LinearLayout>
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@color/abs__background_holo_light"
+                android:gravity="center_vertical" >
+
+                <ProgressBar
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+                <TextView
+                    android:id="@+id/thinking_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opponent_is_thinking" />
+            </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout

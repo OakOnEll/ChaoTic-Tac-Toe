@@ -23,6 +23,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.Interpolator;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -386,7 +395,8 @@ public class GameFragment extends SherlockFragment {
 				return;
 			}
 			Marker marker = game.getMarkerToPlay();
-			boolean wasValid = makeMove(marker, cell);
+
+			boolean wasValid = makeAndDisplayMove(marker, cell);
 			if (!wasValid)
 				return;
 
@@ -395,6 +405,7 @@ public class GameFragment extends SherlockFragment {
 			if (appListener != null) {
 				appListener.sendMove(marker, cell);
 			}
+
 		}
 
 	}
@@ -466,7 +477,7 @@ public class GameFragment extends SherlockFragment {
 			}
 		}
 		if (chance.getRemoveMarker() > 0) {
-			resourcesList.add(android.R.drawable.ic_delete);
+			resourcesList.add(R.drawable.bomb_icon_1068);
 		}
 		final int numPossible = resourcesList.size();
 		// number of rolls cycled through is random between min <-> max
@@ -523,7 +534,7 @@ public class GameFragment extends SherlockFragment {
 	private void displayMarkerToPlay() {
 		Marker toPlay = game.getMarkerToPlay();
 		if (toPlay == Marker.EMPTY) {
-			markerToPlayView.setImageResource(android.R.drawable.ic_delete);
+			markerToPlayView.setImageResource(R.drawable.bomb_icon_1068);
 		} else if (toPlay == Marker.X) {
 			markerToPlayView.setImageResource(R.drawable.system_cross);
 		} else {
@@ -531,7 +542,7 @@ public class GameFragment extends SherlockFragment {
 		}
 	}
 
-	public boolean makeMove(Marker markerToPlay, Cell cell) {
+	public boolean makeAndDisplayMove(Marker markerToPlay, Cell cell) {
 		Marker marker = game.getMarkerToPlay();
 		if (marker != markerToPlay) {
 			throw new RuntimeException("Invalid marker played!");
@@ -564,6 +575,162 @@ public class GameFragment extends SherlockFragment {
 
 	private void privateMakeMove(Cell cell, Marker marker, State outcome) {
 		ImageButton cellButton = findButtonFor(cell);
+		animateMove(marker, cellButton, outcome);
+	}
+
+	private void animateMove(final Marker marker, final ImageButton cellButton,
+			final State outcome) {
+		boolean animate = true;
+		if (!animate) {
+			postMove(marker, cellButton, outcome);
+			return;
+		}
+		// experimenting with animations...
+		// create set of animations
+		AnimationSet replaceAnimation = new AnimationSet(false);
+		// animations should be applied on the finish line
+		replaceAnimation.setFillAfter(false);
+
+		float xScale = ((float) cellButton.getWidth())
+				/ markerToPlayView.getWidth();
+		float yScale = ((float) cellButton.getHeight())
+				/ markerToPlayView.getHeight();
+
+		View grid_container = getActivity().findViewById(R.id.grid_container);
+		int xChange = cellButton.getLeft() - markerToPlayView.getLeft();
+		int yChange = cellButton.getTop()
+				+ ((View) cellButton.getParent()).getTop()
+				+ grid_container.getTop() - markerToPlayView.getTop();
+
+		// create scale animation
+		ScaleAnimation scale = new ScaleAnimation(1.0f, xScale, 1.0f, yScale);
+		scale.setDuration(1000);
+
+		// create translation animation
+		TranslateAnimation trans = new TranslateAnimation(0, xChange, 0,
+				yChange);
+		trans.setDuration(1000);
+
+		// add new animations to the set
+		replaceAnimation.addAnimation(scale);
+		replaceAnimation.addAnimation(trans);
+
+		AlphaAnimation fade = new AlphaAnimation(1, 0);
+		fade.setStartOffset(800);
+		fade.setDuration(200);
+		replaceAnimation.addAnimation(fade);
+
+		Interpolator interpolator = new AnticipateInterpolator();
+		replaceAnimation.setInterpolator(interpolator);
+
+		replaceAnimation.setAnimationListener(new AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// empty
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// empty
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				if (marker == Marker.EMPTY) {
+					explodeCell(cellButton, outcome);
+				} else {
+					postMove(marker, cellButton, outcome);
+				}
+			}
+
+		});
+
+		// start our animation
+		markerToPlayView.startAnimation(replaceAnimation);
+	}
+
+	private void explodeCell(final ImageButton cellButton, final State outcome) {
+		boolean showExplosion = true;
+		if (!showExplosion) {
+			postMove(Marker.EMPTY, cellButton, outcome);
+			return;
+		}
+		
+		getMainActivity().playSound(Sounds.REMOVE_MARKER);
+		cellButton.setImageResource(R.drawable.explosion_icon_13018);
+		AnimationSet explodeSet = new AnimationSet(true);
+		Animation flash = new AlphaAnimation(1, 0);
+		flash.setDuration(200);
+		flash.setRepeatCount(3);
+		flash.setRepeatMode(Animation.REVERSE);
+
+		
+		Animation expand = new ScaleAnimation(1,2,1,2);
+		expand.setRepeatCount(3);
+		expand.setRepeatMode(Animation.REVERSE);
+		
+		int width = cellButton.getWidth();
+		int height = cellButton				.getHeight();
+		
+		Animation translate = new TranslateAnimation(0, -width/2, 0, height/2);
+		translate.setRepeatCount(3);
+		translate.setRepeatMode(Animation.REVERSE);
+		
+		explodeSet.addAnimation(flash);
+		explodeSet.addAnimation(expand);
+		explodeSet.addAnimation(translate);
+		
+		explodeSet.setInterpolator(new AccelerateDecelerateInterpolator() );
+		
+		explodeSet.setAnimationListener(new AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// nothing
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// nothing				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				postMove(Marker.EMPTY, cellButton, outcome);
+			}
+		});
+		
+		cellButton.startAnimation(explodeSet);
+		
+		// final ExplodeView explodeView = (ExplodeView) getActivity()
+		// .findViewById(R.id.explode_view);
+		// explodeView.setImage(R.drawable.bomb_icon_1068);
+		// explodeView.setOnPostExplode(new OnPostExplosion() {
+		// @Override
+		// public void postExplosion(ExplodeView view) {
+		// explodeView.setVisibility(View.GONE);
+		// explodeView.recycle();
+		// postMove(Marker.EMPTY, cellButton, outcome);
+		// }
+		// });
+		//
+		// AbsoluteLayout.LayoutParams layoutParams =
+		// (android.widget.AbsoluteLayout.LayoutParams) explodeView
+		// .getLayoutParams();
+		// layoutParams.x = cellButton.getLeft()
+		// + ((View) cellButton.getParent()).getLeft();
+		// layoutParams.y = cellButton.getTop()
+		// + ((View) cellButton.getParent()).getTop();
+		// layoutParams.width = cellButton.getWidth();
+		// layoutParams.height = cellButton.getHeight();
+		// explodeView.setLayoutParams(layoutParams);
+		// explodeView.setVisibility(View.VISIBLE);
+		// // TODO find middle, or use middle in default no arg method on
+		// // ExplodeView
+		// explodeView.explode(0, 0);
+	}
+
+	private void postMove(Marker marker, ImageButton cellButton, State outcome) {
+		markerToPlayView.setImageDrawable(null);
 		if (marker == Marker.EMPTY) {
 			cellButton.setImageDrawable(null);
 		} else {
@@ -736,7 +903,7 @@ public class GameFragment extends SherlockFragment {
 				// TODO not
 				// TODO play opponent sound
 				cellButton.setBackgroundDrawable(originalBackGround);
-				makeMove(marker, move);
+				makeAndDisplayMove(marker, move);
 			}
 		}, NON_HUMAN_OPPONENT_HIGHLIGHT_MOVE_PAUSE_MS);
 	}

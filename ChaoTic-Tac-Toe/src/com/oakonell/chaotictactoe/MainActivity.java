@@ -92,8 +92,11 @@ public class MainActivity extends BaseGameActivity {
 		soundManager = new SoundManager(this);
 		soundManager.addSound(Sounds.PLAY_X, R.raw.play_x_sounds_882_solemn);
 		soundManager.addSound(Sounds.PLAY_O, R.raw.play_o_sounds_913_served);
+		soundManager.addSound(Sounds.REMOVE_MARKER, R.raw.bomb_soundbible_com_891110113);
+//		soundManager.addSound(Sounds.INVALID_MOVE,
+//				R.raw.invalid_move_sounds_980_thats_a_no);
 		soundManager.addSound(Sounds.INVALID_MOVE,
-				R.raw.invalid_move_sounds_980_thats_a_no);
+				R.raw.invalid_move_metal_gong_dianakc_109711828);
 		soundManager.addSound(Sounds.CHAT_RECIEVED,
 				R.raw.chat_received_sounds_954_all_eyes_on_me);
 		soundManager.addSound(Sounds.INVITE_RECEIVED,
