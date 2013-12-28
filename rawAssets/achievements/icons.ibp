@@ -1,0 +1,23 @@
+//
+// File and path settings
+//
+PathExport 'E:\projects\ChaoticTacToe\ChaoTic-Tac-Toe\rawAssets\achievements\output'
+PathClear false
+FileFormat png
+
+//
+// Export settings settings
+//
+ExportWidth 512
+ExportHeight 512
+FilePrefix ''
+
+//
+// Execute Converter
+//
+Array MySvgFiles 'chaotic_draw.svg':'clean_slate.svg':'only_x.svg':'plain_jane.svg':'reversi.svg':'with_a_little_help.svg':'deja_vu.svg':'equalizer_icon_2989.svg':'long_haul.svg'
+Array MyExportFiles 'chaotic_draw':'clean_slate':'only_x':'plain_jane':'reversi':'with_a_little_help':'deja_vu':'equalizer_icon_2989':'long_haul'
+Loop MySvgFiles 3
+    FileSvg MySvgFiles:Index
+    FileName MyExportFiles:Index
+    Convert

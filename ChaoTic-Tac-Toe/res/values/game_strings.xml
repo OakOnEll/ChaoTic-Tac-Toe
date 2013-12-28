@@ -23,4 +23,7 @@
     <string name="online_setting_title">Settings</string>
     <string name="you_left_the_game">You left the game.</string>
     
+    <string name="chat_actionbar_image_content">Chat action menu</string>
+    <string name="num_move_lbl">Moves</string>
+    <string name="num_games_lbl">Games: </string>
 </resources>

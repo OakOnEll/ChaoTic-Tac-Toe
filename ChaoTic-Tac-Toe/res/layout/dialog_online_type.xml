@@ -17,6 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/fragmentContainer"
         android:layout_centerHorizontal="true"
-        android:text="Select Opponent" />
+        android:text="@string/select_opponent" />
 
 </RelativeLayout>

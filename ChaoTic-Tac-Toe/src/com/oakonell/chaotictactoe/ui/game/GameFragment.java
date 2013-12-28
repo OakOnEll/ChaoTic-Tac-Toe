@@ -655,7 +655,7 @@ public class GameFragment extends SherlockFragment {
 			postMove(Marker.EMPTY, cellButton, outcome);
 			return;
 		}
-		
+
 		getMainActivity().playSound(Sounds.REMOVE_MARKER);
 		cellButton.setImageResource(R.drawable.explosion_icon_13018);
 		AnimationSet explodeSet = new AnimationSet(true);
@@ -664,43 +664,43 @@ public class GameFragment extends SherlockFragment {
 		flash.setRepeatCount(3);
 		flash.setRepeatMode(Animation.REVERSE);
 
-		
-		Animation expand = new ScaleAnimation(1,2,1,2);
+		Animation expand = new ScaleAnimation(1, 2, 1, 2);
 		expand.setRepeatCount(3);
 		expand.setRepeatMode(Animation.REVERSE);
-		
+
 		int width = cellButton.getWidth();
-		int height = cellButton				.getHeight();
-		
-		Animation translate = new TranslateAnimation(0, -width/2, 0, height/2);
+		int height = cellButton.getHeight();
+
+		Animation translate = new TranslateAnimation(0, -width / 2, 0,
+				height / 2);
 		translate.setRepeatCount(3);
 		translate.setRepeatMode(Animation.REVERSE);
-		
+
 		explodeSet.addAnimation(flash);
 		explodeSet.addAnimation(expand);
 		explodeSet.addAnimation(translate);
-		
-		explodeSet.setInterpolator(new AccelerateDecelerateInterpolator() );
-		
+
+		explodeSet.setInterpolator(new AccelerateDecelerateInterpolator());
+
 		explodeSet.setAnimationListener(new AnimationListener() {
 			@Override
 			public void onAnimationStart(Animation animation) {
 				// nothing
 			}
-			
+
 			@Override
 			public void onAnimationRepeat(Animation animation) {
-				// nothing				
+				// nothing
 			}
-			
+
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				postMove(Marker.EMPTY, cellButton, outcome);
 			}
 		});
-		
+
 		cellButton.startAnimation(explodeSet);
-		
+
 		// final ExplodeView explodeView = (ExplodeView) getActivity()
 		// .findViewById(R.id.explode_view);
 		// explodeView.setImage(R.drawable.bomb_icon_1068);
@@ -895,7 +895,7 @@ public class GameFragment extends SherlockFragment {
 		final ImageButton cellButton = findButtonFor(move);
 		final Drawable originalBackGround = cellButton.getBackground();
 		cellButton.setBackgroundColor(getResources().getColor(
-				android.R.color.holo_blue_light));
+				R.color.holo_blue_light));
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			@Override

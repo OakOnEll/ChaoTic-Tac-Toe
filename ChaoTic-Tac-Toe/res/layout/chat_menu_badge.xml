@@ -10,6 +10,7 @@
         android:layout_width="48dp"
         android:layout_height="fill_parent"
         android:clickable="true"
+        android:contentDescription="@string/chat_actionbar_image_content"
         android:src="@drawable/abs__menu_dropdown_panel_holo_light" />
 
     <!-- Badge Count -->    
@@ -19,7 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="5dp"
-        android:text="99"
         android:textColor="@android:color/white"
         android:src="@drawable/abs__menu_dropdown_panel_holo_light" />
 

@@ -7,6 +7,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:baselineAligned="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -38,7 +39,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical"
                     android:lines="1"
-                    android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <LinearLayout
@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="TextView" />
+                         />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -73,7 +73,7 @@
                 android:id="@+id/num_moves_lbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Moves"
+                android:text="@string/num_move_lbl"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="22" />
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -106,7 +106,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:lines="1"
-                    android:text="Large Text"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <LinearLayout
@@ -120,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
-                        android:text="TextView" />
+                         />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -148,8 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Large Text"
+            android:layout_alignParentTop="true"            
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
@@ -163,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/game_number"
-            android:text="Game:"
+            android:text="@string/num_games_lbl"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -279,7 +277,7 @@
             android:id="@+id/num_draws"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+
             android:visibility="gone" />
     </LinearLayout>
 
