@@ -1043,6 +1043,7 @@ public class GameFragment extends SherlockFragment {
 	private boolean opponentLeftIsShowing;
 
 	public void opponentLeft() {
+		getView().setKeepScreenOn(false);
 		if (onlinePlayAgainDialog != null) {
 			// the user is in the play again dialog, let him read the info
 			return;
