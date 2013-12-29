@@ -372,6 +372,14 @@ public class GameFragment extends SherlockFragment {
 		String gameType = game.getMarkerChance().getLabel(getActivity());
 		gameMode.setText(gameType);
 
+		View num_games_container = view.findViewById(R.id.num_games_container);
+		num_games_container.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showGameStats();
+			}
+		});
+		
 		if (savedInstanceState != null) {
 			// reanimate the marker roll on restore?
 			updateHeader(true);
@@ -399,6 +407,12 @@ public class GameFragment extends SherlockFragment {
 		if (showHelp) {
 			showGameHelp();
 		}
+	}
+
+	private void showGameStats() {
+		GameStatDialogFragment dialog = new GameStatDialogFragment();
+		dialog.initialize(this, game, score);
+		dialog.show(getChildFragmentManager(), "stats");
 	}
 
 	private void showGameHelp() {

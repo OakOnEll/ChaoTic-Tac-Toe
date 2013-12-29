@@ -7,9 +7,9 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:baselineAligned="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:baselineAligned="false" >
 
         <LinearLayout
             android:id="@+id/x_name_layout"
@@ -58,8 +58,7 @@
                         android:id="@+id/num_x_wins"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                         />
+                        android:layout_gravity="center_vertical" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -80,8 +79,7 @@
                 android:id="@+id/num_moves"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                 />
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
         <LinearLayout
@@ -118,8 +116,7 @@
                         android:id="@+id/num_o_wins"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                         />
+                        android:layout_gravity="right|center_vertical" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -147,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"            
+            android:layout_alignParentTop="true"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
@@ -155,21 +152,27 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerHorizontal="true"
-            android:src="@android:drawable/ic_menu_delete" />
+             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/game_number"
-            android:text="@string/num_games_lbl"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/game_number"
+        <LinearLayout
+            android:id="@+id/num_games_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/num_games_lbl"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/game_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/grid_container"
@@ -277,7 +280,6 @@
             android:id="@+id/num_draws"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:visibility="gone" />
     </LinearLayout>
 

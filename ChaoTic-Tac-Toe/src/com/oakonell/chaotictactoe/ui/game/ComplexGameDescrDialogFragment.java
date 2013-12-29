@@ -2,7 +2,10 @@ package com.oakonell.chaotictactoe.ui.game;
 
 import java.text.DecimalFormat;
 
+import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,11 +45,11 @@ public class ComplexGameDescrDialogFragment extends SherlockDialogFragment {
 		TextView removePercent = (TextView) view
 				.findViewById(R.id.remove_marker_percentage);
 
-		playerPercent.setText(format.format(100*markerChance
+		playerPercent.setText(format.format(100 * markerChance
 				.getMyMarkerPercentage()) + "%");
-		opponentPercent.setText(format.format(100*markerChance
+		opponentPercent.setText(format.format(100 * markerChance
 				.getOpponentMarkerPercentage()) + "%");
-		removePercent.setText(format.format(100*markerChance
+		removePercent.setText(format.format(100 * markerChance
 				.getRemoveMarkerPercentage()) + "%");
 
 		howToPlayText
@@ -57,10 +60,20 @@ public class ComplexGameDescrDialogFragment extends SherlockDialogFragment {
 			@Override
 			public void onClick(View arg0) {
 				getDialog().dismiss();
-				parent.gameHelpClosed();				
+				parent.gameHelpClosed();
 			}
 		});
 		return view;
+	}
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		Dialog dialog = super.onCreateDialog(savedInstanceState);
+
+		dialog.getWindow().getAttributes().windowAnimations = R.style.game_mode_dialog_Window;
+
+		return dialog;
 	}
 
 	@Override
