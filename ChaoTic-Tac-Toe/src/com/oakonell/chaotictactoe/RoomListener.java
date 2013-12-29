@@ -241,7 +241,8 @@ public class RoomListener implements RoomUpdateListener,
 
 	private void startGame(boolean iAmX) {
 		GameFragment gameFragment = new GameFragment();
-
+		// ads in online play will leave the room.. hide the ad to avoid the problem
+		activity.hideAd();
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		Player xPlayer;
 		Player oPlayer;

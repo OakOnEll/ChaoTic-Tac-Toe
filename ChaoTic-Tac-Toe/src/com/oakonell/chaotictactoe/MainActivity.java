@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -182,8 +183,13 @@ public class MainActivity extends BaseGameActivity {
 	public void gameEnded() {
 		possiblyShowInterstitialAd();
 		getMenuFragment().setActive();
+		mAdView.setVisibility(View.VISIBLE);
 	}
 
+	public void hideAd() {
+		mAdView.setVisibility(View.GONE);
+	}
+	
 	public RoomListener getRoomListener() {
 		return roomListener;
 	}
