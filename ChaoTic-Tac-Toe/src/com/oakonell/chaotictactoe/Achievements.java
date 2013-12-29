@@ -143,6 +143,16 @@ public class Achievements {
 			}
 		}
 	};
+	private IncrementalAchievement chaoticCount = new IncrementalAchievement(
+			R.string.achievement_chaos_theory) {
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (game.getMarkerChance().isChaotic()) {
+				increment(gameHelper, context);
+			}
+		}
+	};
 
 	private IncrementalAchievement reversiCount = new IncrementalAchievement(
 			R.string.achievement_reversi) {
@@ -179,6 +189,7 @@ public class Achievements {
 		endGameAchievements.add(withALittleHelp);
 
 		endGameAchievements.add(plainJaneCount);
+		endGameAchievements.add(chaoticCount);
 		endGameAchievements.add(reversiCount);
 		endGameAchievements.add(customCount);
 	}

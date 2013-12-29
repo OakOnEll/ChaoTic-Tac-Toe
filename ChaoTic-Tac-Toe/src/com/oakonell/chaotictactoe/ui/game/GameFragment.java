@@ -9,12 +9,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
@@ -359,13 +362,56 @@ public class GameFragment extends SherlockFragment {
 			view.findViewById(R.id.num_moves_lbl).setVisibility(View.GONE);
 		}
 
-		updateHeader();
-
 		TextView gameMode = (TextView) view.findViewById(R.id.game_mode);
+		gameMode.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showGameHelp();
+			}
+		});
 		String gameType = game.getMarkerChance().getLabel(getActivity());
 		gameMode.setText(gameType);
 
+		if (savedInstanceState != null) {
+			// reanimate the marker roll on restore?
+			updateHeader(true);
+		} else {
+			showGameHelpOnStart();
+		}
+
 		return view;
+	}
+
+	private void showGameHelpOnStart() {
+		// Always show the game help for custom
+		// otherwise, show it the first time for other game types
+		boolean showHelp = true;
+		if (!game.getMarkerChance().isCustom()) {
+			SharedPreferences sharedPrefs = PreferenceManager
+					.getDefaultSharedPreferences(getSherlockActivity());
+			String key = "help_shown_for_" + game.getMarkerChance().type();
+			showHelp = !sharedPrefs.getBoolean(key, false);
+
+			Editor edit = sharedPrefs.edit();
+			edit.putBoolean(key, true);
+			edit.commit();
+		}
+		if (showHelp) {
+			showGameHelp();
+		}
+	}
+
+	private void showGameHelp() {
+		if (game.getMarkerChance().isNormal()
+				|| game.getMarkerChance().isReverse()) {
+			SimpleGameDescrDialogFragment helpDialog = new SimpleGameDescrDialogFragment();
+			helpDialog.initialize(this, game);
+			helpDialog.show(getChildFragmentManager(), "help");
+		} else {
+			ComplexGameDescrDialogFragment helpDialog = new ComplexGameDescrDialogFragment();
+			helpDialog.initialize(this, game);
+			helpDialog.show(getChildFragmentManager(), "help");
+		}
 	}
 
 	private void updatePlayerImage(ImageView xImage, Uri xUri,
@@ -410,7 +456,7 @@ public class GameFragment extends SherlockFragment {
 
 	}
 
-	private void updateHeader() {
+	private void updateHeader(boolean animateMarker) {
 		Player player = game.getCurrentPlayer();
 		numMoves.setText("" + game.getNumberOfMoves());
 		if (player.getMarker() == Marker.X) {
@@ -431,8 +477,9 @@ public class GameFragment extends SherlockFragment {
 		// the roll is done.
 		// On device inputs, can simply ignore button presses.
 		// online moves need to be queued while animation is proceeding
-		if (game.getMarkerChance().isChaotic()
-				|| game.getMarkerChance().isCustom()) {
+		if (animateMarker
+				&& (game.getMarkerChance().isChaotic() || game
+						.getMarkerChance().isCustom())) {
 			displayAnimatedMarkerToPlay();
 		} else {
 			displayMarkerToPlay();
@@ -742,7 +789,7 @@ public class GameFragment extends SherlockFragment {
 			endGame(outcome);
 		} else {
 			evaluateInGameAchievements(outcome);
-			updateHeader();
+			updateHeader(true);
 			acceptMove();
 		}
 	}
@@ -1012,7 +1059,7 @@ public class GameFragment extends SherlockFragment {
 		Player currentPlayer = game.getCurrentPlayer();
 		game = new Game(3, game.getMode(), currentPlayer,
 				currentPlayer.opponent(), game.getMarkerChance());
-		updateHeader();
+		updateHeader(true);
 		winOverlayView.setWinStyle(null);
 		winOverlayView.invalidate();
 		for (ImageButton each : buttons) {
@@ -1096,5 +1143,12 @@ public class GameFragment extends SherlockFragment {
 		thinkingText.setText(getResources().getString(
 				R.string.opponent_is_thinking,
 				getMainActivity().getRoomListener().getOpponentName()));
+	}
+
+	private boolean helpShown = false;
+
+	public void gameHelpClosed() {
+		updateHeader(!helpShown);
+		helpShown = true;
 	}
 }

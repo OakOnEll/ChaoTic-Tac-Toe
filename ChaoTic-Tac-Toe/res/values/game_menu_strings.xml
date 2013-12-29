@@ -28,7 +28,7 @@
     <string name="chance_reverse">Reverse</string>
     <string name="chance_label_my_marker">Your Marker</string>
     <string name="chance_label_opponent_marker">Their Marker</string>
-    <string name="chance_label_remove_marker">Remove Marker</string>
+    <string name="chance_label_remove_marker">Bomb</string>
 
     <string-array name="chance_array">
         <item>Normal</item>

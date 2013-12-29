@@ -9,23 +9,21 @@
         android:id="@+id/choice_chance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/chance_array"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:entries="@array/chance_array" />
 
-    <LinearLayout
+    <TableLayout
         android:id="@+id/custom_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical" >
+        android:layout_marginRight="10dp" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            >
-
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/chance_label_my_marker"
@@ -43,16 +41,14 @@
             <TextView
                 android:id="@+id/chance_percent_my_marker"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
-        </LinearLayout>
+                android:layout_height="wrap_content" />
+        </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            >
-
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/chance_label_opponent_marker"
@@ -70,15 +66,14 @@
             <TextView
                 android:id="@+id/chance_percent_opponent_marker"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
-        </LinearLayout>
+                android:layout_height="wrap_content" />
+        </TableRow>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            >
+            android:gravity="center_vertical" >
 
             <TextView
                 android:id="@+id/chance_label_remove_marker"
@@ -90,15 +85,14 @@
                 android:id="@+id/chance_seek_remove_marker"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" 
-                android:max="300"/>
+                android:layout_weight="1"
+                android:max="300" />
 
             <TextView
                 android:id="@+id/chance_percent_remove_marker"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>
