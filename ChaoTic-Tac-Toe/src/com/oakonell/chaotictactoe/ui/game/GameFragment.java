@@ -122,9 +122,7 @@ public class GameFragment extends SherlockFragment {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int which) {
-									activity.gameEnded();
-									activity.getSupportFragmentManager()
-											.popBackStack();
+									leaveGame();
 									dialog.dismiss();
 								}
 							}).create().show();
@@ -1126,9 +1124,8 @@ public class GameFragment extends SherlockFragment {
 				.setNeutralButton(android.R.string.ok, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						activity.gameEnded();
-						activity.getSupportFragmentManager().popBackStack();
-						dialog.dismiss();
+						dialog.dismiss();						
+						leaveGame();						
 					}
 				}).create().show();
 
