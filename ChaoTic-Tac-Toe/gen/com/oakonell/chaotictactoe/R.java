@@ -1417,11 +1417,10 @@ containing a value of this type.
         public static final int game_lost_sad_trombone_joe_lamb_665429450=0x7f060003;
         public static final int game_won_small_crowd_applause_yannick_lemieux_1268806408=0x7f060004;
         public static final int invalid_move_metal_gong_dianakc_109711828=0x7f060005;
-        public static final int invalid_move_sounds_980_thats_a_no=0x7f060006;
-        public static final int invite_received_sounds_1044_inquisitiveness=0x7f060007;
-        public static final int play_o_sounds_913_served=0x7f060008;
-        public static final int play_x_sounds_882_solemn=0x7f060009;
-        public static final int wheel_roll_single_275807_sounddogs__ca=0x7f06000a;
+        public static final int invite_received_sounds_1044_inquisitiveness=0x7f060006;
+        public static final int play_o_sounds_913_served=0x7f060007;
+        public static final int play_x_sounds_882_solemn=0x7f060008;
+        public static final int wheel_roll_single_275807_sounddogs__ca=0x7f060009;
     }
     public static final class string {
         public static final int about_title=0x7f090041;
