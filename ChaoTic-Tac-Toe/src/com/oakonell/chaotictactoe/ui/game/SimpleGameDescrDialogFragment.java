@@ -1,7 +1,6 @@
 package com.oakonell.chaotictactoe.ui.game;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -12,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.model.Game;
@@ -35,10 +35,10 @@ public class SimpleGameDescrDialogFragment extends SherlockDialogFragment {
 				.findViewById(R.id.how_to_play_text);
 		if (game.getMarkerChance().isNormal()) {
 			howToPlayText
-					.setText("Traditional Tic-Tac-Toe, Player X plays Xs, and Player O plays Os");
+					.setText(R.string.normal_game_help);
 		} else if (game.getMarkerChance().isReverse()) {
 			howToPlayText
-					.setText("Reverse Tic-Tac-Toe, Player X plays Os, and Player O plays Xs");
+					.setText(R.string.reverse_game_help);
 			ImageView marker = (ImageView) view
 					.findViewById(R.id.x_player_marker);
 			marker.setImageResource(R.drawable.system_dot);

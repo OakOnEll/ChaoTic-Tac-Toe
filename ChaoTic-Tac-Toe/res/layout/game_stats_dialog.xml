@@ -19,7 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Player"
+                android:text="@string/player_stat_label"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Wins"
+                android:text="@string/wins_stat_label"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Losses"
+                android:text="@string/losses_stat_label"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
@@ -48,7 +48,7 @@
                 android:layout_weight="5"
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
-                android:background="@color/abs__background_holo_light" />
+                android:background="@color/holo_blue_light" />
         </TableRow>
 
         <TableRow
@@ -78,6 +78,7 @@
 
             <TextView
                 android:id="@+id/x_wins"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -85,6 +86,7 @@
 
             <TextView
                 android:id="@+id/x_losses"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -99,7 +101,7 @@
                 android:layout_weight="5"
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
-                android:background="@color/abs__background_holo_light" />
+                android:background="@color/holo_blue_light" />
         </TableRow>
 
         <TableRow
@@ -131,17 +133,29 @@
                 android:id="@+id/o_wins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_weight="1"
                 />
 
             <TextView
                 android:id="@+id/o_losses"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                  />
         </TableRow>
-    </TableLayout>
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+                        <View
+                android:layout_weight="5"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="@color/holo_blue_light" />
+        </TableRow>
+        </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -152,7 +166,7 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Draws"
+            android:text="@string/draws_stat_label"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView

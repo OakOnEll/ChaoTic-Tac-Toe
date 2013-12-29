@@ -32,7 +32,7 @@ public class GameStatDialogFragment extends SherlockDialogFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.game_stats_dialog, container,
 				false);
-		getDialog().setTitle("Game Statistics");
+		getDialog().setTitle(R.string.game_stats_title);
 
 		TextView xNameText = (TextView) view.findViewById(R.id.x_name);
 		xNameText.setText(game.getXPlayer().getName());
@@ -58,7 +58,7 @@ public class GameStatDialogFragment extends SherlockDialogFragment {
 			@Override
 			public void onClick(View arg0) {
 				getDialog().dismiss();
-				parent.gameHelpClosed();
+				parent.gameStatsClosed();
 			}
 		});
 
@@ -78,6 +78,6 @@ public class GameStatDialogFragment extends SherlockDialogFragment {
 	@Override
 	public void onCancel(DialogInterface dialog) {
 		super.onCancel(dialog);
-		parent.gameHelpClosed();
+		parent.gameStatsClosed();
 	}
 }

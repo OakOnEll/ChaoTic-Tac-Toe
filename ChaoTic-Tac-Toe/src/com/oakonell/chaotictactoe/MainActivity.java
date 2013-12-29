@@ -212,10 +212,9 @@ public class MainActivity extends BaseGameActivity {
 					if (roomListener != null) {
 						roomListener.leaveRoom();
 					}
-					MainActivity.super.onBackPressed();
+					getGameFragment().leaveGame();
+					//MainActivity.super.onBackPressed();
 
-					// show an ad
-					possiblyShowInterstitialAd();
 				}
 			});
 			builder.setNegativeButton(R.string.no, new OnClickListener() {

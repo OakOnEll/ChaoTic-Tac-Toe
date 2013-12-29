@@ -53,7 +53,7 @@ public class ComplexGameDescrDialogFragment extends SherlockDialogFragment {
 				.getRemoveMarkerPercentage()) + "%");
 
 		howToPlayText
-				.setText("On each player's turn, there is a chance they can play their own marker, their opponent's marker, or can use a bomb to explode an existing marker on the board.");
+				.setText(R.string.complex_game_help);
 		View ok = view.findViewById(R.id.ok_button);
 
 		ok.setOnClickListener(new OnClickListener() {

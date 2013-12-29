@@ -1065,8 +1065,15 @@ public class GameFragment extends SherlockFragment {
 			// let the play again dialog handle it
 			return;
 		}
-		getMainActivity().getSupportFragmentManager().popBackStack();
-		getMainActivity().gameEnded();
+		
+		onGameStatsClose = new Runnable() {
+			@Override
+			public void run() {
+				getMainActivity().getSupportFragmentManager().popBackStack();
+				getMainActivity().gameEnded();
+			}
+		};		
+		showGameStats();
 	}
 
 	public void playAgain() {
@@ -1164,5 +1171,12 @@ public class GameFragment extends SherlockFragment {
 	public void gameHelpClosed() {
 		updateHeader(!helpShown);
 		helpShown = true;
+	}
+
+	private Runnable onGameStatsClose;
+	public void gameStatsClosed() {
+		if (onGameStatsClose != null) {
+			onGameStatsClose.run();
+		}		
 	}
 }
