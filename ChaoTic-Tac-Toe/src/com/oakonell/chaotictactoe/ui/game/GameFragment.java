@@ -300,9 +300,9 @@ public class GameFragment extends SherlockFragment {
 		ImageView oImage = (ImageView) view.findViewById(R.id.o_back);
 
 		updatePlayerImage(xImage, game.getXPlayer().getIconImageUri(),
-				R.drawable.system_cross_faded);
+				R.drawable.system_cross);
 		updatePlayerImage(oImage, game.getOPlayer().getIconImageUri(),
-				R.drawable.system_dot_faded);
+				R.drawable.system_dot);
 
 		xHeaderLayout = view.findViewById(R.id.x_name_layout);
 		oHeaderLayout = view.findViewById(R.id.o_name_layout);
@@ -377,7 +377,7 @@ public class GameFragment extends SherlockFragment {
 				showGameStats();
 			}
 		});
-		
+
 		if (savedInstanceState != null) {
 			// reanimate the marker roll on restore?
 			updateHeader(true);
@@ -404,6 +404,8 @@ public class GameFragment extends SherlockFragment {
 		}
 		if (showHelp) {
 			showGameHelp();
+		} else {
+			updateHeader(true);
 		}
 	}
 
@@ -497,8 +499,10 @@ public class GameFragment extends SherlockFragment {
 			displayMarkerToPlay();
 		}
 
-		xWins.setText("" + score.getXWins());
-		oWins.setText("" + score.getOWins());
+		xWins.setText(getResources().getString(R.string.num_wins_with_label,
+				score.getXWins()));
+		oWins.setText(getResources().getString(R.string.num_wins_with_label,
+				score.getOWins()));
 		draws.setText("" + score.getDraws());
 		gameNumber.setText("" + score.getTotalGames());
 	}
@@ -1063,14 +1067,14 @@ public class GameFragment extends SherlockFragment {
 			// let the play again dialog handle it
 			return;
 		}
-		
+
 		onGameStatsClose = new Runnable() {
 			@Override
 			public void run() {
 				getMainActivity().getSupportFragmentManager().popBackStack();
 				getMainActivity().gameEnded();
 			}
-		};		
+		};
 		showGameStats();
 	}
 
@@ -1124,8 +1128,8 @@ public class GameFragment extends SherlockFragment {
 				.setNeutralButton(android.R.string.ok, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();						
-						leaveGame();						
+						dialog.dismiss();
+						leaveGame();
 					}
 				}).create().show();
 
@@ -1171,9 +1175,10 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private Runnable onGameStatsClose;
+
 	public void gameStatsClosed() {
 		if (onGameStatsClose != null) {
 			onGameStatsClose.run();
-		}		
+		}
 	}
 }

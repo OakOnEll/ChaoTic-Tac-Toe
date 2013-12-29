@@ -25,7 +25,7 @@
                 android:id="@+id/x_back"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/system_cross_faded" />
+                android:src="@drawable/system_cross" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -33,16 +33,18 @@
                 android:layout_weight="1"
                 android:orientation="vertical" >
 
-                <com.oakonell.chaotictactoe.utils.AutoResizeTextView
+                <TextView
                     android:id="@+id/xName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical"
                     android:lines="1"
+                    android:text="Horatio Algers is a Long Name"
+                        android:ellipsize="end"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical"
                     android:orientation="horizontal" >
@@ -51,14 +53,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left|center_vertical"
-                        android:text="X"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:text="@string/player_x_lbl"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/num_x_wins"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical|right"
+                        android:gravity="right"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                         />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -98,16 +103,18 @@
                 android:layout_weight="1"
                 android:orientation="vertical" >
 
-                <com.oakonell.chaotictactoe.utils.AutoResizeTextView
+                <TextView
                     android:id="@+id/oName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:lines="1"
+                    android:ellipsize="end"
+                    android:text="Another Long Name, to test the display"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
                     android:orientation="horizontal" >
@@ -115,15 +122,17 @@
                     <TextView
                         android:id="@+id/num_o_wins"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="wrap_content"                        
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_gravity="right|center_vertical" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
-                        android:text="O"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:gravity="right"
+                        android:text="@string/player_o_lbl"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -131,7 +140,7 @@
                 android:id="@+id/o_back"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/system_dot_faded" />
+                android:src="@drawable/system_dot" />
         </LinearLayout>
     </LinearLayout>
 

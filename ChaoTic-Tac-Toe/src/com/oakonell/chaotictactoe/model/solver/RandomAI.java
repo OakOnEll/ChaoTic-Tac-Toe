@@ -23,7 +23,7 @@ public class RandomAI extends PlayerStrategy {
 
 	private static Uri getImageUri() {
 		return Uri.parse("android.resource://com.oakonell.chaotictactoe/"
-				+ R.drawable.dice);
+				+ R.drawable.dice_icon_14730);
 	}
 
 	@Override

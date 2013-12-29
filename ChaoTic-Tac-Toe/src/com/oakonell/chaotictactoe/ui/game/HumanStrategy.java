@@ -26,9 +26,9 @@ public class HumanStrategy extends PlayerStrategy {
 
 	public static Uri getImage(Marker marker) {
 		if (marker == Marker.X) return Uri.parse("android.resource://com.oakonell.chaotictactoe/"
-				+ R.drawable.system_cross_faded);
+				+ R.drawable.system_cross);
 		return Uri.parse("android.resource://com.oakonell.chaotictactoe/"
-				+ R.drawable.system_dot_faded);
+				+ R.drawable.system_dot);
 	}
 
 	@Override

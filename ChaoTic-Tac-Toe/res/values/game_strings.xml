@@ -36,4 +36,7 @@
     <string name="normal_game_help">Traditional Tic-Tac-Toe\nPlayer X plays Xs\nPlayer O plays Os.</string>
     <string name="reverse_game_help">Reverse Tic-Tac-Toe\nPlayer X plays Os\nPlayer O plays Xs.</string>
     <string name="complex_game_help">On each player\'s turn, there is a chance they can\nplay their own marker\nplay their opponent\'s marker\ncan use a bomb to explode an existing marker on the board.</string>
+    <string name="player_x_lbl">Player X</string>
+    <string name="player_o_lbl">Player O</string>
+    <string name="num_wins_with_label">%s Wins</string>
 </resources>
