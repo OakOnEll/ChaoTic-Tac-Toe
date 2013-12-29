@@ -74,7 +74,7 @@ public class GameFragment extends SherlockFragment {
 	private static final int NON_HUMAN_OPPONENT_HIGHLIGHT_MOVE_PAUSE_MS = 300;
 	private static final int MARKER_ROLL_VISIBILITY_PAUSE = 150;
 	private static final int OPPONENT_MARKER_VISIBILITY_PAUSE_MS = 450;
-
+	
 	private ImageManager imgManager;
 
 	private ImageView markerToPlayView;
@@ -114,7 +114,6 @@ public class GameFragment extends SherlockFragment {
 	public void onResume() {
 		super.onResume();
 		if (exitOnResume) {
-			final MainActivity activity = getMainActivity();
 			(new AlertDialog.Builder(getMainActivity()))
 					.setMessage(R.string.you_left_the_game)
 					.setNeutralButton(android.R.string.ok,
@@ -145,8 +144,8 @@ public class GameFragment extends SherlockFragment {
 						layout.height = min;
 						layout.width = min;
 						squareView.setLayoutParams(layout);
-						squareView.getViewTreeObserver()
-								.removeGlobalOnLayoutListener(this);
+//						squareView.getViewTreeObserver()
+//								.removeGlobalOnLayoutListener(this);
 
 						LayoutParams params = winOverlayView.getLayoutParams();
 						params.height = layout.height;
@@ -472,7 +471,6 @@ public class GameFragment extends SherlockFragment {
 
 	private void updateHeader(boolean animateMarker) {
 		Player player = game.getCurrentPlayer();
-		numMoves.setText("" + game.getNumberOfMoves());
 		if (player.getMarker() == Marker.X) {
 			xHeaderLayout.setBackgroundResource(R.drawable.current_player);
 			oHeaderLayout.setBackgroundResource(R.drawable.inactive_player);
@@ -499,10 +497,15 @@ public class GameFragment extends SherlockFragment {
 			displayMarkerToPlay();
 		}
 
-		xWins.setText(getResources().getString(R.string.num_wins_with_label,
-				score.getXWins()));
-		oWins.setText(getResources().getString(R.string.num_wins_with_label,
-				score.getOWins()));
+		updateGameStatDisplay();
+	}
+
+	private void updateGameStatDisplay() {
+		numMoves.setText("" + game.getNumberOfMoves());
+		xWins.setText(getResources().getQuantityString(R.plurals.num_wins_with_label,
+				score.getXWins(), score.getXWins()));
+		oWins.setText(getResources().getQuantityString(R.plurals.num_wins_with_label,
+				score.getOWins(), score.getOWins()));
 		draws.setText("" + score.getDraws());
 		gameNumber.setText("" + score.getTotalGames());
 	}
@@ -802,6 +805,7 @@ public class GameFragment extends SherlockFragment {
 			cellButton.setImageResource(resId);
 		}
 		if (outcome.isOver()) {
+			updateGameStatDisplay();
 			endGame(outcome);
 		} else {
 			evaluateInGameAchievements(outcome);

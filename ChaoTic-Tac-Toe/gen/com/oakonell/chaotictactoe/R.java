@@ -1160,7 +1160,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080058;
-        public static final int about_description=0x7f0800ac;
+        public static final int about_description=0x7f0800ab;
         public static final int abs__action_bar=0x7f080024;
         public static final int abs__action_bar_container=0x7f080023;
         public static final int abs__action_bar_subtitle=0x7f080015;
@@ -1200,18 +1200,18 @@ containing a value of this type.
         public static final int abs__textButton=0x7f080017;
         public static final int abs__title=0x7f08001f;
         public static final int abs__up=0x7f08000f;
-        public static final int account_settings=0x7f0800bf;
-        public static final int action_chat=0x7f0800c2;
-        public static final int action_settings=0x7f0800c3;
+        public static final int account_settings=0x7f0800be;
+        public static final int action_chat=0x7f0800c1;
+        public static final int action_settings=0x7f0800c2;
         public static final int actionbar_notifcation_imageview=0x7f08003b;
         public static final int actionbar_notifcation_progress=0x7f08003d;
         public static final int actionbar_notifcation_textview=0x7f08003c;
         public static final int adView=0x7f080036;
-        public static final int ad_frame=0x7f0800ae;
+        public static final int ad_frame=0x7f0800ad;
         public static final int ai_level=0x7f080051;
-        public static final int app_info=0x7f0800c1;
-        public static final int app_name_id=0x7f0800a9;
-        public static final int arrow=0x7f0800bd;
+        public static final int app_info=0x7f0800c0;
+        public static final int app_name_id=0x7f0800a8;
+        public static final int arrow=0x7f0800bc;
         public static final int button_r1c1=0x7f080068;
         public static final int button_r1c2=0x7f080069;
         public static final int button_r1c3=0x7f08006a;
@@ -1233,8 +1233,8 @@ containing a value of this type.
         public static final int choice_chance=0x7f080075;
         public static final int close=0x7f08003a;
         public static final int custom_layout=0x7f080076;
-        public static final int decrement=0x7f0800b1;
-        public static final int development_preferences=0x7f0800c0;
+        public static final int decrement=0x7f0800b0;
+        public static final int development_preferences=0x7f0800bf;
         public static final int disableHome=0x7f08000d;
         public static final int edit_query=0x7f08002a;
         public static final int fragmentContainer=0x7f080052;
@@ -1244,8 +1244,8 @@ containing a value of this type.
         public static final int homeAsUp=0x7f08000a;
         public static final int how_to_play_text=0x7f08004a;
         public static final int hybrid=0x7f080004;
-        public static final int icon=0x7f0800ba;
-        public static final int icon_image=0x7f0800a8;
+        public static final int icon=0x7f0800b9;
+        public static final int icon_image=0x7f0800a7;
         public static final int imageView1=0x7f08003e;
         public static final int imageView2=0x7f08003f;
         public static final int imageView3=0x7f080040;
@@ -1255,13 +1255,13 @@ containing a value of this type.
         public static final int imageView7=0x7f080046;
         public static final int imageView8=0x7f080047;
         public static final int imageView9=0x7f080048;
-        public static final int increment=0x7f0800b0;
+        public static final int increment=0x7f0800af;
         public static final int invites=0x7f080091;
-        public static final int label=0x7f0800bb;
+        public static final int label=0x7f0800ba;
         public static final int linearLayout1=0x7f08004d;
         public static final int listMode=0x7f080006;
         public static final int loading_num_invites=0x7f080092;
-        public static final int main_frame=0x7f0800ad;
+        public static final int main_frame=0x7f0800ac;
         public static final int marker_to_play=0x7f080064;
         public static final int message=0x7f080038;
         public static final int messages=0x7f080037;
@@ -1276,7 +1276,7 @@ containing a value of this type.
         public static final int no_button=0x7f08004f;
         public static final int none=0x7f080000;
         public static final int normal=0x7f080001;
-        public static final int not_play_again=0x7f0800b9;
+        public static final int not_play_again=0x7f0800b8;
         public static final int num_draws=0x7f080074;
         public static final int num_games_container=0x7f080065;
         public static final int num_invites=0x7f080093;
@@ -1290,14 +1290,14 @@ containing a value of this type.
         public static final int o_name=0x7f0800a3;
         public static final int o_name_layout=0x7f08005f;
         public static final int o_wins=0x7f0800a4;
-        public static final int ok=0x7f0800b3;
+        public static final int ok=0x7f0800b2;
         public static final int ok_button=0x7f08004b;
         public static final int opponent_marker_percentage=0x7f080045;
-        public static final int opponent_wants_to_play_again=0x7f0800b6;
-        public static final int opponent_wants_to_play_again_progress=0x7f0800b5;
-        public static final int opponent_wants_to_play_again_text=0x7f0800b7;
-        public static final int play_again=0x7f0800b8;
-        public static final int play_again_text=0x7f0800b4;
+        public static final int opponent_wants_to_play_again=0x7f0800b5;
+        public static final int opponent_wants_to_play_again_progress=0x7f0800b4;
+        public static final int opponent_wants_to_play_again_text=0x7f0800b6;
+        public static final int play_again=0x7f0800b7;
+        public static final int play_again_text=0x7f0800b3;
         public static final int play_icon=0x7f08008c;
         public static final int player_marker_percentage=0x7f080041;
         public static final int player_o=0x7f0800a2;
@@ -1305,7 +1305,7 @@ containing a value of this type.
         public static final int player_pic=0x7f08009a;
         public static final int player_x=0x7f08009d;
         public static final int player_x_name=0x7f080054;
-        public static final int pref_sound_fx_key=0x7f0800b2;
+        public static final int pref_sound_fx_key=0x7f0800b1;
         public static final int remember_checkbox=0x7f080050;
         public static final int remove_marker_percentage=0x7f080049;
         public static final int satellite=0x7f080002;
@@ -1328,17 +1328,16 @@ containing a value of this type.
         public static final int tableRow5=0x7f0800a1;
         public static final int tableRow6=0x7f0800a6;
         public static final int terrain=0x7f080003;
-        public static final int text=0x7f0800af;
+        public static final int text=0x7f0800ae;
         public static final int textView1=0x7f08004c;
         public static final int textView2=0x7f080055;
         public static final int textView3=0x7f08009b;
-        public static final int textView4=0x7f0800a7;
         public static final int thinking=0x7f080072;
         public static final int thinking_text=0x7f080073;
         public static final int timestamp=0x7f080099;
-        public static final int urlId=0x7f0800ab;
+        public static final int urlId=0x7f0800aa;
         public static final int useLogo=0x7f080008;
-        public static final int version=0x7f0800aa;
+        public static final int version=0x7f0800a9;
         public static final int view_achievements=0x7f080094;
         public static final int view_achievements_text=0x7f080095;
         public static final int view_leaderboards=0x7f080096;
@@ -1351,8 +1350,8 @@ containing a value of this type.
         public static final int x_losses=0x7f0800a0;
         public static final int x_name=0x7f08009e;
         public static final int x_name_layout=0x7f080059;
-        public static final int x_player=0x7f0800bc;
-        public static final int x_player_marker=0x7f0800be;
+        public static final int x_player=0x7f0800bb;
+        public static final int x_player_marker=0x7f0800bd;
         public static final int x_wins=0x7f08009f;
         public static final int yes_button=0x7f08004e;
     }
@@ -1407,8 +1406,12 @@ containing a value of this type.
         public static final int simple_game_mode_help_dialog=0x7f03002b;
     }
     public static final class menu {
-        public static final int game=0x7f0f0000;
-        public static final int menu=0x7f0f0001;
+        public static final int game=0x7f100000;
+        public static final int menu=0x7f100001;
+    }
+    public static final class plurals {
+        public static final int num_draws_with_label=0x7f0f0001;
+        public static final int num_wins_with_label=0x7f0f0000;
     }
     public static final class raw {
         public static final int bomb_soundbible_com_891110113=0x7f060000;
@@ -1478,14 +1481,14 @@ containing a value of this type.
         public static final int achievements_not_available=0x7f090061;
         public static final int action_chat=0x7f090085;
         public static final int action_settings=0x7f090065;
-        public static final int admob_id=0x7f0900a6;
+        public static final int admob_id=0x7f0900a5;
         public static final int ai_easy=0x7f090077;
         public static final int ai_hard=0x7f090079;
         public static final int ai_level=0x7f090075;
         public static final int ai_medium=0x7f090078;
         public static final int ai_random=0x7f090076;
-        public static final int app_id=0x7f0900a7;
-        public static final int app_name=0x7f0900b0;
+        public static final int app_id=0x7f0900a6;
+        public static final int app_name=0x7f0900af;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -1509,14 +1512,14 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f090014;
-        public static final int beat_alltime_max=0x7f0900ac;
-        public static final int beat_alltime_min=0x7f0900af;
-        public static final int beat_daily_max=0x7f0900aa;
-        public static final int beat_daily_min=0x7f0900ad;
-        public static final int beat_weekly_max=0x7f0900ab;
-        public static final int beat_weekly_min=0x7f0900ae;
+        public static final int beat_alltime_max=0x7f0900ab;
+        public static final int beat_alltime_min=0x7f0900ae;
+        public static final int beat_daily_max=0x7f0900a9;
+        public static final int beat_daily_min=0x7f0900ac;
+        public static final int beat_weekly_max=0x7f0900aa;
+        public static final int beat_weekly_min=0x7f0900ad;
         public static final int button_send=0x7f090084;
-        public static final int cancel=0x7f0900b2;
+        public static final int cancel=0x7f0900b1;
         public static final int chance_chaotic=0x7f09006c;
         public static final int chance_custom=0x7f09006d;
         public static final int chance_label_my_marker=0x7f09006f;
@@ -1611,15 +1614,15 @@ containing a value of this type.
         public static final int error_o_name=0x7f09007c;
         public static final int error_x_name=0x7f09007b;
         public static final int exit_play_again=0x7f090089;
-        public static final int ga_trackingId=0x7f0900a5;
+        public static final int ga_trackingId=0x7f0900a4;
         public static final int game_stats_title=0x7f09009a;
         public static final int httpError=0x7f09002f;
         public static final int invalid_move_need_empty=0x7f090082;
         public static final int invalid_move_need_nonempty=0x7f090083;
         public static final int label_player_o_name=0x7f09006a;
         public static final int label_player_x_name=0x7f090069;
-        public static final int leaderboard_longest_choatic_game=0x7f0900a8;
-        public static final int leaderboard_shortest_choatic_game=0x7f0900a9;
+        public static final int leaderboard_longest_choatic_game=0x7f0900a7;
+        public static final int leaderboard_shortest_choatic_game=0x7f0900a8;
         public static final int leaderboards=0x7f090060;
         public static final int leaderboards_not_available=0x7f090062;
         public static final int leave_game_message=0x7f090091;
@@ -1636,7 +1639,6 @@ containing a value of this type.
         public static final int num_move_lbl=0x7f090098;
         public static final int num_picker_add_sign=0x7f090043;
         public static final int num_picker_minus_sign=0x7f090044;
-        public static final int num_wins_with_label=0x7f0900a4;
         public static final int offline_achievement_chaotic_draw=0x7f090051;
         public static final int offline_achievement_clean_slate=0x7f090055;
         public static final int offline_achievement_deja_vu=0x7f090052;
@@ -1644,7 +1646,7 @@ containing a value of this type.
         public static final int offline_achievement_long_haul=0x7f090053;
         public static final int offline_achievement_only_xs_or_os=0x7f090050;
         public static final int offline_achievement_with_a_little_help=0x7f090054;
-        public static final int ok=0x7f0900b1;
+        public static final int ok=0x7f0900b0;
         public static final int online_setting_title=0x7f090095;
         public static final int opponent_does_not_want_to_play_again=0x7f09008c;
         public static final int opponent_is_in_chat=0x7f09008e;
@@ -1672,8 +1674,8 @@ containing a value of this type.
         /**  do not translate 
          */
         public static final int pref_reset_preferences_key=0x7f090027;
-        public static final int pref_sound_fx=0x7f0900b5;
-        public static final int pref_sound_fx_key=0x7f0900b4;
+        public static final int pref_sound_fx=0x7f0900b4;
+        public static final int pref_sound_fx_key=0x7f0900b3;
         public static final int prompt_player_name=0x7f090068;
         public static final int prompt_title_player_name=0x7f090067;
         public static final int rate_app=0x7f090039;
@@ -1696,7 +1698,7 @@ containing a value of this type.
         public static final int signing_in=0x7f090059;
         public static final int signing_out=0x7f09005a;
         public static final int start=0x7f090072;
-        public static final int title_game=0x7f0900b3;
+        public static final int title_game=0x7f0900b2;
         public static final int unique_error_o_name=0x7f09007d;
         public static final int waiting_for_opponent_to_decide_to_play_again=0x7f09008a;
         public static final int wins_stat_label=0x7f09009c;

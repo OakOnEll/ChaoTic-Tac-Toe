@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
 
     <TableLayout
         android:layout_width="match_parent"
@@ -45,17 +45,17 @@
             android:layout_height="wrap_content" >
 
             <View
-                android:layout_weight="5"
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
+                android:layout_weight="5"
                 android:background="@color/holo_blue_light" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            android:gravity="center_vertical">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -72,35 +72,33 @@
                 <TextView
                     android:id="@+id/x_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                     />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/x_wins"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/x_losses"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                 />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-                        <View
-                android:layout_weight="5"
+
+            <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
+                android:layout_weight="5"
                 android:background="@color/holo_blue_light" />
         </TableRow>
 
@@ -125,37 +123,36 @@
                 <TextView
                     android:id="@+id/o_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/o_wins"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_weight="1"
-                />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/o_losses"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                 />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
+
         <TableRow
             android:id="@+id/tableRow6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-                        <View
-                android:layout_weight="5"
+
+            <View
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
+                android:layout_weight="5"
                 android:background="@color/holo_blue_light" />
         </TableRow>
-        </TableLayout>
+    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -163,18 +160,10 @@
         android:gravity="center_horizontal" >
 
         <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/draws_stat_label"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
             android:id="@+id/num_draws"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
     </LinearLayout>
 
     <Button

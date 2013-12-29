@@ -22,21 +22,28 @@
     <string name="play_again_waiting">Waiting for %s</string>
     <string name="online_setting_title">Settings</string>
     <string name="you_left_the_game">You left the game.</string>
-    
     <string name="chat_actionbar_image_content">Chat action menu</string>
     <string name="num_move_lbl">Moves</string>
     <string name="num_games_lbl">Games: </string>
-    
     <string name="game_stats_title">Game Statistics</string>
-    <string name="player_stat_label">Player</string>        
-    <string name="wins_stat_label">Wins</string>        
-    <string name="losses_stat_label">Losses</string>    
-    <string name="draws_stat_label">Draws</string>    
-    
+    <string name="player_stat_label">Player</string>
+    <string name="wins_stat_label">Wins</string>
+    <string name="losses_stat_label">Losses</string>
+    <string name="draws_stat_label">Draws</string>
     <string name="normal_game_help">Traditional Tic-Tac-Toe\nPlayer X plays Xs\nPlayer O plays Os.</string>
     <string name="reverse_game_help">Reverse Tic-Tac-Toe\nPlayer X plays Os\nPlayer O plays Xs.</string>
     <string name="complex_game_help">On each player\'s turn, there is a chance they can\nplay their own marker\nplay their opponent\'s marker\ncan use a bomb to explode an existing marker on the board.</string>
     <string name="player_x_lbl">Player X</string>
     <string name="player_o_lbl">Player O</string>
-    <string name="num_wins_with_label">%s Wins</string>
+
+    <plurals name="num_wins_with_label">
+        <item quantity="zero">No Wins</item>
+        <item quantity="one">1 Win</item>
+        <item quantity="other">%d Wins</item>
+    </plurals>
+    <plurals name="num_draws_with_label">
+        <item quantity="zero">No Draws</item>
+        <item quantity="one">1 Draw</item>
+        <item quantity="other">%d Draws</item>
+    </plurals>
 </resources>

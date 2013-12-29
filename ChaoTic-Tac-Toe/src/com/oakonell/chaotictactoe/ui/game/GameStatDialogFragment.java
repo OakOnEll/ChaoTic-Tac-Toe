@@ -51,7 +51,7 @@ public class GameStatDialogFragment extends SherlockDialogFragment {
 		xLossesText.setText(score.getOWins() + "");
 
 		TextView numDraws = (TextView) view.findViewById(R.id.num_draws);
-		numDraws.setText(score.getDraws() + "");
+		numDraws.setText(parent.getResources().getQuantityString(R.plurals.num_draws_with_label, score.getDraws(), score.getDraws()));
 
 		View ok = view.findViewById(R.id.ok_button);
 		ok.setOnClickListener(new OnClickListener() {
