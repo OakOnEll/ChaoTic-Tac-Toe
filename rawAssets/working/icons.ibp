@@ -21,3 +21,20 @@ Loop MySvgFiles 3
     FileSvg MySvgFiles:Index
     FileName MyExportFiles:Index
     Convert
+
+
+// Create the feature graphic
+ExportWidth 1024
+ExportHeight 500
+    FileSvg 'feature_graphic.svg'
+    FileName 'feature_graphic'
+    Convert
+
+// Create the promo  graphic
+ExportWidth 180
+ExportHeight 120
+    FileSvg 'promo_graphic.svg'
+    FileName 'promo_graphic'
+    Convert
+
+
