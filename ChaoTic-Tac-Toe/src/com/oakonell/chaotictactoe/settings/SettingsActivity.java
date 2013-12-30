@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.oakonell.chaotictactoe.BuildConfig;
 import com.oakonell.chaotictactoe.R;
+import com.oakonell.utils.Utils;
 import com.oakonell.utils.activity.GenericAboutActivity;
 import com.oakonell.utils.preference.CommonPreferences;
 import com.oakonell.utils.preference.PrefsActivity;
@@ -13,7 +14,9 @@ public class SettingsActivity extends PrefsActivity {
 	@Override
 	public void onCreate(Bundle aSavedState) {
 		super.onCreate(aSavedState);
-		addPreV11Resources();
+		if (Utils.hasHoneycomb()) {
+			addPreV11Resources();
+		}
 	}
 
 	@Override

@@ -12,11 +12,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.actionbarsherlock.app.ActionBar;
+import com.google.ads.Ad;
+import com.google.ads.AdListener;
+import com.google.ads.AdRequest;
+import com.google.ads.AdRequest.ErrorCode;
+import com.google.ads.AdView;
+import com.google.ads.InterstitialAd;
 import com.google.analytics.tracking.android.EasyTracker;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
@@ -93,7 +95,8 @@ public class MainActivity extends BaseGameActivity {
 		soundManager = new SoundManager(this);
 		soundManager.addSound(Sounds.PLAY_X, R.raw.play_x_sounds_882_solemn);
 		soundManager.addSound(Sounds.PLAY_O, R.raw.play_o_sounds_913_served);
-		soundManager.addSound(Sounds.REMOVE_MARKER, R.raw.bomb_soundbible_com_891110113);
+		soundManager.addSound(Sounds.REMOVE_MARKER,
+				R.raw.bomb_soundbible_com_891110113);
 		soundManager.addSound(Sounds.INVALID_MOVE,
 				R.raw.invalid_move_metal_gong_dianakc_109711828);
 		soundManager.addSound(Sounds.CHAT_RECIEVED,
@@ -114,14 +117,17 @@ public class MainActivity extends BaseGameActivity {
 
 		// initialize banner ad
 		mAdView = (AdView) findViewById(R.id.adView);
-		mAdView.loadAd(new AdRequest.Builder().build());
+		mAdView.loadAd(createAdRequest());
 	}
 
 	private void initializeInterstitialAd() {
-		mInterstitialAd = new InterstitialAd(MainActivity.this);
-		mInterstitialAd
-				.setAdUnitId(getResources().getString(R.string.admob_id));
-		mInterstitialAd.loadAd(new AdRequest.Builder().build());
+		mInterstitialAd = new InterstitialAd(MainActivity.this, getResources()
+				.getString(R.string.admob_id));
+		mInterstitialAd.loadAd(createAdRequest());
+	}
+
+	private AdRequest createAdRequest() {
+		return new AdRequest();
 	}
 
 	@Override
@@ -187,7 +193,7 @@ public class MainActivity extends BaseGameActivity {
 	public void hideAd() {
 		mAdView.setVisibility(View.GONE);
 	}
-	
+
 	public RoomListener getRoomListener() {
 		return roomListener;
 	}
@@ -211,7 +217,7 @@ public class MainActivity extends BaseGameActivity {
 						roomListener.leaveRoom();
 					}
 					getGameFragment().leaveGame();
-					//MainActivity.super.onBackPressed();
+					// MainActivity.super.onBackPressed();
 
 				}
 			});
@@ -241,14 +247,14 @@ public class MainActivity extends BaseGameActivity {
 
 	@Override
 	protected void onPause() {
-		mAdView.pause();
+		// mAdView.pause();
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mAdView.resume();
+		// mAdView.resume();
 	}
 
 	@Override
@@ -264,12 +270,33 @@ public class MainActivity extends BaseGameActivity {
 		if (random.nextInt(10) > 5)
 			return;
 
-		if (mInterstitialAd.isLoaded()) {
+		if (mInterstitialAd.isReady()) {
 			mInterstitialAd.show();
 			mInterstitialAd.setAdListener(new AdListener() {
+
 				@Override
-				public void onAdClosed() {
-					super.onAdClosed();
+				public void onReceiveAd(Ad arg0) {
+					// do nothing special
+				}
+
+				@Override
+				public void onPresentScreen(Ad arg0) {
+					// do nothing special
+				}
+
+				@Override
+				public void onLeaveApplication(Ad arg0) {
+					// do nothing special
+				}
+
+				@Override
+				public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
+					// do nothing special
+				}
+
+				@Override
+				public void onDismissScreen(Ad arg0) {
+					// do nothing special
 					initializeInterstitialAd();
 				}
 			});

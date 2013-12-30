@@ -158,6 +158,8 @@ public class GameFragment extends SherlockFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.game, menu);
+		chatMenuItem = menu.findItem(R.id.action_chat);
+		handleMenu();
 	}
 
 	@Override
@@ -181,6 +183,7 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void handleMenu() {
+		if (chatMenuItem == null) return;
 		chatMenuItem.setVisible(getMainActivity().getRoomListener() != null);
 		RelativeLayout actionView = (RelativeLayout) chatMenuItem
 				.getActionView();
@@ -277,6 +280,7 @@ public class GameFragment extends SherlockFragment {
 		View view = inflater.inflate(R.layout.fragment_game, container, false);
 		view.setKeepScreenOn(game.getMode() == GameMode.ONLINE);
 
+		invalidateMenu();
 		setHasOptionsMenu(true);
 		thinkingText = (TextView) view.findViewById(R.id.thinking_text);
 		if (game.getMode() != GameMode.PASS_N_PLAY) {
