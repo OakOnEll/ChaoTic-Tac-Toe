@@ -81,7 +81,7 @@ public class MenuFragment extends SherlockFragment {
 				MarkerChance chance = onlineChance;
 				onlineChance = null;
 				createOnlineRoom(invitees, chance, minAutoMatchPlayers,
-						maxAutoMatchPlayers);
+						maxAutoMatchPlayers, true);
 			} else {
 				Log.i(TAG, "Select players canceled");
 			}
@@ -321,7 +321,7 @@ public class MenuFragment extends SherlockFragment {
 				Bundle autoMatchCriteria = RoomConfig.createAutoMatchCriteria(
 						MIN_OPPONENTS, MAX_OPPONENTS, 0);
 				RoomListener roomListener = new RoomListener(getMainActivity(),
-						getMainActivity().getGameHelper(), chance, true);
+						getMainActivity().getGameHelper(), chance, true, true);
 				getMainActivity().setRoomListener(roomListener);
 				final RoomConfig.Builder rtmConfigBuilder = RoomConfig
 						.builder(roomListener);
@@ -412,7 +412,7 @@ public class MenuFragment extends SherlockFragment {
 
 	private void createOnlineRoom(final ArrayList<String> invitees,
 			MarkerChance chance, int minAutoMatchPlayers,
-			int maxAutoMatchPlayers) {
+			int maxAutoMatchPlayers, boolean initiated) {
 		Log.d(TAG, "Invitee count: " + invitees.size());
 
 		StringBuilder stringBuilder = new StringBuilder();
@@ -433,7 +433,7 @@ public class MenuFragment extends SherlockFragment {
 		}
 
 		RoomListener roomListener = new RoomListener(getMainActivity(),
-				getMainActivity().getGameHelper(), chance, false);
+				getMainActivity().getGameHelper(), chance, false, initiated);
 		getMainActivity().setRoomListener(roomListener);
 		// create the room
 		Log.d(TAG, "Creating room...");
@@ -583,7 +583,7 @@ public class MenuFragment extends SherlockFragment {
 	// Accept the given invitation.
 	public void acceptInviteToRoom(String invId) {
 		RoomListener roomListener = new RoomListener(getMainActivity(),
-				getMainActivity().getGameHelper(), null, false);
+				getMainActivity().getGameHelper(), null, false, false);
 		getMainActivity().setRoomListener(roomListener);
 		// accept the invitation
 		Log.d(TAG, "Accepting invitation: " + invId);
@@ -601,6 +601,16 @@ public class MenuFragment extends SherlockFragment {
 
 	public void setActive() {
 		waiting.setVisibility(View.INVISIBLE);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (getMainActivity().isSignedIn()) {
+			showLogout();
+		} else {
+			showLogin();
+		}
 	}
 
 }

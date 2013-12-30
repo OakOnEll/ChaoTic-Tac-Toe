@@ -105,7 +105,7 @@ public class OnlinePlayAgainFragment extends SherlockDialogFragment {
 						playAgainText.setVisibility(View.GONE);
 						playAgainText.setText(getResources().getString(R.string.play_again_waiting, opponentName));
 						playAgainButton.setVisibility(View.GONE);
-						notPlayAgainButton.setText(R.string.exit_play_again);
+						notPlayAgainButton.setText(R.string.exit_waiting_play_again);
 					}
 				};
 				Runnable error = new Runnable() {
@@ -149,7 +149,7 @@ public class OnlinePlayAgainFragment extends SherlockDialogFragment {
 			playAgainText.setVisibility(View.GONE);
 
 			playAgainButton.setVisibility(View.GONE);
-			notPlayAgainButton.setText(R.string.exit_play_again);
+			notPlayAgainButton.setText(R.string.opponent_left_exit_play_again);
 		}
 	}
 

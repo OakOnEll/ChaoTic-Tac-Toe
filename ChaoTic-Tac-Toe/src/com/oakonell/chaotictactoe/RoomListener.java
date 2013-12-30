@@ -61,17 +61,19 @@ public class RoomListener implements RoomUpdateListener,
 
 	private boolean isQuick;
 	private boolean isConnected;
+	private boolean initiatedTheGame;
 
 	private GamesClient getGamesClient() {
 		return helper.getGamesClient();
 	}
 
 	public RoomListener(MainActivity activity, GameHelper helper,
-			MarkerChance chance, boolean isQuick) {
+			MarkerChance chance, boolean isQuick, boolean initiatedTheGame) {
 		this.activity = activity;
 		this.helper = helper;
 		this.chance = chance;
 		this.isQuick = isQuick;
+		this.initiatedTheGame = initiatedTheGame;
 	}
 
 	// Called when we are connected to the room. We're not ready to play yet!
@@ -628,6 +630,10 @@ public class RoomListener implements RoomUpdateListener,
 						}
 					}
 				}, buffer.array(), getRoomId(), getOpponentId());
+	}
+
+	public boolean isInitiatedTheGame() {
+		return initiatedTheGame;
 	}
 
 }

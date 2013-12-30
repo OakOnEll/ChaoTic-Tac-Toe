@@ -38,53 +38,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical"
+                    android:ellipsize="end"
                     android:lines="1"
                     android:text="Horatio Algers is a Long Name"
-                        android:ellipsize="end"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <LinearLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/player_x_lbl"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/num_x_wins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left|center_vertical"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:text="@string/player_x_lbl"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/num_x_wins"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|right"
-                        android:gravity="right"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                         />
-                </LinearLayout>
+                    android:text="10 wins"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/num_moves_lbl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/num_move_lbl"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/num_moves"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
         <LinearLayout
@@ -108,32 +79,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:lines="1"
                     android:ellipsize="end"
+                    android:lines="1"
                     android:text="Another Long Name, to test the display"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:orientation="horizontal" >
+                    android:gravity="right"
+                    android:text="@string/player_o_lbl"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                    <TextView
-                        android:id="@+id/num_o_wins"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"                        
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:layout_gravity="right|center_vertical" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right|center_vertical"
-                        android:gravity="right"
-                        android:text="@string/player_o_lbl"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/num_o_wins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="12 wins"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
             <ImageView
@@ -160,8 +124,7 @@
             android:id="@+id/marker_to_play"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_centerHorizontal="true"
-             />
+            android:layout_centerHorizontal="true" />
 
         <LinearLayout
             android:id="@+id/num_games_container"
@@ -173,6 +136,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:text="@string/num_games_lbl"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -180,7 +144,32 @@
                 android:id="@+id/game_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="10"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/num_games_container"
+            android:layout_below="@+id/num_games_container"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/num_moves_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4dp"
+                android:text="@string/num_move_lbl"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/num_moves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center_vertical"
+                android:text="22" />
         </LinearLayout>
 
         <RelativeLayout
@@ -188,7 +177,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/marker_to_play"
-            android:layout_gravity="center_horizontal|center_vertical" >
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity="center_horizontal|center_vertical" >
 
             <LinearLayout
                 android:layout_width="fill_parent"

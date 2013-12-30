@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
+import com.google.android.gms.common.images.ImageManager;
 import com.oakonell.chaotictactoe.R;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.ScoreCard;
@@ -20,6 +22,8 @@ public class GameStatDialogFragment extends SherlockDialogFragment {
 	private GameFragment parent;
 	private ScoreCard score;
 	private Game game;
+
+	private ImageManager imgManager;
 
 	public void initialize(GameFragment parent, Game game, ScoreCard score) {
 		this.parent = parent;
@@ -33,6 +37,13 @@ public class GameStatDialogFragment extends SherlockDialogFragment {
 		View view = inflater.inflate(R.layout.game_stats_dialog, container,
 				false);
 		getDialog().setTitle(R.string.game_stats_title);
+		imgManager = ImageManager.create(parent.getMainActivity());
+
+		ImageView playerX = (ImageView) view.findViewById(R.id.player_x);
+		game.getXPlayer().updatePlayerImage(imgManager, playerX);
+
+		ImageView playerO = (ImageView) view.findViewById(R.id.player_o);
+		game.getOPlayer().updatePlayerImage(imgManager, playerO);
 
 		TextView xNameText = (TextView) view.findViewById(R.id.x_name);
 		xNameText.setText(game.getXPlayer().getName());

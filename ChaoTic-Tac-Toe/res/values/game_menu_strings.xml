@@ -9,7 +9,7 @@
     <string name="new_game_same_device">Pass \'N Play</string>
     <string name="new_game_vs_ai">Beat the Bot</string>
     <string name="new_quick_game">New Quick Game</string>
-    <string name="new_game_live">Play a Friend</string>
+    <string name="new_game_live">Play with a Friend</string>
     <string name="achievements">View Achievements</string>
     <string name="leaderboards">View Leaderboards</string>
     <string name="achievements_not_available">Please sign in to view achievements.</string>

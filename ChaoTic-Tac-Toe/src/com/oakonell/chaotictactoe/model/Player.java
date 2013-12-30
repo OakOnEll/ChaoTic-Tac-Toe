@@ -1,6 +1,10 @@
 package com.oakonell.chaotictactoe.model;
 
 import android.net.Uri;
+import android.widget.ImageView;
+
+import com.google.android.gms.common.images.ImageManager;
+import com.oakonell.chaotictactoe.R;
 
 public class Player {
 	private final String name;
@@ -17,7 +21,7 @@ public class Player {
 	public void setOpponent(Player opponent) {
 		this.opponent = opponent;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -36,6 +40,19 @@ public class Player {
 
 	public PlayerStrategy getStrategy() {
 		return strategy;
+	}
+
+	public void updatePlayerImage(ImageManager imgManager, ImageView xImage) {
+		int defaultResource = strategy.getMarker() == Marker.X ? R.drawable.system_cross
+				: R.drawable.system_dot;
+		if (iconImageUri == null
+				|| iconImageUri.getEncodedSchemeSpecificPart().contains(
+						"gms.games")) {
+			imgManager.loadImage(xImage, iconImageUri, defaultResource);
+		} else {
+			xImage.setImageURI(iconImageUri);
+
+		}
 	}
 
 }

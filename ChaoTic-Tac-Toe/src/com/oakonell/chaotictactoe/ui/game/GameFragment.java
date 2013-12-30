@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -298,11 +297,10 @@ public class GameFragment extends SherlockFragment {
 		ImageView xImage = (ImageView) view.findViewById(R.id.x_back);
 		ImageView oImage = (ImageView) view.findViewById(R.id.o_back);
 
-		updatePlayerImage(xImage, game.getXPlayer().getIconImageUri(),
-				R.drawable.system_cross);
-		updatePlayerImage(oImage, game.getOPlayer().getIconImageUri(),
-				R.drawable.system_dot);
-
+		
+		game.getXPlayer().updatePlayerImage(imgManager, xImage);
+		game.getOPlayer().updatePlayerImage(imgManager, oImage);
+		
 		xHeaderLayout = view.findViewById(R.id.x_name_layout);
 		oHeaderLayout = view.findViewById(R.id.o_name_layout);
 
@@ -391,7 +389,9 @@ public class GameFragment extends SherlockFragment {
 		// Always show the game help for custom
 		// otherwise, show it the first time for other game types
 		boolean showHelp = true;
-		if (!game.getMarkerChance().isCustom()) {
+		RoomListener listener = getMainActivity().getRoomListener();
+		boolean doesntKnowChance = listener != null && !listener.isInitiatedTheGame();
+		if (!game.getMarkerChance().isCustom() ) {
 			SharedPreferences sharedPrefs = PreferenceManager
 					.getDefaultSharedPreferences(getSherlockActivity());
 			String key = "help_shown_for_" + game.getMarkerChance().type();
@@ -401,7 +401,7 @@ public class GameFragment extends SherlockFragment {
 			edit.putBoolean(key, true);
 			edit.commit();
 		}
-		if (showHelp) {
+		if (showHelp || doesntKnowChance) {
 			showGameHelp();
 		} else {
 			updateHeader(true);
@@ -427,15 +427,7 @@ public class GameFragment extends SherlockFragment {
 		}
 	}
 
-	private void updatePlayerImage(ImageView xImage, Uri xUri,
-			int defaultResource) {
-		if (xUri == null
-				|| xUri.getEncodedSchemeSpecificPart().contains("gms.games")) {
-			imgManager.loadImage(xImage, xUri, defaultResource);
-		} else {
-			xImage.setImageURI(xUri);
-		}
-	}
+
 
 	private final class ButtonPressListener implements View.OnClickListener {
 		private final Cell cell;

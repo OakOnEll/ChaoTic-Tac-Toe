@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.widget.Toast;
 
 import com.oakonell.chaotictactoe.ChaoTicTacToe;
 import com.oakonell.utils.preference.PrefsActivity.PreferenceConfigurer;
@@ -24,7 +23,7 @@ public class AccountPrefConfigurer implements PreferenceConfigurer {
 	public void configure() {
 		ChaoTicTacToe app = (ChaoTicTacToe) activity.getApplication();
 		final Intent settingsIntent = app.getSettingsIntent();
-		Preference settings = finder.findPreference("settings");
+		Preference settings = finder.findPreference("account_settings");
 		if (settingsIntent == null) {
 			settings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 				@Override

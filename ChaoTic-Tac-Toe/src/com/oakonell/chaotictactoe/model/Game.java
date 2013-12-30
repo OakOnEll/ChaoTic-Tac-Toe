@@ -35,7 +35,6 @@ public class Game {
 	}
 
 	public State placeMarker(Cell cell) {
-		moves++;
 		State outcome;
 		if (toPlay == Marker.EMPTY) {
 			outcome = board.removeMarker(cell, player);
@@ -50,6 +49,7 @@ public class Game {
 		toPlay = pickMarkerToToplay();
 
 		recordVisitToState();
+		moves++;
 
 		return outcome;
 	}
