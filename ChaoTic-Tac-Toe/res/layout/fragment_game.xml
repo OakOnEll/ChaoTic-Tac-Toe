@@ -40,7 +40,6 @@
                     android:layout_gravity="left|center_vertical"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:text="Horatio Algers is a Long Name"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -53,7 +52,6 @@
                     android:id="@+id/num_x_wins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="10 wins"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
         </LinearLayout>
@@ -81,7 +79,6 @@
                     android:layout_gravity="right"
                     android:ellipsize="end"
                     android:lines="1"
-                    android:text="Another Long Name, to test the display"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -96,7 +93,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="12 wins"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
@@ -146,7 +142,6 @@
                 android:id="@+id/game_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
 
@@ -171,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:gravity="center_vertical"
-                android:text="22" />
+                />
         </LinearLayout>
 
         <RelativeLayout
