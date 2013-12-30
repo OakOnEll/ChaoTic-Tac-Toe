@@ -47,16 +47,6 @@
         android:ems="10" 
         android:inputType="textPersonName"/>
 
-    <ImageButton
-        android:id="@+id/switch_players"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/player_o_name"
-        android:layout_below="@+id/player_x_name"
-        android:layout_marginLeft="84dp"
-        android:layout_marginTop="12dp"
-        android:src="@android:drawable/arrow_up_float" />
-
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
@@ -74,5 +64,16 @@
         android:layout_below="@+id/fragmentContainer"
         android:layout_centerHorizontal="true"
         android:text="@string/start" />
+
+    <ImageButton
+        android:id="@+id/switch_players"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/player_o_name"
+        android:layout_below="@+id/player_x_name"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/swap_icon_17858" />
 
 </RelativeLayout>
