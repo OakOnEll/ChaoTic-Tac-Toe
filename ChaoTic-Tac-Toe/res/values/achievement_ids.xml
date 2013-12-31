@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="achievement_only_xs_or_os" translatable="false">CgkI06v4vNAdEAIQAQ</string>
-    <string name="achievement_chaotic_draw" translatable="false">CgkI06v4vNAdEAIQAg</string>
-    <string name="achievement_deja_vu" translatable="false">CgkI06v4vNAdEAIQAw</string>
-    <string name="achievement_long_haul" translatable="false">CgkI06v4vNAdEAIQBA</string>
-    <string name="achievement_plain_jane" translatable="false">CgkI06v4vNAdEAIQBQ</string>
-    <string name="achievement_reversi" translatable="false">CgkI06v4vNAdEAIQBg</string>
-    <string name="achievement_customer" translatable="false">CgkI06v4vNAdEAIQBw</string>
-    <string name="achievement_with_a_little_help" translatable="false">CgkI06v4vNAdEAIQCA</string>
-    <string name="achievement_clean_slate" translatable="false">CgkI06v4vNAdEAIQCQ</string>
-    <string name="achievement_chaos_theory" translatable="false">CgkI06v4vNAdEAIQDA</string>
-
+  <string name="achievement_only_xs_or_os" translatable="false">CgkIpffbuZ8aEAIQAQ</string>
+  <string name="achievement_chaotic_draw" translatable="false">CgkIpffbuZ8aEAIQAg</string>
+  <string name="achievement_dejavu" translatable="false">CgkIpffbuZ8aEAIQAw</string>
+  <string name="achievement_the_long_haul" translatable="false">CgkIpffbuZ8aEAIQBA</string>
+  <string name="achievement_plain_jane" translatable="false">CgkIpffbuZ8aEAIQBQ</string>
+  <string name="achievement_reversi" translatable="false">CgkIpffbuZ8aEAIQBg</string>
+  <string name="achievement_the_customer" translatable="false">CgkIpffbuZ8aEAIQBw</string>
+  <string name="achievement_chaos_theory" translatable="false">CgkIpffbuZ8aEAIQCA</string>
+  <string name="achievement_with_a_little_help_from_my_friends" translatable="false">CgkIpffbuZ8aEAIQCQ</string>
+  <string name="achievement_a_clean_slate" translatable="false">CgkIpffbuZ8aEAIQCg</string>
+    
 </resources>

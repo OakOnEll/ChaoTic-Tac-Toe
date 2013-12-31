@@ -28,6 +28,7 @@ import android.content.IntentSender.SendIntentException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.Toast;
 
 import com.google.android.gms.appstate.AppStateClient;
 import com.google.android.gms.common.ConnectionResult;
@@ -733,6 +734,7 @@ public class GameHelper implements GooglePlayServicesClient.ConnectionCallbacks,
     /** Returns an error dialog that's appropriate for the given error code. */
     Dialog getErrorDialog(int errorCode) {
         debugLog("Making error dialog for error: " + errorCode);
+        Toast.makeText(mActivity, "Google play services error:" + errorCode ,Toast.LENGTH_SHORT).show();
         Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(errorCode, mActivity,
                 RC_UNUSED, null);
 
@@ -740,7 +742,7 @@ public class GameHelper implements GooglePlayServicesClient.ConnectionCallbacks,
             return errorDialog;
 
         // as a last-resort, make a sad "unknown error" dialog.
-        return (new AlertDialog.Builder(getContext())).setMessage(mUnknownErrorMessage)
+        return (new AlertDialog.Builder(getContext())).setMessage(mUnknownErrorMessage + ": " + errorCode)
                 .setNeutralButton(android.R.string.ok, null).create();
     }
 

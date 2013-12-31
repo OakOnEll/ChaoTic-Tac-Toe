@@ -22,8 +22,8 @@ public class Leaderboards {
 	public List<String> getLeaderboardIds(Context context) {
 		List<String> result = new ArrayList<String>();
 		result.add(context
-				.getString(R.string.leaderboard_shortest_choatic_game));
-		result.add(context.getString(R.string.leaderboard_longest_choatic_game));
+				.getString(R.string.leaderboard_shortest_chaotic_game));
+		result.add(context.getString(R.string.leaderboard_longest_chaotic_mode_game));
 		return result;
 	}
 
@@ -51,7 +51,7 @@ public class Leaderboards {
 	private void submitShortestGame(final Context context,
 			GamesClient gamesClient, int submittedScore) {
 		final String id = context
-				.getString(R.string.leaderboard_shortest_choatic_game);
+				.getString(R.string.leaderboard_shortest_chaotic_game);
 		gamesClient.submitScoreImmediate(new BasicOnScoreSubmittedListener(
 				context, id) {
 
@@ -87,7 +87,7 @@ public class Leaderboards {
 	private void submitLongestGame(final Context context,
 			GamesClient gamesClient, int submittedScore) {
 		final String id = context
-				.getString(R.string.leaderboard_longest_choatic_game);
+				.getString(R.string.leaderboard_longest_chaotic_mode_game);
 		gamesClient.submitScoreImmediate(new BasicOnScoreSubmittedListener(
 				context, id) {
 

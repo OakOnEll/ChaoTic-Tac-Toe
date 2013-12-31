@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="leaderboard_longest_choatic_game" translatable="false">CgkI06v4vNAdEAIQCg</string>
-    <string name="leaderboard_shortest_choatic_game" translatable="false"> CgkI06v4vNAdEAIQCw</string>
-    
+    <string name="leaderboard_longest_chaotic_mode_game" translatable="false">CgkIpffbuZ8aEAIQCw</string>
+    <string name="leaderboard_shortest_chaotic_game" translatable="false">CgkIpffbuZ8aEAIQDA</string>
+
 </resources>

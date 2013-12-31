@@ -1446,16 +1446,16 @@ containing a value of this type.
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f090020;
         public static final int account_settings=0x7f090072;
-        public static final int achievement_chaos_theory=0x7f09004d;
+        public static final int achievement_a_clean_slate=0x7f09004d;
+        public static final int achievement_chaos_theory=0x7f09004b;
         public static final int achievement_chaotic_draw=0x7f090045;
-        public static final int achievement_clean_slate=0x7f09004c;
-        public static final int achievement_customer=0x7f09004a;
-        public static final int achievement_deja_vu=0x7f090046;
-        public static final int achievement_long_haul=0x7f090047;
+        public static final int achievement_dejavu=0x7f090046;
         public static final int achievement_only_xs_or_os=0x7f090044;
         public static final int achievement_plain_jane=0x7f090048;
         public static final int achievement_reversi=0x7f090049;
-        public static final int achievement_with_a_little_help=0x7f09004b;
+        public static final int achievement_the_customer=0x7f09004a;
+        public static final int achievement_the_long_haul=0x7f090047;
+        public static final int achievement_with_a_little_help_from_my_friends=0x7f09004c;
         public static final int achievements=0x7f09005e;
         public static final int achievements_not_available=0x7f090060;
         public static final int action_chat=0x7f090084;
@@ -1596,8 +1596,8 @@ containing a value of this type.
         public static final int invalid_move_need_nonempty=0x7f090082;
         public static final int label_player_o_name=0x7f090069;
         public static final int label_player_x_name=0x7f090068;
-        public static final int leaderboard_longest_choatic_game=0x7f0900a7;
-        public static final int leaderboard_shortest_choatic_game=0x7f0900a8;
+        public static final int leaderboard_longest_chaotic_mode_game=0x7f0900a7;
+        public static final int leaderboard_shortest_chaotic_game=0x7f0900a8;
         public static final int leaderboards=0x7f09005f;
         public static final int leaderboards_not_available=0x7f090061;
         public static final int leave_game_message=0x7f090091;

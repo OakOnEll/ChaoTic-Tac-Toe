@@ -69,7 +69,7 @@ public class Achievements {
 
 	};
 	private BooleanAchievement dejaVu = new BooleanAchievement(
-			R.string.achievement_deja_vu, R.string.offline_achievement_deja_vu) {
+			R.string.achievement_dejavu, R.string.offline_achievement_deja_vu) {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -86,7 +86,7 @@ public class Achievements {
 	};
 
 	private BooleanAchievement longHaul = new BooleanAchievement(
-			R.string.achievement_long_haul,
+			R.string.achievement_the_long_haul,
 			R.string.offline_achievement_long_haul) {
 
 		@Override
@@ -103,7 +103,7 @@ public class Achievements {
 	};
 
 	private BooleanAchievement withALittleHelp = new BooleanAchievement(
-			R.string.achievement_with_a_little_help,
+			R.string.achievement_with_a_little_help_from_my_friends,
 			R.string.offline_achievement_with_a_little_help) {
 
 		@Override
@@ -118,7 +118,7 @@ public class Achievements {
 
 	};
 	private BooleanAchievement cleanSlate = new BooleanAchievement(
-			R.string.achievement_clean_slate,
+			R.string.achievement_a_clean_slate,
 			R.string.offline_achievement_chaotic_draw) {
 
 		@Override
@@ -166,7 +166,7 @@ public class Achievements {
 	};
 
 	private IncrementalAchievement customCount = new IncrementalAchievement(
-			R.string.achievement_customer) {
+			R.string.achievement_the_customer) {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
