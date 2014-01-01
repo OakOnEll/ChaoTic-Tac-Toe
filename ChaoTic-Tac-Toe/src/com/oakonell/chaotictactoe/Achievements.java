@@ -19,6 +19,44 @@ public class Achievements {
 	private static final int NUM_MOVES_BEFORE_CLEAN_SLATE = 5;
 	protected static final int NUM_BOARD_REVISITS_FOR_DEJA_VU = 3;
 
+	private BooleanAchievement goodSamaritan = new BooleanAchievement(
+			R.string.achievement_the_good_samaritan,
+			R.string.offline_achievement_the_good_samaritan) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (game.getMode() == GameMode.PASS_N_PLAY) {
+				return;
+			}
+			if (outcome.getWinner() == game.getLocalPlayer()) {
+				return;
+			}
+			if (game.getNumberOfMoves() == game.getBoard().getSize()) {
+				unlock(gameHelper, context);
+			}
+		}
+
+	};
+	private BooleanAchievement reverseWin = new BooleanAchievement(
+			R.string.achievement_reverse_win,
+			R.string.offline_achievement_reverse_win) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (game.getMode() == GameMode.PASS_N_PLAY)
+				return;
+			if (outcome.getWinner() != game.getLocalPlayer())
+				return;
+
+			if (game.getMarkerChance().isReverse()) {
+				unlock(gameHelper, context);
+			}
+		}
+
+	};
+
 	private BooleanAchievement onlyXsOrOs = new BooleanAchievement(
 			R.string.achievement_only_xs_or_os,
 			R.string.offline_achievement_only_xs_or_os) {
@@ -187,6 +225,9 @@ public class Achievements {
 		endGameAchievements.add(chaoticDraw);
 		endGameAchievements.add(longHaul);
 		endGameAchievements.add(withALittleHelp);
+
+		endGameAchievements.add(reverseWin);
+		endGameAchievements.add(goodSamaritan);
 
 		endGameAchievements.add(plainJaneCount);
 		endGameAchievements.add(chaoticCount);
