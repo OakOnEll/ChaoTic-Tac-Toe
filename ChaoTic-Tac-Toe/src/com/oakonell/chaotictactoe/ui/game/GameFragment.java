@@ -184,7 +184,11 @@ public class GameFragment extends SherlockFragment {
 
 	private void handleMenu() {
 		if (chatMenuItem == null) return;
-		chatMenuItem.setVisible(getMainActivity().getRoomListener() != null);
+		boolean isOnline = getMainActivity().getRoomListener() != null;
+		chatMenuItem.setVisible(isOnline);
+		if (!isOnline) {
+			return;
+		}
 		RelativeLayout actionView = (RelativeLayout) chatMenuItem
 				.getActionView();
 		actionView.setOnClickListener(new View.OnClickListener() {

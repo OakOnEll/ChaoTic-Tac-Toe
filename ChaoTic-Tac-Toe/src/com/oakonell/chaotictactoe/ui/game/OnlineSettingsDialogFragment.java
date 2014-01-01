@@ -44,7 +44,7 @@ public class OnlineSettingsDialogFragment extends SherlockDialogFragment {
 				.getDefaultSharedPreferences(getActivity());
 		final String soundFxPrefKey = getActivity().getString(
 				R.string.pref_sound_fx_key);
-		sounds.setChecked(preferences.getBoolean(soundFxPrefKey, false));
+		sounds.setChecked(preferences.getBoolean(soundFxPrefKey, true));
 
 		Button okButton = (Button) view.findViewById(R.id.ok);
 		okButton.setOnClickListener(new OnClickListener() {

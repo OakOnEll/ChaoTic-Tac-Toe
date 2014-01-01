@@ -187,6 +187,7 @@ public class MainActivity extends BaseGameActivity {
 	public void gameEnded() {
 		possiblyShowInterstitialAd();
 		getMenuFragment().setActive();
+		roomListener = null;
 		mAdView.setVisibility(View.VISIBLE);
 	}
 
