@@ -1,3 +1,8 @@
+Version 1.2
+----------
+Fixed display of chat menu icon in local games
+Fixed default of "Play sounds" in online preferences
+
 Version 1.1
 ----------
 ChaoTic-Tac-Toe released
