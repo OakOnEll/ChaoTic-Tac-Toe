@@ -35,7 +35,7 @@
    id="namedview23"
    showgrid="false"
    inkscape:zoom="6.675088"
-   inkscape:cx="50"
+   inkscape:cx="-20.111435"
    inkscape:cy="50"
    inkscape:window-x="0"
    inkscape:window-y="0"
@@ -71,7 +71,8 @@
    id="path15-9-7" /><path
    inkscape:connector-curvature="0"
    d="m 66.333784,76.3299 c 0,6.306 5.112,11.418 11.418,11.418 6.306,0 11.418,-5.112 11.418,-11.418 0,-6.306 -5.112,-11.418 -11.418,-11.418 -6.306,0 -11.418,5.112 -11.418,11.418 z m 20.149,0.075 c 0,4.863 -3.942,8.806 -8.806,8.806 -4.863,0 -8.806,-3.943 -8.806,-8.806 0,-4.864 3.943,-8.806 8.806,-8.806 4.864,0 8.806,3.942 8.806,8.806 z"
-   id="path21-0-4" /><path
+   id="path21-0-4"
+   style="fill:#0000ff;fill-opacity:1" /><path
    inkscape:connector-curvature="0"
    d="m 38.918415,76.779333 c 0,6.306 5.112,11.418 11.418,11.418 6.306,0 11.418,-5.112 11.418,-11.418 0,-6.306 -5.112,-11.418 -11.418,-11.418 -6.306,0 -11.418,5.112 -11.418,11.418 z m 20.149,0.075 c 0,4.863 -3.942,8.806 -8.806,8.806 -4.863,0 -8.806,-3.943 -8.806,-8.806 0,-4.864 3.943,-8.806 8.806,-8.806 4.864,0 8.806,3.942 8.806,8.806 z"
    id="path21-0-4-1" /><g
@@ -213,4 +214,8 @@
      inkscape:connector-curvature="0"
      id="path3040"
      d="m 43.702489,23.039037 c -1.967563,-0.666376 -2.766497,-3.439129 -1.576182,-5.470247 0.679178,-1.15893 1.645428,-1.644231 2.830916,-1.421832 2.418644,0.45374 3.248303,4.326303 1.328492,6.200948 -0.805765,0.786809 -1.640953,1.01026 -2.583226,0.691131 l 0,0 z"
-     style="fill:#ff6600;fill-opacity:0;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.35355338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;stroke-dashoffset:0" /></g></svg>
+     style="fill:#ff6600;fill-opacity:0;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.35355338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;stroke-dashoffset:0" /></g><path
+   style="fill:none;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+   d="m 10.336942,77.378575 82.096296,0.299622"
+   id="path3027"
+   inkscape:connector-curvature="0" /></svg>

@@ -1,7 +1,11 @@
+Version 1.4
+-----------
+Add another new achievement
+
 Version 1.3
 -----------
-Added new achievements: fork, oops, goodSport, goodSamaratan, two birds, reverse win
-Allow multiple wins, and draw lines
+Added new achievements
+Allow multiple direction wins
 disable buttons when no user input allowed
 handle room creation/joining errors a little more nicely
 

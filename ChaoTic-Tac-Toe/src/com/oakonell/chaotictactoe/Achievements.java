@@ -21,6 +21,48 @@ public class Achievements {
 	private static final int NUM_MOVES_BEFORE_CLEAN_SLATE = 5;
 	protected static final int NUM_BOARD_REVISITS_FOR_DEJA_VU = 3;
 
+	private BooleanAchievement friendlyFire = new BooleanAchievement(
+			R.string.achievement_friendly_fire,
+			R.string.offline_achievement_friendly_fire) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (!outcome.getLastMove().getPlayer()
+					.equals(game.getLocalPlayer())) {
+				return;
+			}
+			if (outcome.getLastMove().getPlayedMarker() != Marker.EMPTY) {
+				return;
+			}
+			Player localPlayer = game.getLocalPlayer();
+
+			if (outcome.getLastMove().getPreviousMarker() != localPlayer
+					.getMarker()) {
+				return;
+			}
+
+			// if there are ANY opponent markers, this was a friendly fire
+			Marker opponentMarker = localPlayer.opponent().getMarker();
+			int count = 0;
+			Board board = game.getBoard();
+
+			int size = board.getSize();
+			for (int x = 0; x < size; ++x) {
+				for (int y = 0; y < size; ++y) {
+					Marker boardMarker = board.getCell(x, y);
+					if (boardMarker == opponentMarker) {
+						count++;
+					}
+				}
+			}
+
+			if (count > 0) {
+				unlock(gameHelper, context);
+			}
+		}
+	};
+
 	private BooleanAchievement fork = new BooleanAchievement(
 			R.string.achievement_fork_in_the_road,
 			R.string.offline_achievement_fork_in_the_road) {
@@ -29,10 +71,10 @@ public class Achievements {
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
 			Player localPlayer = game.getLocalPlayer();
-			if (outcome.getWinner() != localPlayer) {
+			if (!outcome.getWinner().equals(localPlayer)) {
 				return;
 			}
-			if (outcome.getPlayer() != outcome.getWinner()) {
+			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
 				return;
 			}
 			Marker marker = outcome.getWinner().getMarker();
@@ -41,7 +83,8 @@ public class Achievements {
 			int count = 0;
 			Board board = game.getBoard().copy();
 
-			board.clearMarker(outcome.getLastMove(), game.getLocalPlayer());
+			board.clearMarker(outcome.getLastMove().getCell(),
+					game.getLocalPlayer());
 			int size = board.getSize();
 			for (int x = 0; x < size; ++x) {
 				for (int y = 0; y < size; ++y) {
@@ -81,10 +124,10 @@ public class Achievements {
 			if (outcome.isDraw()) {
 				return;
 			}
-			if (outcome.getWinner() == game.getLocalPlayer()) {
+			if (outcome.getWinner().equals(game.getLocalPlayer())) {
 				return;
 			}
-			if (outcome.getWinner() == outcome.getPlayer()) {
+			if (outcome.getWinner().equals(outcome.getLastMove().getPlayer())) {
 				return;
 			}
 
@@ -97,7 +140,8 @@ public class Achievements {
 			int opponentWins = 0;
 			Board board = game.getBoard().copy();
 
-			board.clearMarker(outcome.getLastMove(), game.getLocalPlayer());
+			board.clearMarker(outcome.getLastMove().getCell(),
+					game.getLocalPlayer());
 			int size = board.getSize();
 			for (int x = 0; x < size; ++x) {
 				for (int y = 0; y < size; ++y) {
@@ -109,7 +153,7 @@ public class Achievements {
 					Cell cell = new Cell(x, y);
 					State localOutcome = board.placeMarker(cell, localPlayer,
 							marker);
-					if (localOutcome.getWinner() == localPlayer.opponent()) {
+					if (localOutcome.getWinner().equals(localPlayer.opponent())) {
 						opponentWins++;
 					}
 					board.clearMarker(cell, localPlayer);
@@ -135,10 +179,10 @@ public class Achievements {
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				return;
 			}
-			if (outcome.getWinner() == game.getLocalPlayer()) {
+			if (outcome.getWinner().equals(game.getLocalPlayer())) {
 				return;
 			}
-			if (outcome.getPlayer() == outcome.getWinner()) {
+			if (outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
 				return;
 			}
 
@@ -158,9 +202,9 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			if (outcome.getWinner() != game.getLocalPlayer())
+			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
-			if (outcome.getPlayer() != outcome.getWinner()) {
+			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
 				return;
 			}
 
@@ -183,10 +227,10 @@ public class Achievements {
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				return;
 			}
-			if (outcome.getWinner() == game.getLocalPlayer()) {
+			if (!outcome.getWinner().equals(game.getLocalPlayer())) {
 				return;
 			}
-			if (outcome.getPlayer() != outcome.getWinner()) {
+			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
 				return;
 			}
 
@@ -208,7 +252,7 @@ public class Achievements {
 			}
 			if (game.getMode() == GameMode.PASS_N_PLAY)
 				return;
-			if (outcome.getWinner() != game.getLocalPlayer())
+			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
 
 			if (game.getMarkerChance().isReverse()) {
@@ -308,9 +352,9 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			if (outcome.getWinner() != game.getLocalPlayer())
+			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
-			if (outcome.getPlayer() != outcome.getWinner()) {
+			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
 				return;
 			}
 
@@ -385,6 +429,7 @@ public class Achievements {
 	public Achievements() {
 		inGameAchievements.add(dejaVu);
 		inGameAchievements.add(cleanSlate);
+		inGameAchievements.add(friendlyFire);
 
 		endGameAchievements.add(onlyXsOrOs);
 		endGameAchievements.add(chaoticDraw);

@@ -9,7 +9,7 @@ import com.oakonell.chaotictactoe.ui.game.WinOverlayView.WinStyle;
 public class Board {
 	private final int size;
 	private final Marker[][] board;
-	private State state = State.open(null, null);
+	private State state = State.open(null);
 
 	public Board(int size) {
 		this.size = size;
@@ -57,7 +57,8 @@ public class Board {
 					+ ", unable to place a " + mark + " there");
 		}
 		board[cell.x][cell.y] = mark;
-		return evaluateAndStore(player, mark, cell);
+		Move move = new Move(player, mark, cell, Marker.EMPTY);
+		return evaluateAndStore(move);
 	}
 
 	public State clearMarker(Cell cell, Player player) {
@@ -74,15 +75,17 @@ public class Board {
 			throw new InvalidMoveException("Cell " + cell.x + ", " + cell.y
 					+ " does not have a Marker, unable to remove");
 		}
+		Marker previousMarker = board[cell.x][cell.y];
 		board[cell.x][cell.y] = Marker.EMPTY;
 
 		// removing a marker shouldn't expose a win?
-		return evaluateAndStore(player, Marker.EMPTY, cell);
+		Move move = new Move(player, Marker.EMPTY, cell, previousMarker);
+		return evaluateAndStore(move);
 
 	}
 
-	private State evaluateAndStore(Player player, Marker mark, Cell cell) {
-		state = evaluate(player, mark, cell);
+	private State evaluateAndStore(Move move) {
+		state = evaluate(move);
 		return state;
 	}
 
@@ -94,9 +97,8 @@ public class Board {
 		return clearMarker(cell, player);
 	}
 
-	private State evaluate(Player player, Marker mark, Cell cell) {
-		int multiplyer = player.getMarker().getVal() == 1 ? 1 : -1;
-
+	private State evaluate(Move move) {
+		Player player = move.getPlayer();
 		List<Win> wins = new ArrayList<Win>();
 		// Inspect the columns
 		for (int x = 0; x < size; ++x) {
@@ -106,7 +108,7 @@ public class Board {
 				sum += board[x][y].getVal();
 			}
 
-			int score = multiplyer * sum;
+			int score = sum;
 			if (Math.abs(score) == size) {
 				wins.add(new Win(new Cell(x, 0), new Cell(x, size - 1),
 						WinStyle.row(x)));
@@ -121,7 +123,7 @@ public class Board {
 				sum += board[x][y].getVal();
 			}
 
-			int score = multiplyer * sum;
+			int score = sum;
 			if (Math.abs(score) == size) {
 				wins.add(new Win(new Cell(0, y), new Cell(size - 1, y),
 						WinStyle.column(y)));
@@ -135,7 +137,7 @@ public class Board {
 			sum += board[x][x].getVal();
 		}
 
-		int score = multiplyer * sum;
+		int score = sum;
 		if (Math.abs(score) == size) {
 			wins.add(new Win(new Cell(0, 0), new Cell(size - 1, size - 1),
 					WinStyle.TOP_LEFT_DIAG));
@@ -147,19 +149,19 @@ public class Board {
 			sum += board[x][size - x - 1].getVal();
 		}
 
-		score = multiplyer * sum;
+		score = sum;
 		if (Math.abs(score) == size) {
 			wins.add(new Win(new Cell(0, size - 1), new Cell(size - 1, 0),
 					WinStyle.TOP_RIGHT_DIAG));
 		}
 		if (!wins.isEmpty()) {
 			Player winner;
-			if (player.getMarker() == mark) {
+			if (player.getMarker() == move.getPlayedMarker()) {
 				winner = player;
 			} else {
 				winner = player.opponent();
 			}
-			return State.winner(player, wins, winner, cell);
+			return State.winner(move, wins, winner);
 		}
 
 		// check for draw- no empty spots
@@ -171,10 +173,10 @@ public class Board {
 			}
 		}
 		if (sum == 0) {
-			return State.draw(player, cell);
+			return State.draw(move);
 		}
 
-		return State.open(player, cell);
+		return State.open(move);
 	}
 
 	public int getSize() {

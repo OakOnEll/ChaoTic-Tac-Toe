@@ -17,7 +17,6 @@ public class State {
 			this.winStyle = winStyle;
 		}
 
-		
 		public Cell getStart() {
 			return start;
 		}
@@ -30,8 +29,6 @@ public class State {
 			return winStyle;
 		}
 
-
-
 	}
 
 	public enum SimpleState {
@@ -40,30 +37,28 @@ public class State {
 
 	private final SimpleState state;
 	private final Player winner;
-	private final Cell lastMove; 
-	private final Player player; 
+	private final Move move;
 
 	private List<Win> wins = new ArrayList<State.Win>();
 
-	public static State winner(Player playerMoved,List<Win> wins, Player winner, Cell lastMove) {
-		return new State(playerMoved, wins, winner, SimpleState.WIN, lastMove);
+	public static State winner(Move move, List<Win> wins, Player winner) {
+		return new State(move, wins, winner, SimpleState.WIN);
 	}
 
-	public static State draw(Player playerMoved, Cell lastMove) {
-		return new State(playerMoved, null, null, SimpleState.DRAW, lastMove);
+	public static State draw(Move move) {
+		return new State(move, null, null, SimpleState.DRAW);
 	}
 
-	public static State open(Player playerMoved, Cell lastMove) {
-		return new State(playerMoved,null, null, SimpleState.OPEN, lastMove);
+	public static State open(Move move) {
+		return new State(move, null, null, SimpleState.OPEN);
 	}
-	
-	private State(Player playerMoved, List<Win> wins, Player winner, SimpleState state, Cell lastMove) {
-		this.lastMove = lastMove;
+
+	private State(Move move, List<Win> wins, Player winner, SimpleState state) {
+		this.move = move;
 		this.winner = winner;
 		this.state = state;
 
 		this.wins = wins;
-		this.player = playerMoved;
 	}
 
 	public Player getWinner() {
@@ -85,11 +80,8 @@ public class State {
 		return state != SimpleState.OPEN;
 	}
 
-	public Cell getLastMove() {
-		return lastMove;
-	}
-	public Player getPlayer() {
-		return player;
+	public Move getLastMove() {
+		return move;
 	}
 
 }
