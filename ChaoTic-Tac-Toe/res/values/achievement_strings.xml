@@ -8,13 +8,13 @@
     <string name="offline_achievement_long_haul">Play a Chaotic game with 20 moves.</string>
     <string name="offline_achievement_with_a_little_help">Win in 3 moves.</string>
     <string name="offline_achievement_clean_slate">Return to initial state after 5 moves.</string>
-    <!--  New / Testing -->
-  <string name="offline_achievement_reverse_win" >Win a Reverse style game.</string>
-  <string name="offline_achievement_the_good_samaritan" >Help your opponent win in 3 moves.</string>
-  <!--  need some more game infrastucture to evaluate these? -->
-  <string name="offline_achievement_good_sport" >Place forced winning move for your opponent.</string>
-  <string name="offline_achievement_fork_in_the_road" >Win a game in one of multiple ways.</string>
-  <string name="offline_achievement_two_birds_with_one_stone" >Win a game in two directions at once.</string>
-  <string name="offline_achievement_the_threeway" >Win a game in three directions at once.</string>
-    
+    <!-- New / Testing -->
+    <string name="offline_achievement_reverse_win">Win a Reverse style game.</string>
+    <string name="offline_achievement_the_good_samaritan">Help your opponent win in 3 moves.</string>
+    <string name="offline_achievement_two_birds_with_one_stone">Win a game in two directions at once.</string>
+    <string name="offline_achievement_good_sport">Place forced winning move for your opponent.</string>
+    <string name="offline_achievement_fork_in_the_road">Win a game in one of multiple ways.</string>
+    <!-- need some more game infrastucture to evaluate these? -->
+    <string name="offline_achievement_oops">Play an unforced winning move for your opponent.</string>
+
 </resources>

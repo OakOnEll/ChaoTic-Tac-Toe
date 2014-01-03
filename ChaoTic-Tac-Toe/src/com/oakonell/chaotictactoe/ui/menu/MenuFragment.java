@@ -509,6 +509,12 @@ public class MenuFragment extends SherlockFragment {
 		// install invitation listener so we get notified if we receive an
 		// invitation to play
 		// a game.
+		registerInviteListener();
+
+		refreshInvites(true);
+	}
+
+	private void registerInviteListener() {
 		getMainActivity().getGamesClient().registerInvitationListener(
 				new OnInvitationReceivedListener() {
 					@Override
@@ -524,8 +530,6 @@ public class MenuFragment extends SherlockFragment {
 								Toast.LENGTH_SHORT).show();
 					}
 				});
-
-		refreshInvites(true);
 	}
 
 	public void signOut() {
@@ -541,7 +545,8 @@ public class MenuFragment extends SherlockFragment {
 				R.id.signed_in_as_text);
 		if (signedInAsText == null)
 			return;
-		signedInAsText.setText(getResources().getString(R.string.you_are_signed_in_as,
+		signedInAsText.setText(getResources().getString(
+				R.string.you_are_signed_in_as,
 				getMainActivity().getGamesClient().getCurrentAccountName()));
 	}
 
@@ -604,9 +609,18 @@ public class MenuFragment extends SherlockFragment {
 	}
 
 	@Override
+	public void onPause() {
+		if (getMainActivity().isSignedIn()) {
+			getMainActivity().getGamesClient().registerInvitationListener(null);
+		}
+		super.onPause();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		if (getMainActivity().isSignedIn()) {
+			registerInviteListener();
 			showLogout();
 		} else {
 			showLogin();

@@ -47,4 +47,13 @@
         <item quantity="one">1 Draw</item>
         <item quantity="other">%d Draws</item>
     </plurals>
+
+    <string name="onJoinedRoom">Joining Room</string>
+    <string name="onRoomConnected">Connecting to Room</string>
+    <string name="onRoomCreated">Creating Room</string>
+    <string name="sendRealTimeMessage">Sending Message</string>
+    <string name="sendMove">Sending Message</string>
+    <string name="communication_error">Error in communication:</string>
+    <string name="cannot_invite_non_tester">Can\'t invite non-tester from a tester account</string>
+    
 </resources>

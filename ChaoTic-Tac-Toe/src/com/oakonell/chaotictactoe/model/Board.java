@@ -1,11 +1,15 @@
 package com.oakonell.chaotictactoe.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.oakonell.chaotictactoe.model.State.Win;
 import com.oakonell.chaotictactoe.ui.game.WinOverlayView.WinStyle;
 
 public class Board {
 	private final int size;
 	private final Marker[][] board;
-	private State state = State.open(null, null, 0);
+	private State state = State.open(null, null);
 
 	public Board(int size) {
 		this.size = size;
@@ -53,7 +57,7 @@ public class Board {
 					+ ", unable to place a " + mark + " there");
 		}
 		board[cell.x][cell.y] = mark;
-		return evaluateAndStore(player, mark);
+		return evaluateAndStore(player, mark, cell);
 	}
 
 	public State clearMarker(Cell cell, Player player) {
@@ -73,12 +77,12 @@ public class Board {
 		board[cell.x][cell.y] = Marker.EMPTY;
 
 		// removing a marker shouldn't expose a win?
-		return evaluateAndStore(player, Marker.EMPTY);
+		return evaluateAndStore(player, Marker.EMPTY, cell);
 
 	}
 
-	private State evaluateAndStore(Player player, Marker mark) {
-		state = evaluate(player, mark);
+	private State evaluateAndStore(Player player, Marker mark, Cell cell) {
+		state = evaluate(player, mark, cell);
 		return state;
 	}
 
@@ -90,9 +94,10 @@ public class Board {
 		return clearMarker(cell, player);
 	}
 
-	private State evaluate(Player player, Marker mark) {
+	private State evaluate(Player player, Marker mark, Cell cell) {
 		int multiplyer = player.getMarker().getVal() == 1 ? 1 : -1;
-		State result = null;
+
+		List<Win> wins = new ArrayList<Win>();
 		// Inspect the columns
 		for (int x = 0; x < size; ++x) {
 			int sum = 0;
@@ -102,10 +107,10 @@ public class Board {
 			}
 
 			int score = multiplyer * sum;
-			result = createResult(new Cell(x, 0), new Cell(x, size - 1), player,
-					score, result, WinStyle.row(x));
-			if (result.getWinner() != null)
-				return result;
+			if (Math.abs(score) == size) {
+				wins.add(new Win(new Cell(x, 0), new Cell(x, size - 1),
+						WinStyle.row(x)));
+			}
 		}
 
 		// Inspect the rows
@@ -117,10 +122,10 @@ public class Board {
 			}
 
 			int score = multiplyer * sum;
-			result = createResult(new Cell(0, y), new Cell(size - 1, y), player,
-					score, result, WinStyle.column(y));
-			if (result.getWinner() != null)
-				return result;
+			if (Math.abs(score) == size) {
+				wins.add(new Win(new Cell(0, y), new Cell(size - 1, y),
+						WinStyle.column(y)));
+			}
 		}
 
 		int sum = 0;
@@ -131,10 +136,9 @@ public class Board {
 		}
 
 		int score = multiplyer * sum;
-		result = createResult(new Cell(0, 0), new Cell(size - 1, size - 1),
-				player, score, result, WinStyle.TOP_LEFT_DIAG);
-		if (result.getWinner() != null) {
-			return result;
+		if (Math.abs(score) == size) {
+			wins.add(new Win(new Cell(0, 0), new Cell(size - 1, size - 1),
+					WinStyle.TOP_LEFT_DIAG));
 		}
 
 		sum = 0;
@@ -144,10 +148,18 @@ public class Board {
 		}
 
 		score = multiplyer * sum;
-		result = createResult(new Cell(0, size - 1), new Cell(size - 1, 0),
-				player, score, result, WinStyle.TOP_RIGHT_DIAG);
-		if (result.getWinner() != null) {
-			return result;
+		if (Math.abs(score) == size) {
+			wins.add(new Win(new Cell(0, size - 1), new Cell(size - 1, 0),
+					WinStyle.TOP_RIGHT_DIAG));
+		}
+		if (!wins.isEmpty()) {
+			Player winner;
+			if (player.getMarker() == mark) {
+				winner = player;
+			} else {
+				winner = player.opponent();
+			}
+			return State.winner(player, wins, winner, cell);
 		}
 
 		// check for draw- no empty spots
@@ -159,31 +171,10 @@ public class Board {
 			}
 		}
 		if (sum == 0) {
-			return State.draw();
+			return State.draw(player, cell);
 		}
 
-		return result;
-	}
-
-	private State createResult(Cell cell, Cell cell2, Player player, int score,
-			State currentBest, WinStyle winStyle) {
-		if (Math.abs(score) == size) {
-			Player winner = player;
-			if (player.getMarker() != board[cell.x][cell.y]) {
-				winner = player.opponent();
-				// player made opponent win?
-				// throw new RuntimeException("You made the opponent win?!");
-			}
-			return State.winner(cell, cell2, winner, score,
-					winStyle);
-		}
-		if (currentBest == null) {
-			return State.open(cell, cell2, score);
-		}
-		if (Math.abs(score) > Math.abs(currentBest.getScore())) {
-			return State.open(cell, cell2, score);
-		}
-		return currentBest;
+		return State.open(player, cell);
 	}
 
 	public int getSize() {
@@ -199,6 +190,17 @@ public class Board {
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
 				if (board[x][y] != Marker.EMPTY)
+					sum++;
+			}
+		}
+		return sum == 0;
+	}
+
+	public boolean isFull() {
+		int sum = 0;
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				if (board[x][y] == Marker.EMPTY)
 					sum++;
 			}
 		}

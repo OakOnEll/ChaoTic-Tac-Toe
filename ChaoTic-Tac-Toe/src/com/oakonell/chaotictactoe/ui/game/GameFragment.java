@@ -64,6 +64,7 @@ import com.oakonell.chaotictactoe.model.Player;
 import com.oakonell.chaotictactoe.model.PlayerStrategy;
 import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
+import com.oakonell.chaotictactoe.model.State.Win;
 import com.oakonell.chaotictactoe.settings.SettingsActivity;
 import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
 import com.oakonell.utils.StringUtils;
@@ -73,7 +74,7 @@ public class GameFragment extends SherlockFragment {
 	private static final int NON_HUMAN_OPPONENT_HIGHLIGHT_MOVE_PAUSE_MS = 300;
 	private static final int MARKER_ROLL_VISIBILITY_PAUSE = 150;
 	private static final int OPPONENT_MARKER_VISIBILITY_PAUSE_MS = 450;
-	
+
 	private ImageManager imgManager;
 
 	private ImageView markerToPlayView;
@@ -98,6 +99,7 @@ public class GameFragment extends SherlockFragment {
 	private ChatDialogFragment chatDialog;
 	private MenuItem chatMenuItem;
 
+	private boolean disableButtons;
 	private View thinking;
 	private TextView thinkingText;
 
@@ -143,8 +145,8 @@ public class GameFragment extends SherlockFragment {
 						layout.height = min;
 						layout.width = min;
 						squareView.setLayoutParams(layout);
-//						squareView.getViewTreeObserver()
-//								.removeGlobalOnLayoutListener(this);
+						// squareView.getViewTreeObserver()
+						// .removeGlobalOnLayoutListener(this);
 
 						LayoutParams params = winOverlayView.getLayoutParams();
 						params.height = layout.height;
@@ -183,7 +185,8 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void handleMenu() {
-		if (chatMenuItem == null) return;
+		if (chatMenuItem == null)
+			return;
 		boolean isOnline = getMainActivity().getRoomListener() != null;
 		chatMenuItem.setVisible(isOnline);
 		if (!isOnline) {
@@ -305,10 +308,9 @@ public class GameFragment extends SherlockFragment {
 		ImageView xImage = (ImageView) view.findViewById(R.id.x_back);
 		ImageView oImage = (ImageView) view.findViewById(R.id.o_back);
 
-		
 		game.getXPlayer().updatePlayerImage(imgManager, xImage);
 		game.getOPlayer().updatePlayerImage(imgManager, oImage);
-		
+
 		xHeaderLayout = view.findViewById(R.id.x_name_layout);
 		oHeaderLayout = view.findViewById(R.id.o_name_layout);
 
@@ -398,8 +400,9 @@ public class GameFragment extends SherlockFragment {
 		// otherwise, show it the first time for other game types
 		boolean showHelp = true;
 		RoomListener listener = getMainActivity().getRoomListener();
-		boolean doesntKnowChance = listener != null && !listener.isInitiatedTheGame();
-		if (!game.getMarkerChance().isCustom() ) {
+		boolean doesntKnowChance = listener != null
+				&& !listener.isInitiatedTheGame();
+		if (!game.getMarkerChance().isCustom()) {
 			SharedPreferences sharedPrefs = PreferenceManager
 					.getDefaultSharedPreferences(getSherlockActivity());
 			String key = "help_shown_for_" + game.getMarkerChance().type();
@@ -435,8 +438,6 @@ public class GameFragment extends SherlockFragment {
 		}
 	}
 
-
-
 	private final class ButtonPressListener implements View.OnClickListener {
 		private final Cell cell;
 
@@ -446,6 +447,9 @@ public class GameFragment extends SherlockFragment {
 
 		@Override
 		public void onClick(View view) {
+			if (disableButtons) {
+				return;
+			}
 			if (isRolling) {
 				return;
 			}
@@ -502,10 +506,12 @@ public class GameFragment extends SherlockFragment {
 
 	private void updateGameStatDisplay() {
 		numMoves.setText("" + game.getNumberOfMoves());
-		xWins.setText(getResources().getQuantityString(R.plurals.num_wins_with_label,
-				score.getXWins(), score.getXWins()));
-		oWins.setText(getResources().getQuantityString(R.plurals.num_wins_with_label,
-				score.getOWins(), score.getOWins()));
+		xWins.setText(getResources().getQuantityString(
+				R.plurals.num_wins_with_label, score.getXWins(),
+				score.getXWins()));
+		oWins.setText(getResources().getQuantityString(
+				R.plurals.num_wins_with_label, score.getOWins(),
+				score.getOWins()));
 		draws.setText("" + score.getDraws());
 		gameNumber.setText("" + score.getTotalGames());
 	}
@@ -651,6 +657,7 @@ public class GameFragment extends SherlockFragment {
 			postMove(marker, cellButton, outcome);
 			return;
 		}
+		disableButtons = true;
 		// experimenting with animations...
 		// create set of animations
 		AnimationSet replaceAnimation = new AnimationSet(false);
@@ -702,6 +709,7 @@ public class GameFragment extends SherlockFragment {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
+				markerToPlayView.setImageDrawable(null);
 				if (marker == Marker.EMPTY) {
 					explodeCell(cellButton, outcome);
 				} else {
@@ -796,7 +804,6 @@ public class GameFragment extends SherlockFragment {
 	}
 
 	private void postMove(Marker marker, ImageButton cellButton, State outcome) {
-		markerToPlayView.setImageDrawable(null);
 		if (marker == Marker.EMPTY) {
 			cellButton.setImageDrawable(null);
 		} else {
@@ -820,8 +827,11 @@ public class GameFragment extends SherlockFragment {
 		evaluateLeaderboards(outcome);
 		Player winner = outcome.getWinner();
 		if (winner != null) {
+			winOverlayView.clearWins();
 			score.incrementScore(winner);
-			winOverlayView.setWinStyle(outcome.getWinStyle());
+			for (Win each : outcome.getWins()) {
+				winOverlayView.addWinStyle(each.getWinStyle());
+			}
 			winOverlayView.invalidate();
 
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
@@ -892,6 +902,7 @@ public class GameFragment extends SherlockFragment {
 		final PlayerStrategy currentStrategy = game.getCurrentPlayer()
 				.getStrategy();
 		if (currentStrategy.isHuman()) {
+			disableButtons = false;
 			// let the buttons be pressed for a human interaction
 			return;
 		}
@@ -934,24 +945,28 @@ public class GameFragment extends SherlockFragment {
 		PlayerStrategy strategy = game.getCurrentPlayer().getStrategy();
 		if (strategy.isHuman() && !isRolling) {
 			thinking.setVisibility(View.GONE);
+			disableButtons = false;
 			return;
 		}
+		disableButtons = true;
 		thinking.setVisibility(View.VISIBLE);
 		thinkingText.setVisibility(isRolling ? View.GONE : View.VISIBLE);
 
 	}
 
 	public void onlineMakeMove(final Marker marker, final Cell cell) {
+		Runnable makeMove = new Runnable() {
+			@Override
+			public void run() {
+				highlightAndMakeMove(marker, cell);
+
+			}
+		};
 		if (isRolling) {
-			afterRoll = new Runnable() {
-				@Override
-				public void run() {
-					highlightAndMakeMove(marker, cell);
-				}
-			};
+			afterRoll = makeMove;
 			return;
 		}
-		highlightAndMakeMove(marker, cell);
+		makeMove.run();
 	}
 
 	public void highlightAndMakeMove(final Marker marker, final Cell move) {
@@ -1087,7 +1102,7 @@ public class GameFragment extends SherlockFragment {
 		game = new Game(3, game.getMode(), currentPlayer,
 				currentPlayer.opponent(), game.getMarkerChance());
 		updateHeader(true);
-		winOverlayView.setWinStyle(null);
+		winOverlayView.clearWins();
 		winOverlayView.invalidate();
 		for (ImageButton each : buttons) {
 			each.setImageDrawable(null);

@@ -1,8 +1,16 @@
+Version 1.3
+-----------
+Added new achievements: fork, oops, goodSport, goodSamaratan, two birds, reverse win
+Allow multiple wins, and draw lines
+disable buttons when no user input allowed
+handle room creation/joining errors a little more nicely
+
 Version 1.2
-----------
+-----------
 Fixed display of chat menu icon in local games
 Fixed default of "Play sounds" in online preferences
 
+
 Version 1.1
-----------
+-----------
 ChaoTic-Tac-Toe released

@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
 import com.google.android.gms.games.multiplayer.realtime.RealTimeMessage;
@@ -95,6 +96,7 @@ public class RoomListener implements RoomUpdateListener,
 		Log.d(TAG, "My ID " + mMyParticipantId);
 		Log.d(TAG, "<< CONNECTED TO ROOM>>");
 	}
+
 	// Called when we get disconnected from the room. We return to the main
 	// screen.
 	@Override
@@ -104,9 +106,8 @@ public class RoomListener implements RoomUpdateListener,
 		activity.onDisconnectedFromRoom();
 	}
 
-	
 	// We treat most of the room update callbacks in the same way: we update our
-	// list of participants 
+	// list of participants
 	@Override
 	public void onPeerDeclined(Room room, List<String> arg1) {
 		announce("onPeerDeclined");
@@ -157,8 +158,8 @@ public class RoomListener implements RoomUpdateListener,
 	@Override
 	public void onP2PDisconnected(String arg0) {
 		announce("Disconnected from P2P " + arg0);
-	}	
-	
+	}
+
 	void updateRoom(Room room) {
 		mParticipants = room.getParticipants();
 	}
@@ -171,7 +172,7 @@ public class RoomListener implements RoomUpdateListener,
 		announce("onPeerLeft");
 		updateRoom(room);
 	}
-	
+
 	// Called when we receive a real-time message from the network.
 	@Override
 	public void onRealTimeMessageReceived(RealTimeMessage message) {
@@ -243,20 +244,21 @@ public class RoomListener implements RoomUpdateListener,
 
 	private void startGame(boolean iAmX) {
 		GameFragment gameFragment = new GameFragment();
-		// ads in online play will leave the room.. hide the ad to avoid the problem
+		// ads in online play will leave the room.. hide the ad to avoid the
+		// problem
 		activity.hideAd();
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		Player xPlayer;
 		Player oPlayer;
 		String localPlayerName = activity.getString(R.string.local_player_name);
 		if (iAmX) {
-			xPlayer = HumanStrategy.createPlayer(localPlayerName, Marker.X, getMe()
-					.getIconImageUri());
+			xPlayer = HumanStrategy.createPlayer(localPlayerName, Marker.X,
+					getMe().getIconImageUri());
 			oPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.O,
 					getOpponentParticipant().getIconImageUri());
 		} else {
-			oPlayer = HumanStrategy.createPlayer(localPlayerName, Marker.O, getMe()
-					.getIconImageUri());
+			oPlayer = HumanStrategy.createPlayer(localPlayerName, Marker.O,
+					getMe().getIconImageUri());
 			xPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.X,
 					getOpponentParticipant().getIconImageUri());
 		}
@@ -264,7 +266,8 @@ public class RoomListener implements RoomUpdateListener,
 		gameFragment.startGame(game, score);
 		FragmentManager manager = activity.getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.replace(R.id.main_frame, gameFragment, MainActivity.FRAG_TAG_GAME);
+		transaction.replace(R.id.main_frame, gameFragment,
+				MainActivity.FRAG_TAG_GAME);
 		transaction.addToBackStack(null);
 		transaction.commit();
 	}
@@ -273,8 +276,10 @@ public class RoomListener implements RoomUpdateListener,
 	public void onJoinedRoom(int statusCode, Room room) {
 		announce("onJoinedRoom");
 		if (statusCode != GamesClient.STATUS_OK) {
-			Log.e(TAG, "*** Error: onRoomConnected, status " + statusCode);
-			showGameError();
+			Log.e(TAG, "*** Error: onJoinedRoom, status " + statusCode);
+			showGameError(R.string.onJoinedRoom, statusCode);
+			leaveRoom();
+			activity.getMenuFragment().setActive();
 			return;
 		}
 
@@ -299,7 +304,9 @@ public class RoomListener implements RoomUpdateListener,
 
 		if (statusCode != GamesClient.STATUS_OK) {
 			Log.e(TAG, "*** Error: onRoomConnected, status " + statusCode);
-			showGameError();
+			showGameError(R.string.onRoomConnected, statusCode);
+			leaveRoom();
+			activity.getMenuFragment().setActive();
 			return;
 		}
 		updateRoom(room);
@@ -312,7 +319,9 @@ public class RoomListener implements RoomUpdateListener,
 
 		if (statusCode != GamesClient.STATUS_OK) {
 			Log.e(TAG, "*** Error: onRoomCreated, status " + statusCode);
-			showGameError();
+			showGameError(R.string.onRoomCreated, statusCode);
+			leaveRoom();
+			activity.getMenuFragment().setActive();
 			return;
 		}
 
@@ -324,9 +333,15 @@ public class RoomListener implements RoomUpdateListener,
 		Log.d(TAG, string);
 	}
 
-	private void showGameError() {
-		// TODO Auto-generated method stub
-
+	private void showGameError(int typeRes, int errorNum) {
+		String message = GooglePlayServicesUtil.getErrorString(errorNum);
+		if (message.startsWith("UNKNOWN")) {
+			if (errorNum == 6001) {
+				message = activity.getString(R.string.cannot_invite_non_tester);
+			}
+		}
+		helper.showAlert(activity.getString(R.string.communication_error)
+				+ " (" + errorNum + ") " + message);
 	}
 
 	// Show the waiting room UI to track the progress of other players as they
@@ -496,14 +511,9 @@ public class RoomListener implements RoomUpdateListener,
 					@Override
 					public void onRealTimeMessageSent(int statusCode,
 							int token, String recipientParticipantId) {
-						if (statusCode == GamesClient.STATUS_OK) {
-
-						} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
-							showGameError();
-						} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
-							showGameError();
-						} else {
-							showGameError();
+						if (statusCode != GamesClient.STATUS_OK) {
+							showGameError(R.string.sendMove, statusCode);
+							leaveRoom();
 						}
 					}
 				}, buffer.array(), getRoomId(), getOpponentId());
@@ -589,14 +599,9 @@ public class RoomListener implements RoomUpdateListener,
 					@Override
 					public void onRealTimeMessageSent(int statusCode,
 							int token, String recipientParticipantId) {
-						if (statusCode == GamesClient.STATUS_OK) {
-
-						} else if (statusCode == GamesClient.STATUS_REAL_TIME_MESSAGE_SEND_FAILED) {
-							showGameError();
-						} else if (statusCode == GamesClient.STATUS_REAL_TIME_ROOM_NOT_JOINED) {
-							showGameError();
-						} else {
-							showGameError();
+						if (statusCode != GamesClient.STATUS_OK) {
+							showGameError(R.string.sendRealTimeMessage,
+									statusCode);
 						}
 					}
 				}, buffer.array(), getRoomId(), getOpponentId());

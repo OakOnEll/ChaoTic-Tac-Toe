@@ -9,15 +9,169 @@ import android.widget.Toast;
 import com.google.android.gms.games.GamesClient;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Board;
+import com.oakonell.chaotictactoe.model.Cell;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.GameMode;
 import com.oakonell.chaotictactoe.model.Marker;
+import com.oakonell.chaotictactoe.model.Player;
 import com.oakonell.chaotictactoe.model.State;
 
 public class Achievements {
 	private static final int NUM_MOVES_LONG_HAUL = 20;
 	private static final int NUM_MOVES_BEFORE_CLEAN_SLATE = 5;
 	protected static final int NUM_BOARD_REVISITS_FOR_DEJA_VU = 3;
+
+	private BooleanAchievement fork = new BooleanAchievement(
+			R.string.achievement_fork_in_the_road,
+			R.string.offline_achievement_fork_in_the_road) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			Player localPlayer = game.getLocalPlayer();
+			if (outcome.getWinner() != localPlayer) {
+				return;
+			}
+			if (outcome.getPlayer() != outcome.getWinner()) {
+				return;
+			}
+			Marker marker = outcome.getWinner().getMarker();
+			// count possible wins from the previous state
+			// if at least two wins for this marker is possible, it is a fork
+			int count = 0;
+			Board board = game.getBoard().copy();
+
+			board.clearMarker(outcome.getLastMove(), game.getLocalPlayer());
+			int size = board.getSize();
+			for (int x = 0; x < size; ++x) {
+				for (int y = 0; y < size; ++y) {
+					Marker boardMarker = board.getCell(x, y);
+					if (boardMarker != Marker.EMPTY)
+						continue;
+
+					Cell cell = new Cell(x, y);
+					State localOutcome = board.placeMarker(cell, localPlayer,
+							marker);
+					if (localOutcome.getWinner() == localPlayer) {
+						count++;
+					}
+					board.clearMarker(cell, localPlayer);
+				}
+			}
+
+			if (count > 1) {
+				unlock(gameHelper, context);
+			}
+		}
+	};
+
+	private BooleanAchievement oops = new BooleanAchievement(
+			R.string.achievement_oops, R.string.offline_achievement_oops) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (game.getMarkerChance().isReverse()
+					|| game.getMarkerChance().isNormal()) {
+				return;
+			}
+			if (game.getMode() == GameMode.PASS_N_PLAY) {
+				return;
+			}
+			if (outcome.isDraw()) {
+				return;
+			}
+			if (outcome.getWinner() == game.getLocalPlayer()) {
+				return;
+			}
+			if (outcome.getWinner() == outcome.getPlayer()) {
+				return;
+			}
+
+			Player localPlayer = game.getLocalPlayer();
+			Marker marker = outcome.getWinner().getMarker();
+			// count possible wins from the previous state
+			// if num wins is less than possible moves for this marker, it was a
+			// mistake
+			int possibleMoves = 0;
+			int opponentWins = 0;
+			Board board = game.getBoard().copy();
+
+			board.clearMarker(outcome.getLastMove(), game.getLocalPlayer());
+			int size = board.getSize();
+			for (int x = 0; x < size; ++x) {
+				for (int y = 0; y < size; ++y) {
+					Marker boardMarker = board.getCell(x, y);
+					if (boardMarker != Marker.EMPTY)
+						continue;
+					possibleMoves++;
+
+					Cell cell = new Cell(x, y);
+					State localOutcome = board.placeMarker(cell, localPlayer,
+							marker);
+					if (localOutcome.getWinner() == localPlayer.opponent()) {
+						opponentWins++;
+					}
+					board.clearMarker(cell, localPlayer);
+				}
+			}
+
+			if (opponentWins < possibleMoves) {
+				unlock(gameHelper, context);
+			}
+		}
+
+	};
+	private BooleanAchievement goodSport = new BooleanAchievement(
+			R.string.achievement_good_sport,
+			R.string.offline_achievement_good_sport) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (game.getMarkerChance().isReverse()) {
+				return;
+			}
+			if (game.getMode() == GameMode.PASS_N_PLAY) {
+				return;
+			}
+			if (outcome.getWinner() == game.getLocalPlayer()) {
+				return;
+			}
+			if (outcome.getPlayer() == outcome.getWinner()) {
+				return;
+			}
+
+			if (outcome.getWinner() == null) {
+				return;
+			}
+
+			if (game.getBoard().isFull()) {
+				unlock(gameHelper, context);
+			}
+		}
+
+	};
+	private BooleanAchievement twoBirds = new BooleanAchievement(
+			R.string.achievement_two_birds_with_one_stone,
+			R.string.offline_achievement_two_birds_with_one_stone) {
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (outcome.getWinner() != game.getLocalPlayer())
+				return;
+			if (outcome.getPlayer() != outcome.getWinner()) {
+				return;
+			}
+
+			if (outcome.getWins().size() != 2) {
+				return;
+			}
+
+			unlock(gameHelper, context);
+
+		}
+	};
 
 	private BooleanAchievement goodSamaritan = new BooleanAchievement(
 			R.string.achievement_the_good_samaritan,
@@ -32,6 +186,10 @@ public class Achievements {
 			if (outcome.getWinner() == game.getLocalPlayer()) {
 				return;
 			}
+			if (outcome.getPlayer() != outcome.getWinner()) {
+				return;
+			}
+
 			if (game.getNumberOfMoves() == game.getBoard().getSize()) {
 				unlock(gameHelper, context);
 			}
@@ -45,6 +203,9 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (!game.getMarkerChance().isReverse()) {
+				return;
+			}
 			if (game.getMode() == GameMode.PASS_N_PLAY)
 				return;
 			if (outcome.getWinner() != game.getLocalPlayer())
@@ -149,6 +310,10 @@ public class Achievements {
 				Game game, State outcome) {
 			if (outcome.getWinner() != game.getLocalPlayer())
 				return;
+			if (outcome.getPlayer() != outcome.getWinner()) {
+				return;
+			}
+
 			if (game.getNumberOfMoves() == game.getBoard().getSize()) {
 				unlock(gameHelper, context);
 			}
@@ -228,6 +393,10 @@ public class Achievements {
 
 		endGameAchievements.add(reverseWin);
 		endGameAchievements.add(goodSamaritan);
+		endGameAchievements.add(twoBirds);
+		endGameAchievements.add(goodSport);
+		endGameAchievements.add(oops);
+		endGameAchievements.add(fork);
 
 		endGameAchievements.add(plainJaneCount);
 		endGameAchievements.add(chaoticCount);

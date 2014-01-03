@@ -1,46 +1,69 @@
 package com.oakonell.chaotictactoe.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.oakonell.chaotictactoe.ui.game.WinOverlayView.WinStyle;
 
 public class State {
-	private enum SimpleState {
+	public static class Win {
+		private final Cell start;
+		private final Cell end;
+		private final WinStyle winStyle;
+
+		public Win(Cell start, Cell end, WinStyle winStyle) {
+			this.start = start;
+			this.end = end;
+			this.winStyle = winStyle;
+		}
+
+		
+		public Cell getStart() {
+			return start;
+		}
+
+		public Cell getEnd() {
+			return end;
+		}
+
+		public WinStyle getWinStyle() {
+			return winStyle;
+		}
+
+
+
+	}
+
+	public enum SimpleState {
 		WIN, DRAW, OPEN;
 	}
 
 	private final SimpleState state;
 	private final Player winner;
+	private final Cell lastMove; 
+	private final Player player; 
 
-	private final Cell start;
-	private final Cell end;
+	private List<Win> wins = new ArrayList<State.Win>();
 
-	private final int score;
-	private final WinStyle winStyle;
-
-	public static State winner(Cell start, Cell end, Player winner, int score,
-			WinStyle winStyle) {
-		return new State(start, end, winner, score, SimpleState.WIN, winStyle);
+	public static State winner(Player playerMoved,List<Win> wins, Player winner, Cell lastMove) {
+		return new State(playerMoved, wins, winner, SimpleState.WIN, lastMove);
 	}
 
-	public static State draw() {
-		return new State(null, null, null, 0, SimpleState.DRAW, null);
+	public static State draw(Player playerMoved, Cell lastMove) {
+		return new State(playerMoved, null, null, SimpleState.DRAW, lastMove);
 	}
 
-	public static State open(Cell start, Cell end,  int score) {
-		return new State(start, end, null, score, SimpleState.OPEN, null);
+	public static State open(Player playerMoved, Cell lastMove) {
+		return new State(playerMoved,null, null, SimpleState.OPEN, lastMove);
 	}
-
-	public State(Cell start, Cell end, Player winner, int score,
-			SimpleState state, WinStyle winStyle) {
+	
+	private State(Player playerMoved, List<Win> wins, Player winner, SimpleState state, Cell lastMove) {
+		this.lastMove = lastMove;
 		this.winner = winner;
 		this.state = state;
-		this.start = start;
-		this.end = end;
-		this.score = score;
-		this.winStyle = winStyle;
-	}
 
-	public int getScore() {
-		return score;
+		this.wins = wins;
+		this.player = playerMoved;
 	}
 
 	public Player getWinner() {
@@ -54,20 +77,19 @@ public class State {
 		return state == SimpleState.DRAW;
 	}
 
-	public Cell getStart() {
-		return start;
-	}
-
-	public Cell getEnd() {
-		return end;
+	public List<Win> getWins() {
+		return wins;
 	}
 
 	public boolean isOver() {
 		return state != SimpleState.OPEN;
 	}
 
-	public WinStyle getWinStyle() {
-		return winStyle;
+	public Cell getLastMove() {
+		return lastMove;
+	}
+	public Player getPlayer() {
+		return player;
 	}
 
 }
