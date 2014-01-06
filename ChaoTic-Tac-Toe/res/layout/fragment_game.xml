@@ -107,8 +107,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" 
-        android:gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal" >
 
         <TextView
             android:id="@+id/game_mode"
@@ -165,8 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:gravity="center_vertical"
-                />
+                android:gravity="center_vertical" />
         </LinearLayout>
 
         <RelativeLayout
@@ -199,6 +198,16 @@
                     <ImageButton
                         android:id="@+id/button_r1c3"
                         style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r1c4"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r1c5"
+                        style="@style/game_button"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -217,6 +226,16 @@
                     <ImageButton
                         android:id="@+id/button_r2c3"
                         style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r2c4"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r2c5"
+                        style="@style/game_button"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -235,6 +254,82 @@
                     <ImageButton
                         android:id="@+id/button_r3c3"
                         style="@style/game_button" />
+
+                    <ImageButton
+                        android:id="@+id/button_r3c4"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r3c5"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row4"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone" >
+
+                    <ImageButton
+                        android:id="@+id/button_r4c1"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r4c2"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r4c3"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r4c4"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r4c5"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_row5"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone" >
+
+                    <ImageButton
+                        android:id="@+id/button_r5c1"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r5c2"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r5c3"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r5c4"
+                        style="@style/game_button"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/button_r5c5"
+                        style="@style/game_button"
+                        android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
 

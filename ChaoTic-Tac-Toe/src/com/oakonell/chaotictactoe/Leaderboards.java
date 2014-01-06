@@ -23,7 +23,8 @@ public class Leaderboards {
 		List<String> result = new ArrayList<String>();
 		result.add(context
 				.getString(R.string.leaderboard_shortest_chaotic_game));
-		result.add(context.getString(R.string.leaderboard_longest_chaotic_mode_game));
+		result.add(context
+				.getString(R.string.leaderboard_longest_chaotic_mode_game));
 		return result;
 	}
 
@@ -36,7 +37,9 @@ public class Leaderboards {
 		if (game.getMode() == GameMode.PASS_N_PLAY) {
 			return;
 		}
-		if (game.getLocalPlayer() != outcome.getWinner()) {
+		if (outcome.isDraw())
+			return;
+		if (!game.getLocalPlayer().equals(outcome.getWinner())) {
 			return;
 		}
 

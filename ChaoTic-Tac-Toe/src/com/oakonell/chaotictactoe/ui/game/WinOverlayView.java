@@ -16,9 +16,11 @@ public class WinOverlayView extends View {
 	private final int OFFSET = 10;
 	private Paint linePaint;
 
+	int boardSize;
+
 	public enum WinStyle {
-		ROW1, ROW2, ROW3, //
-		COL1, COL2, COL3, //
+		ROW1, ROW2, ROW3, ROW4, ROW5, //
+		COL1, COL2, COL3, COL4, COL5, //
 		TOP_LEFT_DIAG, //
 		TOP_RIGHT_DIAG; //
 
@@ -29,6 +31,10 @@ public class WinOverlayView extends View {
 				return COL2;
 			if (x == 2)
 				return COL3;
+			if (x == 3)
+				return COL4;
+			if (x == 4)
+				return COL5;
 			throw new RuntimeException("Invalid column " + x);
 		}
 
@@ -39,6 +45,10 @@ public class WinOverlayView extends View {
 				return ROW2;
 			if (y == 2)
 				return ROW3;
+			if (y == 3)
+				return ROW4;
+			if (y == 4)
+				return ROW5;
 			throw new RuntimeException("Invalid row " + y);
 		}
 
@@ -91,43 +101,69 @@ public class WinOverlayView extends View {
 		int stopX;
 		int stopY;
 
+		int buttonWidth = width / boardSize;
+		int buttonHieght = height / boardSize;
 		for (WinStyle style : styles) {
 			switch (style) {
 			case COL1: {
 				startY = OFFSET;
 				stopY = height - OFFSET;
-				startX = stopX = width / 6;
+				startX = stopX = buttonWidth / 2;
 				break;
 			}
 			case COL2: {
 				startY = OFFSET;
 				stopY = height - OFFSET;
-				startX = stopX = width / 2;
+				startX = stopX = (int) (1.5 * buttonWidth);
 				break;
 			}
 			case COL3: {
 				startY = OFFSET;
 				stopY = height - OFFSET;
-				startX = stopX = 5 * width / 6;
+				startX = stopX = (int) (2.5 * buttonWidth);
+				break;
+			}
+			case COL4: {
+				startY = OFFSET;
+				stopY = height - OFFSET;
+				startX = stopX = (int) (3.5 * buttonWidth);
+				break;
+			}
+			case COL5: {
+				startY = OFFSET;
+				stopY = height - OFFSET;
+				startX = stopX = (int) (4.5 * buttonWidth);
 				break;
 			}
 
 			case ROW1: {
 				startX = OFFSET;
 				stopX = width - OFFSET;
-				startY = stopY = height / 6;
+				startY = stopY = buttonHieght / 2;
 				break;
 			}
 			case ROW2: {
 				startX = OFFSET;
 				stopX = width - OFFSET;
-				startY = stopY = height / 2;
+				startY = stopY = (int) (1.5 * buttonHieght);
 				break;
 			}
 			case ROW3: {
 				startX = OFFSET;
 				stopX = width - OFFSET;
-				startY = stopY = 5 * height / 6;
+				startY = stopY = (int) (2.5 * buttonHieght);
+				break;
+			}
+			case ROW4: {
+				startX = OFFSET;
+				stopX = width - OFFSET;
+				startY = stopY = (int) (3.5 * buttonHieght);
+				break;
+			}
+			case ROW5: {
+				startX = OFFSET;
+				stopX = width - OFFSET;
+				startY = stopY = (int) (4.5 * buttonHieght);
 				break;
 			}
 
@@ -153,5 +189,9 @@ public class WinOverlayView extends View {
 			canvas.drawLine(startX, startY, stopX, stopY, linePaint);
 		}
 
+	}
+
+	public void setBoardSize(int size) {
+		this.boardSize = size;
 	}
 }

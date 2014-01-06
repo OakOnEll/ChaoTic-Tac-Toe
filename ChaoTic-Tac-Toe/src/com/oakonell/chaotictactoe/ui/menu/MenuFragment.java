@@ -55,6 +55,8 @@ import com.oakonell.chaotictactoe.utils.DevelopmentUtil.Info;
 import com.oakonell.utils.StringUtils;
 
 public class MenuFragment extends SherlockFragment {
+	public static final int BOARD_SIZE = 3;
+
 	private String TAG = MenuFragment.class.getName();
 
 	private View signInView;
@@ -371,7 +373,7 @@ public class MenuFragment extends SherlockFragment {
 		Player xPlayer = HumanStrategy.createPlayer(xName, Marker.X);
 		Player oPlayer = HumanStrategy.createPlayer(oName, Marker.O);
 
-		Game game = new Game(3, GameMode.PASS_N_PLAY, xPlayer, oPlayer, chance);
+		Game game = new Game(BOARD_SIZE, GameMode.PASS_N_PLAY, xPlayer, oPlayer, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		gameFragment.startGame(game, score);
 
@@ -398,7 +400,7 @@ public class MenuFragment extends SherlockFragment {
 
 		Player xPlayer = HumanStrategy.createPlayer(xName, Marker.X);
 
-		Game game = new Game(3, GameMode.AI, xPlayer, oPlayer, chance);
+		Game game = new Game(BOARD_SIZE, GameMode.AI, xPlayer, oPlayer, chance);
 
 		gameFragment.startGame(game, score);
 

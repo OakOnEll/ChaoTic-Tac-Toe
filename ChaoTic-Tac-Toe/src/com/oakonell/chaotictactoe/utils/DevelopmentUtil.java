@@ -35,13 +35,11 @@ public class DevelopmentUtil {
 	public static void resetAchievements(Activity context, Info helper) {
 		// as seen on
 		// http://stackoverflow.com/questions/17658732/reset-achievements-leaderboard-from-my-android-application
-// TODO put up a progress bar
 		ProgressDialog dialog = ProgressDialog.show(context, "Resetting Achievements", "Please Wait...");
 		new AchievementsResetterTask(context, helper, dialog).execute((Void) null);
 	}
 
 	public static void resetLeaderboards(Activity context, Info helper) {
-		// TODO put up a progress bar
 		ProgressDialog dialog = ProgressDialog.show(context, "Resetting Leaderboards", "Please Wait...");
 		new LeaderboardResetterTask(context, helper, dialog).execute((Void) null);
 	}

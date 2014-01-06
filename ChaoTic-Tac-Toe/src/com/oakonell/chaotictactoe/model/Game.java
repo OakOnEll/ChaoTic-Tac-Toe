@@ -14,7 +14,7 @@ public class Game {
 
 	private Player player;
 	private Marker toPlay;
-	private Map<Long, Integer> numVisitsPerState = new HashMap<Long, Integer>();
+	private Map<String, Integer> numVisitsPerState = new HashMap<String, Integer>();
 
 	public Game(int size, GameMode mode, Player firstPlayer,
 			Player secondPlayer, MarkerChance chance) {
@@ -55,7 +55,7 @@ public class Game {
 	}
 
 	private void recordVisitToState() {
-		long state = board.getBoardStateAsLong();
+		String state = board.getBoardStateAsLong();
 		Integer number = numVisitsPerState.get(state);
 		if (number == null) {
 			number = 0;
@@ -80,7 +80,7 @@ public class Game {
 	}
 
 	public int getNumberOfTimesInThisState() {
-		long state = board.getBoardStateAsLong();
+		String state = board.getBoardStateAsLong();
 		Integer integer = numVisitsPerState.get(state);
 		if (integer == null)
 			return 0;

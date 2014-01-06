@@ -110,7 +110,8 @@ public class MiniMaxAlg {
 			return result;
 		}
 		if (chance.getMyMarker() != 0) {
-			addMoves(result, board, player.getMarker(), chance.getMyMarkerPercentage());
+			addMoves(result, board, player.getMarker(),
+					chance.getMyMarkerPercentage());
 		}
 		if (chance.getOpponentMarker() != 0) {
 			addMoves(result, board, player.opponent().getMarker(),
@@ -141,23 +142,29 @@ public class MiniMaxAlg {
 		}
 	}
 
-	private int scoreLine(int numMine, int numOpponent) {
-		if (numMine == 3) {
-			return 1000;
+	private int scoreLine(int size, int numMine, int numOpponent) {
+		if (numOpponent == 0) {
+			return (int) Math.pow(10, numMine);
 		}
-		if (numOpponent == 3) {
-			return -1000;
+		if (numMine == 0) {
+			return (int) -Math.pow(10, numOpponent);
 		}
-
-		if (numMine == 2 && numOpponent == 0)
-			return 100;
-		if (numMine == 1 && numOpponent == 0)
-			return 10;
-
-		if (numMine == 0 && numOpponent == 2)
-			return -100;
-		if (numMine == 0 && numOpponent == 1)
-			return -10;
+		// if (numMine == 3) {
+		// return 1000;
+		// }
+		// if (numOpponent == 3) {
+		// return -1000;
+		// }
+		//
+		// if (numMine == 2 && numOpponent == 0)
+		// return 100;
+		// if (numMine == 1 && numOpponent == 0)
+		// return 10;
+		//
+		// if (numMine == 0 && numOpponent == 2)
+		// return -100;
+		// if (numMine == 0 && numOpponent == 1)
+		// return -10;
 
 		return 0;
 	}
@@ -182,7 +189,7 @@ public class MiniMaxAlg {
 				}
 			}
 
-			score += scoreLine(numMine, numOpponent);
+			score += scoreLine(size, numMine, numOpponent);
 		}
 
 		// Inspect the rows
@@ -200,7 +207,7 @@ public class MiniMaxAlg {
 				}
 			}
 
-			score += scoreLine(numMine, numOpponent);
+			score += scoreLine(size, numMine, numOpponent);
 		}
 
 		// Inspect the top-left/bottom-right diagonal
@@ -216,7 +223,7 @@ public class MiniMaxAlg {
 			}
 		}
 
-		score += scoreLine(numMine, numOpponent);
+		score += scoreLine(size, numMine, numOpponent);
 
 		numMine = 0;
 		numOpponent = 0;
@@ -231,7 +238,7 @@ public class MiniMaxAlg {
 			}
 		}
 
-		score += scoreLine(numMine, numOpponent);
+		score += scoreLine(size, numMine, numOpponent);
 
 		return score;
 	}

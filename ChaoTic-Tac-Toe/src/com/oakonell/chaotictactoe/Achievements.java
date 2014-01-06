@@ -70,6 +70,8 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (outcome.isDraw())
+				return;
 			Player localPlayer = game.getLocalPlayer();
 			if (!outcome.getWinner().equals(localPlayer)) {
 				return;
@@ -179,6 +181,7 @@ public class Achievements {
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				return;
 			}
+			if (outcome.isDraw()) return;
 			if (outcome.getWinner().equals(game.getLocalPlayer())) {
 				return;
 			}
@@ -202,6 +205,7 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (outcome.isDraw()) return;
 			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
 			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
@@ -227,6 +231,7 @@ public class Achievements {
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				return;
 			}
+			if (outcome.isDraw()) return;
 			if (!outcome.getWinner().equals(game.getLocalPlayer())) {
 				return;
 			}
@@ -252,6 +257,7 @@ public class Achievements {
 			}
 			if (game.getMode() == GameMode.PASS_N_PLAY)
 				return;
+			if (outcome.isDraw()) return;
 			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
 
@@ -352,6 +358,7 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
+			if (outcome.isDraw()) return;
 			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
 			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {

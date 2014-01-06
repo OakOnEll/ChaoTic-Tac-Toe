@@ -31,6 +31,7 @@ import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.ui.game.GameFragment;
 import com.oakonell.chaotictactoe.ui.game.HumanStrategy;
 import com.oakonell.chaotictactoe.ui.game.OnlineStrategy;
+import com.oakonell.chaotictactoe.ui.menu.MenuFragment;
 
 public class RoomListener implements RoomUpdateListener,
 		RealTimeMessageReceivedListener, RoomStatusUpdateListener {
@@ -262,7 +263,7 @@ public class RoomListener implements RoomUpdateListener,
 			xPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.X,
 					getOpponentParticipant().getIconImageUri());
 		}
-		Game game = new Game(3, GameMode.ONLINE, xPlayer, oPlayer, chance);
+		Game game = new Game(MenuFragment.BOARD_SIZE, GameMode.ONLINE, xPlayer, oPlayer, chance);
 		gameFragment.startGame(game, score);
 		FragmentManager manager = activity.getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();

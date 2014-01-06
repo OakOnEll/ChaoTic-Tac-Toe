@@ -271,7 +271,7 @@ public final class R {
 		public static final int icon = 0x7f02009a;
 	}
 	public static final class id {
-		public static final int about_description = 0x7f0800b0;
+		public static final int about_description = 0x7f0800c2;
 		public static final int abs__action_bar = 0x7f080024;
 		public static final int abs__action_bar_container = 0x7f080023;
 		public static final int abs__action_bar_subtitle = 0x7f080015;
@@ -311,15 +311,15 @@ public final class R {
 		public static final int abs__textButton = 0x7f080017;
 		public static final int abs__title = 0x7f08001f;
 		public static final int abs__up = 0x7f08000f;
-		public static final int app_name_id = 0x7f0800ad;
-		public static final int decrement = 0x7f0800b5;
+		public static final int app_name_id = 0x7f0800bf;
+		public static final int decrement = 0x7f0800c7;
 		public static final int disableHome = 0x7f08000d;
 		public static final int edit_query = 0x7f08002a;
 		public static final int homeAsUp = 0x7f08000a;
-		public static final int icon = 0x7f0800be;
-		public static final int icon_image = 0x7f0800ac;
-		public static final int increment = 0x7f0800b4;
-		public static final int label = 0x7f0800bf;
+		public static final int icon = 0x7f0800d0;
+		public static final int icon_image = 0x7f0800be;
+		public static final int increment = 0x7f0800c6;
+		public static final int label = 0x7f0800d1;
 		public static final int linearLayout1 = 0x7f08004d;
 		public static final int listMode = 0x7f080006;
 		public static final int no_button = 0x7f08004f;
@@ -334,11 +334,11 @@ public final class R {
 		public static final int showHome = 0x7f080009;
 		public static final int showTitle = 0x7f08000b;
 		public static final int tabMode = 0x7f080007;
-		public static final int text = 0x7f0800b3;
+		public static final int text = 0x7f0800c5;
 		public static final int textView1 = 0x7f08004c;
-		public static final int urlId = 0x7f0800af;
+		public static final int urlId = 0x7f0800c1;
 		public static final int useLogo = 0x7f080008;
-		public static final int version = 0x7f0800ae;
+		public static final int version = 0x7f0800c0;
 		public static final int wrap_content = 0x7f080005;
 		public static final int yes_button = 0x7f08004e;
 	}

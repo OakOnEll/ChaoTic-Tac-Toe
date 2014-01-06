@@ -267,8 +267,6 @@ public class GameFragment extends SherlockFragment {
 	private void openChatDialog() {
 		getMainActivity().getRoomListener().sendInChat(true);
 		chatDialog = new ChatDialogFragment();
-		// TODO get the opponent name in nice fashion- ie, 'Anonymous'
-		// instead of google+'s anonymized string
 		chatDialog.initialize(this, messages, getMainActivity()
 				.getRoomListener().getMe(), getMainActivity().getRoomListener()
 				.getOpponentName());
@@ -316,42 +314,9 @@ public class GameFragment extends SherlockFragment {
 
 		markerToPlayView = (ImageView) view.findViewById(R.id.marker_to_play);
 		winOverlayView = (WinOverlayView) view.findViewById(R.id.win_overlay);
+		winOverlayView.setBoardSize(game.getBoard().getSize());
 
-		ImageButton button = (ImageButton) view.findViewById(R.id.button_r1c1);
-		button.setOnClickListener(new ButtonPressListener(new Cell(0, 0)));
-		buttons.add(button);
-
-		button = (ImageButton) view.findViewById(R.id.button_r1c2);
-		button.setOnClickListener(new ButtonPressListener(new Cell(0, 1)));
-		buttons.add(button);
-
-		button = (ImageButton) view.findViewById(R.id.button_r1c3);
-		button.setOnClickListener(new ButtonPressListener(new Cell(0, 2)));
-		buttons.add(button);
-
-		button = (ImageButton) view.findViewById(R.id.button_r2c1);
-		button.setOnClickListener(new ButtonPressListener(new Cell(1, 0)));
-		buttons.add(button);
-
-		button = (ImageButton) view.findViewById(R.id.button_r2c2);
-		button.setOnClickListener(new ButtonPressListener(new Cell(1, 1)));
-		buttons.add(button);
-
-		button = (ImageButton) view.findViewById(R.id.button_r2c3);
-		button.setOnClickListener(new ButtonPressListener(new Cell(1, 2)));
-		buttons.add(button);
-
-		button = (ImageButton) view.findViewById(R.id.button_r3c1);
-		button.setOnClickListener(new ButtonPressListener(new Cell(2, 0)));
-		buttons.add(button);
-
-		button = (ImageButton) view.findViewById(R.id.button_r3c2);
-		button.setOnClickListener(new ButtonPressListener(new Cell(2, 1)));
-		buttons.add(button);
-
-		button = (ImageButton) view.findViewById(R.id.button_r3c3);
-		button.setOnClickListener(new ButtonPressListener(new Cell(2, 2)));
-		buttons.add(button);
+		addButtonClickListeners(view);
 
 		xWins = (TextView) view.findViewById(R.id.num_x_wins);
 		oWins = (TextView) view.findViewById(R.id.num_o_wins);
@@ -393,6 +358,146 @@ public class GameFragment extends SherlockFragment {
 		}
 
 		return view;
+	}
+
+	private void addButtonClickListeners(View view) {
+		int size = game.getBoard().getSize();
+		ImageButton button = (ImageButton) view.findViewById(R.id.button_r1c1);
+		button.setOnClickListener(new ButtonPressListener(new Cell(0, 0)));
+		buttons.add(button);
+
+		button = (ImageButton) view.findViewById(R.id.button_r1c2);
+		button.setOnClickListener(new ButtonPressListener(new Cell(0, 1)));
+		buttons.add(button);
+
+		button = (ImageButton) view.findViewById(R.id.button_r1c3);
+		button.setOnClickListener(new ButtonPressListener(new Cell(0, 2)));
+		buttons.add(button);
+
+		button = (ImageButton) view.findViewById(R.id.button_r1c4);
+		if (size > 3) {
+			button.setOnClickListener(new ButtonPressListener(new Cell(0, 3)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+		}
+		if (size > 4) {
+			button = (ImageButton) view.findViewById(R.id.button_r1c5);
+			button.setOnClickListener(new ButtonPressListener(new Cell(0, 4)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+		}
+
+		// row2
+		button = (ImageButton) view.findViewById(R.id.button_r2c1);
+		button.setOnClickListener(new ButtonPressListener(new Cell(1, 0)));
+		buttons.add(button);
+
+		button = (ImageButton) view.findViewById(R.id.button_r2c2);
+		button.setOnClickListener(new ButtonPressListener(new Cell(1, 1)));
+		buttons.add(button);
+
+		button = (ImageButton) view.findViewById(R.id.button_r2c3);
+		button.setOnClickListener(new ButtonPressListener(new Cell(1, 2)));
+		buttons.add(button);
+
+		if (size > 3) {
+			button = (ImageButton) view.findViewById(R.id.button_r2c4);
+			button.setOnClickListener(new ButtonPressListener(new Cell(1, 3)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+		}
+		if (size > 4) {
+			button = (ImageButton) view.findViewById(R.id.button_r2c5);
+			button.setOnClickListener(new ButtonPressListener(new Cell(1, 4)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+		}
+		// row3
+		button = (ImageButton) view.findViewById(R.id.button_r3c1);
+		button.setOnClickListener(new ButtonPressListener(new Cell(2, 0)));
+		buttons.add(button);
+
+		button = (ImageButton) view.findViewById(R.id.button_r3c2);
+		button.setOnClickListener(new ButtonPressListener(new Cell(2, 1)));
+		buttons.add(button);
+
+		button = (ImageButton) view.findViewById(R.id.button_r3c3);
+		button.setOnClickListener(new ButtonPressListener(new Cell(2, 2)));
+		buttons.add(button);
+
+		if (size > 3) {
+			button = (ImageButton) view.findViewById(R.id.button_r3c4);
+			button.setOnClickListener(new ButtonPressListener(new Cell(2, 3)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+		}
+		if (size > 4) {
+			button = (ImageButton) view.findViewById(R.id.button_r3c5);
+			button.setOnClickListener(new ButtonPressListener(new Cell(2, 4)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+		}
+
+		if (size > 3) {
+			view.findViewById(R.id.button_row4).setVisibility(View.VISIBLE);
+			// row4
+			button = (ImageButton) view.findViewById(R.id.button_r4c1);
+			button.setOnClickListener(new ButtonPressListener(new Cell(3, 0)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+
+			button = (ImageButton) view.findViewById(R.id.button_r4c2);
+			button.setOnClickListener(new ButtonPressListener(new Cell(3, 1)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+
+			button = (ImageButton) view.findViewById(R.id.button_r4c3);
+			button.setOnClickListener(new ButtonPressListener(new Cell(3, 2)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+
+			button = (ImageButton) view.findViewById(R.id.button_r4c4);
+			button.setOnClickListener(new ButtonPressListener(new Cell(3, 3)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+
+			if (size > 4) {
+				button = (ImageButton) view.findViewById(R.id.button_r4c5);
+				button.setOnClickListener(new ButtonPressListener(
+						new Cell(3, 4)));
+				buttons.add(button);
+				button.setVisibility(View.VISIBLE);
+			}
+		}
+
+		if (size > 4) {
+			view.findViewById(R.id.button_row5).setVisibility(View.VISIBLE);
+			// row5
+			button = (ImageButton) view.findViewById(R.id.button_r5c1);
+			button.setOnClickListener(new ButtonPressListener(new Cell(4, 0)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+
+			button = (ImageButton) view.findViewById(R.id.button_r5c2);
+			button.setOnClickListener(new ButtonPressListener(new Cell(4, 1)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+
+			button = (ImageButton) view.findViewById(R.id.button_r5c3);
+			button.setOnClickListener(new ButtonPressListener(new Cell(4, 2)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+
+			button = (ImageButton) view.findViewById(R.id.button_r5c4);
+			button.setOnClickListener(new ButtonPressListener(new Cell(4, 3)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+
+			button = (ImageButton) view.findViewById(R.id.button_r5c5);
+			button.setOnClickListener(new ButtonPressListener(new Cell(4, 4)));
+			buttons.add(button);
+			button.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void showGameHelpOnStart() {
@@ -774,33 +879,6 @@ public class GameFragment extends SherlockFragment {
 		});
 
 		cellButton.startAnimation(explodeSet);
-
-		// final ExplodeView explodeView = (ExplodeView) getActivity()
-		// .findViewById(R.id.explode_view);
-		// explodeView.setImage(R.drawable.bomb_icon_1068);
-		// explodeView.setOnPostExplode(new OnPostExplosion() {
-		// @Override
-		// public void postExplosion(ExplodeView view) {
-		// explodeView.setVisibility(View.GONE);
-		// explodeView.recycle();
-		// postMove(Marker.EMPTY, cellButton, outcome);
-		// }
-		// });
-		//
-		// AbsoluteLayout.LayoutParams layoutParams =
-		// (android.widget.AbsoluteLayout.LayoutParams) explodeView
-		// .getLayoutParams();
-		// layoutParams.x = cellButton.getLeft()
-		// + ((View) cellButton.getParent()).getLeft();
-		// layoutParams.y = cellButton.getTop()
-		// + ((View) cellButton.getParent()).getTop();
-		// layoutParams.width = cellButton.getWidth();
-		// layoutParams.height = cellButton.getHeight();
-		// explodeView.setLayoutParams(layoutParams);
-		// explodeView.setVisibility(View.VISIBLE);
-		// // TODO find middle, or use middle in default no arg method on
-		// // ExplodeView
-		// explodeView.explode(0, 0);
 	}
 
 	private void postMove(Marker marker, ImageButton cellButton, State outcome) {
@@ -982,8 +1060,6 @@ public class GameFragment extends SherlockFragment {
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				// TODO not
-				// TODO play opponent sound
 				cellButton.setBackgroundDrawable(originalBackGround);
 				makeAndDisplayMove(marker, move);
 			}
@@ -1001,6 +1077,10 @@ public class GameFragment extends SherlockFragment {
 				id = R.id.button_r1c2;
 			} else if (y == 2) {
 				id = R.id.button_r1c3;
+			} else if (y == 3) {
+				id = R.id.button_r1c4;
+			} else if (y == 4) {
+				id = R.id.button_r1c5;
 			} else {
 				throw new RuntimeException("Invalid cell");
 			}
@@ -1011,6 +1091,10 @@ public class GameFragment extends SherlockFragment {
 				id = R.id.button_r2c2;
 			} else if (y == 2) {
 				id = R.id.button_r2c3;
+			} else if (y == 3) {
+				id = R.id.button_r2c4;
+			} else if (y == 4) {
+				id = R.id.button_r2c5;
 			} else {
 				throw new RuntimeException("Invalid cell");
 			}
@@ -1021,6 +1105,38 @@ public class GameFragment extends SherlockFragment {
 				id = R.id.button_r3c2;
 			} else if (y == 2) {
 				id = R.id.button_r3c3;
+			} else if (y == 3) {
+				id = R.id.button_r3c4;
+			} else if (y == 4) {
+				id = R.id.button_r3c5;
+			} else {
+				throw new RuntimeException("Invalid cell");
+			}
+		} else if (x == 3) {
+			if (y == 0) {
+				id = R.id.button_r4c1;
+			} else if (y == 1) {
+				id = R.id.button_r4c2;
+			} else if (y == 2) {
+				id = R.id.button_r4c3;
+			} else if (y == 3) {
+				id = R.id.button_r4c4;
+			} else if (y == 4) {
+				id = R.id.button_r4c5;
+			} else {
+				throw new RuntimeException("Invalid cell");
+			}
+		} else if (x == 4) {
+			if (y == 0) {
+				id = R.id.button_r5c1;
+			} else if (y == 1) {
+				id = R.id.button_r5c2;
+			} else if (y == 2) {
+				id = R.id.button_r5c3;
+			} else if (y == 3) {
+				id = R.id.button_r5c4;
+			} else if (y == 4) {
+				id = R.id.button_r5c5;
 			} else {
 				throw new RuntimeException("Invalid cell");
 			}
@@ -1099,8 +1215,8 @@ public class GameFragment extends SherlockFragment {
 
 	public void playAgain() {
 		Player currentPlayer = game.getCurrentPlayer();
-		game = new Game(3, game.getMode(), currentPlayer,
-				currentPlayer.opponent(), game.getMarkerChance());
+		game = new Game(game.getBoard().getSize(), game.getMode(),
+				currentPlayer, currentPlayer.opponent(), game.getMarkerChance());
 		updateHeader(true);
 		winOverlayView.clearWins();
 		winOverlayView.invalidate();

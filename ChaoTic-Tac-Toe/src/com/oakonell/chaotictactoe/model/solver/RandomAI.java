@@ -72,7 +72,7 @@ public class RandomAI extends PlayerStrategy {
 				}
 			}
 		}
-		int cellNum = MarkerChance.random.nextInt(9 - numEmpty);
+		int cellNum = MarkerChance.random.nextInt(size*size - numEmpty);
 		int count = cellNum;
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {

@@ -223,7 +223,7 @@ public class Board {
 		return copy;
 	}
 
-	public long getBoardStateAsLong() {
+	public String getBoardStateAsLong() {
 		StringBuilder builder = new StringBuilder();
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
@@ -236,8 +236,7 @@ public class Board {
 				builder.append(squareChar);
 			}
 		}
-		return Long.parseLong(builder.toString());
-
+		return builder.toString();
 	}
 
 }
