@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <string name="achievement_only_xs_or_os" translatable="false">CgkIpffbuZ8aEAIQAQ</string>
-  <string name="achievement_chaotic_draw" translatable="false">CgkIpffbuZ8aEAIQAg</string>
-  <string name="achievement_dejavu" translatable="false">CgkIpffbuZ8aEAIQAw</string>
-  <string name="achievement_the_long_haul" translatable="false">CgkIpffbuZ8aEAIQBA</string>
-  <string name="achievement_plain_jane" translatable="false">CgkIpffbuZ8aEAIQBQ</string>
-  <string name="achievement_reversi" translatable="false">CgkIpffbuZ8aEAIQBg</string>
-  <string name="achievement_the_customer" translatable="false">CgkIpffbuZ8aEAIQBw</string>
-  <string name="achievement_chaos_theory" translatable="false">CgkIpffbuZ8aEAIQCA</string>
-  <string name="achievement_with_a_little_help_from_my_friends" translatable="false">CgkIpffbuZ8aEAIQCQ</string>
-  <string name="achievement_a_clean_slate" translatable="false">CgkIpffbuZ8aEAIQCg</string>
-  <string name="achievement_two_birds_with_one_stone" translatable="false">CgkIpffbuZ8aEAIQEw</string>  
-  <string name="achievement_reverse_win" translatable="false">CgkIpffbuZ8aEAIQEQ</string>
-  <!--  hidden achievements -->
-  <string name="achievement_the_good_samaritan" translatable="false">CgkIpffbuZ8aEAIQDw</string>
-  <string name="achievement_good_sport" translatable="false">CgkIpffbuZ8aEAIQEA</string>  
-  <string name="achievement_oops" translatable="false">CgkIpffbuZ8aEAIQFQ</string>
-  <string name="achievement_fork_in_the_road" translatable="false">CgkIpffbuZ8aEAIQEg</string>
-  <string name="achievement_friendly_fire">CgkIpffbuZ8aEAIQFg</string>
+    <string name="achievement_only_xs_or_os" translatable="false">CgkIpffbuZ8aEAIQAQ</string>
+    <string name="achievement_chaotic_draw" translatable="false">CgkIpffbuZ8aEAIQAg</string>
+    <string name="achievement_dejavu" translatable="false">CgkIpffbuZ8aEAIQAw</string>
+    <string name="achievement_the_long_haul" translatable="false">CgkIpffbuZ8aEAIQBA</string>
+    <string name="achievement_plain_jane" translatable="false">CgkIpffbuZ8aEAIQBQ</string>
+    <string name="achievement_reversi" translatable="false">CgkIpffbuZ8aEAIQBg</string>
+    <string name="achievement_the_customer" translatable="false">CgkIpffbuZ8aEAIQBw</string>
+    <string name="achievement_chaos_theory" translatable="false">CgkIpffbuZ8aEAIQCA</string>
+    <string name="achievement_with_a_little_help_from_my_friends" translatable="false">CgkIpffbuZ8aEAIQCQ</string>
+    <string name="achievement_a_clean_slate" translatable="false">CgkIpffbuZ8aEAIQCg</string>
+    <string name="achievement_two_birds_with_one_stone" translatable="false">CgkIpffbuZ8aEAIQEw</string>
+    <string name="achievement_reverse_win" translatable="false">CgkIpffbuZ8aEAIQEQ</string>
+    <!-- hidden achievements -->
+    <string name="achievement_the_good_samaritan" translatable="false">CgkIpffbuZ8aEAIQDw</string>
+    <string name="achievement_good_sport" translatable="false">CgkIpffbuZ8aEAIQEA</string>
+    <string name="achievement_oops" translatable="false">CgkIpffbuZ8aEAIQFQ</string>
+    <string name="achievement_fork_in_the_road" translatable="false">CgkIpffbuZ8aEAIQEg</string>
+    <string name="achievement_friendly_fire" translatable="false">CgkIpffbuZ8aEAIQFg</string>
+    <string name="achievement_missed_opportunities" translatable="false">CgkIpffbuZ8aEAIQFw</string>
+
 </resources>

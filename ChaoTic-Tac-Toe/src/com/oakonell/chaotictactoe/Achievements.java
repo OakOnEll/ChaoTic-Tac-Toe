@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Tracker;
 import com.google.android.gms.games.GamesClient;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Board;
@@ -17,9 +20,60 @@ import com.oakonell.chaotictactoe.model.Player;
 import com.oakonell.chaotictactoe.model.State;
 
 public class Achievements {
+	private final String TAG = Achievements.class.getName();
 	private static final int NUM_MOVES_LONG_HAUL = 20;
 	private static final int NUM_MOVES_BEFORE_CLEAN_SLATE = 5;
 	protected static final int NUM_BOARD_REVISITS_FOR_DEJA_VU = 3;
+
+	private BooleanAchievement missedOpportunities = new BooleanAchievement(
+			R.string.achievement_missed_opportunities,
+			R.string.offline_achievement_missed_opportunities) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			// Did the local player make a non-winning move, despite their being
+			// a winning move he could have played?!
+			// if the game is over, he lost or won, but this achievement doesn't
+			// apply
+			if (outcome.isOver()) {
+				return;
+			}
+			// if it wasn't the local player, doesn't apply
+			if (!outcome.getLastMove().getPlayer()
+					.equals(game.getLocalPlayer())) {
+				return;
+			}
+
+			Player localPlayer = game.getLocalPlayer();
+			// if the marker he played wasn't his own, it doesn't apply
+			if (outcome.getLastMove().getPlayedMarker() != localPlayer
+					.getMarker()) {
+				return;
+			}
+
+			// undo the last move, and see if any moves would have Won!
+			Board board = game.getBoard().copy();
+			board.clearMarker(outcome.getLastMove().getCell(), localPlayer);
+			int size = board.getSize();
+			for (int x = 0; x < size; ++x) {
+				for (int y = 0; y < size; ++y) {
+					Marker boardMarker = board.getCell(x, y);
+					if (boardMarker != Marker.EMPTY)
+						continue;
+					// try to place his marker there and see if won.
+					State state = board.placeMarker(new Cell(x, y),
+							localPlayer, localPlayer.getMarker());
+					if (state.getWinner() != null
+							&& localPlayer.equals(state.getWinner())) {
+						unlock(gameHelper, context);
+						return;
+					}
+					board.removeMarker(new Cell(x, y), localPlayer);
+				}
+			}
+		}
+	};
 
 	private BooleanAchievement friendlyFire = new BooleanAchievement(
 			R.string.achievement_friendly_fire,
@@ -44,7 +98,6 @@ public class Achievements {
 
 			// if there are ANY opponent markers, this was a friendly fire
 			Marker opponentMarker = localPlayer.opponent().getMarker();
-			int count = 0;
 			Board board = game.getBoard();
 
 			int size = board.getSize();
@@ -52,13 +105,10 @@ public class Achievements {
 				for (int y = 0; y < size; ++y) {
 					Marker boardMarker = board.getCell(x, y);
 					if (boardMarker == opponentMarker) {
-						count++;
+						unlock(gameHelper, context);
+						return;
 					}
 				}
-			}
-
-			if (count > 0) {
-				unlock(gameHelper, context);
 			}
 		}
 	};
@@ -99,13 +149,13 @@ public class Achievements {
 							marker);
 					if (localOutcome.getWinner() == localPlayer) {
 						count++;
+						if (count>1) {
+							unlock(gameHelper, context);
+							return;
+						}
 					}
 					board.clearMarker(cell, localPlayer);
 				}
-			}
-
-			if (count > 1) {
-				unlock(gameHelper, context);
 			}
 		}
 	};
@@ -166,8 +216,8 @@ public class Achievements {
 				unlock(gameHelper, context);
 			}
 		}
-
 	};
+
 	private BooleanAchievement goodSport = new BooleanAchievement(
 			R.string.achievement_good_sport,
 			R.string.offline_achievement_good_sport) {
@@ -181,7 +231,8 @@ public class Achievements {
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				return;
 			}
-			if (outcome.isDraw()) return;
+			if (outcome.isDraw())
+				return;
 			if (outcome.getWinner().equals(game.getLocalPlayer())) {
 				return;
 			}
@@ -205,7 +256,8 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			if (outcome.isDraw()) return;
+			if (outcome.isDraw())
+				return;
 			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
 			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
@@ -231,8 +283,9 @@ public class Achievements {
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				return;
 			}
-			if (outcome.isDraw()) return;
-			if (!outcome.getWinner().equals(game.getLocalPlayer())) {
+			if (outcome.isDraw())
+				return;
+			if (outcome.getWinner().equals(game.getLocalPlayer())) {
 				return;
 			}
 			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
@@ -257,7 +310,8 @@ public class Achievements {
 			}
 			if (game.getMode() == GameMode.PASS_N_PLAY)
 				return;
-			if (outcome.isDraw()) return;
+			if (outcome.isDraw())
+				return;
 			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
 
@@ -358,7 +412,8 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			if (outcome.isDraw()) return;
+			if (outcome.isDraw())
+				return;
 			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
 			if (!outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
@@ -437,6 +492,7 @@ public class Achievements {
 		inGameAchievements.add(dejaVu);
 		inGameAchievements.add(cleanSlate);
 		inGameAchievements.add(friendlyFire);
+		inGameAchievements.add(missedOpportunities);
 
 		endGameAchievements.add(onlyXsOrOs);
 		endGameAchievements.add(chaoticDraw);
@@ -463,6 +519,8 @@ public class Achievements {
 				State outcome);
 
 		boolean isPending();
+
+		int getKey();
 	}
 
 	private abstract static class BooleanAchievement implements Achievement {
@@ -473,6 +531,10 @@ public class Achievements {
 		BooleanAchievement(int achievementId, int stringId) {
 			this.achievementId = achievementId;
 			this.stringId = stringId;
+		}
+
+		public int getKey() {
+			return achievementId;
 		}
 
 		@Override
@@ -510,6 +572,10 @@ public class Achievements {
 
 		IncrementalAchievement(int achievementId) {
 			this.achievementId = achievementId;
+		}
+
+		public int getKey() {
+			return achievementId;
 		}
 
 		@Override
@@ -563,14 +629,38 @@ public class Achievements {
 	public void testAndSetForInGameAchievements(GameHelper gameHelper,
 			Context context, Game game, State outcome) {
 		for (Achievement each : inGameAchievements) {
-			each.testAndSet(gameHelper, context, game, outcome);
+			try {
+				each.testAndSet(gameHelper, context, game, outcome);
+			} catch (RuntimeException e) {
+				String text = "Error testing achievement " + each.getKey();
+				if (BuildConfig.DEBUG) {
+					throw new RuntimeException(text, e);
+				}
+				Tracker myTracker = EasyTracker.getTracker();
+				myTracker.sendException(text, e, false);
+				// don't crash game due to faulty implementation of achievement,
+				// just log it
+				Log.e(TAG, text + ": " + e.getMessage());
+			}
 		}
 	}
 
 	public void testAndSetForGameEndAchievements(GameHelper gameHelper,
 			Context context, Game game, State outcome) {
 		for (Achievement each : endGameAchievements) {
-			each.testAndSet(gameHelper, context, game, outcome);
+			try {
+				each.testAndSet(gameHelper, context, game, outcome);
+			} catch (RuntimeException e) {
+				String text = "Error testing achievement " + each.getKey();
+				if (BuildConfig.DEBUG) {
+					throw new RuntimeException(text, e);
+				}
+				Tracker myTracker = EasyTracker.getTracker();
+				myTracker.sendException(text, e, false);
+				// don't crash game due to faulty implementation of achievement,
+				// just log it
+				Log.e(TAG, text + ": " + e.getMessage());
+			}
 		}
 	}
 }
