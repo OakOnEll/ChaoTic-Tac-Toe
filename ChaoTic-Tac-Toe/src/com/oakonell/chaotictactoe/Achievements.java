@@ -373,7 +373,7 @@ public class Achievements {
 	};
 	private BooleanAchievement cleanSlate = new BooleanAchievement(
 			R.string.achievement_a_clean_slate,
-			R.string.offline_achievement_chaotic_draw) {
+			R.string.offline_achievement_clean_slate) {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -496,7 +496,7 @@ public class Achievements {
 					Toast.makeText(
 							context,
 							context.getString(R.string.offline_achievement_label)
-									+ ": " + context.getString(stringId),
+									+ " " + context.getString(stringId),
 							Toast.LENGTH_LONG).show();
 				}
 				value = true;
