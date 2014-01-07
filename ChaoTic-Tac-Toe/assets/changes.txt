@@ -1,3 +1,9 @@
+Version 1.6
+-----------
+Prevent some more crashes while evaluating achievements
+Added another new achievement
+Fixed offline text of clean slate achievement
+
 Version 1.5
 -----------
 Fix some crashes on draws
