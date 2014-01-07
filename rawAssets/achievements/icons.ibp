@@ -15,8 +15,8 @@ FilePrefix ''
 //
 // Execute Converter
 //
-Array MySvgFiles 'chaotic_draw.svg':'clean_slate.svg':'only_x.svg':'plain_jane.svg':'reversi.svg':'with_a_little_help.svg':'deja_vu.svg':'equalizer_icon_2989.svg':'long_haul.svg':'chaos_theory.svg':'good_sport.svg':'good_samaritan.svg':'two_birds.svg':'oops.svg':'forked.svg':'reverse_win.svg':'friendly_fire.svg'
-Array MyExportFiles 'chaotic_draw':'clean_slate':'only_x':'plain_jane':'reversi':'with_a_little_help':'deja_vu':'equalizer_icon_2989':'long_haul':'chaos_theory':'good_sport':'good_samaritan':'two_birds':'oops':'forked':'reverse_win':'friendly_fire'
+Array MySvgFiles 'chaotic_draw.svg':'clean_slate.svg':'only_x.svg':'plain_jane.svg':'reversi.svg':'with_a_little_help.svg':'deja_vu.svg':'equalizer_icon_2989.svg':'long_haul.svg':'chaos_theory.svg':'good_sport.svg':'good_samaritan.svg':'two_birds.svg':'oops.svg':'forked.svg':'reverse_win.svg':'friendly_fire.svg':'missed_opportunities.svg'
+Array MyExportFiles 'chaotic_draw':'clean_slate':'only_x':'plain_jane':'reversi':'with_a_little_help':'deja_vu':'equalizer_icon_2989':'long_haul':'chaos_theory':'good_sport':'good_samaritan':'two_birds':'oops':'forked':'reverse_win':'friendly_fire':'missed_opportunities'
 Loop MySvgFiles 3
     FileSvg MySvgFiles:Index
     FileName MyExportFiles:Index
