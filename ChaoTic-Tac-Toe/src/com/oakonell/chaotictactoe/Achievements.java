@@ -26,7 +26,8 @@ public class Achievements {
 	protected static final int NUM_BOARD_REVISITS_FOR_DEJA_VU = 3;
 
 	private BooleanAchievement forcedHand = new BooleanAchievement(
-			R.string.achievement_the_forced_hand, R.string.offline_achievement_the_forced_hand) {
+			R.string.achievement_the_forced_hand,
+			R.string.offline_achievement_the_forced_hand) {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -50,7 +51,8 @@ public class Achievements {
 			Player localPlayer = game.getLocalPlayer();
 			Marker marker = outcome.getWinner().getMarker();
 			// count possible opponent wins from the previous state
-			// if num opponent wins is equal to possible moves for this marker, it was a
+			// if num opponent wins is equal to possible moves for this marker,
+			// it was a
 			// forced win for the opponent
 			int possibleMoves = 0;
 			int opponentWins = 0;
@@ -76,12 +78,12 @@ public class Achievements {
 				}
 			}
 
-			if (opponentWins == possibleMoves) {
+			if (opponentWins == possibleMoves && possibleMoves > 1) {
 				unlock(gameHelper, context);
 			}
 		}
 	};
-	
+
 	private BooleanAchievement missedOpportunities = new BooleanAchievement(
 			R.string.achievement_missed_opportunities,
 			R.string.offline_achievement_missed_opportunities) {
@@ -206,7 +208,7 @@ public class Achievements {
 							marker);
 					if (localOutcome.getWinner() == localPlayer) {
 						count++;
-						if (count>1) {
+						if (count > 1) {
 							unlock(gameHelper, context);
 							return;
 						}
@@ -608,11 +610,13 @@ public class Achievements {
 		}
 
 		public void unlock(GameHelper helper, Context context) {
-			if (helper.isSignedIn()) {
+			boolean isSignedIn = helper.isSignedIn();
+			if (isSignedIn) {
 				helper.getGamesClient().unlockAchievement(
 						context.getString(achievementId));
-			} else {
-				if (!value) {
+			}
+			if (!helper.isSignedIn() || BuildConfig.DEBUG) {
+				if (!value || BuildConfig.DEBUG) {
 					Toast.makeText(
 							context,
 							context.getString(R.string.offline_achievement_label)
