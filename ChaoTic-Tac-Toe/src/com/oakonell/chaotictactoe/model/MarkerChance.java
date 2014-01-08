@@ -151,4 +151,19 @@ public class MarkerChance {
 		}
 		return context.getString(R.string.chance_custom);
 	}
+
+	public String toString() {
+		if (isNormal()) {
+			return "normal";
+		}
+		if (isReverse()) {
+			return "reverse";
+		}
+		if (isChaotic()) {
+			return "chaotic";
+		}
+
+		return "custom: (my=" + myMarker + ", opponent=" + opponentMarker
+				+ ", remove=" + removeMarker + ")";
+	}
 }

@@ -25,6 +25,63 @@ public class Achievements {
 	private static final int NUM_MOVES_BEFORE_CLEAN_SLATE = 5;
 	protected static final int NUM_BOARD_REVISITS_FOR_DEJA_VU = 3;
 
+	private BooleanAchievement forcedHand = new BooleanAchievement(
+			R.string.achievement_the_forced_hand, R.string.offline_achievement_the_forced_hand) {
+
+		@Override
+		public void testAndSet(GameHelper gameHelper, Context context,
+				Game game, State outcome) {
+			if (game.getMarkerChance().isNormal()) {
+				return;
+			}
+			if (game.getMode() == GameMode.PASS_N_PLAY) {
+				return;
+			}
+			if (outcome.isDraw()) {
+				return;
+			}
+			if (outcome.getWinner().equals(game.getLocalPlayer())) {
+				return;
+			}
+			if (outcome.getWinner().equals(outcome.getLastMove().getPlayer())) {
+				return;
+			}
+
+			Player localPlayer = game.getLocalPlayer();
+			Marker marker = outcome.getWinner().getMarker();
+			// count possible opponent wins from the previous state
+			// if num opponent wins is equal to possible moves for this marker, it was a
+			// forced win for the opponent
+			int possibleMoves = 0;
+			int opponentWins = 0;
+			Board board = game.getBoard().copy();
+
+			board.clearMarker(outcome.getLastMove().getCell(),
+					game.getLocalPlayer());
+			int size = board.getSize();
+			for (int x = 0; x < size; ++x) {
+				for (int y = 0; y < size; ++y) {
+					Marker boardMarker = board.getCell(x, y);
+					if (boardMarker != Marker.EMPTY)
+						continue;
+					possibleMoves++;
+
+					Cell cell = new Cell(x, y);
+					State localOutcome = board.placeMarker(cell, localPlayer,
+							marker);
+					if (localOutcome.getWinner().equals(localPlayer.opponent())) {
+						opponentWins++;
+					}
+					board.clearMarker(cell, localPlayer);
+				}
+			}
+
+			if (opponentWins == possibleMoves) {
+				unlock(gameHelper, context);
+			}
+		}
+	};
+	
 	private BooleanAchievement missedOpportunities = new BooleanAchievement(
 			R.string.achievement_missed_opportunities,
 			R.string.offline_achievement_missed_opportunities) {
@@ -505,6 +562,7 @@ public class Achievements {
 		endGameAchievements.add(goodSport);
 		endGameAchievements.add(oops);
 		endGameAchievements.add(fork);
+		endGameAchievements.add(forcedHand);
 
 		endGameAchievements.add(plainJaneCount);
 		endGameAchievements.add(chaoticCount);

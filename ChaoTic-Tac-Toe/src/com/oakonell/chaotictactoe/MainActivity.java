@@ -95,6 +95,8 @@ public class MainActivity extends BaseGameActivity {
 		soundManager = new SoundManager(this);
 		soundManager.addSound(Sounds.PLAY_X, R.raw.play_x_sounds_882_solemn);
 		soundManager.addSound(Sounds.PLAY_O, R.raw.play_o_sounds_913_served);
+		soundManager.addSound(Sounds.FUSE,
+				R.raw.fuse_burning_soundbible_com_1372982430);
 		soundManager.addSound(Sounds.REMOVE_MARKER,
 				R.raw.bomb_soundbible_com_891110113);
 		soundManager.addSound(Sounds.INVALID_MOVE,

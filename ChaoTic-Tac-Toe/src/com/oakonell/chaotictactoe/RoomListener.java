@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Tracker;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.games.GamesClient;
 import com.google.android.gms.games.multiplayer.Participant;
@@ -263,7 +265,18 @@ public class RoomListener implements RoomUpdateListener,
 			xPlayer = OnlineStrategy.createPlayer(getOpponentName(), Marker.X,
 					getOpponentParticipant().getIconImageUri());
 		}
-		Game game = new Game(MenuFragment.BOARD_SIZE, GameMode.ONLINE, xPlayer, oPlayer, chance);
+		Tracker myTracker = EasyTracker.getTracker();
+		myTracker
+				.sendEvent(
+						activity.getString(R.string.an_start_game_cat),
+						(isQuick ? activity
+								.getString(R.string.an_start_quick_game_action)
+								: activity
+										.getString(R.string.an_start_online_game_action)),
+						chance.toString(), 0L);
+
+		Game game = new Game(MenuFragment.BOARD_SIZE, GameMode.ONLINE, xPlayer,
+				oPlayer, chance);
 		gameFragment.startGame(game, score);
 		FragmentManager manager = activity.getSupportFragmentManager();
 		FragmentTransaction transaction = manager.beginTransaction();

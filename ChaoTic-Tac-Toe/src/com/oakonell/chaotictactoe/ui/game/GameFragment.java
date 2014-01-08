@@ -743,8 +743,10 @@ public class GameFragment extends SherlockFragment {
 		}
 		if (markerToPlay == Marker.X) {
 			getMainActivity().playSound(Sounds.PLAY_X);
-		} else {
+		} else if (markerToPlay == Marker.O){
 			getMainActivity().playSound(Sounds.PLAY_O);
+		} else if (markerToPlay == Marker.EMPTY) {
+			getMainActivity().playSound(Sounds.FUSE);
 		}
 		privateMakeMove(cell, marker, outcome);
 		return true;

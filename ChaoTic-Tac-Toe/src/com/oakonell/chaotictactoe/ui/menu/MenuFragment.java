@@ -23,6 +23,8 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Tracker;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.GamesClient;
@@ -373,6 +375,9 @@ public class MenuFragment extends SherlockFragment {
 		Player xPlayer = HumanStrategy.createPlayer(xName, Marker.X);
 		Player oPlayer = HumanStrategy.createPlayer(oName, Marker.O);
 
+		Tracker myTracker = EasyTracker.getTracker();		
+		myTracker.sendEvent(getString(R.string.an_start_game_cat), getString(R.string.an_start_pass_n_play_game_action), chance.toString(), 0L);
+
 		Game game = new Game(BOARD_SIZE, GameMode.PASS_N_PLAY, xPlayer, oPlayer, chance);
 		ScoreCard score = new ScoreCard(0, 0, 0);
 		gameFragment.startGame(game, score);
@@ -400,6 +405,8 @@ public class MenuFragment extends SherlockFragment {
 
 		Player xPlayer = HumanStrategy.createPlayer(xName, Marker.X);
 
+		Tracker myTracker = EasyTracker.getTracker();		
+		myTracker.sendEvent(getString(R.string.an_start_game_cat), getString(R.string.an_start_ai_game_action), chance.toString(), 0L);
 		Game game = new Game(BOARD_SIZE, GameMode.AI, xPlayer, oPlayer, chance);
 
 		gameFragment.startGame(game, score);

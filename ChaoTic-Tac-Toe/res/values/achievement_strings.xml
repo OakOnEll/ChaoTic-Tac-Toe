@@ -16,5 +16,6 @@
     <string name="offline_achievement_oops">Oops: Play an unforced winning move for your opponent.</string>
     <string name="offline_achievement_friendly_fire">Friendly Fire: Needlessly bomb one of your own markers.</string>
     <string name="offline_achievement_missed_opportunities">Missed Opportunites: Miss playing a winning move.</string>
-
+    <string name="offline_achievement_the_forced_hand">The Forced Hand: Play one of multiple forced winning moves for your opponent.</string>
+    
 </resources>
