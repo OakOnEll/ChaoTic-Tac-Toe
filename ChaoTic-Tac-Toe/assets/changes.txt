@@ -1,3 +1,9 @@
+Version 1.7
+-----------
+Added most wins in a session leaderboard 
+Added yet another new achievement
+Added fuse sound when placing bomb, prior to explosion
+
 Version 1.6
 -----------
 Prevent some more crashes while evaluating achievements

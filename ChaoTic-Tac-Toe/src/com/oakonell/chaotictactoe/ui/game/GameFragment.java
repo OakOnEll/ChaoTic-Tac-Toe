@@ -1172,7 +1172,7 @@ public class GameFragment extends SherlockFragment {
 
 		Leaderboards leaderboards = application.getLeaderboards();
 		leaderboards.submitGame(getMainActivity().getGameHelper(),
-				getActivity(), game, outcome);
+				getActivity(), game, outcome, score);
 
 	}
 

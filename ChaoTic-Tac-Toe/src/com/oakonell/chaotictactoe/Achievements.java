@@ -27,7 +27,7 @@ public class Achievements {
 
 	private BooleanAchievement forcedHand = new BooleanAchievement(
 			R.string.achievement_the_forced_hand,
-			R.string.offline_achievement_the_forced_hand) {
+			R.string.offline_achievement_the_forced_hand, "Forced Hand") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -86,7 +86,7 @@ public class Achievements {
 
 	private BooleanAchievement missedOpportunities = new BooleanAchievement(
 			R.string.achievement_missed_opportunities,
-			R.string.offline_achievement_missed_opportunities) {
+			R.string.offline_achievement_missed_opportunities, "Missed Opportunities") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -136,7 +136,7 @@ public class Achievements {
 
 	private BooleanAchievement friendlyFire = new BooleanAchievement(
 			R.string.achievement_friendly_fire,
-			R.string.offline_achievement_friendly_fire) {
+			R.string.offline_achievement_friendly_fire, "Friendly Fire") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -174,7 +174,7 @@ public class Achievements {
 
 	private BooleanAchievement fork = new BooleanAchievement(
 			R.string.achievement_fork_in_the_road,
-			R.string.offline_achievement_fork_in_the_road) {
+			R.string.offline_achievement_fork_in_the_road, "Fork in the Road") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -220,7 +220,7 @@ public class Achievements {
 	};
 
 	private BooleanAchievement oops = new BooleanAchievement(
-			R.string.achievement_oops, R.string.offline_achievement_oops) {
+			R.string.achievement_oops, R.string.offline_achievement_oops, "Oops") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -279,7 +279,7 @@ public class Achievements {
 
 	private BooleanAchievement goodSport = new BooleanAchievement(
 			R.string.achievement_good_sport,
-			R.string.offline_achievement_good_sport) {
+			R.string.offline_achievement_good_sport, "Good Sport") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -311,7 +311,7 @@ public class Achievements {
 	};
 	private BooleanAchievement twoBirds = new BooleanAchievement(
 			R.string.achievement_two_birds_with_one_stone,
-			R.string.offline_achievement_two_birds_with_one_stone) {
+			R.string.offline_achievement_two_birds_with_one_stone, "Two Birds") {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
@@ -334,7 +334,7 @@ public class Achievements {
 
 	private BooleanAchievement goodSamaritan = new BooleanAchievement(
 			R.string.achievement_the_good_samaritan,
-			R.string.offline_achievement_the_good_samaritan) {
+			R.string.offline_achievement_the_good_samaritan, "Good Samaritan") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -359,7 +359,7 @@ public class Achievements {
 	};
 	private BooleanAchievement reverseWin = new BooleanAchievement(
 			R.string.achievement_reverse_win,
-			R.string.offline_achievement_reverse_win) {
+			R.string.offline_achievement_reverse_win, "Reverse Win") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -383,7 +383,7 @@ public class Achievements {
 
 	private BooleanAchievement onlyXsOrOs = new BooleanAchievement(
 			R.string.achievement_only_xs_or_os,
-			R.string.offline_achievement_only_xs_or_os) {
+			R.string.offline_achievement_only_xs_or_os, "Only Xs or Os") {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
@@ -414,7 +414,7 @@ public class Achievements {
 
 	private BooleanAchievement chaoticDraw = new BooleanAchievement(
 			R.string.achievement_chaotic_draw,
-			R.string.offline_achievement_chaotic_draw) {
+			R.string.offline_achievement_chaotic_draw, "Chaotic Draw") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -431,7 +431,7 @@ public class Achievements {
 
 	};
 	private BooleanAchievement dejaVu = new BooleanAchievement(
-			R.string.achievement_dejavu, R.string.offline_achievement_deja_vu) {
+			R.string.achievement_dejavu, R.string.offline_achievement_deja_vu, "Deja Vu") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -449,7 +449,7 @@ public class Achievements {
 
 	private BooleanAchievement longHaul = new BooleanAchievement(
 			R.string.achievement_the_long_haul,
-			R.string.offline_achievement_long_haul) {
+			R.string.offline_achievement_long_haul, "The Long Haul") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -466,7 +466,7 @@ public class Achievements {
 
 	private BooleanAchievement withALittleHelp = new BooleanAchievement(
 			R.string.achievement_with_a_little_help_from_my_friends,
-			R.string.offline_achievement_with_a_little_help) {
+			R.string.offline_achievement_with_a_little_help, "Little Help") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -487,7 +487,7 @@ public class Achievements {
 	};
 	private BooleanAchievement cleanSlate = new BooleanAchievement(
 			R.string.achievement_a_clean_slate,
-			R.string.offline_achievement_clean_slate) {
+			R.string.offline_achievement_clean_slate, "Clean Slate") {
 
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
@@ -502,7 +502,7 @@ public class Achievements {
 	};
 
 	private IncrementalAchievement plainJaneCount = new IncrementalAchievement(
-			R.string.achievement_plain_jane) {
+			R.string.achievement_plain_jane, "Plain Jane") {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
@@ -512,7 +512,7 @@ public class Achievements {
 		}
 	};
 	private IncrementalAchievement chaoticCount = new IncrementalAchievement(
-			R.string.achievement_chaos_theory) {
+			R.string.achievement_chaos_theory, "Chaos Theory") {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
@@ -523,7 +523,7 @@ public class Achievements {
 	};
 
 	private IncrementalAchievement reversiCount = new IncrementalAchievement(
-			R.string.achievement_reversi) {
+			R.string.achievement_reversi, "Reversi") {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
@@ -534,7 +534,7 @@ public class Achievements {
 	};
 
 	private IncrementalAchievement customCount = new IncrementalAchievement(
-			R.string.achievement_the_customer) {
+			R.string.achievement_the_customer, "The Customer") {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
@@ -580,21 +580,23 @@ public class Achievements {
 
 		boolean isPending();
 
-		int getKey();
+		String getName();
 	}
 
 	private abstract static class BooleanAchievement implements Achievement {
 		private boolean value = false;
 		private final int achievementId;
 		private final int stringId;
+		private final String name;
 
-		BooleanAchievement(int achievementId, int stringId) {
+		BooleanAchievement(int achievementId, int stringId, String name) {
 			this.achievementId = achievementId;
 			this.stringId = stringId;
+			this.name = name;
 		}
 
-		public int getKey() {
-			return achievementId;
+		public String getName() {
+			return name;
 		}
 
 		@Override
@@ -631,13 +633,15 @@ public class Achievements {
 	private static abstract class IncrementalAchievement implements Achievement {
 		private int count = 0;
 		private final int achievementId;
+		private final String name;
 
-		IncrementalAchievement(int achievementId) {
+		IncrementalAchievement(int achievementId, String name) {
 			this.achievementId = achievementId;
+			this.name = name;
 		}
 
-		public int getKey() {
-			return achievementId;
+		public String getName() {
+			return name;
 		}
 
 		@Override
@@ -690,32 +694,23 @@ public class Achievements {
 
 	public void testAndSetForInGameAchievements(GameHelper gameHelper,
 			Context context, Game game, State outcome) {
-		for (Achievement each : inGameAchievements) {
-			try {
-				each.testAndSet(gameHelper, context, game, outcome);
-			} catch (RuntimeException e) {
-				String text = "Error testing achievement " + each.getKey();
-				if (BuildConfig.DEBUG) {
-					throw new RuntimeException(text, e);
-				}
-				Tracker myTracker = EasyTracker.getTracker();
-				myTracker.sendException(text, e, false);
-				// don't crash game due to faulty implementation of achievement,
-				// just log it
-				Log.e(TAG, text + ": " + e.getMessage());
-			}
-		}
+		testAndSetAchievements(gameHelper, context, game, outcome, inGameAchievements, "In Game");
 	}
 
 	public void testAndSetForGameEndAchievements(GameHelper gameHelper,
 			Context context, Game game, State outcome) {
-		for (Achievement each : endGameAchievements) {
+		testAndSetAchievements(gameHelper, context, game, outcome, endGameAchievements, "End Game");
+	}
+	
+	private void testAndSetAchievements(GameHelper gameHelper, Context context,
+			Game game, State outcome, List<Achievement> achievements, String type) {
+		for (Achievement each : achievements) {
 			try {
 				each.testAndSet(gameHelper, context, game, outcome);
 			} catch (RuntimeException e) {
-				String text = "Error testing achievement " + each.getKey();
+				String text = "Error testing " + type + " achievement " + each.getName();
 				if (BuildConfig.DEBUG) {
-					throw new RuntimeException(text, e);
+					gameHelper.showAlert(text, e.getMessage());
 				}
 				Tracker myTracker = EasyTracker.getTracker();
 				myTracker.sendException(text, e, false);

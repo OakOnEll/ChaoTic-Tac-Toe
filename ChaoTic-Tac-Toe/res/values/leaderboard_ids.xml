@@ -3,5 +3,6 @@
 
     <string name="leaderboard_longest_chaotic_mode_game" translatable="false">CgkIpffbuZ8aEAIQCw</string>
     <string name="leaderboard_shortest_chaotic_game" translatable="false">CgkIpffbuZ8aEAIQDA</string>
+    <string name="leaderboard_most_wins_in_a_session" translatable="false">CgkIpffbuZ8aEAIQGQ</string>
 
 </resources>

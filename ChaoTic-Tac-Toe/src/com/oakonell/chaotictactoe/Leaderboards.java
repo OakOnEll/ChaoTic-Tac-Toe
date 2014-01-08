@@ -15,6 +15,8 @@ import com.google.android.gms.games.leaderboard.SubmitScoreResult.Result;
 import com.oakonell.chaotictactoe.googleapi.GameHelper;
 import com.oakonell.chaotictactoe.model.Game;
 import com.oakonell.chaotictactoe.model.GameMode;
+import com.oakonell.chaotictactoe.model.Marker;
+import com.oakonell.chaotictactoe.model.ScoreCard;
 import com.oakonell.chaotictactoe.model.State;
 
 public class Leaderboards {
@@ -25,32 +27,80 @@ public class Leaderboards {
 				.getString(R.string.leaderboard_shortest_chaotic_game));
 		result.add(context
 				.getString(R.string.leaderboard_longest_chaotic_mode_game));
+		result.add(context
+				.getString(R.string.leaderboard_most_wins_in_a_session));
 		return result;
 	}
 
 	public void submitGame(GameHelper gameHelper, final Context context,
-			Game game, State outcome) {
-
-		if (!game.getMarkerChance().isChaotic()) {
-			return;
-		}
+			Game game, State outcome, ScoreCard score) {
 		if (game.getMode() == GameMode.PASS_N_PLAY) {
 			return;
 		}
 		if (outcome.isDraw())
 			return;
+		
 		if (!game.getLocalPlayer().equals(outcome.getWinner())) {
 			return;
 		}
 
 		GamesClient gamesClient = gameHelper.getGamesClient();
-		int submittedScore = game.getNumberOfMoves();
+		int wins = 0;
+		if (game.getLocalPlayer().getMarker() == Marker.X) {
+			wins = score.getXWins();
+		} else {
+			wins = score.getOWins();
+		}
+		submitMostWins(context, gamesClient, wins);
+		
+		if (!game.getMarkerChance().isChaotic()) {
+			return;
+		}
+		int numMoves = game.getNumberOfMoves();
 
-		submitLongestGame(context, gamesClient, submittedScore);
-		submitShortestGame(context, gamesClient, submittedScore);
+		submitLongestGame(context, gamesClient, numMoves);
+		submitShortestGame(context, gamesClient, numMoves);
 
 	}
 
+	
+	private void submitMostWins(final Context context,
+			GamesClient gamesClient, int submittedScore) {
+		final String id = context
+				.getString(R.string.leaderboard_most_wins_in_a_session);
+		gamesClient.submitScoreImmediate(new BasicOnScoreSubmittedListener(
+				context, id) {
+
+			@Override
+			protected void beatDaily(final Context context, Result daily) {
+				Toast.makeText(
+						context,
+						context.getResources().getString(
+								R.string.beat_daily_wins, daily.rawScore),
+						Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			protected void beatWeekly(final Context context, Result weekly) {
+				Toast.makeText(
+						context,
+						context.getResources().getString(
+								R.string.beat_weekly_wins, weekly.rawScore),
+						Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			protected void beatAllTime(final Context context, Result allTime) {
+				Toast.makeText(
+						context,
+						context.getResources().getString(
+								R.string.beat_alltime_wins, allTime.rawScore),
+						Toast.LENGTH_SHORT).show();
+			}
+		}, id, submittedScore);
+	}
+
+	
 	private void submitShortestGame(final Context context,
 			GamesClient gamesClient, int submittedScore) {
 		final String id = context

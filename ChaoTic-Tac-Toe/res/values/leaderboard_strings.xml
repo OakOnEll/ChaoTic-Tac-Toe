@@ -6,6 +6,9 @@
     <string name="beat_alltime_max">You beat your all time maximum moves in a chaotic game: %s</string>
     <string name="beat_daily_min">You beat your daily minimum moves in a chaotic game: %s</string>
     <string name="beat_weekly_min">You beat your weekly minimum moves in a chaotic game: %s</string>
-    <string name="beat_alltime_min">You beat your all time minimum moves in a chaotic game: %s</string>
-
+    <string name="beat_alltime_min">You beat your all time minimum moves in a chaotic game: %s</string>    
+    <string name="beat_daily_wins">You beat your daily maximum wins in a session: %s</string>
+    <string name="beat_weekly_wins">You beat your weekly maximum wins in a session: %s</string>
+    <string name="beat_alltime_wins">You beat your all time maximum wins in a session: %s</string>
+    
 </resources>
