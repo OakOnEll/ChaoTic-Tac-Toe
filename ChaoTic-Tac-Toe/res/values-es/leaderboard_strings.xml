@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="beat_daily_max">Le ganaste tus movimientos máximas diarias en un juego caótico: %s</string>
+    <string name="beat_weekly_max">Le ganaste tus movimientos máximos semanales en un juego caótico: %s</string>
+    <string name="beat_alltime_max">Sacudas tus todas máximas tiempo se mueve en un juego caótico: %s</string>
+    <string name="beat_daily_min">Le ganaste tus movimientos mínimos diarios en un juego caótico: %s</string>
+    <string name="beat_weekly_min">Le ganaste tus movimientos mínimos semanales en un juego caótico: %s</string>
+    <string name="beat_alltime_min">Le ganaste a sus todos los movimientos mínimos de tiempo en un juego caótico: %s</string>    
+    <string name="beat_daily_wins">Sacudas tus victorias máximas diarias en una sesión: %s</string>
+    <string name="beat_weekly_wins">Sacudas tus victorias máximos semanales en una sesión: %s</string>
+    <string name="beat_alltime_wins">Sacudas tus todas las ganancias máximas de tiempo en una sesión: %s</string>
+    
+</resources>

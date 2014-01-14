@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="invalid_move_need_empty">Juega en una casilla vacía.</string>
+    <string name="invalid_move_need_nonempty">Coloque la bomba en un marcador existente.</string>
+    <string name="button_send">enviar</string>
+    <string name="action_chat">Chat</string>
+    <string name="player_won">%s ganadas!</string>
+    <string name="draw">Dibuja juego!</string>
+    <string name="play_again">Jugar de nuevo?</string>
+    <string name="exit_waiting_play_again">Salir</string>
+    <string name="opponent_left_exit_play_again">OK</string>
+    <string name="waiting_for_opponent_to_decide_to_play_again">Esperando a %s para decidir volver a jugar.</string>
+    <string name="opponent_wants_to_play_again">%s Rob quiere jugar de nuevo.</string>
+    <string name="opponent_does_not_want_to_play_again">%s no quiere volver a jugar.</string>
+    <string name="opponent_is_thinking">%s está pensando.</string>
+    <string name="opponent_is_in_chat">%s está en el chat.</string>
+    <string name="peer_left_the_game">%s ha dejado el juego.</string>
+    <string name="leave_game_title">Deja el juego?</string>
+    <string name="leave_game_message">Deje el juego en curso?</string>
+    <string name="local_player_name">Tu</string>
+    <string name="chat_title">Chat con %s</string>
+    <string name="play_again_waiting">Esperando a %s</string>
+    <string name="online_setting_title">Configuración</string>
+    <string name="you_left_the_game">Usted dejó el juego.</string>
+    <string name="chat_actionbar_image_content">Menú de acciones chat</string>
+    <string name="num_move_lbl">Movimientos</string>
+    <string name="num_games_lbl">Juegos: </string>
+    <string name="game_stats_title">Estadísticas del juego</string>
+    <string name="player_stat_label">Jugador</string>
+    <string name="wins_stat_label">Victorias</string>
+    <string name="losses_stat_label">Pérdidas</string>
+    <string name="draws_stat_label">Draws</string>
+    <string name="normal_game_help">Tradicional Tic-Tac-Toe\Jugador X juega Xs\nPlayer O juega Os.</string>
+    <string name="reverse_game_help">Reverse Tic-Tac-Toe\nPlayer X juega Os\nPlayer O juega Xs.</string>
+    <string name="complex_game_help">En el turno de cada jugador,\nhay una posibilidad de que puedan jugar su propio marcador\n jugar marcador de su oponente\n puede usar una bomba a punto de estallar un marcador existente en el tablero.</string>
+    <string name="player_x_lbl">Jugador X</string>
+    <string name="player_o_lbl">Jugador O</string>
+
+    <plurals name="num_wins_with_label">
+        <item quantity="zero">No se gana</item>
+        <item quantity="one">1 victoria</item>
+        <item quantity="other">%d victorias</item>
+    </plurals>
+    <plurals name="num_draws_with_label">
+        <item quantity="zero">No Sorteos</item>
+        <item quantity="one">1 empate</item>
+        <item quantity="other">%d empates</item>
+    </plurals>
+
+    <string name="onJoinedRoom">Unirse a la habitación</string>
+    <string name="onRoomConnected">Conexión a la habitación</string>
+    <string name="onRoomCreated">Creación de habitaciones</string>
+    <string name="sendRealTimeMessage">Enviando Mensaje</string>
+    <string name="sendMove">Envío de movimiento</string>
+    <string name="communication_error">Error en la comunicación:</string>
+    <string name="cannot_invite_non_tester">No se puede invitar a no-probador de una cuenta de verificador</string>
+    
+</resources>

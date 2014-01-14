@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="sign_in_why">Conéctate con Google para compartir logros y jugar con tus amigos.</string>
+    <string name="you_are_signed_in_as">Has iniciado sesión en Google+ como %s</string>
+    <string name="sign_out">Salir</string>
+    <string name="signing_in">Firma con Google</string>
+    <string name="signing_out">Cierre de sesión</string>
+    <string name="new_game_same_device">Pase Y Jugar</string>
+    <string name="new_game_vs_ai">Beat the Bot</string>
+    <string name="new_quick_game">Nuevo Juego Rápido</string>
+    <string name="new_game_live">Juega con un amigo</string>
+    <string name="achievements">Ver Logros</string>
+    <string name="leaderboards">Ver Líderes</string>
+    <string name="achievements_not_available">Por favor, inicia sesión para ver los logros.</string>
+    <string name="leaderboards_not_available">Por favor, inicia sesión para ver tablas de clasificación.</string>
+    <string name="sign_in_to_play_network_game">Por favor, identifíquese para poder iniciar un juego en red.</string>
+    <string name="sign_in_to_view_invites">Por favor, inicia sesión para ver las invitaciones de juego de red.</string>
+    <string name="action_settings">Configuración</string>
+    <string name="received_invite_from"Recibido invitación de %s.</string>
+    <string name="prompt_title_player_name">Ingrese Nombre del jugador</string>
+    <string name="prompt_player_name">Nombre para el jugador %s</string>
+    <string name="label_player_x_name">Nombre de Player X</string>
+    <string name="label_player_o_name">Nombre de Player O</string>
+    <string name="chance_normal">Normal</string>
+    <string name="chance_chaotic">Caótico</string>
+    <string name="chance_custom">Costumbre</string>
+    <string name="chance_reverse">Reverse</string>
+    <string name="chance_label_my_marker">Tu marcador</string>
+    <string name="chance_label_opponent_marker">Su Marker</string>
+    <string name="chance_label_remove_marker">Bomba</string>
+
+    <string-array name="chance_array">
+        <item>Normal</item>
+        <item>Reverse</item>
+        <item>Caótico</item>
+        <item>Costumbre</item>
+    </string-array>
+
+    <string name="start">Iniciar Juego</string>
+    <string name="account_settings">Configuración de la cuenta</string>
+    <string name="choose_ai_mode_title">Elija Modo de juego AI</string>
+	<string name="ai_level">AI Nivel</string>
+    <string name="ai_random">Azar</string>
+    <string name="ai_easy">Fácil</string>
+    <string name="ai_medium">Medio</string>
+    <string name="ai_hard">Duro</string>
+    <string name="choose_local_game_mode_title">Elija Modo de juego</string>
+    <string name="error_x_name">Introduzca un nombre para X</string>
+    <string name="error_o_name">Introduzca un nombre para O</string>
+    <string name="unique_error_o_name">Introduzca un nombre exclusivo para el O</string>
+    <string name="choose_quick_game_mode_title">Elegir modo de juego rápido</string>
+    <string name="choose_online_game_mode_title">Elegir modo de juego en línea</string>
+    <string name="choose_online_opponent">Encontrar Amigo</string>
+    <string name="select_opponent">Seleccione Rival</string>
+    <string name="game_style_lbl">Estilo de juego</string>
+    <string name="chance_of_label">Posibilidad de</string>
+    
+</resources>

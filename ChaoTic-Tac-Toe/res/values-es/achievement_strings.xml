@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="offline_achievement_label">Logros</string>
+    <string name="offline_achievement_only_xs_or_os">: Sólo Xs o S</string>
+    <string name="offline_achievement_chaotic_draw">Caótico Tablas: Un sorteo en el modo caótico.</string>
+    <string name="offline_achievement_deja_vu">Deja Vu: Estado del juego Same tres movimientos en un juego.</string>
+    <string name="offline_achievement_long_haul">El Largo Recorrido: Juega un juego caótico, con 20 movimientos.</string>
+    <string name="offline_achievement_with_a_little_help">Con un poco de ayuda de tus amigos: Vencer en 3 movimientos.</string>
+    <string name="offline_achievement_clean_slate">Borrón y cuenta nueva: Regreso al estado inicial después de 5 movimientos.</string>
+    <string name="offline_achievement_reverse_win">Reversi: Gana un juego de estilo inversa.</string>
+    <string name="offline_achievement_the_good_samaritan">El buen samaritano: Ayude a su oponente ganar en 3 movimientos.</string>
+    <string name="offline_achievement_two_birds_with_one_stone">Dos pájaros de un tiro: Gana un juego en dos direcciones a la vez.</string>
+    <string name="offline_achievement_good_sport">El Buena Sport: Coloque forzada ganadora movimiento para su oponente.</string>
+    <string name="offline_achievement_fork_in_the_road">Tenedor en la Carretera: Gana un juego en una de las múltiples formas.</string>
+    <string name="offline_achievement_oops">Vaya: Juega un movimiento ganador no forzada por su oponente.</string>
+    <string name="offline_achievement_friendly_fire">Amistoso Disparar: Innecesariamente bombardear uno de sus propios marcadores.</string>
+    <string name="offline_achievement_missed_opportunities">Oportunidades Perdidas: Señorita jugando un movimiento ganador.</string>
+    <string name="offline_achievement_the_forced_hand">La Mano Forzada: Juega uno de los múltiples movimientos ganadores forzados para tu oponente.</string>
+    
+</resources>

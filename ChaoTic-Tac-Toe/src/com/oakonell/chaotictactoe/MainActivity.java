@@ -134,7 +134,9 @@ public class MainActivity extends BaseGameActivity {
 
 	@Override
 	public void onSignInFailed() {
-		getMenuFragment().onSignInFailed();
+		if (getMenuFragment()!= null) {
+			getMenuFragment().onSignInFailed();
+		}
 	}
 
 	@Override
