@@ -71,7 +71,7 @@ public class Achievements {
 					Cell cell = new Cell(x, y);
 					State localOutcome = board.placeMarker(cell, localPlayer,
 							marker);
-					if (localOutcome.getWinner().equals(localPlayer.opponent())) {
+					if (localOutcome.getWinner() != null && localOutcome.getWinner().equals(localPlayer.opponent())) {
 						opponentWins++;
 					}
 					board.clearMarker(cell, localPlayer);
@@ -206,7 +206,7 @@ public class Achievements {
 					Cell cell = new Cell(x, y);
 					State localOutcome = board.placeMarker(cell, localPlayer,
 							marker);
-					if (localOutcome.getWinner() == localPlayer) {
+					if (localOutcome.getWinner() != null && localOutcome.getWinner().equals(localPlayer)) {
 						count++;
 						if (count > 1) {
 							unlock(gameHelper, context);
@@ -232,7 +232,7 @@ public class Achievements {
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				return;
 			}
-			if (outcome.isDraw()) {
+			if (outcome.getWinner()== null) {
 				return;
 			}
 			if (outcome.getWinner().equals(game.getLocalPlayer())) {
@@ -264,7 +264,7 @@ public class Achievements {
 					Cell cell = new Cell(x, y);
 					State localOutcome = board.placeMarker(cell, localPlayer,
 							marker);
-					if (localOutcome.getWinner().equals(localPlayer.opponent())) {
+					if (localOutcome.getWinner() != null && localOutcome.getWinner().equals(localPlayer.opponent())) {
 						opponentWins++;
 					}
 					board.clearMarker(cell, localPlayer);
@@ -296,10 +296,6 @@ public class Achievements {
 				return;
 			}
 			if (outcome.getLastMove().getPlayer().equals(outcome.getWinner())) {
-				return;
-			}
-
-			if (outcome.getWinner() == null) {
 				return;
 			}
 
@@ -387,7 +383,9 @@ public class Achievements {
 		@Override
 		public void testAndSet(GameHelper gameHelper, Context context,
 				Game game, State outcome) {
-			if (outcome.getWinner() != game.getLocalPlayer())
+			if (outcome.isDraw()) return;
+			
+			if (!outcome.getWinner().equals(game.getLocalPlayer()))
 				return;
 
 			Board board = game.getBoard();

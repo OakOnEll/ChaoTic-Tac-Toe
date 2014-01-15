@@ -16,8 +16,8 @@
     <string name="leaderboards_not_available">Por favor, inicia sesión para ver tablas de clasificación.</string>
     <string name="sign_in_to_play_network_game">Por favor, identifíquese para poder iniciar un juego en red.</string>
     <string name="sign_in_to_view_invites">Por favor, inicia sesión para ver las invitaciones de juego de red.</string>
-    <string name="action_settings">Configuración</string>
-    <string name="received_invite_from"Recibido invitación de %s.</string>
+    <string name="action_settings">Configuración</string>    
+    <string name="received_invite_from">Recibido invitación de %s.</string>
     <string name="prompt_title_player_name">Ingrese Nombre del jugador</string>
     <string name="prompt_player_name">Nombre para el jugador %s</string>
     <string name="label_player_x_name">Nombre de Player X</string>
