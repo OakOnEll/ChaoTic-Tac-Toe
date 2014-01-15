@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">빈 사각형에서 재생.</string>
+  <string name="invalid_move_need_nonempty">기존 표시자에 폭탄을 놓으십시오.</string>
+  <string name="button_send">보내기</string>
+  <string name="action_chat">채팅</string>
+  <string name="player_won">%s 겼 어!</string>
+  <string name="draw">그리기 게임!</string>
+  <string name="play_again">다시 플레이?</string>
+  <string name="exit_waiting_play_again">두고</string>
+  <string name="opponent_left_exit_play_again">괜찮았던 것</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">다시 재생을 %s 대 한 대기.</string>
+  <string name="opponent_wants_to_play_again">%s 다시 놀고 싶어.</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\' t 다시 놀고 싶어입니다.\'</string>
+  <string name="opponent_is_thinking">%s 생각 하 고 있다.</string>
+  <string name="opponent_is_in_chat">%s 채팅에서입니다.</string>
+  <string name="peer_left_the_game">%s 게임을 왼쪽에 있다.</string>
+  <string name="leave_game_title">게임를 남겨 주세요?</string>
+  <string name="leave_game_message">진행 중인 게임을 떠나?</string>
+  <string name="local_player_name">당신</string>
+  <string name="chat_title">%S 채팅</string>
+  <string name="play_again_waiting">%S 대 한 대기</string>
+  <string name="online_setting_title">설정</string>
+  <string name="you_left_the_game">당신은 게임을 떠날.</string>
+  <string name="chat_actionbar_image_content">채팅 액션 메뉴</string>
+  <string name="num_move_lbl">이동</string>
+  <string name="num_games_lbl">게임:</string>
+  <string name="game_stats_title">게임 통계</string>
+  <string name="player_stat_label">플레이어</string>
+  <string name="losses_stat_label">손실</string>
+  <string name="draws_stat_label">무</string>
+  <string name="normal_game_help">전통적인 틱 전술 Toe\nPlayer X Xs\nPlayer O 연극 Os를 재생합니다.</string>
+  <string name="reverse_game_help">역방향 틱 전술 Toe\nPlayer X Os\nPlayer O 연극 Xs를 재생합니다.</string>
+  <string name="complex_game_help">각 player\의 차례에, 기회는 그들이 can\nplay 그들의 자신의 marker\nplay 그들의 opponent\ marker\ncan 폭탄 폭발 보드에 기존 마커를 사용 하 여.</string>
+  <string name="player_x_lbl">선수 X</string>
+  <string name="player_o_lbl">플레이어 O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">방을 합류</string>
+  <string name="onRoomConnected">룸에 연결</string>
+  <string name="onRoomCreated">방 만들기</string>
+  <string name="sendRealTimeMessage">보내는 메시지</string>
+  <string name="sendMove">전송 이동</string>
+  <string name="communication_error">통신에서 오류:</string>
+  <string name="cannot_invite_non_tester">Can\' t 테스터 계정에서 비 테스터 초대\'</string>
+</resources>

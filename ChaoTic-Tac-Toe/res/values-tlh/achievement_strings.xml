@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">chav</string>
+  <string name="offline_achievement_only_xs_or_os">: neH xs pagh os</string>
+  <string name="offline_achievement_chaotic_draw">chaotic tu\'lu\'be\': tu\'lu\'be\' qaStaHvIS Chaotic Mode.\'</string>
+  <string name="offline_achievement_deja_vu">nIbpoH: qaStaHvIS Quj puS vIH rap Quj Sep wej.</string>
+  <string name="offline_achievement_long_haul">haul qaStaHvIS: Chaotic Quj, 20 vIH chu\'.\'</string>
+  <string name="offline_achievement_with_a_little_help">loQ QaH vo\' jup: vIH 3 Qap.\'</string>
+  <string name="offline_achievement_clean_slate">choSay\'moHlaH Slate: tIHmey pImchugh chuqmey poHmey Sep qaSpu\'DI\' vIH 5.\'</string>
+  <string name="offline_achievement_reverse_win">reversi: style Qujmey Qap Reverse.</string>
+  <string name="offline_achievement_the_good_samaritan">samaritan QaQ: ghol Qap qaStaHvIS 3 vIH QaH.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">cha\' cha\'par pe\'eghtaHvIS wa\': cha\' lurgh Qujmey Qap Dotlhmey.\'</string>
+  <string name="offline_achievement_good_sport">Sport QaQ: Qap vIH ghol raD Daq.</string>
+  <string name="offline_achievement_fork_in_the_road">puq chonnaQ qaStaHvIS road: qaStaHvIS mIw multiple wa\' Quj Qap.\'</string>
+  <string name="offline_achievement_oops">oops: unforce Qap vIH chu\' ghol.\'</string>
+  <string name="offline_achievement_friendly_fire">qul friendly: Needlessly markers wa\' bomb.\'</string>
+  <string name="offline_achievement_missed_opportunities">miss opportunites: vIH winning chu\' miss.\'</string>
+  <string name="offline_achievement_the_forced_hand">ghop forced: wa\' multiple raD Qap vIH chu\' ghol.\'</string>
+</resources>

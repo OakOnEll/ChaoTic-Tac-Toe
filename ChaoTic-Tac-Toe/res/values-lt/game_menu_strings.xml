@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Prisijungti naudojant "Google" dalijasi pasiekimus ir žaisti su savo draugais.</string>
+  <string name="you_are_signed_in_as">Jūs esate įsiregistravę į Google + kaip %s</string>
+  <string name="sign_out">Atsijungti</string>
+  <string name="signing_in">Prisijungti naudodami "Google"</string>
+  <string name="signing_out">Atsijungti</string>
+  <string name="new_game_same_device">Perduoti \'N žaisti\'</string>
+  <string name="new_game_vs_ai">Mušti Bot</string>
+  <string name="new_quick_game">Naujas greitas žaidimas</string>
+  <string name="new_game_live">Žaisti su draugu</string>
+  <string name="achievements">Rodyti pasiekimai</string>
+  <string name="leaderboards">Rodyti lyderių</string>
+  <string name="achievements_not_available">Prašome prisijungti prie Rodyti pasiekimus.</string>
+  <string name="leaderboards_not_available">Prašome prisijungti prie Rodyti lyderių.</string>
+  <string name="sign_in_to_play_network_game">Prašome prisijungti prie pradėti tinklo žaidimas.</string>
+  <string name="sign_in_to_view_invites">Prašome prisijungti prie Rodyti tinklo žaidimas kvietimus.</string>
+  <string name="action_settings">Parametrai</string>
+  <string name="received_invite_from">Gavo kvietimą iš %s.</string>
+  <string name="prompt_title_player_name">Įveskite žaidėjo pseudonimas</string>
+  <string name="prompt_player_name">Pavadinimas žaidėjui %s</string>
+  <string name="label_player_x_name">Žaidėjas X\ pavadinimas</string>
+  <string name="label_player_o_name">Žaidėjas o pavadinimas</string>
+  <string name="chance_chaotic">Chaotiškas</string>
+  <string name="chance_custom">Pasirinktinis</string>
+  <string name="chance_reverse">Atbulinės eigos</string>
+  <string name="chance_label_my_marker">Žymeklį</string>
+  <string name="chance_label_opponent_marker">Jų žymeklis</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Pradėti žaidimą</string>
+  <string name="account_settings">Abonemento parametrai</string>
+  <string name="choose_ai_mode_title">Pasirinkti AI žaidimas režimas</string>
+  <string name="ai_level">AI lygis</string>
+  <string name="ai_random">Atsitiktinių</string>
+  <string name="ai_easy">Lengvai</string>
+  <string name="ai_medium">Vidutinės</string>
+  <string name="ai_hard">Sunku</string>
+  <string name="choose_local_game_mode_title">Pasirinkti žaidimo režimą</string>
+  <string name="error_x_name">Įvardykite X</string>
+  <string name="error_o_name">Įvardykite O</string>
+  <string name="unique_error_o_name">Įvesti unikalų pavadinimą, O</string>
+  <string name="choose_quick_game_mode_title">Pasirinkti greitai žaidimo režimas</string>
+  <string name="choose_online_game_mode_title">Pasirinkite interneto žaidime būdas</string>
+  <string name="choose_online_opponent">Rasti draugui</string>
+  <string name="select_opponent">Pasirinkite priešininką</string>
+  <string name="game_style_lbl">Žaidimo stilius</string>
+  <string name="chance_of_label">Tikimybė</string>
+</resources>

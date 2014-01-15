@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">在一個混沌的遊戲中擊敗你每日的最大動作： %s</string>
+  <string name="beat_weekly_max">在一個混沌的遊戲中擊敗你每週的最大動作： %s</string>
+  <string name="beat_alltime_max">在一個混沌的遊戲中擊敗你所有的時間最大動作： %s</string>
+  <string name="beat_daily_min">在一個混沌的遊戲中擊敗你每日的最低動作： %s</string>
+  <string name="beat_weekly_min">在一個混沌的遊戲中擊敗你每週的最低動作： %s</string>
+  <string name="beat_alltime_min">在一個混沌的遊戲中擊敗你所有的時間最低動作： %s</string>
+  <string name="beat_daily_wins">你打你每日的最大 wins 在會話中： %s</string>
+  <string name="beat_weekly_wins">你打你每週的最大 wins 在會話中： %s</string>
+  <string name="beat_alltime_wins">你打你所有的時間最大 wins 在會話中： %s</string>
+</resources>

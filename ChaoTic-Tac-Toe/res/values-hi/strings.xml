@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">अराजक-दूसस-पैर</string>
+  <string name="yes">हाँ</string>
+  <string name="no">नहीं</string>
+  <string name="ok">ठीक है</string>
+  <string name="cancel">रद्द करें</string>
+  <string name="title_game">अराजक-दूसस-पैर</string>
+  <string name="pref_sound_fx">ध्वनि प्रभाव चलाएँ</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

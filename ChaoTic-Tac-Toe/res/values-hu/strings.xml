@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Kaotikus-Tac-Toe</string>
+  <string name="yes">igen</string>
+  <string name="no">nem</string>
+  <string name="ok">oké</string>
+  <string name="cancel">Mégse</string>
+  <string name="title_game">Kaotikus-Tac-Toe</string>
+  <string name="pref_sound_fx">Játék hanghatások</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

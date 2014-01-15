@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">כאוטי-Tac-הבוהן</string>
+  <string name="yes">כן</string>
+  <string name="no">לא</string>
+  <string name="ok">אוקיי</string>
+  <string name="cancel">ביטול</string>
+  <string name="title_game">כאוטי-Tac-הבוהן</string>
+  <string name="pref_sound_fx">לשחק אפקטים קוליים</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

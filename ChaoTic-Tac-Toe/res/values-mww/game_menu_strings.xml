@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Kos maub Google sib achievements thiab kev ua si nrog koj tej phooj ywg.</string>
+  <string name="you_are_signed_in_as">Kos koj cov npe rau hauv Google + li %s</string>
+  <string name="sign_out">Sau npe tawm</string>
+  <string name="signing_in">Kos npe maub Google</string>
+  <string name="signing_out">Kos npe</string>
+  <string name="new_game_same_device">Tshaj \'N ua si\'</string>
+  <string name="new_game_vs_ai">Tuav lub Bot</string>
+  <string name="new_quick_game">Tshiab ceev kev ua si</string>
+  <string name="new_game_live">Ua si nrog ib tug phooj ywg</string>
+  <string name="achievements">Saib Achievements</string>
+  <string name="leaderboards">Saib Leaderboards</string>
+  <string name="achievements_not_available">Thov kos mus saib achievements.</string>
+  <string name="leaderboards_not_available">Thov kos mus saib leaderboards.</string>
+  <string name="sign_in_to_play_network_game">Thov kos rov networked nees.</string>
+  <string name="sign_in_to_view_invites">Thov kos mus saib network invitations qus.</string>
+  <string name="action_settings">Nqis</string>
+  <string name="received_invite_from">Caw tau txais los ntawm %s.</string>
+  <string name="prompt_title_player_name">Sau tus neeg uas ua ntawv lub npe</string>
+  <string name="prompt_player_name">Lub npe rau cov neeg uas ua ntawv %s</string>
+  <string name="label_player_x_name">Tus neeg uas ua ntawv X\ lub npe</string>
+  <string name="label_player_o_name">Tus neeg uas ua ntawv O\ lub npe</string>
+  <string name="chance_normal">Li qub</string>
+  <string name="chance_custom">Nchuav</string>
+  <string name="chance_reverse">Rov qab</string>
+  <string name="chance_label_my_marker">Koj Marker</string>
+  <string name="chance_label_opponent_marker">Lawv Marker</string>
+  <string name="chance_label_remove_marker">Foob pob</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Pib tau kev ua si</string>
+  <string name="account_settings">Tus account Settings</string>
+  <string name="choose_ai_mode_title">Xaiv cov hom kabmob AI kev ua si</string>
+  <string name="ai_easy">Yooj yim</string>
+  <string name="ai_medium">Nruab nrab</string>
+  <string name="ai_hard">Nyuaj</string>
+  <string name="choose_local_game_mode_title">Xaiv hom qus</string>
+  <string name="error_x_name">Sau npe X</string>
+  <string name="error_o_name">Sau npe O</string>
+  <string name="unique_error_o_name">Sau tus cim npe O</string>
+  <string name="choose_quick_game_mode_title">Xaiv hom ceev qus</string>
+  <string name="choose_online_game_mode_title">Xaiv hom tuaj qus hauv internet</string>
+  <string name="choose_online_opponent">Nrhiav kev phooj ywg</string>
+  <string name="select_opponent">Xaiv tus nrog sib ntaus</string>
+  <string name="game_style_lbl">Qus Style</string>
+  <string name="chance_of_label">Txoj kev</string>
+</resources>

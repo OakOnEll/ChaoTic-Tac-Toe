@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Kisba</string>
+  <string name="offline_achievement_only_xs_or_os">: Biss Xs jew Os</string>
+  <string name="offline_achievement_chaotic_draw">Tagħmel chaotic: Tlugħ fil-mod Chaotic.</string>
+  <string name="offline_achievement_deja_vu">UV Deja: Stat tal-logħba istess tliet jimxi fil-logħba.</string>
+  <string name="offline_achievement_long_haul">Il-ġibda twila: Tilgħab logħba Chaotic mal-mossi 20.</string>
+  <string name="offline_achievement_with_a_little_help">Bl-għajnuna ta \' ftit mill-ħbieb tiegħek: imexxi rebħ fl-3.\'</string>
+  <string name="offline_achievement_clean_slate">Il nadif: Ir-ritorn fi Stat inizjali wara 5 jimxi.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Tirbaħ-rivers stil logħba.</string>
+  <string name="offline_achievement_the_good_samaritan">-Samaritan tajjeb: Jgħinu tiegħek opponent rebħ fl-mossi 3.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Żewġ għasafar b \' ġebla waħda: tirbaħ il-logħba fiż-żewġ direzzjonijiet f\'daqqa.\'</string>
+  <string name="offline_achievement_good_sport">L-Isport tajba: Post sfurzata rebbieħa mossa għall-avversarju.</string>
+  <string name="offline_achievement_fork_in_the_road">Truck fit-toroq: tirbaħ il-logħba f \' wieħed mill-modi multipli.\'</string>
+  <string name="offline_achievement_oops">Issa: Aqra l-mossa rebbieħa unforced għall-avversarju.</string>
+  <string name="offline_achievement_friendly_fire">Tan-nar ta \' l-ambjent: Ħruq ippreżentata waħda ta \' markaturi tiegħek stess.\'</string>
+  <string name="offline_achievement_missed_opportunities">Opportunites tajjeb: Is-Sinjorina daqq a rebħ tmexxi.</string>
+  <string name="offline_achievement_the_forced_hand">L-idejn Forced: Aqra waħda mossi rebbieħa furzata multipli għall-avversarju.</string>
+</resources>

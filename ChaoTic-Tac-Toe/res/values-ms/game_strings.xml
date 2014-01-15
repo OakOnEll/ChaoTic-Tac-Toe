@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Bermain di segi empat kosong.</string>
+  <string name="invalid_move_need_nonempty">Letakkan bom pada penanda yang sedia ada.</string>
+  <string name="button_send">Menghantar</string>
+  <string name="action_chat">Sembang</string>
+  <string name="player_won">%s menang!</string>
+  <string name="draw">Menarik Permainan!</string>
+  <string name="play_again">Main semula?</string>
+  <string name="exit_waiting_play_again">Cuti</string>
+  <string name="opponent_left_exit_play_again">ok</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Menunggu untuk %s memutuskan untuk main semula.</string>
+  <string name="opponent_wants_to_play_again">%s mahu Main lagi.</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\'t hendak main semula.\'</string>
+  <string name="opponent_is_thinking">%s adalah berfikir.</string>
+  <string name="opponent_is_in_chat">%s sedang berbual.</string>
+  <string name="peer_left_the_game">%s telah meninggalkan permainan.</string>
+  <string name="leave_game_title">Meninggalkan Permainan?</string>
+  <string name="leave_game_message">Meninggalkan permainan dijalankan?</string>
+  <string name="local_player_name">Anda</string>
+  <string name="chat_title">Berbual dengan %s</string>
+  <string name="play_again_waiting">Menunggu untuk %s</string>
+  <string name="online_setting_title">Seting</string>
+  <string name="you_left_the_game">Anda meninggalkan permainan.</string>
+  <string name="chat_actionbar_image_content">Sembang tindakan menu</string>
+  <string name="num_move_lbl">Langkah-langkah</string>
+  <string name="num_games_lbl">Permainan:</string>
+  <string name="game_stats_title">Statistik Permainan</string>
+  <string name="player_stat_label">Pemain</string>
+  <string name="wins_stat_label">Menang</string>
+  <string name="losses_stat_label">Kerugian</string>
+  <string name="draws_stat_label">Menarik</string>
+  <string name="normal_game_help">Tradisional Tic Tac Toe\nPlayer X memainkan memainkan Xs\nPlayer O Os.</string>
+  <string name="reverse_game_help">Belakang Tic Tac Toe\nPlayer X memainkan memainkan Os\nPlayer O Xs.</string>
+  <string name="complex_game_help">Pada player\ setiap pusingan, ada kemungkinan mereka can\nplay marker\nplay sendiri marker\ncan opponent\ mereka menggunakan bom untuk meletup satu penanda yang sedia ada pada Lembaga Pengarah.</string>
+  <string name="player_x_lbl">Pemain X</string>
+  <string name="player_o_lbl">Pemain O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Menyertai bilik</string>
+  <string name="onRoomConnected">Menyambung ke bilik</string>
+  <string name="onRoomCreated">Mewujudkan bilik</string>
+  <string name="sendRealTimeMessage">Menghantar mesej</string>
+  <string name="sendMove">Menghantar langkah</string>
+  <string name="communication_error">Ralat dalam komunikasi:</string>
+  <string name="cannot_invite_non_tester">Can\'t menjemput tester dari akaun tester\'</string>
+</resources>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Prestatie</string>
+  <string name="offline_achievement_only_xs_or_os">: Alleen Xs of Os</string>
+  <string name="offline_achievement_chaotic_draw">Chaotische Draw: Een gelijkspel in de chaotische modus.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Hetzelfde spel staat drie beweegt in een spel.</string>
+  <string name="offline_achievement_long_haul">De lange afstanden: Een chaotische spel met 20 bewegingen.</string>
+  <string name="offline_achievement_with_a_little_help">Met een beetje hulp van je vrienden: Win in 3 beweegt.</string>
+  <string name="offline_achievement_clean_slate">Schone lei: Terugkeer naar de oorspronkelijke toestand na 5 wordt verplaatst.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Win een omgekeerde stijl spel.</string>
+  <string name="offline_achievement_the_good_samaritan">De Barmhartige Samaritaan: Helpen uw tegenstander winnen in 3 bewegingen.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Twee vogels met één steen: Win een spel in twee richtingen tegelijk.</string>
+  <string name="offline_achievement_good_sport">De goede Sport: Plaats gedwongen winnende zet voor uw tegenstander.</string>
+  <string name="offline_achievement_fork_in_the_road">Vork in de weg: Win een spel op meerdere manieren.</string>
+  <string name="offline_achievement_oops">Oeps: Speel een ongedwongen winnende zet voor uw tegenstander.</string>
+  <string name="offline_achievement_friendly_fire">Vriendelijk vuur: Bomb nodeloos een van uw eigen markeringen.</string>
+  <string name="offline_achievement_missed_opportunities">Gemiste Opportunites: Miss spelen een winnende verplaatsen.</string>
+  <string name="offline_achievement_the_forced_hand">De geforceerde Hand: Speel een van meerdere gedwongen winnende zetten voor uw tegenstander.</string>
+</resources>

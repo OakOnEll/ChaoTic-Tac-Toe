@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Anda mengalahkan bergerak maksimum harian Anda dalam permainan kacau: %s</string>
+  <string name="beat_weekly_max">Anda mengalahkan bergerak maksimum unduhan Anda dalam permainan kacau: %s</string>
+  <string name="beat_alltime_max">Anda mengalahkan Anda semua waktu maksimum bergerak dalam permainan kacau: %s</string>
+  <string name="beat_daily_min">Anda mengalahkan bergerak minimal sehari-hari Anda dalam permainan kacau: %s</string>
+  <string name="beat_weekly_min">Anda mengalahkan bergerak minimal unduhan Anda dalam permainan kacau: %s</string>
+  <string name="beat_alltime_min">Anda mengalahkan Anda semua waktu minimal bergerak dalam permainan kacau: %s</string>
+  <string name="beat_daily_wins">Anda mengalahkan kemenangan maksimum Anda sehari-hari dalam sesi: %s</string>
+  <string name="beat_weekly_wins">Anda mengalahkan kemenangan maksimum Anda mingguan dalam sesi: %s</string>
+  <string name="beat_alltime_wins">Anda mengalahkan Anda semua waktu maksimum menang dalam sesi: %s</string>
+</resources>

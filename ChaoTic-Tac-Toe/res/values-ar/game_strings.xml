@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">اللعب في ساحة فارغة.</string>
+  <string name="invalid_move_need_nonempty">وضع قنبلة على علامة موجودة.</string>
+  <string name="button_send">إرسال</string>
+  <string name="action_chat">دردشة</string>
+  <string name="player_won">وفاز % s!</string>
+  <string name="draw">رسم اللعبة!</string>
+  <string name="play_again">اللعب مرة أخرى؟</string>
+  <string name="exit_waiting_play_again">إجازة</string>
+  <string name="opponent_left_exit_play_again">موافق</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">في انتظار % s تقرر للعب مرة أخرى.</string>
+  <string name="opponent_wants_to_play_again">% s يرغب في اللعب مرة أخرى.</string>
+  <string name="opponent_does_not_want_to_play_again">doesn\ % s \' ر تريد أن تلعب مرة أخرى.\'</string>
+  <string name="opponent_is_thinking">% s هو التفكير.</string>
+  <string name="opponent_is_in_chat">% s في المحادثة.</string>
+  <string name="peer_left_the_game">% s قد ترك اللعبة.</string>
+  <string name="leave_game_title">ترك اللعبة؟</string>
+  <string name="leave_game_message">ترك اللعبة في التقدم؟</string>
+  <string name="local_player_name">لك</string>
+  <string name="chat_title">دردشة مع % s</string>
+  <string name="play_again_waiting">في انتظار ل % s</string>
+  <string name="online_setting_title">إعدادات</string>
+  <string name="you_left_the_game">يمكنك ترك اللعبة.</string>
+  <string name="chat_actionbar_image_content">القائمة إجراء دردشة</string>
+  <string name="num_move_lbl">التحركات</string>
+  <string name="num_games_lbl">الألعاب:</string>
+  <string name="game_stats_title">إحصائيات اللعبة</string>
+  <string name="player_stat_label">لاعب</string>
+  <string name="losses_stat_label">الخسائر</string>
+  <string name="draws_stat_label">وتوجه</string>
+  <string name="normal_game_help">يلعب التقليدية تك تك-Toe\nPlayer س Xs\nPlayer س يلعب نظام التشغيل.</string>
+  <string name="reverse_game_help">يلعب عكس تك تك-Toe\nPlayer س Os\nPlayer س يلعب Xs.</string>
+  <string name="complex_game_help">على بدوره كل player\، هناك فرصة أنهم can\nplay بهم marker\nplay marker\ncan opponent\ استخدام قنبلة لتنفجر علامة موجودة على متنها.</string>
+  <string name="player_x_lbl">اللاعب X</string>
+  <string name="player_o_lbl">لاعب س</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">الانضمام إلى غرفة</string>
+  <string name="onRoomConnected">الاتصال بالغرفة</string>
+  <string name="onRoomCreated">إنشاء غرفة</string>
+  <string name="sendRealTimeMessage">إرسال رسالة</string>
+  <string name="sendMove">إرسال التحرك</string>
+  <string name="communication_error">خطأ في الاتصال:</string>
+  <string name="cannot_invite_non_tester">Can\' ر دعوة غير المختبر من حساب اختبار\'</string>
+</resources>

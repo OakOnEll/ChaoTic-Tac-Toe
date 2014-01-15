@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Olet voittanut päivän suurin liikkuu kaoottinen peli: %s</string>
+  <string name="beat_weekly_max">Olet voittanut viikoittainen enimmäismäärä liikkuu kaoottinen peli: %s</string>
+  <string name="beat_alltime_max">Olet voittanut kaikki kertaa suurin liikkuu kaoottinen peli: %s</string>
+  <string name="beat_daily_min">Olet voittanut päivittäin vähintään liikkuu kaoottinen peli: %s</string>
+  <string name="beat_weekly_min">Olet voittanut viikoittain vähintään liikkuu kaoottinen peli: %s</string>
+  <string name="beat_alltime_min">Olet voittanut kaikki aikaa pienin liikkuu kaoottinen peli: %s</string>
+  <string name="beat_daily_wins">Voittaa päivittäin enintään voittoja istunto: %s</string>
+  <string name="beat_weekly_wins">Voittaa teidän viikoittain suurin voittaa istunto: %s</string>
+  <string name="beat_alltime_wins">Olet voittanut kaikki ajan suurin voittaa istunnossa: %s</string>
+</resources>

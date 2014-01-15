@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Úspěch</string>
+  <string name="offline_achievement_only_xs_or_os">: Pouze křížky nebo kolečka</string>
+  <string name="offline_achievement_chaotic_draw">Chaotické Draw: Remíza v chaotické režimu.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Stejné hry stát tři pohybuje v zápase.</string>
+  <string name="offline_achievement_long_haul">Dlouhé vzdálenosti: Chaotickou hru s 20 tahů.</string>
+  <string name="offline_achievement_with_a_little_help">S trochou pomoci od svých přátel: přesune vítězství ve 3.</string>
+  <string name="offline_achievement_clean_slate">Čistý štít: Návrat do původního stavu po 5 pohyby.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Vyhrajte reverzní styl hry.</string>
+  <string name="offline_achievement_the_good_samaritan">Dobrý Samaritán: Pomůže váš soupeř vítězství v 3 tahy.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Dvě mouchy jednou ranou: vyhrát hru ve dvou směrech najednou.</string>
+  <string name="offline_achievement_good_sport">Dobrý Sport: Místo donutila vyhrát pro své soupeře.</string>
+  <string name="offline_achievement_fork_in_the_road">Rozcestí: vyhrát hru v jednom z mnoha způsoby.</string>
+  <string name="offline_achievement_oops">Chybička se vloudila: Hrát nenásilnou vyhrát soupeře.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Zbytečně bombardovat jedním z vlastních značek.</string>
+  <string name="offline_achievement_missed_opportunities">Zmeškané příležitosti: Miss hrát výherní pohybovat.</string>
+  <string name="offline_achievement_the_forced_hand">Forced rukou: Hrát jednu z více nucené vítězné tahů soupeř.</string>
+</resources>

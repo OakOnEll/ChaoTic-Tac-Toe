@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Vèncer els moviments de màxims diàries en un caòtic joc: %s</string>
+  <string name="beat_weekly_max">Vèncer els moviments de màxims setmanals en un caòtic joc: %s</string>
+  <string name="beat_alltime_max">Bat el seu tots els moviments de màxima de temps en un caòtic joc: %s</string>
+  <string name="beat_daily_min">Vèncer els moviments mínims diàries en un caòtic joc: %s</string>
+  <string name="beat_weekly_min">Vèncer els moviments mínims setmanals en un caòtic joc: %s</string>
+  <string name="beat_alltime_min">Bat el seu tots els moviments mínims de temps en un caòtic joc: %s</string>
+  <string name="beat_daily_wins">Bat el seu diaris màxims victòries en una sessió: %s</string>
+  <string name="beat_weekly_wins">Bat el seu guanya màxim setmanal en una sessió: %s</string>
+  <string name="beat_alltime_wins">Bat el seu totes les victòries màxim temps en una sessió: %s</string>
+</resources>

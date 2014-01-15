@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Spelen in een leeg vierkant.</string>
+  <string name="invalid_move_need_nonempty">Plaats bom op een bestaande markering.</string>
+  <string name="button_send">Verzenden</string>
+  <string name="player_won">%s gewonnen!</string>
+  <string name="draw">Teken spel!</string>
+  <string name="play_again">Opnieuw spelen?</string>
+  <string name="exit_waiting_play_again">Verlof</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Wachten voor %s om te beslissen om opnieuw te spelen.</string>
+  <string name="opponent_wants_to_play_again">%s wil om opnieuw te spelen.</string>
+  <string name="opponent_does_not_want_to_play_again">%s doet\ die \'t willen om opnieuw te spelen.\'</string>
+  <string name="opponent_is_thinking">%s is denken.</string>
+  <string name="opponent_is_in_chat">%s is in de chat.</string>
+  <string name="peer_left_the_game">%s heeft het spel verlaten.</string>
+  <string name="leave_game_title">Laat spel?</string>
+  <string name="leave_game_message">Verlaat dan het spel aan de gang?</string>
+  <string name="local_player_name">U</string>
+  <string name="chat_title">Chatten met %s</string>
+  <string name="play_again_waiting">Wachten voor %s</string>
+  <string name="online_setting_title">Instellingen</string>
+  <string name="you_left_the_game">U het spel hebt verlaten.</string>
+  <string name="chat_actionbar_image_content">Menu van de actie chat</string>
+  <string name="num_move_lbl">Hiermee verplaatst u</string>
+  <string name="num_games_lbl">Spelprogramma\'s:\'</string>
+  <string name="game_stats_title">Spel statistieken</string>
+  <string name="player_stat_label">Speler</string>
+  <string name="wins_stat_label">Wint</string>
+  <string name="losses_stat_label">Verliezen</string>
+  <string name="draws_stat_label">Vestigt</string>
+  <string name="normal_game_help">Traditionele Tic-Tic-Tac-Toe\nPlayer X speelt Xs\nPlayer O speelt Os.</string>
+  <string name="reverse_game_help">Omgekeerde Tic-Tic-Tac-Toe\nPlayer X speelt Os\nPlayer O speelt Xs.</string>
+  <string name="complex_game_help">Op elke player\ beurt, is er een kans ze can\nplay hun eigen marker\nplay hun opponent\ marker\ncan gebruiken een bom ontploffen van een bestaande markering op het bord.</string>
+  <string name="player_x_lbl">Speler X</string>
+  <string name="player_o_lbl">Speler O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Toetreding tot kamer</string>
+  <string name="onRoomConnected">Verbinding maken met kamer</string>
+  <string name="onRoomCreated">Kamer maken</string>
+  <string name="sendRealTimeMessage">Signaal</string>
+  <string name="sendMove">Verzenden verplaatsen</string>
+  <string name="communication_error">Fout in mededeling:</string>
+  <string name="cannot_invite_non_tester">Huicheltaal\'t uitnodigen niet-tester van een testprogramma-rekening\'</string>
+</resources>

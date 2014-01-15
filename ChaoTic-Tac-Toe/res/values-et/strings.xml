@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Kaootiline Tac Toe</string>
+  <string name="yes">Jah</string>
+  <string name="no">Ei</string>
+  <string name="ok">Ok</string>
+  <string name="cancel">Loobu</string>
+  <string name="title_game">Kaootiline Tac Toe</string>
+  <string name="pref_sound_fx">Mängi heli</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

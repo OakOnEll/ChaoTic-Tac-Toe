@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">आप अपने दैनिक अधिकतम चाल एक अराजक खेल में हरा: %s</string>
+  <string name="beat_weekly_max">आप अपने साप्ताहिक अधिकतम चाल एक अराजक खेल में हरा: %s</string>
+  <string name="beat_alltime_max">आप अपने सभी समय अधिकतम चाल एक अराजक खेल में हरा: %s</string>
+  <string name="beat_daily_min">आप अपने दैनिक न्यूनतम चाल एक अराजक खेल में हरा: %s</string>
+  <string name="beat_weekly_min">आप अपने साप्ताहिक न्यूनतम चालें एक अराजक खेल में हरा: %s</string>
+  <string name="beat_alltime_min">आप अपने सभी समय कम से कम चालों को एक अराजक खेल में हरा: %s</string>
+  <string name="beat_daily_wins">तुम एक सत्र में अपने दैनिक अधिकतम जीतता हरा: %s</string>
+  <string name="beat_weekly_wins">तुम एक सत्र में अपने साप्ताहिक अधिकतम जीतता हरा: %s</string>
+  <string name="beat_alltime_wins">तुम एक सत्र में अपने सभी समय अधिकतम जीतता हरा: %s</string>
+</resources>

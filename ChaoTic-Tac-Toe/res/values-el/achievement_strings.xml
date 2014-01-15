@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Επίτευγμα</string>
+  <string name="offline_achievement_only_xs_or_os">: Μόνο Xs ή Os</string>
+  <string name="offline_achievement_chaotic_draw">Χαοτική κλήρωση: Μια ισοπαλία σε χαοτική κατάσταση.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Το ίδιο παιχνίδι κατάσταση τρεις κινείται σε ένα παιχνίδι.</string>
+  <string name="offline_achievement_long_haul">Ο μακρύς δρόµος: Παίξτε ένα χαοτικό παιχνίδι με 20 κινήσεις.</string>
+  <string name="offline_achievement_with_a_little_help">Με λίγη βοήθεια από τους φίλους σας: νίκη σε 3 κινήσεις.</string>
+  <string name="offline_achievement_clean_slate">Καθαρή πλάκα: Επιστροφή στην αρχική κατάσταση μετά από 5 κινήσεις.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Κερδίσει μια αντίστροφη στυλ παιχνιδιού.</string>
+  <string name="offline_achievement_the_good_samaritan">Ο καλός Σαμαρείτης: Βοηθήσει αντίπαλο νίκη σας με 3 κινήσεις.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Δύο πουλιά με μια πέτρα: κερδίσει ένα παιχνίδι σε δύο κατευθύνσεις ταυτόχρονα.</string>
+  <string name="offline_achievement_good_sport">Το καλό του αθλητισμού: Μέρος αναγκασμένος νικηφόρο κίνηση για τον αντίπαλό σας.</string>
+  <string name="offline_achievement_fork_in_the_road">Διακλάδωση του δρόμου: κερδίσει ένα παιχνίδι με πολλούς τρόπους.</string>
+  <string name="offline_achievement_oops">Ωχ: Παίξτε ένα αβίαστο νικηφόρο κίνηση για τον αντίπαλό σας.</string>
+  <string name="offline_achievement_friendly_fire">Φιλικά πυρά: Βόμβα άσκοπα ένα από δική σας δείκτες.</string>
+  <string name="offline_achievement_missed_opportunities">Χαμένη Opportunites: Μις παίζει ένα νικηφόρο κίνηση.</string>
+  <string name="offline_achievement_the_forced_hand">Το χέρι αναγκασμένο: Παίξτε ένα από πολλαπλές αναγκαστική κερδίζοντας κινήσεις για τον αντίπαλό σας.</string>
+</resources>

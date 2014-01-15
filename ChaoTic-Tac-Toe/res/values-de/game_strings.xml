@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Spielen Sie in ein leeres Quadrat.</string>
+  <string name="invalid_move_need_nonempty">Platzieren Sie die Bombe auf eine vorhandene Markierung.</string>
+  <string name="player_won">%s gewonnen!</string>
+  <string name="draw">Zeichnen Sie Spiel!</string>
+  <string name="play_again">Wieder spielen?</string>
+  <string name="exit_waiting_play_again">Verlassen</string>
+  <string name="opponent_left_exit_play_again">Okay</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Ich warte auf %s zu entscheiden, wieder zu spielen.</string>
+  <string name="opponent_wants_to_play_again">%s will wieder spielen.</string>
+  <string name="opponent_does_not_want_to_play_again">%s-Doesn\' t wieder spielen möchten.\'</string>
+  <string name="opponent_is_thinking">%s denkt.</string>
+  <string name="opponent_is_in_chat">%s ist im Chat.</string>
+  <string name="peer_left_the_game">%s hat das Spiel verlassen.</string>
+  <string name="leave_game_title">Verlassen Spiel?</string>
+  <string name="leave_game_message">Verlassen Sie das Spiel im Gange?</string>
+  <string name="local_player_name">Sie</string>
+  <string name="chat_title">Chat mit %s</string>
+  <string name="play_again_waiting">Warten auf %s</string>
+  <string name="online_setting_title">Einstellungen</string>
+  <string name="you_left_the_game">Du hast das Spiel verlassen.</string>
+  <string name="chat_actionbar_image_content">Im Menü Chat-Aktion</string>
+  <string name="num_move_lbl">Bewegt</string>
+  <string name="num_games_lbl">Spiele:</string>
+  <string name="game_stats_title">Spiel-Statistiken</string>
+  <string name="wins_stat_label">Gewinnt</string>
+  <string name="losses_stat_label">Verluste</string>
+  <string name="draws_stat_label">Zeichnet</string>
+  <string name="normal_game_help">Traditionelle Tic-Tac-Toe\nPlayer X spielt Xs\nPlayer O spielt Os.</string>
+  <string name="reverse_game_help">Reverse Tic-Tac-Toe\nPlayer X spielt Os\nPlayer O spielt Xs.</string>
+  <string name="complex_game_help">Auf jeder Player\ wiederum gibt es eine Chance sie Can\nplay ihren eigenen Marker\nplay ihre Opponent\ Marker\ncan eine Bombe verwenden, um eine vorhandene Markierung auf dem Brett zu explodieren.</string>
+  <string name="player_x_lbl">Spieler X</string>
+  <string name="player_o_lbl">Spieler O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Beitritt Zimmer</string>
+  <string name="onRoomConnected">Herstellen einer Verbindung mit Zimmer</string>
+  <string name="onRoomCreated">Raum</string>
+  <string name="sendRealTimeMessage">Nachricht senden</string>
+  <string name="sendMove">Senden verschieben</string>
+  <string name="communication_error">Fehler in der Kommunikation:</string>
+  <string name="cannot_invite_non_tester">Can\' t nicht-Tester von einem Tester-Konto laden\'</string>
+</resources>

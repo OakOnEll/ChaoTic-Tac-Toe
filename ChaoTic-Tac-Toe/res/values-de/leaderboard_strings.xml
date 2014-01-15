@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Sie schlagen Ihre täglichen maximalen Bewegungen in einem chaotischen Spiel: %s</string>
+  <string name="beat_weekly_max">Sie schlagen Ihre pro maximalen Bewegungen in einem chaotischen Spiel: %s</string>
+  <string name="beat_alltime_max">Sie schlagen Ihr alle Zeit maximale Bewegungen in einem chaotischen Spiel: %s</string>
+  <string name="beat_daily_min">Sie schlagen Ihre täglichen minimalen Bewegungen in einem chaotischen Spiel: %s</string>
+  <string name="beat_weekly_min">Sie schlagen Ihre pro minimalen Bewegungen in einem chaotischen Spiel: %s</string>
+  <string name="beat_alltime_min">Sie schlagen Ihr alle Zeit minimale Bewegungen in einem chaotischen Spiel: %s</string>
+  <string name="beat_daily_wins">Sie schlagen Ihre tägliche maximale Gewinne in einer Sitzung: %s</string>
+  <string name="beat_weekly_wins">Sie schlagen Ihre pro maximale Gewinne in einer Sitzung: %s</string>
+  <string name="beat_alltime_wins">Sie schlagen Ihr alle Zeit maximale Gewinne in einer Sitzung: %s</string>
+</resources>

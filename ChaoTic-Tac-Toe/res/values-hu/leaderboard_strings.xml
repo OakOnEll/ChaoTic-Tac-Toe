@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Verni a napi maximális mozog egy kaotikus játék: %s</string>
+  <string name="beat_weekly_max">Verni a heti maximális mozog egy kaotikus játék: %s</string>
+  <string name="beat_alltime_max">Verni az összes idő maximális mozog egy kaotikus játék: %s</string>
+  <string name="beat_daily_min">Verni a napi minimális mozog egy kaotikus játék: %s</string>
+  <string name="beat_weekly_min">Verni a heti minimális mozog egy kaotikus játék: %s</string>
+  <string name="beat_alltime_min">Verni az összes idő minimális mozog egy kaotikus játék: %s</string>
+  <string name="beat_daily_wins">Verni a napi maximális wins-munkamenetben: %s</string>
+  <string name="beat_weekly_wins">Verni a heti maximális wins-munkamenetben: %s</string>
+  <string name="beat_alltime_wins">Verni az összes idő maximális nyer egy munkamenetben: %s</string>
+</resources>

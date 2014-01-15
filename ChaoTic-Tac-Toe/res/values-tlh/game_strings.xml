@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">qaStaHvIS meyrI\' chIm chu\'.\'</string>
+  <string name="invalid_move_need_nonempty">Daq bomb nIv\'e\' marker.\'</string>
+  <string name="button_send">ngeH</string>
+  <string name="action_chat">jaw</string>
+  <string name="player_won">Qap %s!</string>
+  <string name="draw">Quj tu\'lu\'be\'!\'</string>
+  <string name="play_again">reH jatlhqa\'?\'</string>
+  <string name="exit_waiting_play_again">mej</string>
+  <string name="opponent_left_exit_play_again">LUQ</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">loS %s QujmeH jatlhqa\' wuq.\'</string>
+  <string name="opponent_wants_to_play_again">jatlhqa\' chu\' neH %s.\'</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\ QujmeH jatlhqa\' neH wIwuq.\'</string>
+  <string name="opponent_is_thinking">Qub %s.</string>
+  <string name="opponent_is_in_chat">%s qaStaHvIS jaw.</string>
+  <string name="peer_left_the_game">Qujmey mej %s.</string>
+  <string name="leave_game_title">DaH Quj?</string>
+  <string name="leave_game_message">el latlh Qujmey loD lI\'?\'</string>
+  <string name="local_player_name">SoH</string>
+  <string name="chat_title">jaw %s</string>
+  <string name="play_again_waiting">loS %s</string>
+  <string name="online_setting_title">setting</string>
+  <string name="you_left_the_game">Quj bImej.</string>
+  <string name="chat_actionbar_image_content">jaw action HIDjolev</string>
+  <string name="num_move_lbl">vIH</string>
+  <string name="num_games_lbl">Quj:</string>
+  <string name="game_stats_title">Quj Statistics</string>
+  <string name="player_stat_label">chu\'wI\'</string>
+  <string name="wins_stat_label">Qap</string>
+  <string name="losses_stat_label">loss</string>
+  <string name="draws_stat_label">tu\'lu\'be\'</string>
+  <string name="normal_game_help">reH x tic-tac-toe\nplayer potlhmeyDaq xs\nplayer va chu\' os.\'</string>
+  <string name="reverse_game_help">reH x tic-tac-toe\nplayer reverse os\nplayer va chu\' xs.\'</string>
+  <string name="complex_game_help">Hoch player\ tlhe\', tu\'lu\' \'eb chaH can\nplay chaH lach\'eghDI\' marker\nplay bomb DanoHmeH opponent\ marker\ncan jor nIv\'e\' marker tIj.\'</string>
+  <string name="player_x_lbl">x DawI\'pu\'</string>
+  <string name="player_o_lbl">va DawI\'pu\'</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">pa\' muv\'</string>
+  <string name="onRoomConnected">rar pa</string>
+  <string name="onRoomCreated">pa\' chenmoH\'</string>
+  <string name="sendRealTimeMessage">QIn ngeH</string>
+  <string name="sendMove">vIH ngeH</string>
+  <string name="communication_error">Qo\'noS Qagh qaStaHvIS QumpIn:\'</string>
+  <string name="cannot_invite_non_tester">QI\'yaH-tester tester account vo\' vItlhobqa\' wIwuq can\'</string>
+</resources>

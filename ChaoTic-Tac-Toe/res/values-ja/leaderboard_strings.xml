@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">カオス ゲームであなたの毎日の最大の動きをビート： %s</string>
+  <string name="beat_weekly_max">カオス ゲームであなたの毎週の最大の動きをビート： %s</string>
+  <string name="beat_alltime_max">カオス ゲームで、すべての時間の最大移動を打つ: %s</string>
+  <string name="beat_daily_min">カオス ゲームであなたの毎日の最小の動きをビート： %s</string>
+  <string name="beat_weekly_min">カオス ゲームであなたの毎週の最小の動きをビート： %s</string>
+  <string name="beat_alltime_min">カオス ゲームであなたのすべての時間最小移動を打つ: %s</string>
+  <string name="beat_daily_wins">セッションであなたの毎日の最大の wins を打つ: %s</string>
+  <string name="beat_weekly_wins">セッションで、毎週最大 wins を打つ: %s</string>
+  <string name="beat_alltime_wins">セッションで最大勝利のすべての時間をビート： %s</string>
+</resources>

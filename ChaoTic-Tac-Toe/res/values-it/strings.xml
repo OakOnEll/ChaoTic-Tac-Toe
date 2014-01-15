@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Caotica-Tac-Toe</string>
+  <string name="yes">Sì</string>
+  <string name="ok">Ok</string>
+  <string name="cancel">Annulla</string>
+  <string name="title_game">Caotica-Tac-Toe</string>
+  <string name="pref_sound_fx">Effetti sonori del gioco</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

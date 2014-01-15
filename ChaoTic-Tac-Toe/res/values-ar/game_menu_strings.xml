@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">تسجيل الدخول باستخدام Google تبادل الإنجازات واللعب مع أصدقائك.</string>
+  <string name="you_are_signed_in_as">تم تسجيل دخولك إلى Google + ك % s</string>
+  <string name="sign_out">قم بتسجيل الخروج</string>
+  <string name="signing_in">تسجيل الدخول باستخدام جوجل</string>
+  <string name="signing_out">تسجيل الخروج</string>
+  <string name="new_game_same_device">تمرير اللعب \'N\'</string>
+  <string name="new_game_vs_ai">الفوز بوت</string>
+  <string name="new_quick_game">لعبة سريعة جديدة</string>
+  <string name="new_game_live">اللعب مع صديق</string>
+  <string name="achievements">عرض الإنجازات</string>
+  <string name="leaderboards">عرض المتصدرين</string>
+  <string name="achievements_not_available">يرجى تسجيل الدخول لعرض الإنجازات التي تحققت.</string>
+  <string name="leaderboards_not_available">يرجى تسجيل الدخول لعرض المتصدرين.</string>
+  <string name="sign_in_to_play_network_game">الرجاء تسجيل الدخول بدء لعبة شبكات.</string>
+  <string name="sign_in_to_view_invites">يرجى تسجيل الدخول لعرض شبكة لعبة الدعوات.</string>
+  <string name="action_settings">إعدادات</string>
+  <string name="received_invite_from">تلقي دعوة من % s.</string>
+  <string name="prompt_title_player_name">أدخل اسم لاعب</string>
+  <string name="prompt_player_name">اسم للمشغل % s</string>
+  <string name="label_player_x_name">اسم المشغل X\</string>
+  <string name="label_player_o_name">اسم المشغل O\</string>
+  <string name="chance_normal">عادي</string>
+  <string name="chance_chaotic">الفوضى</string>
+  <string name="chance_custom">مخصص</string>
+  <string name="chance_reverse">عكس</string>
+  <string name="chance_label_my_marker">العلامة الخاصة بك</string>
+  <string name="chance_label_opponent_marker">هذه العلامة</string>
+  <string name="chance_label_remove_marker">قنبلة</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">بدء لعبة</string>
+  <string name="account_settings">إعدادات الحساب</string>
+  <string name="choose_ai_mode_title">اختر طريقة لعبة منظمة العفو الدولية</string>
+  <string name="ai_level">مستوى منظمة العفو الدولية</string>
+  <string name="ai_random">عشوائية</string>
+  <string name="ai_easy">سهلة</string>
+  <string name="ai_medium">متوسطة</string>
+  <string name="ai_hard">الثابت</string>
+  <string name="choose_local_game_mode_title">اختر طريقة لعبة</string>
+  <string name="error_x_name">أدخل اسماً للعاشر</string>
+  <string name="error_o_name">أدخل اسماً س</string>
+  <string name="unique_error_o_name">أدخل اسماً فريداً س</string>
+  <string name="choose_quick_game_mode_title">اختر طريقة لعبة سريعة</string>
+  <string name="choose_online_game_mode_title">اختر طريقة لعبة على الإنترنت</string>
+  <string name="choose_online_opponent">البحث عن صديق</string>
+  <string name="select_opponent">حدد الخصم</string>
+  <string name="game_style_lbl">نمط اللعبة</string>
+  <string name="chance_of_label">فرصة من</string>
+</resources>

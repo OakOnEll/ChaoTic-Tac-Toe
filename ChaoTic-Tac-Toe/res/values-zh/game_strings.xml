@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">在一个空的广场中发挥。</string>
+  <string name="invalid_move_need_nonempty">现有的标记上放置炸弹。</string>
+  <string name="button_send">发送</string>
+  <string name="action_chat">聊天</string>
+  <string name="player_won">%s 赢了 ！</string>
+  <string name="draw">画的游戏 ！</string>
+  <string name="play_again">再玩一次吗？</string>
+  <string name="exit_waiting_play_again">离开</string>
+  <string name="opponent_left_exit_play_again">还行</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">等待 %s 来决定再玩。</string>
+  <string name="opponent_wants_to_play_again">%s 想要再玩。</string>
+  <string name="opponent_does_not_want_to_play_again">%s 切断并不想再玩。</string>
+  <string name="opponent_is_thinking">%s 正在思考。</string>
+  <string name="opponent_is_in_chat">%s 是在聊天。</string>
+  <string name="peer_left_the_game">%s 已离开游戏。</string>
+  <string name="leave_game_title">离开游戏吗？</string>
+  <string name="leave_game_message">在进展中离开游戏吗？</string>
+  <string name="local_player_name">你</string>
+  <string name="chat_title">%S 与洽谈</string>
+  <string name="play_again_waiting">%S 在等待</string>
+  <string name="online_setting_title">设置</string>
+  <string name="you_left_the_game">您离开该游戏。</string>
+  <string name="chat_actionbar_image_content">聊天操作菜单</string>
+  <string name="num_move_lbl">移动</string>
+  <string name="num_games_lbl">游戏:</string>
+  <string name="game_stats_title">游戏统计信息</string>
+  <string name="player_stat_label">播放机</string>
+  <string name="losses_stat_label">损失</string>
+  <string name="draws_stat_label">绘制</string>
+  <string name="normal_game_help">传统的井字 Toe\nPlayer X 播放 Xs\nPlayer O 戏剧 Os。</string>
+  <string name="reverse_game_help">反向井字 Toe\nPlayer X 播放 Os\nPlayer O 戏剧 Xs。</string>
+  <string name="complex_game_help">在每个 player\ 转有机会他们 can\nplay 他们自己 marker\nplay 他们 opponent\ marker\ncan 使用一枚炸弹爆炸板上的现有标记。</string>
+  <string name="player_x_lbl">玩家 X</string>
+  <string name="player_o_lbl">玩家 O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">加入房间</string>
+  <string name="onRoomConnected">连接到房间</string>
+  <string name="onRoomCreated">创建房间</string>
+  <string name="sendRealTimeMessage">发送邮件</string>
+  <string name="sendMove">发送移动</string>
+  <string name="communication_error">在通信中的错误：</string>
+  <string name="cannot_invite_non_tester">这个不邀请非测试仪从测试仪帐户</string>
+</resources>

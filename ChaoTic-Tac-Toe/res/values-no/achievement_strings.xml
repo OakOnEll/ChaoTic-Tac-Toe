@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Prestasjon</string>
+  <string name="offline_achievement_only_xs_or_os">: Bare Xs eller Os</string>
+  <string name="offline_achievement_chaotic_draw">Kaotisk uavgjort: Uavgjort i kaotiske modus.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Samme spillet staten tre trekk i et spill.</string>
+  <string name="offline_achievement_long_haul">I lang tid: Spille kaotisk med 20 trekk.</string>
+  <string name="offline_achievement_with_a_little_help">Med litt hjelp fra dine venner: seier i 3 trekk.</string>
+  <string name="offline_achievement_clean_slate">Blanke: Tilbake til opprinnelig tilstand etter 5 trekk.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Vinn en omvendt stil spillet.</string>
+  <string name="offline_achievement_the_good_samaritan">Den barmhjertige Samaritan: Hjelpe motstanderen seier i 3 trekk.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">To fluer i ett smekk: vinne spillet i to retninger samtidig.</string>
+  <string name="offline_achievement_good_sport">God Sport: Sted tvunget vinnende trekk for motspilleren.</string>
+  <string name="offline_achievement_fork_in_the_road">Gaffel i veien: vinne et spill på flere måter.</string>
+  <string name="offline_achievement_oops">Oops: Spille en utvungen vinnende trekk for motspilleren.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Unødvendig bombe en av dine egne indikatorer.</string>
+  <string name="offline_achievement_missed_opportunities">Tapte Opportunites: Miss spille en vinnende flytte.</string>
+  <string name="offline_achievement_the_forced_hand">Tvunget hånden: Spill en av flere tvunget vinnende trekk for motspilleren.</string>
+</resources>

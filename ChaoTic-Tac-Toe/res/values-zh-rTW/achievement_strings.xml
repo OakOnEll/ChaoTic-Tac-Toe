@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">成就</string>
+  <string name="offline_achievement_only_xs_or_os">： 僅 Xs 或 Os</string>
+  <string name="offline_achievement_chaotic_draw">混沌畫： 在混沌模式下繪製。</string>
+  <string name="offline_achievement_deja_vu">似曾相識的感覺： 同一遊戲狀態三在遊戲中移動。</string>
+  <string name="offline_achievement_long_haul">長途： 混沌與玩遊戲 20 移動。</string>
+  <string name="offline_achievement_with_a_little_help">從你的朋友們一點説明： 贏 3 中的移動。</string>
+  <string name="offline_achievement_clean_slate">5 移動之後，清白： 返回到初始狀態。</string>
+  <string name="offline_achievement_reverse_win">翻轉棋： 贏反向風格的遊戲。</string>
+  <string name="offline_achievement_the_good_samaritan">好撒瑪利亞人： 説明您對手贏了 3 的動作。</string>
+  <string name="offline_achievement_two_birds_with_one_stone">一石兩鳥： 一次贏得兩個方向的一場比賽。</string>
+  <string name="offline_achievement_good_sport">好體育： 地方強迫取勝的棋，你的對手。</string>
+  <string name="offline_achievement_fork_in_the_road">岔路口： 贏了多個方法中的一場比賽。</string>
+  <string name="offline_achievement_oops">哎呀： 發揮容中取勝的棋，你的對手。</string>
+  <string name="offline_achievement_friendly_fire">友好火： 毫無必要地炸彈你自己的指標之一。</string>
+  <string name="offline_achievement_missed_opportunities">錯過了機遇： 小姐玩了贏得移動。</string>
+  <string name="offline_achievement_the_forced_hand">牽強的手： 玩的多個強迫中獎移動一個為你的對手。</string>
+</resources>

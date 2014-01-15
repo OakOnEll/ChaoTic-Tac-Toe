@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">يمكنك التغلب على التحركات الخاصة بك الحد الأقصى اليومي في لعبة فوضى: % s</string>
+  <string name="beat_weekly_max">يمكنك التغلب على التحركات أقصى التنزيلات الخاصة بك في لعبة فوضى: % s</string>
+  <string name="beat_alltime_max">يمكنك الفوز التحركات الخاصة بك كحد أقصى كل الوقت في لعبة فوضى: % s</string>
+  <string name="beat_daily_min">يمكنك التغلب على التحركات الخاصة بك الحد الأدنى اليومي في لعبة فوضى: % s</string>
+  <string name="beat_weekly_min">يمكنك التغلب على التحركات الدنيا التنزيلات الخاصة بك في لعبة فوضى: % s</string>
+  <string name="beat_alltime_min">يمكنك الفوز الخاصة بك كل الوقت الحد الأدنى التحركات في لعبة فوضى: % s</string>
+  <string name="beat_daily_wins">يمكنك الفوز الخاصة بك wins يوميا كحد أقصى في جلسة عمل: % s</string>
+  <string name="beat_weekly_wins">يمكنك الفوز الخاصة بك wins أسبوعية كحد أقصى في جلسة عمل: % s</string>
+  <string name="beat_alltime_wins">يمكنك الفوز الخاصة بك wins الحد الأقصى الوقت كل في دورة: % s</string>
+</resources>

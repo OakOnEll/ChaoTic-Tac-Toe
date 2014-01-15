@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Du kan slå dine daglige maksimale bevægelser i et kaotisk spil: %s</string>
+  <string name="beat_weekly_max">Du kan slå dine ugentlige maksimum bevægelser i et kaotisk spil: %s</string>
+  <string name="beat_alltime_max">Du kan slå din alle tid maksimale bevæger sig i et kaotisk spil: %s</string>
+  <string name="beat_daily_min">Du kan slå dine daglige minimum bevægelser i et kaotisk spil: %s</string>
+  <string name="beat_weekly_min">Du kan slå dine ugentlige mindste bevægelser i et kaotisk spil: %s</string>
+  <string name="beat_alltime_min">Du kan slå din alle tid minimum bevæger sig i et kaotisk spil: %s</string>
+  <string name="beat_daily_wins">Du kan slå din daglige maksimale vinder i en session: %s</string>
+  <string name="beat_weekly_wins">Du kan slå din ugentlige maksimum vinder i en session: %s</string>
+  <string name="beat_alltime_wins">Du kan slå din alle tid maksimale vinder i en session: %s</string>
+</resources>

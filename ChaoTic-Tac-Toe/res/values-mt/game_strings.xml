@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Aqra fil-kaxxa vojta.</string>
+  <string name="invalid_move_need_nonempty">Post bomba fuq l-markatur eżistenti.</string>
+  <string name="button_send">Tibgħat</string>
+  <string name="player_won">%s mirbuħa!</string>
+  <string name="draw">Tiġbed il-logħba!</string>
+  <string name="play_again">Qari mill-ġdid?</string>
+  <string name="exit_waiting_play_again">Il-leave</string>
+  <string name="opponent_left_exit_play_again">kollox sew</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Stennija għal %s biex tiddeċiedi taqra mill-ġdid.</string>
+  <string name="opponent_wants_to_play_again">%s jixtieq jaqra mill-ġdid.</string>
+  <string name="opponent_does_not_want_to_play_again">doesn\ %s t Tixtieq taqra mill-ġdid.</string>
+  <string name="opponent_is_thinking">%s huwa ħsieb.</string>
+  <string name="opponent_is_in_chat">%s għandu l-iċċettjar.</string>
+  <string name="peer_left_the_game">%s ħalliet il-logħba.</string>
+  <string name="leave_game_title">Ħalli tal-kaċċa?</string>
+  <string name="leave_game_message">Ħalli l-logħba li għaddejja?</string>
+  <string name="local_player_name">Inti</string>
+  <string name="chat_title">Chat ma \' %s\'</string>
+  <string name="play_again_waiting">Stennija għal %s</string>
+  <string name="online_setting_title">L-issettjar</string>
+  <string name="you_left_the_game">Inti ħalla l-logħba.</string>
+  <string name="chat_actionbar_image_content">Chat azzjoni menù</string>
+  <string name="num_move_lbl">Imexxi</string>
+  <string name="num_games_lbl">Logħob:</string>
+  <string name="game_stats_title">L-istatistika tal-logħba</string>
+  <string name="wins_stat_label">Jirbaħ</string>
+  <string name="losses_stat_label">It-telf</string>
+  <string name="draws_stat_label">Ipenġi</string>
+  <string name="normal_game_help">X Tic Tac-Toe\nPlayer tradizzjonali jilgħab m Xs\nPlayer O Os.</string>
+  <string name="reverse_game_help">Bil-maqlub Tic Tac-Toe\nPlayer X jilgħab Os\nPlayer O m Xs.</string>
+  <string name="complex_game_help">Fuq kull player\-dawra, hemm ċans li can\nplay tagħhom stess marker\nplay marker\ncan tal-opponent\ tagħhom jużaw a bomba li jisplodu l-markatur eżistenti fuq il-Bord.</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Li tgħaqqad il-kamra</string>
+  <string name="onRoomConnected">Qed jikkonnettja mal-Kamra</string>
+  <string name="onRoomCreated">Ħolqien ta \' kamra\'</string>
+  <string name="sendRealTimeMessage">Tibgħat il-messaġġ</string>
+  <string name="sendMove">Tibgħat il-mossa</string>
+  <string name="communication_error">Żball fil-komunikazzjoni:</string>
+  <string name="cannot_invite_non_tester">Can\ t jistieden mhux-Instron minn kont Instron</string>
+</resources>

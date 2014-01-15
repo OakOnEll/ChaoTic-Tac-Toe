@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Raggiungimento</string>
+  <string name="offline_achievement_only_xs_or_os">: Solo Xs o Os</string>
+  <string name="offline_achievement_chaotic_draw">Sorteggio caotico: Un pareggio in modo caotico.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Stesso gioco stato tre si muove in un gioco.</string>
+  <string name="offline_achievement_long_haul">Il lungo raggio: Un caotico gioco con 20 mosse.</string>
+  <string name="offline_achievement_with_a_little_help">Con un piccolo aiuto dai tuoi amici: vittoria in 3 mosse.</string>
+  <string name="offline_achievement_clean_slate">Tabula Rasa: Ritornare allo stato iniziale dopo 5 si muove.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Vincere un Reverse stile di gioco.</string>
+  <string name="offline_achievement_the_good_samaritan">Il buon Samaritano: Aiutare il tuo avversario vittoria in 3 mosse.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Due piccioni con una fava: vincere una partita in due direzioni contemporaneamente.</string>
+  <string name="offline_achievement_good_sport">Sport buono: Luogo costretto mossa vincente per il tuo avversario.</string>
+  <string name="offline_achievement_fork_in_the_road">Bivio: vincere una partita in più modi.</string>
+  <string name="offline_achievement_oops">Oops: Giocare una mossa vincente non forzata per l\'avversario.\'</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Bomba inutilmente uno dei vostri propri marcatori.</string>
+  <string name="offline_achievement_missed_opportunities">Opportunità mancate: Spostare Miss giocando un vincente.</string>
+  <string name="offline_achievement_the_forced_hand">La mano forzata: Una delle mosse vincenti forzate più giocare per l\'avversario.\'</string>
+</resources>

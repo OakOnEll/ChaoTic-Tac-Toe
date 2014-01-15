@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Ou te bat ou chak jou se yon nivo maksimòm nan yon jwèt kaotik: %s</string>
+  <string name="beat_weekly_max">Ou te bat ou se yon nivo maksimòm chak semèn nan yon jwèt kaotik: %s</string>
+  <string name="beat_alltime_max">Ou te bat ou tout tan maksimòm se nan yon jwèt kaotik: %s</string>
+  <string name="beat_daily_min">Ou te bat ou chak jou se minimòm nan yon jwèt kaotik: %s</string>
+  <string name="beat_weekly_min">Ou te bat ou se minimòm chak semèn nan yon jwèt kaotik: %s</string>
+  <string name="beat_alltime_min">Ou te bat ou tout tan minimòm se nan yon jwèt kaotik: %s</string>
+  <string name="beat_daily_wins">Ou te bat yon nivo maksimòm wins chak jou ou nan yon sesyon: %s</string>
+  <string name="beat_weekly_wins">Ou te bat ou chak semèn yon nivo maksimòm wins nan yon sesyon: %s</string>
+  <string name="beat_alltime_wins">Ou te bat ou tout tan maksimòm wins nan yon sesyon: %s</string>
+</resources>

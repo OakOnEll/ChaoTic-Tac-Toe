@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Žaisti į tuščią kvadratėlį.</string>
+  <string name="invalid_move_need_nonempty">Vieta bombų ant esamo žymeklio.</string>
+  <string name="button_send">Siųsti</string>
+  <string name="action_chat">Pokalbių</string>
+  <string name="player_won">%s laimėjo!</string>
+  <string name="draw">Lygiosios žaidimas!</string>
+  <string name="play_again">Žaisti dar kartą?</string>
+  <string name="exit_waiting_play_again">Palikti</string>
+  <string name="opponent_left_exit_play_again">gerai</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Laukia %s nuspręsti žaisti dar kartą.</string>
+  <string name="opponent_wants_to_play_again">%s nori žaisti dar kartą.</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\'t wanna play dar kartą.\'</string>
+  <string name="opponent_is_thinking">%s yra mąstymas.</string>
+  <string name="opponent_is_in_chat">%s yra pokalbių.</string>
+  <string name="peer_left_the_game">%s išėjo iš žaidimo.</string>
+  <string name="leave_game_title">Palikti žaidimą?</string>
+  <string name="leave_game_message">Išeik iš žaidimo vyksta?</string>
+  <string name="local_player_name">Jūs</string>
+  <string name="chat_title">Kalbėtis su %s</string>
+  <string name="play_again_waiting">Laukia %s</string>
+  <string name="online_setting_title">Parametrai</string>
+  <string name="you_left_the_game">Baigėte žaidimą.</string>
+  <string name="chat_actionbar_image_content">Pokalbių veiksmų meniu</string>
+  <string name="num_move_lbl">Juda</string>
+  <string name="num_games_lbl">Žaidimai:</string>
+  <string name="game_stats_title">Žaidimo statistiką</string>
+  <string name="player_stat_label">Žaidėjas</string>
+  <string name="wins_stat_label">Laimi</string>
+  <string name="losses_stat_label">Nuostoliai</string>
+  <string name="draws_stat_label">Atkreipia</string>
+  <string name="normal_game_help">Tradicinis Tic Tac Toe\nPlayer X vaidina Xs\nPlayer O vaidina Os.</string>
+  <string name="reverse_game_help">Atvirkštinio Tic Tac Toe\nPlayer X vaidina Os\nPlayer O vaidina Xs.</string>
+  <string name="complex_game_help">Ant kiekvieno player\ savo ruožtu, yra tikimybė, jie can\nplay savo marker\nplay savo opponent\ marker\ncan naudoti bomba sprogti esamų žymeklis ant lentos.</string>
+  <string name="player_x_lbl">Žaidėjas X</string>
+  <string name="player_o_lbl">Žaidėjas O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Prisijungti prie kambario</string>
+  <string name="onRoomConnected">Prisijungti prie kambario</string>
+  <string name="onRoomCreated">Sukurti kambarį</string>
+  <string name="sendRealTimeMessage">Siųsti laišką</string>
+  <string name="sendMove">Siuntimas perkelti</string>
+  <string name="communication_error">Klaidos pranešime:</string>
+  <string name="cannot_invite_non_tester">Can\'t pakviesti ne testeris iš testeris sąskaitos\'</string>
+</resources>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">登录谷歌分享成就和你的朋友一起玩。</string>
+  <string name="you_are_signed_in_as">您登录到 Google + 作为 %s</string>
+  <string name="sign_out">注销</string>
+  <string name="signing_in">登录谷歌</string>
+  <string name="signing_out">退出</string>
+  <string name="new_game_same_device">通过 \'N 播放\'</string>
+  <string name="new_game_vs_ai">打 Bot</string>
+  <string name="new_quick_game">新的快速游戏</string>
+  <string name="new_game_live">和一个朋友一起玩</string>
+  <string name="achievements">查看成就</string>
+  <string name="leaderboards">查看排行榜</string>
+  <string name="achievements_not_available">请登录以查看取得的成就。</string>
+  <string name="leaderboards_not_available">请登录以查看排行榜。</string>
+  <string name="sign_in_to_play_network_game">请登录，开始一个联网的游戏。</string>
+  <string name="sign_in_to_view_invites">请登录以查看网络游戏邀请。</string>
+  <string name="action_settings">设置</string>
+  <string name="received_invite_from">从 %s 接收的邀请。</string>
+  <string name="prompt_title_player_name">输入玩家名字</string>
+  <string name="prompt_player_name">播放机 %s 的名称</string>
+  <string name="label_player_x_name">播放器 X\ 名称</string>
+  <string name="label_player_o_name">播放器 O\ 名称</string>
+  <string name="chance_normal">正常</string>
+  <string name="chance_chaotic">混沌</string>
+  <string name="chance_custom">自定义</string>
+  <string name="chance_reverse">反向</string>
+  <string name="chance_label_my_marker">您的标记</string>
+  <string name="chance_label_opponent_marker">他们的标志</string>
+  <string name="chance_label_remove_marker">炸弹</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">开始游戏</string>
+  <string name="account_settings">帐户设置</string>
+  <string name="choose_ai_mode_title">选择 AI 游戏模式</string>
+  <string name="ai_level">AI 水平</string>
+  <string name="ai_random">随机</string>
+  <string name="ai_easy">很容易</string>
+  <string name="ai_medium">介质</string>
+  <string name="ai_hard">硬</string>
+  <string name="choose_local_game_mode_title">选择游戏模式</string>
+  <string name="error_x_name">为 X 输入一个名称</string>
+  <string name="error_o_name">O 为输入一个名称</string>
+  <string name="unique_error_o_name">请输入一个唯一的名称为 O</string>
+  <string name="choose_quick_game_mode_title">选择快速游戏模式</string>
+  <string name="choose_online_game_mode_title">联机游戏模式的选择</string>
+  <string name="choose_online_opponent">找朋友</string>
+  <string name="select_opponent">选择对手</string>
+  <string name="game_style_lbl">游戏风格</string>
+  <string name="chance_of_label">机会</string>
+</resources>

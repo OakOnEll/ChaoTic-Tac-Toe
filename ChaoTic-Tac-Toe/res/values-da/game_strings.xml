@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Spille i en tom firkant.</string>
+  <string name="invalid_move_need_nonempty">Placere bombe på et eksisterende mærke.</string>
+  <string name="player_won">%s vandt!</string>
+  <string name="draw">Draw spil!</string>
+  <string name="play_again">Spille igen?</string>
+  <string name="exit_waiting_play_again">Forlade</string>
+  <string name="opponent_left_exit_play_again">Ok</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Venter på %s til at beslutte at spille igen.</string>
+  <string name="opponent_wants_to_play_again">%s ønsker at spille igen.</string>
+  <string name="opponent_does_not_want_to_play_again">%s gør ikke\'t ønsker at spille igen.\'</string>
+  <string name="opponent_is_thinking">%s tænkning.</string>
+  <string name="opponent_is_in_chat">%s er i chat.</string>
+  <string name="peer_left_the_game">%s har forladt spillet.</string>
+  <string name="leave_game_title">Forlade spillet?</string>
+  <string name="leave_game_message">Forlade spillet i gang?</string>
+  <string name="local_player_name">Du</string>
+  <string name="chat_title">Chat med %s</string>
+  <string name="play_again_waiting">Venter på %s</string>
+  <string name="online_setting_title">Indstillinger</string>
+  <string name="you_left_the_game">Du forlod spillet.</string>
+  <string name="chat_actionbar_image_content">Chat handlingsmenuen</string>
+  <string name="num_move_lbl">Flytter</string>
+  <string name="num_games_lbl">Spil:</string>
+  <string name="game_stats_title">Spil statistik</string>
+  <string name="player_stat_label">Afspiller</string>
+  <string name="wins_stat_label">Vinder</string>
+  <string name="losses_stat_label">Tab</string>
+  <string name="draws_stat_label">Trækker</string>
+  <string name="normal_game_help">Traditionelle Tic Tac-Toe\nPlayer X spiller Xs\nPlayer O spiller Os.</string>
+  <string name="reverse_game_help">Omvendt Tic Tac-Toe\nPlayer X spiller Os\nPlayer O spiller Xs.</string>
+  <string name="complex_game_help">På hver player\ tur, der er en chance for de can\nplay deres egen marker\nplay deres opponent\ marker\ncan bruge en bombe eksplodere en eksisterende markør på bordet.</string>
+  <string name="player_x_lbl">Spilleren X</string>
+  <string name="player_o_lbl">Spilleren O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">At deltage i værelse</string>
+  <string name="onRoomConnected">Tilslutning til værelse</string>
+  <string name="onRoomCreated">Skabe værelse</string>
+  <string name="sendRealTimeMessage">Afsendelse af meddelelse</string>
+  <string name="sendMove">At sende flytte</string>
+  <string name="communication_error">Fejl i kommunikationen:</string>
+  <string name="cannot_invite_non_tester">Kan ikke\'t invitere ikke-tester fra en tester konto\'</string>
+</resources>

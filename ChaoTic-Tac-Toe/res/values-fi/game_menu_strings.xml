@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Kirjaudu sisään Google jakaa saavutuksia ja pelata ystäviesi kanssa.</string>
+  <string name="you_are_signed_in_as">Olet kirjautuneena Google + %s</string>
+  <string name="sign_out">Kirjaudu ulos</string>
+  <string name="signing_in">Kirjaudu sisään Google</string>
+  <string name="signing_out">Kirjautuminen ulos</string>
+  <string name="new_game_same_device">Pass \'N Pelaa\'</string>
+  <string name="new_game_vs_ai">Beat Bot</string>
+  <string name="new_quick_game">Uusi nopea peli</string>
+  <string name="new_game_live">Pelata kaverin kanssa</string>
+  <string name="achievements">Näytä saavutukset</string>
+  <string name="leaderboards">Katso tulostaulukot</string>
+  <string name="achievements_not_available">Kirjaudu sisään nähdäksesi saavutuksia.</string>
+  <string name="leaderboards_not_available">Kirjaudu sisään nähdäksesi leaderboards.</string>
+  <string name="sign_in_to_play_network_game">Kirjaudu sisään verkkoon pelin käynnistäminen.</string>
+  <string name="sign_in_to_view_invites">Kirjaudu sisään nähdäksesi verkon kutsuja peleihin.</string>
+  <string name="action_settings">Asetukset</string>
+  <string name="received_invite_from">Sai kutsun: %s.</string>
+  <string name="prompt_title_player_name">Anna pelaajan nimi</string>
+  <string name="prompt_player_name">Nimi player %s</string>
+  <string name="label_player_x_name">Soitin X\ nimi</string>
+  <string name="label_player_o_name">Pelaaja o nimi</string>
+  <string name="chance_normal">Normaali</string>
+  <string name="chance_chaotic">Kaoottinen</string>
+  <string name="chance_reverse">Kääntää</string>
+  <string name="chance_label_my_marker">Merkintä</string>
+  <string name="chance_label_opponent_marker">Niiden merkki</string>
+  <string name="chance_label_remove_marker">Pommi</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Aloita peli</string>
+  <string name="account_settings">Tilin asetukset</string>
+  <string name="choose_ai_mode_title">Valitse AI Game Mode</string>
+  <string name="ai_level">AI taso</string>
+  <string name="ai_random">Satunnainen</string>
+  <string name="ai_easy">Helppoa</string>
+  <string name="ai_hard">Kova</string>
+  <string name="choose_local_game_mode_title">Valitse pelitila</string>
+  <string name="error_x_name">Kirjoita nimi X</string>
+  <string name="error_o_name">Kirjoita nimi O</string>
+  <string name="unique_error_o_name">Kirjoita yksilöivä nimi O</string>
+  <string name="choose_quick_game_mode_title">Valitse Nopea pelin modella</string>
+  <string name="choose_online_game_mode_title">Valitse Online peli tilassa</string>
+  <string name="choose_online_opponent">Löytää ystävän</string>
+  <string name="select_opponent">Valitse vastustaja</string>
+  <string name="game_style_lbl">Pelityyli</string>
+  <string name="chance_of_label">Mahdollisuus</string>
+</resources>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Porazit své denní maximální tahy v chaotickém hra: %s</string>
+  <string name="beat_weekly_max">Porazit své týdenní maximální tahy v chaotickém hra: %s</string>
+  <string name="beat_alltime_max">Beat vaše všechny pohyby maximální čas v chaotickém hra: %s</string>
+  <string name="beat_daily_min">Beat vaše denní minimální pohyby v chaotickém hra: %s</string>
+  <string name="beat_weekly_min">Beat vaše týdenní minimální pohyby v chaotickém hra: %s</string>
+  <string name="beat_alltime_min">Beat vaše všechny pohyby minimální čas v chaotickém hra: %s</string>
+  <string name="beat_daily_wins">Beat vaše denní maximální výhry v relaci: %s</string>
+  <string name="beat_weekly_wins">Beat vaše týdenní maximální výhry v relaci: %s</string>
+  <string name="beat_alltime_wins">Porazit všechny výhry maximální čas v relaci: %s</string>
+</resources>

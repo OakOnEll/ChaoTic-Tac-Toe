@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Réalisation</string>
+  <string name="offline_achievement_only_xs_or_os">: Seulement Xs ou Os</string>
+  <string name="offline_achievement_chaotic_draw">Chaotique tirage : Un tirage au sort en Mode chaotique.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu : État du jeu même trois se déplace dans un jeu.</string>
+  <string name="offline_achievement_long_haul">Le long-courrier : Jouer à un jeu chaotique avec 20 coups.</string>
+  <string name="offline_achievement_with_a_little_help">Avec l\'aide de vos amis : gagner à 3 se déplace.\'</string>
+  <string name="offline_achievement_clean_slate">Table rase : Retour à l\'état initial après que 5 se déplace.\'</string>
+  <string name="offline_achievement_reverse_win">Reversi : Gagnez un revers style de jeu.</string>
+  <string name="offline_achievement_the_good_samaritan">Le bon Samaritain : Aider votre adversaire gagner en 3 coups.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">D\'une pierre deux coups : gagner un match dans deux directions à la fois.\'</string>
+  <string name="offline_achievement_good_sport">Le bon Sport : Place contraint coup gagnant pour votre adversaire.</string>
+  <string name="offline_achievement_fork_in_the_road">Croisée des chemins : gagner un jeu de plusieurs manières.</string>
+  <string name="offline_achievement_oops">Oups : Jouer un coup gagnant non forcée pour votre adversaire.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire : Bombe inutilement un de vos propres marqueurs.</string>
+  <string name="offline_achievement_missed_opportunities">Les occasions manquées : Miss jouant une gagnante se déplacer.</string>
+  <string name="offline_achievement_the_forced_hand">La main forcée : Jouer l\'un des multiples coups gagnantes forcés pour votre adversaire.\'</string>
+</resources>

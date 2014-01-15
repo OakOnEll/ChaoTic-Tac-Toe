@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Google の成果を共有し、お友達と遊ぶにログインします。</string>
+  <string name="you_are_signed_in_as">Google + に %s としてサインインしています。</string>
+  <string name="sign_out">サインアウトします。</string>
+  <string name="signing_in">Google を使用してサインイン</string>
+  <string name="signing_out">サインアウト</string>
+  <string name="new_game_same_device">\'N プレイを渡す\'</string>
+  <string name="new_game_vs_ai">ボットをビートします。</string>
+  <string name="new_quick_game">新しいクイック ゲーム</string>
+  <string name="new_game_live">友達と遊ぶ</string>
+  <string name="achievements">実績を見る</string>
+  <string name="leaderboards">ビューのリーダー ボード</string>
+  <string name="achievements_not_available">成果を見るには、ログインしてください。</string>
+  <string name="leaderboards_not_available">スコア_ボードを表示するのには、ログインしてください。</string>
+  <string name="sign_in_to_play_network_game">ネットワーク ゲームを始めるには、ログインしてください。</string>
+  <string name="sign_in_to_view_invites">ネットワーク ゲームへの招待を見るには、ログインしてください。</string>
+  <string name="action_settings">設定</string>
+  <string name="received_invite_from">%S から招待状を受け取った。</string>
+  <string name="prompt_title_player_name">プレイヤー名を入力してください。</string>
+  <string name="prompt_player_name">プレイヤー %s の名前</string>
+  <string name="label_player_x_name">プレーヤー X\ 名</string>
+  <string name="label_player_o_name">プレーヤーの O の名前</string>
+  <string name="chance_normal">ノーマル</string>
+  <string name="chance_chaotic">カオス</string>
+  <string name="chance_custom">カスタム</string>
+  <string name="chance_reverse">リバース</string>
+  <string name="chance_label_my_marker">あなたのマーカー</string>
+  <string name="chance_label_opponent_marker">そのマーカー</string>
+  <string name="chance_label_remove_marker">爆弾</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">ゲームを開始します。</string>
+  <string name="account_settings">アカウントの設定</string>
+  <string name="choose_ai_mode_title">人工知能ゲーム モードを選択します。</string>
+  <string name="ai_level">AI レベル</string>
+  <string name="ai_random">ランダム</string>
+  <string name="ai_easy">簡単</string>
+  <string name="ai_medium">媒体</string>
+  <string name="ai_hard">ハード</string>
+  <string name="choose_local_game_mode_title">ゲーム モードを選択します。</string>
+  <string name="error_x_name">X の名前を入力してください。</string>
+  <string name="error_o_name">O の名前を入力してください。</string>
+  <string name="unique_error_o_name">O の一意の名前を入力してください。</string>
+  <string name="choose_quick_game_mode_title">クイック ゲーム モードを選択します</string>
+  <string name="choose_online_game_mode_title">オンライン ゲームのモードを選択します</string>
+  <string name="choose_online_opponent">友人を見つける</string>
+  <string name="select_opponent">相手を選択します</string>
+  <string name="game_style_lbl">ゲームのスタイル</string>
+  <string name="chance_of_label">チャンス</string>
+</resources>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Ntiv chaoTic-Tac-taw</string>
+  <string name="yes">Yog</string>
+  <string name="no">Tsis yog</string>
+  <string name="ok">ua li</string>
+  <string name="cancel">Ncua tseg</string>
+  <string name="title_game">Ntiv chaoTic-Tac-taw</string>
+  <string name="pref_sound_fx">Ua si lwm lub suab los</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

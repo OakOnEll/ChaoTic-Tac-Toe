@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">الفوضى تاك تو</string>
+  <string name="yes">نعم</string>
+  <string name="no">لا</string>
+  <string name="ok">موافق</string>
+  <string name="cancel">إلغاء الأمر</string>
+  <string name="title_game">الفوضى تاك تو</string>
+  <string name="pref_sound_fx">تشغيل تأثيرات الصوت</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

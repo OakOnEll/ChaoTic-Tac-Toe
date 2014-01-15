@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Log ind med Google til at dele resultater og spille med dine venner.</string>
+  <string name="you_are_signed_in_as">Du er logget ind på Google + som %s</string>
+  <string name="sign_out">Log ud</string>
+  <string name="signing_in">Logge ind med Google</string>
+  <string name="signing_out">Logge ud</string>
+  <string name="new_game_vs_ai">Slå Bot</string>
+  <string name="new_quick_game">Nye hurtige spil</string>
+  <string name="new_game_live">Spille med en ven</string>
+  <string name="achievements">Se resultater</string>
+  <string name="leaderboards">Se ranglister</string>
+  <string name="achievements_not_available">Venligst log på til at se resultater.</string>
+  <string name="leaderboards_not_available">Venligst log på til at se leaderboards.</string>
+  <string name="sign_in_to_play_network_game">Venligst log på til at starte en netværksforbundet spil.</string>
+  <string name="sign_in_to_view_invites">Venligst log på til at se netværk spil invitationer.</string>
+  <string name="action_settings">Indstillinger</string>
+  <string name="received_invite_from">Modtaget indbydelse fra %s.</string>
+  <string name="prompt_title_player_name">Angiv spillernavn</string>
+  <string name="prompt_player_name">Navn til spiller %s</string>
+  <string name="label_player_x_name">Afspiller X\ navn</string>
+  <string name="label_player_o_name">Spilleren o navn</string>
+  <string name="chance_chaotic">Kaotisk</string>
+  <string name="chance_reverse">Omvendt</string>
+  <string name="chance_label_my_marker">Din markør</string>
+  <string name="chance_label_opponent_marker">Deres markør</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Start spillet</string>
+  <string name="account_settings">Kontoindstillinger</string>
+  <string name="choose_ai_mode_title">Vælg AI Game Mode</string>
+  <string name="ai_level">AI niveau</string>
+  <string name="ai_random">Tilfældige</string>
+  <string name="ai_easy">Nem</string>
+  <string name="ai_hard">Hårdt</string>
+  <string name="choose_local_game_mode_title">Vælg Game Mode</string>
+  <string name="error_x_name">Angiv et navn til X</string>
+  <string name="error_o_name">Angiv et navn til O</string>
+  <string name="unique_error_o_name">Angiv et entydigt navn til O</string>
+  <string name="choose_quick_game_mode_title">Vælg hurtig Game Mode</string>
+  <string name="choose_online_game_mode_title">Vælg Online Game Mode</string>
+  <string name="choose_online_opponent">Find ven</string>
+  <string name="select_opponent">Vælg modstander</string>
+  <string name="game_style_lbl">Spil stil</string>
+  <string name="chance_of_label">Chance for at</string>
+</resources>

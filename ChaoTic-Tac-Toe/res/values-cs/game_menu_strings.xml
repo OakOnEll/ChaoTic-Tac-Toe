@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Přihlášení Google sdílet úspěchy a hrát se svými přáteli.</string>
+  <string name="you_are_signed_in_as">Přihlášení do služby Google + jako: %s</string>
+  <string name="sign_out">Odhlásit se</string>
+  <string name="signing_in">Přihlášení pomocí účtu Google</string>
+  <string name="signing_out">Odhlášení</string>
+  <string name="new_game_same_device">Průchod \'N hra\'</string>
+  <string name="new_game_vs_ai">Porazit Bot</string>
+  <string name="new_quick_game">Nová rychlá hra</string>
+  <string name="new_game_live">Hrát s přítelem</string>
+  <string name="achievements">Zobrazit achievementy</string>
+  <string name="leaderboards">Zobrazit skóre</string>
+  <string name="achievements_not_available">Přihlaste se k zobrazení úspěchy.</string>
+  <string name="leaderboards_not_available">Přihlaste se k zobrazení žebříčků.</string>
+  <string name="sign_in_to_play_network_game">Přihlaste se ke spuštění síťové hry.</string>
+  <string name="sign_in_to_view_invites">Přihlaste se k zobrazení sítě herní pozvání.</string>
+  <string name="action_settings">Nastavení</string>
+  <string name="received_invite_from">Obdržela pozvání od uživatele %s.</string>
+  <string name="prompt_title_player_name">Zadejte jméno hráče</string>
+  <string name="prompt_player_name">Jméno pro hráče %s</string>
+  <string name="label_player_x_name">Jméno hráče X\</string>
+  <string name="label_player_o_name">Jméno hráče o</string>
+  <string name="chance_normal">Normální</string>
+  <string name="chance_custom">Vlastní</string>
+  <string name="chance_reverse">Reverzní</string>
+  <string name="chance_label_my_marker">Vaše značka</string>
+  <string name="chance_label_opponent_marker">Jejich značka</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Začít hru</string>
+  <string name="account_settings">Nastavení účtu</string>
+  <string name="choose_ai_mode_title">Zvolte režim AI hry</string>
+  <string name="ai_level">AI úroveň</string>
+  <string name="ai_random">Náhodné</string>
+  <string name="ai_easy">Snadné</string>
+  <string name="ai_medium">Střední</string>
+  <string name="ai_hard">Tvrdý</string>
+  <string name="choose_local_game_mode_title">Vybrat herní mód</string>
+  <string name="error_x_name">Zadejte název pro X</string>
+  <string name="error_o_name">Zadejte název pro O</string>
+  <string name="unique_error_o_name">Zadejte jedinečný název pro O</string>
+  <string name="choose_quick_game_mode_title">Zvolte rychlé herní mód</string>
+  <string name="choose_online_game_mode_title">Vyberte si Online herní mód</string>
+  <string name="choose_online_opponent">Najít přítele</string>
+  <string name="select_opponent">Protihráče vybrat</string>
+  <string name="game_style_lbl">Styl hry</string>
+  <string name="chance_of_label">Šance</string>
+</resources>

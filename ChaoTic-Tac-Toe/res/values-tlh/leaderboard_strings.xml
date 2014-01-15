@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">daily \'aqroS vIH moq, \'ej SoH qaStaHvIS Quj chaotic: %s\'</string>
+  <string name="beat_weekly_max">weekly \'aqroS vIH moq, \'ej SoH qaStaHvIS Quj chaotic: %s\'</string>
+  <string name="beat_alltime_max">Hoch poH \'aqroS vIH moq, \'ej SoH qaStaHvIS Quj chaotic: %s\'</string>
+  <string name="beat_daily_min">daily minimum vIH moq, \'ej SoH qaStaHvIS Quj chaotic: %s\'</string>
+  <string name="beat_weekly_min">weekly minimum vIH moq, \'ej SoH qaStaHvIS Quj chaotic: %s\'</string>
+  <string name="beat_alltime_min">Hoch poH minimum vIH moq, \'ej SoH qaStaHvIS Quj chaotic: %s\'</string>
+  <string name="beat_daily_wins">Qap daily \'aqroS moq SoH qaStaHvIS session: %s\'</string>
+  <string name="beat_weekly_wins">Qap weekly \'aqroS moq SoH qaStaHvIS session: %s\'</string>
+  <string name="beat_alltime_wins">Hoch poH \'aqroS Qap moq SoH qaStaHvIS session: %s\'</string>
+</resources>

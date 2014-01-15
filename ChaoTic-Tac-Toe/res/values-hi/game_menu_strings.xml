@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">उपलब्धियों का हिस्सा है और अपने दोस्तों के साथ खेलने के लिए Google साइन इन।</string>
+  <string name="you_are_signed_in_as">आप Google + में %s के रूप में हस्ताक्षर किए हैं</string>
+  <string name="sign_out">साइन आउट करें</string>
+  <string name="signing_in">गूगल के साथ साइन इन करने</string>
+  <string name="signing_out">साइन आउट करना</string>
+  <string name="new_game_same_device">\'N प्ले से गुजारें\'</string>
+  <string name="new_game_vs_ai">बीओटी हरा</string>
+  <string name="new_quick_game">नया त्वरित खेल</string>
+  <string name="new_game_live">एक दोस्त के साथ खेलने</string>
+  <string name="achievements">दृश्य उपलब्धियां</string>
+  <string name="leaderboards">दृश्य Leaderboards</string>
+  <string name="achievements_not_available">कृपया साइन इन उपलब्धियों को देखने के लिए।</string>
+  <string name="leaderboards_not_available">कृपया साइन इन leaderboards को देखने के लिए।</string>
+  <string name="sign_in_to_play_network_game">कृपया एक नेटवर्क्ड खेल शुरू करने के लिए में साइन इन करें।</string>
+  <string name="sign_in_to_view_invites">कृपया साइन इन नेटवर्क खेल निमंत्रण को देखने के लिए।</string>
+  <string name="action_settings">सेटिंग्स</string>
+  <string name="received_invite_from">%S से मिला निमंत्रण।</string>
+  <string name="prompt_title_player_name">प्लेयर का नाम दर्ज करें</string>
+  <string name="prompt_player_name">खिलाड़ी %s के लिए नाम</string>
+  <string name="label_player_x_name">खिलाड़ी X\ नाम</string>
+  <string name="label_player_o_name">खिलाड़ी ओ नाम</string>
+  <string name="chance_normal">सामान्य</string>
+  <string name="chance_chaotic">अराजक</string>
+  <string name="chance_custom">कस्टम</string>
+  <string name="chance_reverse">रिवर्स</string>
+  <string name="chance_label_my_marker">अपने मार्कर</string>
+  <string name="chance_label_opponent_marker">अपने मार्कर</string>
+  <string name="chance_label_remove_marker">बम</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">खेल प्रारंभ करें</string>
+  <string name="account_settings">खाता सेटिंग्स</string>
+  <string name="choose_ai_mode_title">ऐ खेल मोड का चयन</string>
+  <string name="ai_level">एअर इंडिया स्तर</string>
+  <string name="ai_random">यादृच्छिक</string>
+  <string name="ai_easy">आसान</string>
+  <string name="ai_medium">मध्यम</string>
+  <string name="ai_hard">कड़ी मेहनत</string>
+  <string name="choose_local_game_mode_title">खेल मोड का चयन</string>
+  <string name="error_x_name">X के लिए एक नाम दर्ज करें</string>
+  <string name="error_o_name">ओ के लिए एक नाम दर्ज करें</string>
+  <string name="unique_error_o_name">ओ के लिए एक अद्वितीय नाम दर्ज करें</string>
+  <string name="choose_quick_game_mode_title">जल्दी खेल मोड का चयन</string>
+  <string name="choose_online_game_mode_title">ऑनलाइन खेल मोड का चयन</string>
+  <string name="choose_online_opponent">दोस्त मिल</string>
+  <string name="select_opponent">प्रतिद्वंद्वी चुनें</string>
+  <string name="game_style_lbl">खेल शैली</string>
+  <string name="chance_of_label">का मौका</string>
+</resources>

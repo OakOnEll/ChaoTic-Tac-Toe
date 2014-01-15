@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">לשחק משבצת ריקה.</string>
+  <string name="invalid_move_need_nonempty">מניחים פצצות על סמן קיים.</string>
+  <string name="button_send">שלח</string>
+  <string name="action_chat">צ\'אט\'</string>
+  <string name="player_won">%s זכה!</string>
+  <string name="draw">לצייר המשחק!</string>
+  <string name="play_again">לשחק שוב?</string>
+  <string name="exit_waiting_play_again">לעזוב</string>
+  <string name="opponent_left_exit_play_again">אוקיי</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">מחכה %s להחליט לשחק שוב.</string>
+  <string name="opponent_wants_to_play_again">%s רוצה לשחק שוב.</string>
+  <string name="opponent_does_not_want_to_play_again">doesn\ %s שרוצה לשחק שוב.</string>
+  <string name="opponent_is_thinking">%s הוא חושב.</string>
+  <string name="opponent_is_in_chat">%s הוא בצ\'אט.\'</string>
+  <string name="peer_left_the_game">%s עזב את המשחק.</string>
+  <string name="leave_game_title">להשאיר משחק?</string>
+  <string name="leave_game_message">לעזוב את המשחק מתבצע?</string>
+  <string name="local_player_name">אתה</string>
+  <string name="chat_title">שוחח בצ\'אט עם %s\'</string>
+  <string name="play_again_waiting">ממתינים עבור %s</string>
+  <string name="online_setting_title">הגדרות</string>
+  <string name="you_left_the_game">השארת את המשחק.</string>
+  <string name="chat_actionbar_image_content">בתפריט פעולה צ\'אט\'</string>
+  <string name="num_move_lbl">מהלכים</string>
+  <string name="num_games_lbl">משחקים:</string>
+  <string name="game_stats_title">הנתונים הסטטיסטיים של המשחק</string>
+  <string name="player_stat_label">שחקן</string>
+  <string name="wins_stat_label">מנצח</string>
+  <string name="losses_stat_label">הפסדים</string>
+  <string name="draws_stat_label">מצייר</string>
+  <string name="normal_game_help">X Tic-Tac-Toe\nPlayer המסורתית ממלאת מחזות Xs\nPlayer O Os.</string>
+  <string name="reverse_game_help">X Tic-Tac-Toe\nPlayer הפוך מנגן Os\nPlayer O הצגות Xs.</string>
+  <string name="complex_game_help">על פנייה של player\ כל אחד, יש סיכוי שהם can\nplay משלהם marker\nplay marker\ncan של opponent\ שלהם להשתמש פצצה להתפוצץ סמן קיים על הלוח.</string>
+  <string name="player_x_lbl">שחקן X</string>
+  <string name="player_o_lbl">נגן O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">מצטרף חדר</string>
+  <string name="onRoomConnected">חיבור לחדר</string>
+  <string name="onRoomCreated">יצירת חדר</string>
+  <string name="sendRealTimeMessage">שליחת הודעה</string>
+  <string name="sendMove">שליחת מהלך</string>
+  <string name="communication_error">שגיאה בתקשורת:</string>
+  <string name="cannot_invite_non_tester">Can\ אל תזמין שאינו בודק-מחשבון הבוחן</string>
+</resources>

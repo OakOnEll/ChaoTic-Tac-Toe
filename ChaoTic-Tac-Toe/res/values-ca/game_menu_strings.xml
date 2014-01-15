@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Inicieu sessió amb Google per compartir èxits i jugar amb els teus amics.</string>
+  <string name="you_are_signed_in_as">Heu iniciat la sessió a Google + com a %s</string>
+  <string name="sign_out">Tanca la sessió</string>
+  <string name="signing_in">Signatura amb Google</string>
+  <string name="signing_out">Senyalització</string>
+  <string name="new_game_same_device">Pass \'N jugar\'</string>
+  <string name="new_game_vs_ai">Batre el Bot</string>
+  <string name="new_quick_game">Nou joc ràpid</string>
+  <string name="new_game_live">Jugar amb un amic</string>
+  <string name="achievements">Veure èxits</string>
+  <string name="leaderboards">Veure classificació</string>
+  <string name="achievements_not_available">Identifica\'t veure els èxits.\'</string>
+  <string name="leaderboards_not_available">Identifica\'t veure la classificació.\'</string>
+  <string name="sign_in_to_play_network_game">Identifica\'t iniciar un joc en xarxa.\'</string>
+  <string name="sign_in_to_view_invites">Identifica\'t veure invitacions joc de xarxa.\'</string>
+  <string name="action_settings">Configuració</string>
+  <string name="received_invite_from">Rebut invitació de %s.</string>
+  <string name="prompt_title_player_name">Introduïu el nom d\'intèrpret\'</string>
+  <string name="prompt_player_name">Nom per a intèrpret de %s</string>
+  <string name="label_player_x_name">Nom del jugador X\</string>
+  <string name="label_player_o_name">Nom del jugador O\</string>
+  <string name="chance_chaotic">Caòtic</string>
+  <string name="chance_custom">Costum</string>
+  <string name="chance_reverse">Inversa</string>
+  <string name="chance_label_my_marker">El seu marcador</string>
+  <string name="chance_label_opponent_marker">Seu marcador</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Joc de començament</string>
+  <string name="account_settings">Configuració del compte</string>
+  <string name="choose_ai_mode_title">Trieu la modalitat de joc d\'AI\'</string>
+  <string name="ai_level">Nivell d\'AI\'</string>
+  <string name="ai_random">L\'atzar\'</string>
+  <string name="ai_easy">Fàcil</string>
+  <string name="ai_medium">Mitjà</string>
+  <string name="ai_hard">Dur</string>
+  <string name="choose_local_game_mode_title">Escollir Mode de joc</string>
+  <string name="error_x_name">Introduïu un nom per a X</string>
+  <string name="error_o_name">Introduïu un nom per O</string>
+  <string name="unique_error_o_name">Introduïu un nom únic per a O</string>
+  <string name="choose_quick_game_mode_title">Escollir Mode ràpid joc</string>
+  <string name="choose_online_game_mode_title">Escollir Mode de joc en línia</string>
+  <string name="choose_online_opponent">Trobar l\'amic\'</string>
+  <string name="select_opponent">Seleccioneu oponent</string>
+  <string name="game_style_lbl">Estil de joc</string>
+  <string name="chance_of_label">Possibilitat de</string>
+</resources>

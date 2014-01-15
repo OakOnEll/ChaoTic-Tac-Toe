@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Jugar en una plaça buida.</string>
+  <string name="invalid_move_need_nonempty">Col locar la bomba en un marcador existent.</string>
+  <string name="button_send">Enviar</string>
+  <string name="action_chat">Xat</string>
+  <string name="player_won">%s guanyat!</string>
+  <string name="draw">Joc de dibuixar!</string>
+  <string name="play_again">Jugar una altra vegada?</string>
+  <string name="exit_waiting_play_again">Deixar</string>
+  <string name="opponent_left_exit_play_again">CORRECTE</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Esperant que %s decidir jugar una altra vegada.</string>
+  <string name="opponent_wants_to_play_again">%s vol jugar una altra vegada.</string>
+  <string name="opponent_does_not_want_to_play_again">doesn\ %[NULL] es t vol jugar una altra vegada.</string>
+  <string name="opponent_is_thinking">%s està pensant.</string>
+  <string name="opponent_is_in_chat">%s és el xat.</string>
+  <string name="peer_left_the_game">%s ha deixat la partida.</string>
+  <string name="leave_game_title">Deixar el joc?</string>
+  <string name="leave_game_message">Deixar el joc en curs?</string>
+  <string name="local_player_name">Vostè</string>
+  <string name="chat_title">Xateja amb %s</string>
+  <string name="play_again_waiting">Esperant per %s</string>
+  <string name="online_setting_title">Configuració</string>
+  <string name="you_left_the_game">Has deixat el joc.</string>
+  <string name="chat_actionbar_image_content">Menú d\'acció de xat\'</string>
+  <string name="num_move_lbl">Es mou</string>
+  <string name="num_games_lbl">Jocs:</string>
+  <string name="game_stats_title">Estadístiques joc</string>
+  <string name="player_stat_label">Intèrpret</string>
+  <string name="wins_stat_label">Guanya</string>
+  <string name="losses_stat_label">Pèrdues</string>
+  <string name="draws_stat_label">Sortejos</string>
+  <string name="normal_game_help">Tradicional Tic-Tac-Toe\nPlayer X juga juga Xs\nPlayer O Os.</string>
+  <string name="reverse_game_help">Inversa Tic-Tac-Toe\nPlayer X juga juga Os\nPlayer O Xs.</string>
+  <string name="complex_game_help">En torn de cada player\, hi ha una casualitat can\nplay seu propi marker\nplay marker\ncan del seu opponent\ utilitzar una bomba d\'explotar un marcador existent a la pissarra.\'</string>
+  <string name="player_x_lbl">Jugador X</string>
+  <string name="player_o_lbl">Intèrpret O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Incorporar-se a la sala</string>
+  <string name="onRoomConnected">Connectar-se a la sala</string>
+  <string name="onRoomCreated">Creant espai</string>
+  <string name="sendRealTimeMessage">Enviant el missatge</string>
+  <string name="sendMove">Moviment d\'enviament\'</string>
+  <string name="communication_error">Error en la comunicació:</string>
+  <string name="cannot_invite_non_tester">Can \' t convidar no-multímetre d\'un compte de multímetre\'</string>
+</resources>

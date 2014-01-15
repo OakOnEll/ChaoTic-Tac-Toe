@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Eredmény</string>
+  <string name="offline_achievement_only_xs_or_os">: Csak Xs vagy Os</string>
+  <string name="offline_achievement_chaotic_draw">Kaotikus felhívni: Felhívni a kaotikus módban.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Ugyanazon játék állam három helyezi a játék.</string>
+  <string name="offline_achievement_long_haul">A hosszú táv: Kaotikus játék 20 mozog.</string>
+  <string name="offline_achievement_with_a_little_help">Egy kis segítség a barátoktól: 3 győzelem mozog.</string>
+  <string name="offline_achievement_clean_slate">Tiszta lappal: Vissza eredeti állapot után 5 mozog.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Nyerj egy fordított stílusú játék.</string>
+  <string name="offline_achievement_the_good_samaritan">A jó samaritánus: Segíteni az ellenfél nyer, 3 mozog.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Két legyet egy csapásra: nyer a játék két irányba egyszerre.</string>
+  <string name="offline_achievement_good_sport">A jó Sport: Hely kénytelenek győztes lépés az ellenfél.</string>
+  <string name="offline_achievement_fork_in_the_road">Villát az úton: nyer a játék több módon.</string>
+  <string name="offline_achievement_oops">Hoppá: Játszani egy unforced nyerő mozog az ellenfél.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Feleslegesen bombát az egyik saját markerek.</string>
+  <string name="offline_achievement_missed_opportunities">Elszalasztott lehetőséget is: Miss játszik egy nyerő mozog.</string>
+  <string name="offline_achievement_the_forced_hand">Kényszerítve kéz: Játszani az egyik több kényszerített nyerő mozog az ellenfél.</string>
+</resources>

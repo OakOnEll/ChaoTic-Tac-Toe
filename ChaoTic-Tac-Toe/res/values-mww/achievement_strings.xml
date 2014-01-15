@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Tav</string>
+  <string name="offline_achievement_only_xs_or_os">: Tsuas sau tug ntawv x los Os</string>
+  <string name="offline_achievement_chaotic_draw">Kos chaotic: A kos rau hom Chaotic.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Tib lub xeev mas peb tsiv nees.</string>
+  <string name="offline_achievement_long_haul">Lub log ntev: Ua si ib Chaotic kev ua si nrog 20 xyaum.</string>
+  <string name="offline_achievement_with_a_little_help">Nrog kev pab me ntsis ntawm koj tus phooj ywg: yeej nyob rau hauv 3 tsiv.</string>
+  <string name="offline_achievement_clean_slate">Huv Slate: Rov mus pib xeev tom qab 5 tsiv.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Yeej tus nraud style kev ua si.</string>
+  <string name="offline_achievement_the_good_samaritan">Good Samaritan: Pab koj yeej nyob rau hauv 3 xyaum opponent.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Ob tug noog nrog ib pob zeb: yeej muaj kev ua si hauv ob lus cob qhia ib zaug.</string>
+  <string name="offline_achievement_good_sport">Kev ua si qhov zoo nws: Chaw yuam winning khiav mus rau koj tus nrog sib ntaus.</string>
+  <string name="offline_achievement_fork_in_the_road">Diav rawg hauv kev: yeej nyob rau ntau txoj kev uas ib tug nees.</string>
+  <string name="offline_achievement_oops">Oops: Ua si ib unforced winning txav mus rau koj tus nrog sib ntaus.</string>
+  <string name="offline_achievement_friendly_fire">Hauv hluav taws: Tej tawg vimchij hem ib yam ntawm koj tus kheej tej.</string>
+  <string name="offline_achievement_missed_opportunities">Opportunites tsis tau: Npeeg ua si ib winning tsiv.</string>
+  <string name="offline_achievement_the_forced_hand">Forced tes: Ua si ib hom ntau forced winning tsiv rau koj tus nrog sib ntaus.</string>
+</resources>

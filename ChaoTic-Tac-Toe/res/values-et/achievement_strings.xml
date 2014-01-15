@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Saavutus</string>
+  <string name="offline_achievement_only_xs_or_os">: Ainult Xs või Os</string>
+  <string name="offline_achievement_chaotic_draw">Kaootiline viik: Joonista kaootiline režiimis.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Mäng muutmata kolme liigub mäng.</string>
+  <string name="offline_achievement_long_haul">Pikkadeks: 20 liigub kaootiline mängu mängida.</string>
+  <string name="offline_achievement_with_a_little_help">On vähe abi sõpradelt: WIN‑i 3 liigub.</string>
+  <string name="offline_achievement_clean_slate">Puhtalt lehelt: Naasta algse seisundi pärast 5 liigub.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Võita vastupidine stiilis mäng.</string>
+  <string name="offline_achievement_the_good_samaritan">Hea samaarlane: Aidata oma vastase võita 3 käigud.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Kaks lindu ühe kivi: võita mängu kahes suunas korraga.</string>
+  <string name="offline_achievement_good_sport">Hea Sport: Koht sunnitud võitnud liikuda oma vastast.</string>
+  <string name="offline_achievement_fork_in_the_road">Käitumisviisi: Win game mitmel viisil.</string>
+  <string name="offline_achievement_oops">Oops: Mängida sundimatu võitnud liikuda oma vastast.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Asjatult pomm ühe oma markerid.</string>
+  <string name="offline_achievement_missed_opportunities">Vahelejäänud Opportunites: Miss mängib võitnud liikuda.</string>
+  <string name="offline_achievement_the_forced_hand">Sunniviisiline käsi: Mängida üks mitu sunnitud võitnud liigub teie vastane.</string>
+</resources>

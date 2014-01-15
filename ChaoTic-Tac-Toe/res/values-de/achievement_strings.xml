@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Leistung</string>
+  <string name="offline_achievement_only_xs_or_os">: Nur Xs oder Os</string>
+  <string name="offline_achievement_chaotic_draw">Chaotische Draw: Ein Unentschieden im chaotischen Modus.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Gleiche Spiel Staat drei bewegt sich in einem Spiel.</string>
+  <string name="offline_achievement_long_haul">Die Langstrecke: Ein chaotisches Spiel mit 20 bewegt.</string>
+  <string name="offline_achievement_with_a_little_help">Mit ein wenig Hilfe von Ihren Freunden: Sieg in 3 bewegt.</string>
+  <string name="offline_achievement_clean_slate">Weste: Zurück zum ursprünglichen Zustand, nachdem 5 verschiebt.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Gewinnen Sie eine Rückseite Stil Spiel.</string>
+  <string name="offline_achievement_the_good_samaritan">Der barmherzige Samariter: Ihre Gegner gewinnt in 3 Zügen.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Zwei Fliegen mit einer Klappe: eine Spiel in zwei Richtungen gleichzeitig zu gewinnen.</string>
+  <string name="offline_achievement_good_sport">Der Spielverderber: Platz gezwungen gewinnen Schritt für Ihre Gegner.</string>
+  <string name="offline_achievement_fork_in_the_road">Gabelung: ein Spiel auf mehrere Arten gewinnen.</string>
+  <string name="offline_achievement_oops">Achtung: Spielen Sie einen unerzwungene gewinnen Schritt für dein Gegner.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Bombardieren Sie eine eigene Marker unnötig.</string>
+  <string name="offline_achievement_missed_opportunities">Verpasste Chancen: Miss spielen eine gewinnende verschieben.</string>
+  <string name="offline_achievement_the_forced_hand">Die Forced-Hand: Spiel bewegt man mehrere erzwungene gewinnen für Ihre Gegner.</string>
+</resources>

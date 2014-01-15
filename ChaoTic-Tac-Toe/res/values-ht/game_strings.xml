@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Jwe nan yon plas vid.</string>
+  <string name="invalid_move_need_nonempty">Kote bonm sou yon marque ki ekziste.</string>
+  <string name="button_send">Voye</string>
+  <string name="action_chat">Koze</string>
+  <string name="player_won">%s te genyen!</string>
+  <string name="draw">Trase jwèt!</string>
+  <string name="play_again">Jwe ankò?</string>
+  <string name="exit_waiting_play_again">Kite</string>
+  <string name="opponent_left_exit_play_again">Oke</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Ap tann pou %s pou deside pou yo jwe ankò.</string>
+  <string name="opponent_wants_to_play_again">%s ki vle pou yo jwe ankò.</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\ t vle pou yo jwe ankò.</string>
+  <string name="opponent_is_thinking">%s gen nan tèt.</string>
+  <string name="opponent_is_in_chat">%s se nan koze.</string>
+  <string name="peer_left_the_game">%s te kite jwèt lan.</string>
+  <string name="leave_game_title">Kite jwèt?</string>
+  <string name="leave_game_message">Kite jwèt lan nan pwogrè?</string>
+  <string name="local_player_name">ou</string>
+  <string name="chat_title">Chat ak %s</string>
+  <string name="play_again_waiting">Pou %s</string>
+  <string name="online_setting_title">Paramètres</string>
+  <string name="you_left_the_game">Ou te kite jwèt lan.</string>
+  <string name="chat_actionbar_image_content">Koze aksyon kat</string>
+  <string name="num_move_lbl">Deplase</string>
+  <string name="num_games_lbl">Jwèt:</string>
+  <string name="game_stats_title">Statistiques jwèt</string>
+  <string name="player_stat_label">Jwè</string>
+  <string name="losses_stat_label">Pèt</string>
+  <string name="draws_stat_label">Enspirasyon</string>
+  <string name="normal_game_help">Tradisyonèl Tic-Tac-Toe\nPlayer X jwe Xs\nPlayer O joue Os.</string>
+  <string name="reverse_game_help">Inverse Tic-Tac-Toe\nPlayer X jwe joue Os\nPlayer O Xs.</string>
+  <string name="complex_game_help">Sou chak player\ vire, pa gen yon chans yo can\nplay marker\nplay yo marker\ncan opponent\ yo sèvi ak yon bonb lan pou eksploze nan yon marque ki ekziste sou tablo an.</string>
+  <string name="player_x_lbl">Jwè X</string>
+  <string name="player_o_lbl">Jwè O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Se sal</string>
+  <string name="onRoomConnected">Koneksyon sal</string>
+  <string name="onRoomCreated">Ap kreye sal</string>
+  <string name="sendRealTimeMessage">Voye mesaj</string>
+  <string name="sendMove">Voye mouvman</string>
+  <string name="communication_error">Erreur nan kominikasyon:</string>
+  <string name="cannot_invite_non_tester">Can\ t envite ou menm ki pa-Jeremi de compte ou menm Jeremi yon</string>
+</resources>

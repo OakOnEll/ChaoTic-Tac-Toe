@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">. ניצחת את המהלכים המקסימלי היומי שלך במשחק כאוטי: %s</string>
+  <string name="beat_weekly_max">. ניצחת את המהלכים המקסימלי השבועי שלך במשחק כאוטי: %s</string>
+  <string name="beat_alltime_max">. ניצחת את כל הזמן המרבי המהלכים שלך במשחק כאוטי: %s</string>
+  <string name="beat_daily_min">. ניצחת את המהלכים המינימום היומי שלך במשחק כאוטי: %s</string>
+  <string name="beat_weekly_min">. ניצחת את המהלכים המינימלי השבועי שלך במשחק כאוטי: %s</string>
+  <string name="beat_alltime_min">. ניצחת את כל הזמן המינימלי המהלכים שלך במשחק כאוטי: %s</string>
+  <string name="beat_daily_wins">אתה לנצח הניצחונות המרבי יומי בהפעלה: %s</string>
+  <string name="beat_weekly_wins">. ניצחת הניצחונות המרבי שבועי בהפעלה: %s</string>
+  <string name="beat_alltime_wins">אתה לנצח כל הזמן המרבי הניצחונות בהפעלה: %s</string>
+</resources>

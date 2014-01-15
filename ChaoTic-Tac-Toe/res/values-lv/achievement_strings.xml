@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Sasniegumu</string>
+  <string name="offline_achievement_only_xs_or_os">: Tikai Xs vai Os</string>
+  <string name="offline_achievement_chaotic_draw">Haotiska Draw: Draw haotiska režīmā.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Spēles pašā stāvoklī trīs pārvietojas spēli.</string>
+  <string name="offline_achievement_long_haul">Ilgajam: Spēlēt haotiska spēli ar 20 kustas.</string>
+  <string name="offline_achievement_with_a_little_help">Ar nelielu palīdzību no draugiem: Win 3 kustas.</string>
+  <string name="offline_achievement_clean_slate">Tīrs šīferis: Atgriešanās sākotnējā stāvoklī pēc 5 kustas.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Win Reverse stila spēli.</string>
+  <string name="offline_achievement_the_good_samaritan">Good Samaritan: Palīdzība jūsu pretinieks win 3 gājienos.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Divi putni ar vienu akmeni: uzvarēt spēli divos virzienos vienlaikus.</string>
+  <string name="offline_achievement_good_sport">Labs sports: Vieta piespiedu uzvaras gājienu pretinieka.</string>
+  <string name="offline_achievement_fork_in_the_road">Ceļa atzarojuma: uzvarēt spēli vairākos veidos.</string>
+  <string name="offline_achievement_oops">UPS: Play nepiespiestā uzvarētāju pārvietot jūsu pretinieks.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Nevajadzīgi bumbu viens no savas atzīmes.</string>
+  <string name="offline_achievement_missed_opportunities">Neatbildētie Opportunites: Mis spēļu uzvarētāju pārvietot.</string>
+  <string name="offline_achievement_the_forced_hand">Piespiedu roku: Spēlēt vienu no vairākiem piespiedu uzvaras gājienu pretinieka.</string>
+</resources>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Battere le mosse massime giornaliere in un caotico gioco: %s</string>
+  <string name="beat_weekly_max">Battere le mosse massime settimanale in un caotico gioco: %s</string>
+  <string name="beat_alltime_max">Battete il vostra tutte le mosse di tempo massimo in un caotico gioco: %s</string>
+  <string name="beat_daily_min">Battere le mosse minime giornaliere in un caotico gioco: %s</string>
+  <string name="beat_weekly_min">Battere le mosse minime settimanale in un caotico gioco: %s</string>
+  <string name="beat_alltime_min">Battere il tua tutte le mosse di tempo minimo in un caotico gioco: %s</string>
+  <string name="beat_daily_wins">Battete le vostre vittorie massime giornaliere in una sessione: %s</string>
+  <string name="beat_weekly_wins">Battete le vostre vittorie massime settimanale in una sessione: %s</string>
+  <string name="beat_alltime_wins">Battete il vostra tutte le vittorie di tempo massimo in una sessione: %s</string>
+</resources>

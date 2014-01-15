@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Kacau-Tac Toe</string>
+  <string name="yes">Ya</string>
+  <string name="no">Tidak</string>
+  <string name="ok">Oke</string>
+  <string name="cancel">Batal</string>
+  <string name="title_game">Kacau-Tac Toe</string>
+  <string name="pref_sound_fx">Bermain efek suara</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">הישג</string>
+  <string name="offline_achievement_only_xs_or_os">: רק סימני x או o</string>
+  <string name="offline_achievement_chaotic_draw">לצייר כאוטי: תיקו במצב כאוטי.</string>
+  <string name="offline_achievement_deja_vu">דז \' ה וו: באותו מצב משחק שלושה מהלכים במשחק.\'</string>
+  <string name="offline_achievement_long_haul">לטווח הארוך: משחק כאוטי עם 20 מהלכים.</string>
+  <string name="offline_achievement_with_a_little_help">עם מעט עזרה מהחברים שלך: לנצח ב 3 מהלכים.</string>
+  <string name="offline_achievement_clean_slate">דף נקי: להחזיר למצב הראשוני אחרי 5 נעה.</string>
+  <string name="offline_achievement_reverse_win">רברסי: לנצח הפוכה סגנון משחק.</string>
+  <string name="offline_achievement_the_good_samaritan">השומרוני הטוב: עזרה win היריב ב 3 מהלכים.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">שתי ציפורים במכה אחת: לנצח משחק בשני כיוונים בו זמנית.</string>
+  <string name="offline_achievement_good_sport">ספורט טוב: המקום כפה מהלך הניצחון על היריב שלך.</string>
+  <string name="offline_achievement_fork_in_the_road">צומת הדרכים: לנצח במשחק באחת מהדרכים מרובים.</string>
+  <string name="offline_achievement_oops">אופס: לשחק מהלך מנצח unforced בלתי ניתנת ליריב.</string>
+  <string name="offline_achievement_friendly_fire">אש ידידותית: ללא צורך פצצה אחת של סמני משלך.</string>
+  <string name="offline_achievement_missed_opportunities">ההזדמנויות שהוחמצו: מיס לשחק מנצחת העבר.</string>
+  <string name="offline_achievement_the_forced_hand">היד כפוי: לשחק אחד מספר המהלכים מנצח בכוח של היריב שלך.</string>
+</resources>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Pencapaian</string>
+  <string name="offline_achievement_only_xs_or_os">: Hanya Xs atau Os</string>
+  <string name="offline_achievement_chaotic_draw">Huru-hara cabutan: Seri dalam mod huru-hara.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Permainan Negeri tiga bergerak dalam permainan.</string>
+  <string name="offline_achievement_long_haul">Jarak jauh: Bermain huru-hara dengan 20 pergerakan.</string>
+  <string name="offline_achievement_with_a_little_help">Dengan sedikit bantuan dari kawan-kawan anda: menang 3 bergerak.</string>
+  <string name="offline_achievement_clean_slate">Bertanding bersama-sama bersih: Kembali ke keadaan awal selepas 5 bergerak.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Menang belakang sebuah gaya permainan.</string>
+  <string name="offline_achievement_the_good_samaritan">Samaritan dahulu baik: Membantu anda menang lawan dalam langkah 3.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Dua burung dengan satu batu: memenangi permainan dalam dua arah pada satu masa.</string>
+  <string name="offline_achievement_good_sport">Sukan baik: Tempat dipaksa langkah kemenangan untuk lawan.</string>
+  <string name="offline_achievement_fork_in_the_road">Fork di jalan raya: memenangi permainan di salah satu daripada pelbagai cara.</string>
+  <string name="offline_achievement_oops">Oops: Bermain untuk memenangi unforced bergerak untuk lawan.</string>
+  <string name="offline_achievement_friendly_fire">Kebakaran mesra: Sia-sia meletupkan salah satu penanda anda sendiri.</string>
+  <string name="offline_achievement_missed_opportunities">Terlepas Opportunites: Miss bermain memenangi yang bergerak.</string>
+  <string name="offline_achievement_the_forced_hand">Tangan paksa: Main salah satu daripada beberapa pemenang terpaksa bergerak bagi pihak lawan anda.</string>
+</resources>

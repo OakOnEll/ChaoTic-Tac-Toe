@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">          </string>
+  <string name="you_are_signed_in_as">    +  %</string>
+  <string name="sign_out"></string>
+  <string name="signing_in">   </string>
+  <string name="signing_out"></string>
+  <string name="new_game_same_device">\  </string>
+  <string name="new_game_vs_ai"> </string>
+  <string name="new_quick_game">  </string>
+  <string name="new_game_live"> </string>
+  <string name="achievements"> </string>
+  <string name="leaderboards"> </string>
+  <string name="achievements_not_available">   </string>
+  <string name="leaderboards_not_available">   </string>
+  <string name="sign_in_to_play_network_game">    </string>
+  <string name="sign_in_to_view_invites">     </string>
+  <string name="action_settings"></string>
+  <string name="received_invite_from">    </string>
+  <string name="prompt_title_player_name">  </string>
+  <string name="prompt_player_name"> % </string>
+  <string name="label_player_x_name">  \</string>
+  <string name="label_player_o_name">  \</string>
+  <string name="chance_normal"></string>
+  <string name="chance_chaotic"></string>
+  <string name="chance_custom"></string>
+  <string name="chance_reverse"></string>
+  <string name="chance_label_my_marker"></string>
+  <string name="chance_label_opponent_marker"></string>
+  <string name="chance_label_remove_marker"></string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start"> </string>
+  <string name="account_settings"> </string>
+  <string name="choose_ai_mode_title">   </string>
+  <string name="ai_level"> </string>
+  <string name="ai_random"></string>
+  <string name="ai_easy"></string>
+  <string name="ai_medium"></string>
+  <string name="ai_hard"></string>
+  <string name="choose_local_game_mode_title">  </string>
+  <string name="error_x_name">  </string>
+  <string name="error_o_name">  </string>
+  <string name="unique_error_o_name">   </string>
+  <string name="choose_quick_game_mode_title">   </string>
+  <string name="choose_online_game_mode_title">   </string>
+  <string name="choose_online_opponent"> </string>
+  <string name="select_opponent"> </string>
+  <string name="game_style_lbl"> </string>
+  <string name="chance_of_label"></string>
+</resources>

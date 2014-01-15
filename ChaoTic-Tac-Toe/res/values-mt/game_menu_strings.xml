@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Idħol bl-Google biex jaqsmu l-kisbiet u tilgħab mal-ħbieb tiegħek.</string>
+  <string name="you_are_signed_in_as">Tiegħek huma iffirmati fis-Google + bħala %s</string>
+  <string name="sign_out">Iffirma l-</string>
+  <string name="signing_in">Iffirmar b \' Google\'</string>
+  <string name="signing_out">Iffirmar ta \' l-\'</string>
+  <string name="new_game_same_device">Jgħaddu logħob \'N\'</string>
+  <string name="new_game_vs_ai">Ħabbat il-Bot</string>
+  <string name="new_quick_game">Logħba ġdida mgħaġġla</string>
+  <string name="new_game_live">Jilaghbu Ħabib</string>
+  <string name="achievements">Kisbiet tara</string>
+  <string name="leaderboards">Ara Leaderboards</string>
+  <string name="achievements_not_available">Idħol fl-biex tara l-kisbiet.</string>
+  <string name="leaderboards_not_available">Jekk jogħġbok idħol fil ara leaderboards.</string>
+  <string name="sign_in_to_play_network_game">Jekk jogħġbok idħol fil ibda logħba bin-netwerk.</string>
+  <string name="sign_in_to_view_invites">Idħol fl-biex tara l-inviti tal-logħba tan-netwerk.</string>
+  <string name="action_settings">L-issettjar</string>
+  <string name="received_invite_from">Istedina riċevuti minn %s.</string>
+  <string name="prompt_title_player_name">Daħħal l-isem tal-Plejer</string>
+  <string name="prompt_player_name">Isem għall-Plejer %s</string>
+  <string name="label_player_x_name">L-isem tal-Plejer X\</string>
+  <string name="label_player_o_name">L-isem tal-Plejer O\</string>
+  <string name="chance_custom">Personalizzat</string>
+  <string name="chance_reverse">Rivers</string>
+  <string name="chance_label_my_marker">Markatur tiegħek</string>
+  <string name="chance_label_opponent_marker">L-immarkar</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Ibda logħba</string>
+  <string name="account_settings">Issettjar tal-kont</string>
+  <string name="choose_ai_mode_title">Agħżel logħba AI mod</string>
+  <string name="ai_level">Livell AI</string>
+  <string name="ai_random">Bl-addoċċ</string>
+  <string name="ai_easy">Faċli</string>
+  <string name="ai_medium">Medju</string>
+  <string name="ai_hard">Iebes</string>
+  <string name="choose_local_game_mode_title">Agħżel il-modalità tal-logħba</string>
+  <string name="error_x_name">Daħħal isem għall-X</string>
+  <string name="error_o_name">Daħħal isem għall-O</string>
+  <string name="unique_error_o_name">Daħħal isem uniku għal O</string>
+  <string name="choose_quick_game_mode_title">Agħżel mod veloċi tal-logħba</string>
+  <string name="choose_online_game_mode_title">Agħżel il-modalità tal-logħba onlajn</string>
+  <string name="choose_online_opponent">Ssib Ħabib</string>
+  <string name="select_opponent">Agħżel l-Opponent</string>
+  <string name="game_style_lbl">L-istil tal-logħba</string>
+  <string name="chance_of_label">Ċans</string>
+</resources>

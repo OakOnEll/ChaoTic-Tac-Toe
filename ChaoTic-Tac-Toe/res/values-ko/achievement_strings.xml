@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">공적</string>
+  <string name="offline_achievement_only_xs_or_os">: Xs 또는 Os만</string>
+  <string name="offline_achievement_chaotic_draw">혼란 스러운 무승부: 혼란 모드에서 무승부입니다.</string>
+  <string name="offline_achievement_deja_vu">데 자부: 동일한 게임 스테이트 3 경기에서 이동합니다.</string>
+  <string name="offline_achievement_long_haul">장거리: 20 이동 혼란 게임.</string>
+  <string name="offline_achievement_with_a_little_help">당신의 친구 로부터 약간의 도움으로: 3에서 승리 이동.</string>
+  <string name="offline_achievement_clean_slate">5 이동 후 깨끗 한 슬레이트: 초기 상태로 되돌립니다.</string>
+  <string name="offline_achievement_reverse_win">리버시: 반대 스타일의 게임을 승리.</string>
+  <string name="offline_achievement_the_good_samaritan">사마리아인: 3 움직임에 당신의 상대 승리를 도움이 됩니다.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">하나의 돌으로 두 새: 한 번에 두 방향으로 게임을 승리.</string>
+  <string name="offline_achievement_good_sport">좋은 스포츠: 장소 당신의 상대에 대 한 승리 이동 강제.</string>
+  <string name="offline_achievement_fork_in_the_road">도 있는 포크: 여러 가지 방법 중 하나로 게임을 승리.</string>
+  <string name="offline_achievement_oops">죄송 합니다: 행마는 아쉽게 우승 당신의 상대에 대 한.</string>
+  <string name="offline_achievement_friendly_fire">아군: 불필요 하 게 자신의 표식 중 하나 폭탄.</string>
+  <string name="offline_achievement_missed_opportunities">놓친된 Opportunites: 미스 승리를 재생 이동 합니다.</string>
+  <string name="offline_achievement_the_forced_hand">강제 손: 당신의 상대에 대 한 여러 강제 승리 움직임 중 하나를 재생 합니다.</string>
+</resources>

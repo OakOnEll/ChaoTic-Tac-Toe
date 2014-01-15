@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Játszanak egy üres tér.</string>
+  <string name="invalid_move_need_nonempty">Helyen bomba a meglévő jelölő.</string>
+  <string name="button_send">Küldés</string>
+  <string name="player_won">a(z) %s nyert!</string>
+  <string name="draw">Döntetlen a játék!</string>
+  <string name="play_again">Újra játszani?</string>
+  <string name="exit_waiting_play_again">Szabadság</string>
+  <string name="opponent_left_exit_play_again">oké</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Várakozás a(z) %s úgy dönt, hogy újra játszani.</string>
+  <string name="opponent_wants_to_play_again">%s szeretne újra játszani.</string>
+  <string name="opponent_does_not_want_to_play_again">a(z) %s nem\'t akar-hoz újra játszani.\'</string>
+  <string name="opponent_is_thinking">a(z) %s gondolkodás.</string>
+  <string name="opponent_is_in_chat">%s a chat.</string>
+  <string name="peer_left_the_game">a(z) %s elhagyta a játékot.</string>
+  <string name="leave_game_title">Hagyja el a játék?</string>
+  <string name="leave_game_message">Hagyja a játék folyamatban?</string>
+  <string name="local_player_name">Ön</string>
+  <string name="chat_title">Chat: %s</string>
+  <string name="play_again_waiting">Várakozás a(z) %s</string>
+  <string name="online_setting_title">Beállítások</string>
+  <string name="you_left_the_game">Akkor marad a játék.</string>
+  <string name="chat_actionbar_image_content">Chat művelet menü</string>
+  <string name="num_move_lbl">Mozog</string>
+  <string name="num_games_lbl">Játékok:</string>
+  <string name="game_stats_title">Játék statisztikák</string>
+  <string name="player_stat_label">Játékos</string>
+  <string name="wins_stat_label">A WINS</string>
+  <string name="losses_stat_label">Veszteségek</string>
+  <string name="draws_stat_label">Felhívja a</string>
+  <string name="normal_game_help">Hagyományos Tic Tac, Toe\nPlayer-X Xs\nPlayer O játszik Os játszik.</string>
+  <string name="reverse_game_help">Fordított Tic Tac, Toe\nPlayer-X Os\nPlayer O játszik Xs játszik.</string>
+  <string name="complex_game_help">Viszont minden player\, van esély arra, hogy can\nplay saját marker\nplay a opponent\ marker\ncan használja a bomba felrobban a táblán meglévő jelölő.</string>
+  <string name="player_x_lbl">Játékos X</string>
+  <string name="player_o_lbl">Játékos O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Csatlakozás a szobában</string>
+  <string name="onRoomConnected">Összekötő pálca-hoz szoba</string>
+  <string name="onRoomCreated">Szoba létrehozása</string>
+  <string name="sendRealTimeMessage">Üzenet küldése</string>
+  <string name="sendMove">Küldő áthelyezése</string>
+  <string name="communication_error">Hiba a kommunikáció:</string>
+  <string name="cannot_invite_non_tester">Can\'t meghívja a nem teszter teszter számláról\'</string>
+</resources>

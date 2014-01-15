@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Qo\'noS qI\' in with chav SoH \'ej ghaH jup chu\' google.\'</string>
+  <string name="you_are_signed_in_as">qI\' SoH vaj google + je %s\'</string>
+  <string name="sign_out">qI</string>
+  <string name="signing_in">in with google qI</string>
+  <string name="signing_out">qI</string>
+  <string name="new_game_same_device">\'n chu\' juS\'</string>
+  <string name="new_game_vs_ai">Bot moq</string>
+  <string name="new_quick_game">Qapchu\' chu\' Qujmey\'</string>
+  <string name="new_game_live">reH jup</string>
+  <string name="achievements">jIH chav</string>
+  <string name="leaderboards">jIH leaderboards</string>
+  <string name="achievements_not_available">DubelmoHchugh chav jIH qI\'.\'</string>
+  <string name="leaderboards_not_available">DubelmoHchugh leaderboards jIH qI\'.\'</string>
+  <string name="sign_in_to_play_network_game">DubelmoHchugh network Qujmey start qI\'.\'</string>
+  <string name="sign_in_to_view_invites">DubelmoHchugh network Qujmey invitations jIH qI\'.\'</string>
+  <string name="action_settings">setting</string>
+  <string name="received_invite_from">Hev invitation vo\' vatlhvI\' s.\'</string>
+  <string name="prompt_title_player_name">el DawI\' pong\'</string>
+  <string name="prompt_player_name">pong %s DawI\'pu\'</string>
+  <string name="label_player_x_name">pong DawI\'pu\' x\'</string>
+  <string name="label_player_o_name">pong DawI\'pu\' o\'</string>
+  <string name="chance_normal">motlh</string>
+  <string name="chance_chaotic">chaotic</string>
+  <string name="chance_custom">tIgh</string>
+  <string name="chance_reverse">reverse</string>
+  <string name="chance_label_my_marker">Marker</string>
+  <string name="chance_label_opponent_marker">Marker</string>
+  <string name="chance_label_remove_marker">bomb</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Quj start</string>
+  <string name="account_settings">account Settings</string>
+  <string name="choose_ai_mode_title">wutlh ai Qujmey Mode</string>
+  <string name="ai_level">ai patlh</string>
+  <string name="ai_random">random</string>
+  <string name="ai_easy">ngeD</string>
+  <string name="ai_medium">medium</string>
+  <string name="ai_hard">let</string>
+  <string name="choose_local_game_mode_title">Quj Mode wutlh</string>
+  <string name="error_x_name">x pong \'el\'</string>
+  <string name="error_o_name">pong va \'el\'</string>
+  <string name="unique_error_o_name">unique pong, va \'el\'</string>
+  <string name="choose_quick_game_mode_title">wutlh Mode Qujmey Qapchu</string>
+  <string name="choose_online_game_mode_title">wutlh Mode Qujmey Online</string>
+  <string name="choose_online_opponent">jup vItu</string>
+  <string name="select_opponent">ghol wIv</string>
+  <string name="game_style_lbl">Quj Style</string>
+  <string name="chance_of_label">eb</string>
+</resources>

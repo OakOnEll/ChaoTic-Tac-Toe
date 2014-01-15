@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Daftar Masuk dengan Google untuk berkongsi pencapaian dan bermain dengan kawan-kawan anda.</string>
+  <string name="you_are_signed_in_as">Anda mendaftar ke dalam Google + sebagai %s</string>
+  <string name="sign_out">Daftar keluar</string>
+  <string name="signing_in">Mendaftar masuk dengan Google</string>
+  <string name="signing_out">Mendaftar</string>
+  <string name="new_game_same_device">Pas Main \'N\'</string>
+  <string name="new_game_vs_ai">Mengalahkan Bot</string>
+  <string name="new_quick_game">Permainan pantas yang baru</string>
+  <string name="new_game_live">Bermain dengan rakan-rakan</string>
+  <string name="achievements">Lihat pencapaian</string>
+  <string name="achievements_not_available">Sila Daftar Masuk untuk melihat pencapaian.</string>
+  <string name="leaderboards_not_available">Sila Daftar Masuk untuk melihat leaderboards.</string>
+  <string name="sign_in_to_play_network_game">Sila Daftar Masuk untuk memulakan permainan rangkaian.</string>
+  <string name="sign_in_to_view_invites">Sila Daftar Masuk untuk melihat jemputan permainan rangkaian.</string>
+  <string name="action_settings">Seting</string>
+  <string name="received_invite_from">Menerima jemputan daripada %s.</string>
+  <string name="prompt_title_player_name">Masukkan nama pemain</string>
+  <string name="prompt_player_name">Nama untuk pemain %s</string>
+  <string name="label_player_x_name">Nama pemain X\</string>
+  <string name="label_player_o_name">Nama pemain O\</string>
+  <string name="chance_chaotic">Huru-hara</string>
+  <string name="chance_custom">Adat</string>
+  <string name="chance_reverse">Belakang</string>
+  <string name="chance_label_my_marker">Penanda anda</string>
+  <string name="chance_label_opponent_marker">Petanda mereka</string>
+  <string name="chance_label_remove_marker">Bom</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Mulakan permainan</string>
+  <string name="account_settings">Tetapan akaun</string>
+  <string name="choose_ai_mode_title">Pilih mod permainan AI</string>
+  <string name="ai_level">Tahap AI</string>
+  <string name="ai_random">Rawak</string>
+  <string name="ai_easy">Mudah</string>
+  <string name="ai_medium">Sederhana</string>
+  <string name="ai_hard">Keras</string>
+  <string name="choose_local_game_mode_title">Pilih mod permainan</string>
+  <string name="error_x_name">Masukkan nama bagi X</string>
+  <string name="error_o_name">Masukkan nama untuk O</string>
+  <string name="unique_error_o_name">Masukkan nama unik untuk O</string>
+  <string name="choose_quick_game_mode_title">Pilih mod permainan yang pantas</string>
+  <string name="choose_online_game_mode_title">Pilih mod permainan dalam talian</string>
+  <string name="choose_online_opponent">Mencari rakan</string>
+  <string name="select_opponent">Pilih lawan</string>
+  <string name="game_style_lbl">Gaya permainan</string>
+  <string name="chance_of_label">Peluang untuk</string>
+</resources>

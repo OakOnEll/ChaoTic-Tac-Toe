@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">एक खाली वर्ग में खेलते हैं।</string>
+  <string name="invalid_move_need_nonempty">बम कोई मौजूदा मार्कर पर रखें।</string>
+  <string name="button_send">भेजें</string>
+  <string name="action_chat">चैट</string>
+  <string name="player_won">%s जीता!</string>
+  <string name="draw">खेल ड्रा!</string>
+  <string name="play_again">फिर से खेलना?</string>
+  <string name="exit_waiting_play_again">छोड़ दो</string>
+  <string name="opponent_left_exit_play_again">ठीक है</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">%S के लिए फिर से खेलने के लिए तय करने के लिए इंतज़ार कर रहे।</string>
+  <string name="opponent_wants_to_play_again">%s फिर से खेलने के लिए चाहता है।</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\' t फिर से खेलना चाहते हैं।\'</string>
+  <string name="opponent_is_thinking">%s की सोच रही है।</string>
+  <string name="opponent_is_in_chat">%s में चैट है।</string>
+  <string name="peer_left_the_game">%s खेल छोड़ दिया है।</string>
+  <string name="leave_game_title">खेल छोड़ दें?</string>
+  <string name="leave_game_message">इस खेल में प्रगति छोड़ दें?</string>
+  <string name="local_player_name">तुम</string>
+  <string name="chat_title">%S के साथ चैट करें</string>
+  <string name="play_again_waiting">%S के लिए इंतजार कर</string>
+  <string name="online_setting_title">सेटिंग्स</string>
+  <string name="you_left_the_game">आप खेल छोड़ दिया है।</string>
+  <string name="chat_actionbar_image_content">चैट कार्रवाई मेनू</string>
+  <string name="num_move_lbl">ले जाता है</string>
+  <string name="num_games_lbl">खेल:</string>
+  <string name="game_stats_title">खेल आँकड़े</string>
+  <string name="player_stat_label">खिलाड़ी</string>
+  <string name="wins_stat_label">जीतता है</string>
+  <string name="losses_stat_label">घाटा</string>
+  <string name="draws_stat_label">खींचता है</string>
+  <string name="normal_game_help">परंपरागत घरेलू टीएसी Toe\nPlayer X Xs\nPlayer O नाटकों ओएस निभाता है।</string>
+  <string name="reverse_game_help">रिवर्स घरेलू टीएसी Toe\nPlayer X Os\nPlayer O नाटकों Xs निभाता है।</string>
+  <string name="complex_game_help">प्रत्येक player\ मोड़ पर, वहाँ एक मौका है वे can\nplay अपनी marker\nplay उनके opponent\ marker\ncan एक मौजूदा मार्कर के बोर्ड पर विस्फोट करने के लिए एक बम का उपयोग करें।</string>
+  <string name="player_x_lbl">प्लेयर एक्स</string>
+  <string name="player_o_lbl">खिलाड़ी ओ</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">कमरे से जुड़ने</string>
+  <string name="onRoomConnected">कमरे के लिए कनेक्ट कर रहा है</string>
+  <string name="onRoomCreated">बनाने के कक्ष</string>
+  <string name="sendRealTimeMessage">संदेश भेजना</string>
+  <string name="sendMove">चाल भेजने</string>
+  <string name="communication_error">संचार में त्रुटि:</string>
+  <string name="cannot_invite_non_tester">Can\' t एक परीक्षक खाते से गैर-परीक्षक को आमंत्रित करें\'</string>
+</resources>

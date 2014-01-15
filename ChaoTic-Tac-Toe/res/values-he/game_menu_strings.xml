@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">היכנס באמצעות גוגל לשתף הישגים ולשחק עם החברים שלך.</string>
+  <string name="you_are_signed_in_as">אתם חתומים לתוך גוגל + כ- %s</string>
+  <string name="sign_out">צא</string>
+  <string name="signing_in">החתימה עם גוגל</string>
+  <string name="signing_out">. םתוח</string>
+  <string name="new_game_same_device">לעבור לשחק \'N\'</string>
+  <string name="new_game_vs_ai">לנצח את בוט</string>
+  <string name="new_quick_game">משחק מהיר חדש</string>
+  <string name="new_game_live">לשחק עם חבר</string>
+  <string name="achievements">תצוגת הישגים</string>
+  <string name="leaderboards">תצוגת Leaderboards</string>
+  <string name="achievements_not_available">אנא התחבר \ י להציג הישגים.</string>
+  <string name="leaderboards_not_available">אנא התחבר \ י לצפות leaderboards.</string>
+  <string name="sign_in_to_play_network_game">אנא התחבר \ י להתחיל משחק ברשת.</string>
+  <string name="sign_in_to_view_invites">אנא התחבר \ י להציג הזמנות משחק רשת.</string>
+  <string name="action_settings">הגדרות</string>
+  <string name="received_invite_from">הזמנה שהתקבלה מ- %s.</string>
+  <string name="prompt_title_player_name">הזן שם שחקן</string>
+  <string name="prompt_player_name">השם לשחקן %s</string>
+  <string name="label_player_x_name">השם של שחקן X\</string>
+  <string name="label_player_o_name">השם של שחקן O\</string>
+  <string name="chance_normal">רגיל</string>
+  <string name="chance_chaotic">כאוטי</string>
+  <string name="chance_custom">מותאם אישית</string>
+  <string name="chance_reverse">הפוך</string>
+  <string name="chance_label_my_marker">הסמן שלך</string>
+  <string name="chance_label_opponent_marker">סמן שלהם</string>
+  <string name="chance_label_remove_marker">פצצה</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">תחילת המשחק</string>
+  <string name="account_settings">הגדרות חשבון</string>
+  <string name="choose_ai_mode_title">לבחור מצב המשחק AI</string>
+  <string name="ai_level">רמת AI</string>
+  <string name="ai_random">אקראי</string>
+  <string name="ai_easy">קל</string>
+  <string name="ai_medium">בינוני</string>
+  <string name="ai_hard">קשה</string>
+  <string name="choose_local_game_mode_title">לבחור מצב המשחק</string>
+  <string name="error_x_name">הזן שם עבור X</string>
+  <string name="error_o_name">הזן שם עבור O</string>
+  <string name="unique_error_o_name">הזן שם ייחודי עבור O</string>
+  <string name="choose_quick_game_mode_title">בחר מצב משחק מהיר</string>
+  <string name="choose_online_game_mode_title">בחרו מצב משחק מקוון</string>
+  <string name="choose_online_opponent">למצוא חבר</string>
+  <string name="select_opponent">בחר את היריב</string>
+  <string name="game_style_lbl">סגנון משחק</string>
+  <string name="chance_of_label">הסיכוי</string>
+</resources>

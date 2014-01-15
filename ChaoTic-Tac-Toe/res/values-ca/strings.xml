@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Caòtic-Tac-Toe</string>
+  <string name="yes">Sí</string>
+  <string name="ok">CORRECTE</string>
+  <string name="title_game">Caòtic-Tac-Toe</string>
+  <string name="pref_sound_fx">Jugar a efectes de so</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

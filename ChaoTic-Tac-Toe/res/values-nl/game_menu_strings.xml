@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Meld u aan met Google te delen resultaten en spelen met je vrienden.</string>
+  <string name="you_are_signed_in_as">Je bent aangemeld bij Google + als %s</string>
+  <string name="sign_out">Afmelden</string>
+  <string name="signing_in">Aanmelden met een Google</string>
+  <string name="signing_out">Afmelden</string>
+  <string name="new_game_vs_ai">Verslaan de Bot</string>
+  <string name="new_quick_game">Nieuwe snelle spel</string>
+  <string name="new_game_live">Spelen met een vriend</string>
+  <string name="achievements">Weergave prestaties</string>
+  <string name="leaderboards">Weergave Leaderboards</string>
+  <string name="achievements_not_available">Gelieve aan te melden om resultaten weer te geven.</string>
+  <string name="leaderboards_not_available">Gelieve aan te melden om te bekijken leaderboards.</string>
+  <string name="sign_in_to_play_network_game">Gelieve aan te melden om een genetwerkte spel te starten.</string>
+  <string name="sign_in_to_view_invites">Gelieve aan te melden om te bekijken netwerk spel uitnodigingen.</string>
+  <string name="action_settings">Instellingen</string>
+  <string name="received_invite_from">Ontvangen uitnodiging van %s.</string>
+  <string name="prompt_title_player_name">Voer voor spelernaam</string>
+  <string name="prompt_player_name">Naam voor speler %s</string>
+  <string name="label_player_x_name">Player X\ naam</string>
+  <string name="label_player_o_name">Player O\ naam</string>
+  <string name="chance_normal">Normaal</string>
+  <string name="chance_chaotic">Chaotische</string>
+  <string name="chance_custom">Aangepaste</string>
+  <string name="chance_reverse">Omgekeerde</string>
+  <string name="chance_label_my_marker">Uw markering</string>
+  <string name="chance_label_opponent_marker">Hun Marker</string>
+  <string name="chance_label_remove_marker">Bom</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Start spel</string>
+  <string name="account_settings">Accountinstellingen</string>
+  <string name="choose_ai_mode_title">AI spel modus kiezen</string>
+  <string name="ai_level">AI niveau</string>
+  <string name="ai_random">Willekeurige</string>
+  <string name="ai_easy">Gemakkelijk</string>
+  <string name="choose_local_game_mode_title">Game-modus kiezen</string>
+  <string name="error_x_name">Voer een naam in voor X</string>
+  <string name="error_o_name">Voer een naam in voor O</string>
+  <string name="unique_error_o_name">Geef een unieke naam voor O</string>
+  <string name="choose_quick_game_mode_title">Snelle spel modus kiezen</string>
+  <string name="choose_online_game_mode_title">Kies Online spel modus</string>
+  <string name="choose_online_opponent">Vinden vriend</string>
+  <string name="select_opponent">Selecteer tegenstander</string>
+  <string name="game_style_lbl">Spelstijl</string>
+  <string name="chance_of_label">Kans op</string>
+</resources>

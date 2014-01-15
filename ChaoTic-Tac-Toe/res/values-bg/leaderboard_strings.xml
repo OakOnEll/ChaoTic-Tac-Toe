@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Beat си дневни максимални ходове в хаотична игра: %s</string>
+  <string name="beat_weekly_max">Beat си седмичен максимум хода в една хаотична игра: %s</string>
+  <string name="beat_alltime_max">Победи всички време максимално се движи в една хаотична игра: %s</string>
+  <string name="beat_daily_min">Beat си ежедневно минимално ходове в хаотична игра: %s</string>
+  <string name="beat_weekly_min">Beat си седмичен минимум ходове в хаотична игра: %s</string>
+  <string name="beat_alltime_min">Победи всички време минимум се движи в една хаотична игра: %s</string>
+  <string name="beat_daily_wins">Победи ежедневно максимално победи в сесия: %s</string>
+  <string name="beat_weekly_wins">Победи седмичен максимално победи в сесия: %s</string>
+  <string name="beat_alltime_wins">Победи всички време максимално победи в сесия: %s</string>
+</resources>

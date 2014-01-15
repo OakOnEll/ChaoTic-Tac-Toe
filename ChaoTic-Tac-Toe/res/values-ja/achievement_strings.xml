@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">達成</string>
+  <string name="offline_achievement_only_xs_or_os">: Xs か Os のみ</string>
+  <string name="offline_achievement_chaotic_draw">カオスの描く: カオス モードで描く。</string>
+  <string name="offline_achievement_deja_vu">Deja Vu： 同じゲームの状態 3 は、ゲームに移動します。</string>
+  <string name="offline_achievement_long_haul">長距離: 20 の動きとカオス ゲームをプレイします。</string>
+  <string name="offline_achievement_with_a_little_help">あなたの友人から少し助けを借りて： 3 での勝利を移動します。</string>
+  <string name="offline_achievement_clean_slate">クリーン スレート: 5 を移動した後に初期状態に戻ります。</string>
+  <string name="offline_achievement_reverse_win">リバーシ: 逆スタイルのゲームに勝ちます。</string>
+  <string name="offline_achievement_the_good_samaritan">良きサマリア人: 3 動きであなたの相手の勝利を助けます。</string>
+  <string name="offline_achievement_two_birds_with_one_stone">1 つの石で二羽の鳥： 一度に 2 つの方向で試合に勝ちます。</string>
+  <string name="offline_achievement_good_sport">良いスポーツ： 場所あなたの相手の勝利移動を余儀なくされました。</string>
+  <string name="offline_achievement_fork_in_the_road">道路の分岐点: 複数の方法のいずれかで試合に勝ちます。</string>
+  <string name="offline_achievement_oops">おっと： 再生、凡の勝利を移動あなたの対戦相手。</string>
+  <string name="offline_achievement_friendly_fire">フレンドリーファイアー： 不必要にあなた自身のマーカーの 1 つを爆弾します。</string>
+  <string name="offline_achievement_missed_opportunities">逃された機会： 勝利の演奏ミスを移動します。</string>
+  <string name="offline_achievement_the_forced_hand">複数の強制勝利の 1 つの相手の動き、強制手： 再生。</string>
+</resources>

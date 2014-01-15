@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Chaotické Tac Toe</string>
+  <string name="yes">Ano</string>
+  <string name="no">Ne</string>
+  <string name="ok">Ok</string>
+  <string name="cancel">Storno</string>
+  <string name="title_game">Chaotické Tac Toe</string>
+  <string name="pref_sound_fx">Přehrávat zvukové efekty</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

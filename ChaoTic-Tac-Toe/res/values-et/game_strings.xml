@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Mängida tühja ruutu.</string>
+  <string name="invalid_move_need_nonempty">Pomm asetamiseks olemasolevale marker.</string>
+  <string name="button_send">Saada</string>
+  <string name="action_chat">Vestlus</string>
+  <string name="player_won">%s võitis!</string>
+  <string name="draw">Joonista mäng!</string>
+  <string name="play_again">Uuesti mängida?</string>
+  <string name="exit_waiting_play_again">Jätke</string>
+  <string name="opponent_left_exit_play_again">Ok</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Ootan %s otsustada uuesti mängida.</string>
+  <string name="opponent_wants_to_play_again">%s tahab uuesti mängida.</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\'t tahan uuesti mängida.\'</string>
+  <string name="opponent_is_thinking">%s on mõtlemine.</string>
+  <string name="opponent_is_in_chat">%s on vestlus.</string>
+  <string name="peer_left_the_game">%s lahkus mängust.</string>
+  <string name="leave_game_title">Jäta mängu?</string>
+  <string name="leave_game_message">Jäta mäng pooleli?</string>
+  <string name="local_player_name">Te</string>
+  <string name="chat_title">Vestelge %s</string>
+  <string name="play_again_waiting">Ootan %s</string>
+  <string name="online_setting_title">Seaded</string>
+  <string name="you_left_the_game">Sa jätsid mängu.</string>
+  <string name="chat_actionbar_image_content">Menüü vestlus tegevus</string>
+  <string name="num_move_lbl">Liigub</string>
+  <string name="num_games_lbl">Mängud:</string>
+  <string name="game_stats_title">Mängude statistika</string>
+  <string name="player_stat_label">Mängija</string>
+  <string name="wins_stat_label">Võidab</string>
+  <string name="losses_stat_label">Kaod</string>
+  <string name="draws_stat_label">Juhib</string>
+  <string name="normal_game_help">Traditsiooniline Tic Tac Toe\nPlayer X mängib Xs\nPlayer O mängib Os.</string>
+  <string name="reverse_game_help">Vastupidine Tic Tac Toe\nPlayer X mängib Os\nPlayer O mängib Xs.</string>
+  <string name="complex_game_help">Iga player\ Turn on võimalus nad can\nplay oma marker\nplay nende opponent\ marker\ncan abil pommi plahvatada olemasolevate marker laual.</string>
+  <string name="player_x_lbl">Mängija X</string>
+  <string name="player_o_lbl">Mängija O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Liitumine tuba</string>
+  <string name="onRoomConnected">Connecting Room</string>
+  <string name="onRoomCreated">Luua ruumi</string>
+  <string name="sendRealTimeMessage">Sõnumi saatmine</string>
+  <string name="sendMove">Saates liikuda</string>
+  <string name="communication_error">Tõrge side:</string>
+  <string name="cannot_invite_non_tester">Can\'t kutsuda tester tester kontolt\'</string>
+</resources>

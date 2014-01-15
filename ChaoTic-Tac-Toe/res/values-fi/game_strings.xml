@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Pelaa tyhjään ruutuun.</string>
+  <string name="invalid_move_need_nonempty">Sijoita pommi nykyisten merkki.</string>
+  <string name="button_send">Lähetä</string>
+  <string name="player_won">%s voitti!</string>
+  <string name="draw">Piirrä peli!</string>
+  <string name="play_again">Haluatko pelata uudelleen?</string>
+  <string name="exit_waiting_play_again">Jätä</string>
+  <string name="opponent_left_exit_play_again">Okei</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Odottelen %s päättää pelata uudelleen.</string>
+  <string name="opponent_wants_to_play_again">%s haluaa pelata uudestaan.</string>
+  <string name="opponent_does_not_want_to_play_again">%s Doesnt\'t haluavat pelata uudelleen.\'</string>
+  <string name="opponent_is_thinking">%s on ajatellut.</string>
+  <string name="opponent_is_in_chat">%s on chat.</string>
+  <string name="peer_left_the_game">%s on lopettanut pelin.</string>
+  <string name="leave_game_title">Jätä peli?</string>
+  <string name="leave_game_message">Jätä peli käynnissä?</string>
+  <string name="local_player_name">Voit</string>
+  <string name="chat_title">Chat on %s</string>
+  <string name="play_again_waiting">Odottelen %s</string>
+  <string name="online_setting_title">Asetukset</string>
+  <string name="you_left_the_game">Jätit peli.</string>
+  <string name="chat_actionbar_image_content">Chat toiminto-valikko</string>
+  <string name="num_move_lbl">Liikkuu</string>
+  <string name="num_games_lbl">Pelit:</string>
+  <string name="game_stats_title">Pelin tilastot</string>
+  <string name="player_stat_label">Soitin</string>
+  <string name="wins_stat_label">Voittaa</string>
+  <string name="losses_stat_label">Tappiot</string>
+  <string name="draws_stat_label">Kiinnittää</string>
+  <string name="normal_game_help">Perinteinen Tic Tac Toe\nPlayer X Pelaa Xs\nPlayer O soittaa Os.</string>
+  <string name="reverse_game_help">Käänteinen Tic Tac Toe\nPlayer X Pelaa Os\nPlayer O soittaa Xs.</string>
+  <string name="complex_game_help">Kunkin player\ puolestaan on mahdollista, he can\nplay omia marker\nplay niiden opponent\ marker\ncan käyttää pommi räjähtää nykyisten merkitsin hallituksen.</string>
+  <string name="player_x_lbl">Pelaaja X</string>
+  <string name="player_o_lbl">Pelaaja O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Liittymällä Tietoa</string>
+  <string name="onRoomConnected">Yhdistävä huoneeseen</string>
+  <string name="onRoomCreated">Tilaa</string>
+  <string name="sendRealTimeMessage">Viestin lähettäminen</string>
+  <string name="sendMove">Lähettää liikkua</string>
+  <string name="communication_error">Virhe tiedonannossa:</string>
+  <string name="cannot_invite_non_tester">Erikoiskieli\'t kutsua ei-testaaja testaaja-tililtä\'</string>
+</resources>

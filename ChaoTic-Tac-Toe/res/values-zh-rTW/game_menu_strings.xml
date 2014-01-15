@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">登錄谷歌分享成就和你的朋友一起玩。</string>
+  <string name="you_are_signed_in_as">您登錄到 Google + 作為 %s</string>
+  <string name="sign_out">登出</string>
+  <string name="signing_in">登錄谷歌</string>
+  <string name="signing_out">退出</string>
+  <string name="new_game_same_device">通過 \'N 播放\'</string>
+  <string name="new_game_vs_ai">打 Bot</string>
+  <string name="new_quick_game">新的快速遊戲</string>
+  <string name="new_game_live">和一個朋友一起玩</string>
+  <string name="achievements">查看成就</string>
+  <string name="leaderboards">查看排行榜</string>
+  <string name="achievements_not_available">請登錄以查看取得的成就。</string>
+  <string name="leaderboards_not_available">請登錄以查看排行榜。</string>
+  <string name="sign_in_to_play_network_game">請登錄，開始一個聯網的遊戲。</string>
+  <string name="sign_in_to_view_invites">請登錄以查看網路遊戲邀請。</string>
+  <string name="action_settings">設置</string>
+  <string name="received_invite_from">從 %s 接收的邀請。</string>
+  <string name="prompt_title_player_name">輸入玩家名字</string>
+  <string name="prompt_player_name">播放機 %s 的名稱</string>
+  <string name="label_player_x_name">播放機 X\ 名稱</string>
+  <string name="label_player_o_name">播放機 O\ 名稱</string>
+  <string name="chance_normal">正常</string>
+  <string name="chance_chaotic">混沌</string>
+  <string name="chance_custom">自訂</string>
+  <string name="chance_reverse">反向</string>
+  <string name="chance_label_my_marker">您的標記</string>
+  <string name="chance_label_opponent_marker">他們的標誌</string>
+  <string name="chance_label_remove_marker">炸彈</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">開始遊戲</string>
+  <string name="account_settings">帳戶設置</string>
+  <string name="choose_ai_mode_title">選擇 AI 遊戲模式</string>
+  <string name="ai_level">AI 水準</string>
+  <string name="ai_random">隨機</string>
+  <string name="ai_easy">很容易</string>
+  <string name="ai_medium">介質</string>
+  <string name="ai_hard">硬</string>
+  <string name="choose_local_game_mode_title">選擇遊戲模式</string>
+  <string name="error_x_name">為 X 輸入一個名稱</string>
+  <string name="error_o_name">O 為輸入一個名稱</string>
+  <string name="unique_error_o_name">請輸入一個唯一的名稱為 O</string>
+  <string name="choose_quick_game_mode_title">選擇快速遊戲模式</string>
+  <string name="choose_online_game_mode_title">連線遊戲模式的選擇</string>
+  <string name="choose_online_opponent">找朋友</string>
+  <string name="select_opponent">選擇對手</string>
+  <string name="game_style_lbl">遊戲風格</string>
+  <string name="chance_of_label">機會</string>
+</resources>

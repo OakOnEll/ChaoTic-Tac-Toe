@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Συνδεθείτε με το Google για να μοιράζονται τα επιτεύγματα και να παίξετε με τους φίλους σας.</string>
+  <string name="you_are_signed_in_as">Είστε συνδεδεμένοι στον Google + ως %s</string>
+  <string name="sign_out">Εξέλθετε</string>
+  <string name="signing_in">Εισέλθετε με το Google</string>
+  <string name="signing_out">Υπογράφω έξω</string>
+  <string name="new_game_same_device">Περάσει \'N παιχνίδι\'</string>
+  <string name="new_game_vs_ai">Νικήσει το Bot</string>
+  <string name="new_quick_game">Νέο γρήγορο παιχνίδι</string>
+  <string name="new_game_live">Παίξει με έναν φίλο</string>
+  <string name="achievements">Προβολή επιτεύγματα</string>
+  <string name="leaderboards">Προβολή πίνακες βαθμολογίας</string>
+  <string name="achievements_not_available">Παρακαλώ συνδεθείτε για να δείτε τα επιτεύγματα.</string>
+  <string name="leaderboards_not_available">Παρακαλώ συνδεθείτε για να δείτε τα leaderboards.</string>
+  <string name="sign_in_to_play_network_game">Παρακαλώ συνδεθείτε για να αρχίσετε ένα δικτυωμένο παιχνίδι.</string>
+  <string name="sign_in_to_view_invites">Παρακαλώ συνδεθείτε για να δείτε δίκτυο παιχνίδι προσκλήσεις.</string>
+  <string name="action_settings">Ρυθμίσεις</string>
+  <string name="received_invite_from">Έλαβε πρόσκληση από %s.</string>
+  <string name="prompt_title_player_name">Εισάγετε το όνομα του παίκτη</string>
+  <string name="prompt_player_name">Όνομα για παίκτη %s</string>
+  <string name="label_player_x_name">Το όνομα του παίκτη X\</string>
+  <string name="label_player_o_name">Το όνομα του παίκτη O\</string>
+  <string name="chance_normal">Κανονική</string>
+  <string name="chance_chaotic">Χαοτική</string>
+  <string name="chance_custom">Προσαρμοσμένη</string>
+  <string name="chance_reverse">Αντίστροφη</string>
+  <string name="chance_label_my_marker">Το δείκτη του ποντικιού</string>
+  <string name="chance_label_opponent_marker">Τους δείκτης</string>
+  <string name="chance_label_remove_marker">Βόμβα</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Έναρξη του παιχνίδι</string>
+  <string name="account_settings">Ρυθμίσεις λογαριασμού</string>
+  <string name="choose_ai_mode_title">Επιλέξτε τη λειτουργία παιχνίδι AI</string>
+  <string name="ai_level">Επίπεδο AI</string>
+  <string name="ai_random">Τυχαία</string>
+  <string name="ai_easy">Εύκολη</string>
+  <string name="ai_medium">Μέσο</string>
+  <string name="ai_hard">Σκληρό</string>
+  <string name="choose_local_game_mode_title">Επιλέξτε τη λειτουργία παιχνίδι</string>
+  <string name="error_x_name">Πληκτρολογήστε ένα όνομα για το X</string>
+  <string name="error_o_name">Πληκτρολογήστε ένα όνομα για O</string>
+  <string name="unique_error_o_name">Πληκτρολογήστε ένα μοναδικό όνομα για O</string>
+  <string name="choose_quick_game_mode_title">Επιλέξτε γρήγορη λειτουργία παιχνίδι</string>
+  <string name="choose_online_game_mode_title">Επιλέξτε Online Mode παιχνίδι</string>
+  <string name="choose_online_opponent">Βρείτε φίλο</string>
+  <string name="select_opponent">Επιλέξτε τον αντίπαλό</string>
+  <string name="game_style_lbl">Στυλ παιχνιδιού</string>
+  <string name="chance_of_label">Πιθανότητα</string>
+</resources>

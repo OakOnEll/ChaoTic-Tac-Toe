@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Præstation</string>
+  <string name="offline_achievement_only_xs_or_os">: Kun Xs eller Os</string>
+  <string name="offline_achievement_chaotic_draw">Kaotisk Draw: Uafgjort i kaotiske tilstand.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Samme spil tilstand tre bevæger sig i et spil.</string>
+  <string name="offline_achievement_long_haul">Langdistanceflyvninger: Spille et kaotisk spil med 20 flytter.</string>
+  <string name="offline_achievement_with_a_little_help">Med lidt hjælp fra dine venner: sejr i 3 flytter.</string>
+  <string name="offline_achievement_clean_slate">Ren tavle: Vende tilbage til oprindelige tilstand efter 5 træk.</string>
+  <string name="offline_achievement_reverse_win">Reversi: Vinde en omvendt stil spil.</string>
+  <string name="offline_achievement_the_good_samaritan">Den barmhjertige samaritaner: Hjælpe din modstander sejr i 3 træk.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">To fluer med ét smæk: vinde et spil i to retninger på en gang.</string>
+  <string name="offline_achievement_good_sport">God Sport: Sted tvunget vindende flytte til din modstander.</string>
+  <string name="offline_achievement_fork_in_the_road">Gaffel i vejen: vinder et spil på flere måder.</string>
+  <string name="offline_achievement_oops">Ups: Spille en forceret vindende flytte til din modstander.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Unødigt bombe en af dine egne mærker.</string>
+  <string name="offline_achievement_missed_opportunities">Ubesvarede Opportunites: Miss spiller en vindende flytte.</string>
+  <string name="offline_achievement_the_forced_hand">Den forcerede hånd: Spille et af flere tvungne vindende flytter til din modstander.</string>
+</resources>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">空の四角形で再生します。</string>
+  <string name="invalid_move_need_nonempty">既存のマーカーに爆弾を配置します。</string>
+  <string name="button_send">送信</string>
+  <string name="action_chat">チャット</string>
+  <string name="player_won">%s 獲得しています ！</string>
+  <string name="draw">ゲームを描く ！</string>
+  <string name="play_again">もう一度再生できますか？</string>
+  <string name="exit_waiting_play_again">残す</string>
+  <string name="opponent_left_exit_play_again">わかりました</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">%S にもう一度再生することを決定を待っています。</string>
+  <string name="opponent_wants_to_play_again">%s もう一度プレーしたいです。</string>
+  <string name="opponent_does_not_want_to_play_again">%s の doesn\' t がもう一度プレイしたいです。\'</string>
+  <string name="opponent_is_thinking">%s は考えています。</string>
+  <string name="opponent_is_in_chat">%s はチャット中です。</string>
+  <string name="peer_left_the_game">%s はゲームを離れました。</string>
+  <string name="leave_game_title">ゲームを残すか？</string>
+  <string name="leave_game_message">進行中のゲームを残してますか？</string>
+  <string name="local_player_name">あなた</string>
+  <string name="chat_title">%S とチャットします。</string>
+  <string name="play_again_waiting">%S を待っています。</string>
+  <string name="online_setting_title">設定</string>
+  <string name="you_left_the_game">あなたはゲームを離れました。</string>
+  <string name="chat_actionbar_image_content">チャット メニューのアクション</string>
+  <string name="num_move_lbl">移動</string>
+  <string name="num_games_lbl">ゲーム:</string>
+  <string name="game_stats_title">ゲームの統計情報</string>
+  <string name="player_stat_label">プレーヤー</string>
+  <string name="losses_stat_label">損失</string>
+  <string name="draws_stat_label">描画します</string>
+  <string name="normal_game_help">伝統的な Tic Tac Toe\nPlayer X Xs\nPlayer O 演劇 Os を果たしています。</string>
+  <string name="reverse_game_help">逆の Tic Tac Toe\nPlayer X Os\nPlayer O 演劇 Xs を果たしています。</string>
+  <string name="complex_game_help">各 player\ のターンでチャンスがある彼ら can\nplay 自分 marker\nplay opponent\ の marker\ncan ボード上既存のマーカーを爆発する爆弾を使用します。</string>
+  <string name="player_x_lbl">プレーヤー X</string>
+  <string name="player_o_lbl">プレーヤー O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">ルームに参加します。</string>
+  <string name="onRoomConnected">部屋への接続</string>
+  <string name="onRoomCreated">部屋を作成します。</string>
+  <string name="sendRealTimeMessage">メッセージを送信します。</string>
+  <string name="sendMove">移動を送信します。</string>
+  <string name="communication_error">通信エラー:</string>
+  <string name="cannot_invite_non_tester">テスト担当者のアカウントから非テスターを招待 \' t Can\'</string>
+</resources>

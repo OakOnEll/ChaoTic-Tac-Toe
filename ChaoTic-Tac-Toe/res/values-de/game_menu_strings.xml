@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Melden Sie sich mit Google Errungenschaften zu teilen und mit Ihren Freunden spielen.</string>
+  <string name="you_are_signed_in_as">Sie werden bei Google + angemeldet, als %s</string>
+  <string name="sign_out">Melden Sie sich</string>
+  <string name="signing_in">Anmelden mit Google</string>
+  <string name="signing_out">Abmelden</string>
+  <string name="new_game_vs_ai">Der Bot zu schlagen</string>
+  <string name="new_quick_game">Neue schnelles Spiel</string>
+  <string name="new_game_live">Mit einem Freund spielen</string>
+  <string name="achievements">Ansicht-Leistungen</string>
+  <string name="leaderboards">Ansicht-Ranglisten</string>
+  <string name="achievements_not_available">Bitte melden Sie zum Erfolge zu sehen an.</string>
+  <string name="leaderboards_not_available">Bitte melden Sie um Ranglisten anzuzeigen an.</string>
+  <string name="sign_in_to_play_network_game">Bitte melden Sie um ein Netzwerkspiel starten an.</string>
+  <string name="sign_in_to_view_invites">Bitte melden Sie zum Netzwerk Spiel Einladungen anzeigen an.</string>
+  <string name="action_settings">Einstellungen</string>
+  <string name="received_invite_from">Erhaltene Einladung von %s.</string>
+  <string name="prompt_title_player_name">Spielername eingeben</string>
+  <string name="prompt_player_name">Namen für Spieler %s</string>
+  <string name="label_player_x_name">Player X\ name</string>
+  <string name="label_player_o_name">Player O\ name</string>
+  <string name="chance_chaotic">Chaotische</string>
+  <string name="chance_reverse">Rückseite</string>
+  <string name="chance_label_my_marker">Ihre Marker</string>
+  <string name="chance_label_opponent_marker">Ihre Marker</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Spiel starten</string>
+  <string name="account_settings">Kontoeinstellungen</string>
+  <string name="choose_ai_mode_title">Wählen Sie den AI-Spiel-Modus</string>
+  <string name="ai_level">AI-Ebene</string>
+  <string name="ai_random">Zufällige</string>
+  <string name="ai_easy">Einfach</string>
+  <string name="ai_hard">Schwer</string>
+  <string name="choose_local_game_mode_title">Spielmodus wählen</string>
+  <string name="error_x_name">Geben Sie einen Namen für X</string>
+  <string name="error_o_name">Geben Sie einen Namen für O</string>
+  <string name="unique_error_o_name">Geben Sie einen eindeutigen Namen für O</string>
+  <string name="choose_quick_game_mode_title">Schnelle Spielmodus wählen</string>
+  <string name="choose_online_game_mode_title">Wählen Sie Online-Spiel-Modus</string>
+  <string name="choose_online_opponent">Freund finden</string>
+  <string name="select_opponent">Wählen Sie Gegner</string>
+  <string name="game_style_lbl">Spielstil</string>
+  <string name="chance_of_label">Chance</string>
+</resources>

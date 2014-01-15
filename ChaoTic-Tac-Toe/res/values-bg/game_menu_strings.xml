@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Влезте с Google да споделя постижения и да играе с приятелите си.</string>
+  <string name="you_are_signed_in_as">Вие сте влезли в Google + като %s</string>
+  <string name="sign_out">Излизане</string>
+  <string name="signing_in">Влизане с Google</string>
+  <string name="signing_out">Излизане</string>
+  <string name="new_game_same_device">Проход \'N игра\'</string>
+  <string name="new_game_vs_ai">Beat бот</string>
+  <string name="new_quick_game">Нова бърза игра</string>
+  <string name="new_game_live">Играя с един приятел</string>
+  <string name="achievements">Преглед на постиженията</string>
+  <string name="leaderboards">Преглед класация</string>
+  <string name="achievements_not_available">Моля, влезте в за да видите постижения.</string>
+  <string name="leaderboards_not_available">Моля, влезте в за да видите класации.</string>
+  <string name="sign_in_to_play_network_game">Моля, влезте в, за да започнете игра на мрежа.</string>
+  <string name="sign_in_to_view_invites">Моля, влезте в за да видите мрежа покани за игри.</string>
+  <string name="action_settings">Настройки</string>
+  <string name="received_invite_from">Получи покана от %s.</string>
+  <string name="prompt_title_player_name">Въведете име на играч</string>
+  <string name="prompt_player_name">Име на играч %s</string>
+  <string name="label_player_x_name">Име на играч X\</string>
+  <string name="label_player_o_name">Име на играч о</string>
+  <string name="chance_normal">Нормален</string>
+  <string name="chance_chaotic">Хаотична</string>
+  <string name="chance_custom">По избор</string>
+  <string name="chance_reverse">Заден ход</string>
+  <string name="chance_label_my_marker">Вашия маркер</string>
+  <string name="chance_label_opponent_marker">Техните маркер</string>
+  <string name="chance_label_remove_marker">Бомба</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Започнете играта</string>
+  <string name="account_settings">Настройки на акаунт</string>
+  <string name="choose_ai_mode_title">Изберете режим на игра AI</string>
+  <string name="ai_level">AI ниво</string>
+  <string name="ai_random">Случайни</string>
+  <string name="ai_easy">Лесно</string>
+  <string name="ai_medium">Средно</string>
+  <string name="ai_hard">Твърд</string>
+  <string name="choose_local_game_mode_title">Изберете режим на игра</string>
+  <string name="error_x_name">Въведете име за X</string>
+  <string name="error_o_name">Въведете име за О</string>
+  <string name="unique_error_o_name">Въведете уникално име за О</string>
+  <string name="choose_quick_game_mode_title">Изберете бърз режим на игра</string>
+  <string name="choose_online_game_mode_title">Изберете режим за онлайн игра</string>
+  <string name="choose_online_opponent">Намери приятел</string>
+  <string name="select_opponent">Изберете противник</string>
+  <string name="game_style_lbl">Стил на игра</string>
+  <string name="chance_of_label">Шанс за</string>
+</resources>

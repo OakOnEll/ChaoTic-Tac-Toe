@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">성과 공유 하 고 당신의 친구와 함께 플레이를 Google로 로그인 합니다.</string>
+  <string name="you_are_signed_in_as">%S 구글 +에 로그인</string>
+  <string name="sign_out">로그 아웃</string>
+  <string name="signing_in">Google를 사용 하 여 서명</string>
+  <string name="signing_out">로그 아웃</string>
+  <string name="new_game_same_device">\'N 플레이 패스\'</string>
+  <string name="new_game_vs_ai">로봇을 이길</string>
+  <string name="new_quick_game">새로운 빠른 게임</string>
+  <string name="new_game_live">친구와 함께 플레이</string>
+  <string name="achievements">보기 업적</string>
+  <string name="leaderboards">보기 리더</string>
+  <string name="achievements_not_available">성과 보려면 로그인 하시기 바랍니다.</string>
+  <string name="leaderboards_not_available">순위표를 보려면 로그인 하시기 바랍니다.</string>
+  <string name="sign_in_to_play_network_game">네트워크 게임을 시작 하려면 로그인 하세요.</string>
+  <string name="sign_in_to_view_invites">네트워크 게임 초대를 보려면 로그인 하시기 바랍니다.</string>
+  <string name="action_settings">설정</string>
+  <string name="received_invite_from">%S 받은 초대장.</string>
+  <string name="prompt_title_player_name">플레이어 이름을 입력합니다</string>
+  <string name="prompt_player_name">플레이어 %s 대 한 이름</string>
+  <string name="label_player_x_name">선수 X\의 이름</string>
+  <string name="label_player_o_name">선수 O\의 이름</string>
+  <string name="chance_normal">정상</string>
+  <string name="chance_chaotic">혼란</string>
+  <string name="chance_custom">사용자 지정</string>
+  <string name="chance_reverse">리버스</string>
+  <string name="chance_label_my_marker">당신의 마커</string>
+  <string name="chance_label_opponent_marker">그들의 표식</string>
+  <string name="chance_label_remove_marker">폭탄</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">게임 시작</string>
+  <string name="account_settings">계정 설정</string>
+  <string name="choose_ai_mode_title">인공 지능 게임 모드 선택</string>
+  <string name="ai_level">인공 지능 수준</string>
+  <string name="ai_random">무작위</string>
+  <string name="ai_easy">쉬운</string>
+  <string name="ai_medium">매체</string>
+  <string name="ai_hard">하드</string>
+  <string name="choose_local_game_mode_title">게임 모드 선택</string>
+  <string name="error_x_name">X에 대 한 이름을 입력합니다</string>
+  <string name="error_o_name">O에 대 한 이름을 입력합니다</string>
+  <string name="unique_error_o_name">O에 대 한 고유 이름을 입력합니다</string>
+  <string name="choose_quick_game_mode_title">빠른 게임 모드 선택</string>
+  <string name="choose_online_game_mode_title">온라인 게임 모드 선택</string>
+  <string name="choose_online_opponent">친구 찾기</string>
+  <string name="select_opponent">상대 선택</string>
+  <string name="game_style_lbl">게임 스타일</string>
+  <string name="chance_of_label">기회</string>
+</resources>

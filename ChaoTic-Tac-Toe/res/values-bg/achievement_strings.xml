@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Постигането</string>
+  <string name="offline_achievement_only_xs_or_os">: Само Xs или Os</string>
+  <string name="offline_achievement_chaotic_draw">Хаотична изготвя: Реми в хаотична режим.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Една и съща игра държава три се движи в една игра.</string>
+  <string name="offline_achievement_long_haul">Дълги разстояния: Играе хаотична игра с 20 хода.</string>
+  <string name="offline_achievement_with_a_little_help">С малко помощ от приятелите си: победа в 3 хода.</string>
+  <string name="offline_achievement_clean_slate">Чисто: Връщане към първоначалното състояние след 5 движения.</string>
+  <string name="offline_achievement_reverse_win">Реверси: Спечели обратно стил на игра.</string>
+  <string name="offline_achievement_the_good_samaritan">Добрия самарянин: Помогне вашия опонент победа в 3 ходове.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Две птици с един камък: спечели игра в две посоки едновременно.</string>
+  <string name="offline_achievement_good_sport">Добър спорт: Място принудени печеливш ход за противника.</string>
+  <string name="offline_achievement_fork_in_the_road">Разклонение на пътя: спечели игра в един от няколко начина.</string>
+  <string name="offline_achievement_oops">Опа: Играят непредизвикани печеливш ход за противника.</string>
+  <string name="offline_achievement_friendly_fire">Приятелски огън: Ненужно бомба един от вашите собствени маркери.</string>
+  <string name="offline_achievement_missed_opportunities">Пропуснати Opportunites: Мис играе печеливша се движат.</string>
+  <string name="offline_achievement_the_forced_hand">Принудителната ръка: Играе един от множество Принудителна движения за противника.</string>
+</resources>

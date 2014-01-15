@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Assoliment</string>
+  <string name="offline_achievement_only_xs_or_os">: Només Xs o Os</string>
+  <string name="offline_achievement_chaotic_draw">Sorteig caòtic: Un empat en el Mode caòtic.</string>
+  <string name="offline_achievement_deja_vu">El Deja Vu: Mateix joc estat tres moviments en un joc.</string>
+  <string name="offline_achievement_long_haul">El llarg termini: Juga un joc caòtica amb 20 moviments.</string>
+  <string name="offline_achievement_with_a_little_help">Amb una mica d\'ajuda dels seus amics: victòria en 3 es mou.\'</string>
+  <string name="offline_achievement_clean_slate">Pissarra neta: Retorn a l\'estat inicial després 5 es mou.\'</string>
+  <string name="offline_achievement_reverse_win">Reversi: Guanya un revers estil de joc.</string>
+  <string name="offline_achievement_the_good_samaritan">El bon samarità: Ajudar el seu adversari guanya en 3 moviments.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Dos ocells amb una pedra: guanyar una partida en dues direccions alhora.</string>
+  <string name="offline_achievement_good_sport">El bon esport: Lloc forçat moviment guanyador perquè el seu oponent.</string>
+  <string name="offline_achievement_fork_in_the_road">Forquilla a la carretera: guanyar cap joc en un dels múltiples formes.</string>
+  <string name="offline_achievement_oops">UI: Jugar un moviment guanyador no forçats per al teu oponent.</string>
+  <string name="offline_achievement_friendly_fire">Foc amic: Innecessàriament bombardejar un dels seus propis marcadors.</string>
+  <string name="offline_achievement_missed_opportunities">Opportunites perduda: Miss jugant un guanyador moure.</string>
+  <string name="offline_achievement_the_forced_hand">La mà forçades: Jugar un dels múltiples moviments forçats guanyadors per al teu oponent.</string>
+</resources>

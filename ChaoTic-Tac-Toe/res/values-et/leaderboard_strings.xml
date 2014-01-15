@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Sa peksid oma igapäevane maksimaalne käigud kaootiline mäng: %s</string>
+  <string name="beat_weekly_max">Sa peksid oma iganädalast maksimaalset käigud kaootiline mäng: %s</string>
+  <string name="beat_alltime_max">Sa peksid oma kogu aeg maksimaalne käigud kaootiline mäng: %s</string>
+  <string name="beat_daily_min">Sa peksid oma igapäevane minimaalne käigud kaootiline mäng: %s</string>
+  <string name="beat_weekly_min">Sa peksid oma iganädalane minimaalne käigud kaootiline mäng: %s</string>
+  <string name="beat_alltime_min">Sa peksid oma kogu aeg minimaalne käigud kaootiline mäng: %s</string>
+  <string name="beat_daily_wins">Sa peksid oma igapäevane maksimaalne võitu istungil: %s</string>
+  <string name="beat_weekly_wins">Sa peksid oma iganädalast maksimaalset võitu istungil: %s</string>
+  <string name="beat_alltime_wins">Sa peksid oma kogu aja suurim võitu istungil: %s</string>
+</resources>

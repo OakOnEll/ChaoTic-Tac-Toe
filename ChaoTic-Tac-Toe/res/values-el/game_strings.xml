@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Παίζουν σε μία πλατεία άδεια.</string>
+  <string name="invalid_move_need_nonempty">Τοποθετήστε βόμβα σε έναν δείκτη που ήδη υπάρχει.</string>
+  <string name="button_send">Αποστολή</string>
+  <string name="player_won">%s κέρδισε!</string>
+  <string name="draw">Σχεδιάστε το παιχνίδι!</string>
+  <string name="play_again">Θέλετε να ξαναπαίξετε;</string>
+  <string name="exit_waiting_play_again">Άδεια</string>
+  <string name="opponent_left_exit_play_again">Ok</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Αναμονή για το %s να αποφασίσει να παίξει και πάλι.</string>
+  <string name="opponent_wants_to_play_again">%s θέλει να παίξει και πάλι.</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\'t θέλετε να ξαναπαίξετε.\'</string>
+  <string name="opponent_is_thinking">%s σκέψης.</string>
+  <string name="opponent_is_in_chat">%s είναι στο chat.</string>
+  <string name="peer_left_the_game">%s έχει αφήσει το παιχνίδι.</string>
+  <string name="leave_game_title">Αφήστε το παιχνίδι;</string>
+  <string name="leave_game_message">Αφήστε το παιχνίδι σε εξέλιξη;</string>
+  <string name="local_player_name">Σας</string>
+  <string name="chat_title">Συνομιλία με %s</string>
+  <string name="play_again_waiting">Αναμονή για %s</string>
+  <string name="online_setting_title">Ρυθμίσεις</string>
+  <string name="you_left_the_game">Αφήσατε το παιχνίδι.</string>
+  <string name="chat_actionbar_image_content">Chat μενού "ενέργεια"</string>
+  <string name="num_move_lbl">Κινήσεις</string>
+  <string name="num_games_lbl">Παιχνίδια:</string>
+  <string name="game_stats_title">Στατιστικά στοιχεία του παιχνιδιού</string>
+  <string name="player_stat_label">Παίκτης</string>
+  <string name="wins_stat_label">Κερδίζει</string>
+  <string name="losses_stat_label">Απώλειες</string>
+  <string name="draws_stat_label">Ισοπαλίες</string>
+  <string name="normal_game_help">Παραδοσιακά X Tic Tac-Toe\nPlayer παίζει Ο Xs\nPlayer παίζει Os.</string>
+  <string name="reverse_game_help">Αντίστροφη Tic Tac-Toe\nPlayer X παίζει Ο Os\nPlayer παίζει Xs.</string>
+  <string name="complex_game_help">Για κάθε player\ του στροφή, υπάρχει μια πιθανότητα αυτοί can\nplay τους marker\nplay τους opponent\ του marker\ncan να χρησιμοποιήσετε μια βόμβα να εκραγεί έναν δείκτη που ήδη υπάρχει στο Διοικητικό Συμβούλιο.</string>
+  <string name="player_x_lbl">Παίκτης X</string>
+  <string name="player_o_lbl">O παίκτης</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Ενώνει το δωμάτιο</string>
+  <string name="onRoomConnected">Τη σύνδεση με το δωμάτιο</string>
+  <string name="onRoomCreated">Τη δημιουργία δωμάτιο</string>
+  <string name="sendRealTimeMessage">Αποστολή μηνύματος</string>
+  <string name="sendMove">Αποστολή κίνηση</string>
+  <string name="communication_error">Σφάλμα στην επικοινωνία:</string>
+  <string name="cannot_invite_non_tester">Can\'t προσκαλέσει μη-tester από ένα λογαριασμό tester\'</string>
+</resources>

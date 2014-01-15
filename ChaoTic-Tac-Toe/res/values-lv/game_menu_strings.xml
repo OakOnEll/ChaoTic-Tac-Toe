@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Pierakstieties Google nosūtīt sasniegumus un spēlēt ar saviem draugiem.</string>
+  <string name="you_are_signed_in_as">Jūs esat pierakstījies pakalpojumā Google + kā %s</string>
+  <string name="sign_out">Izrakstīties</string>
+  <string name="signing_in">Pierakstoties Google</string>
+  <string name="signing_out">Parakstīšanas</string>
+  <string name="new_game_same_device">Caurlaide \'N Play\'</string>
+  <string name="new_game_vs_ai">Pārspēt Bot</string>
+  <string name="new_quick_game">Jaunu ātrās spēli</string>
+  <string name="new_game_live">Spēlēt ar draugu</string>
+  <string name="achievements">Skatīt sasniegumi</string>
+  <string name="leaderboards">Skatīt Leaderboards</string>
+  <string name="achievements_not_available">Lūdzu pieteikties, lai skatītu sasniegumiem.</string>
+  <string name="leaderboards_not_available">Lūdzu pieteikties, lai skatītu leaderboards.</string>
+  <string name="sign_in_to_play_network_game">Lūdzu, pierakstieties sākt tīkla spēli.</string>
+  <string name="sign_in_to_view_invites">Lūdzu pieteikties, lai skatītu tīkla spēļu ielūgumus.</string>
+  <string name="action_settings">Iestatījumus</string>
+  <string name="received_invite_from">Saņemtais uzaicinājums no %s.</string>
+  <string name="prompt_title_player_name">Ievadiet spēlētāja vārds</string>
+  <string name="prompt_player_name">Player %s nosaukums</string>
+  <string name="label_player_x_name">Player X\ nosaukums</string>
+  <string name="label_player_o_name">Player O\ nosaukums</string>
+  <string name="chance_chaotic">Haotiska</string>
+  <string name="chance_custom">Pielāgots</string>
+  <string name="chance_reverse">Pretējā virzienā</string>
+  <string name="chance_label_my_marker">Marķieri</string>
+  <string name="chance_label_opponent_marker">Viņu marķieri</string>
+  <string name="chance_label_remove_marker">Bumba</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Sākt spēli</string>
+  <string name="account_settings">Konta iestatījumus</string>
+  <string name="choose_ai_mode_title">ŠI spēle režīmā izvēlieties</string>
+  <string name="ai_level">ŠI līmenis</string>
+  <string name="ai_random">Izlases</string>
+  <string name="ai_easy">Viegli</string>
+  <string name="ai_medium">Vidējā</string>
+  <string name="ai_hard">Grūti</string>
+  <string name="choose_local_game_mode_title">Izvēlieties spēli režīmā</string>
+  <string name="error_x_name">Ievadiet nosaukumu X</string>
+  <string name="error_o_name">Ievadiet nosaukumu O</string>
+  <string name="unique_error_o_name">Ievadiet unikālu nosaukumu O</string>
+  <string name="choose_quick_game_mode_title">Izvēlēties ātrās spēli režīmā</string>
+  <string name="choose_online_game_mode_title">Izvēlieties tiešsaistes spēļu režīms</string>
+  <string name="choose_online_opponent">Atrast draugu</string>
+  <string name="select_opponent">Izvēlieties pretinieku</string>
+  <string name="game_style_lbl">Spēles stilu</string>
+  <string name="chance_of_label">Rain</string>
+</resources>

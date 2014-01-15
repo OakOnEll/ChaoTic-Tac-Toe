@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Siyen ak Google pou pataje réalisations Et jwe ansanm ak zanmi ou.</string>
+  <string name="you_are_signed_in_as">Ou ap siyen nan Google plis pase tankou %s</string>
+  <string name="sign_out">Pou yo siyen</string>
+  <string name="signing_in">Angaj pa siy ak Google</string>
+  <string name="signing_out">Angaj pa siy</string>
+  <string name="new_game_same_device">Pase \'N Jouer\'</string>
+  <string name="new_game_vs_ai">Li te bat Bot la</string>
+  <string name="new_quick_game">Nouvo taptap jwèt</string>
+  <string name="new_game_live">Jwe ak yon zanmi</string>
+  <string name="achievements">Réalisations View</string>
+  <string name="leaderboards">View Des</string>
+  <string name="achievements_not_available">Souple siyen pou wè réalisations.</string>
+  <string name="leaderboards_not_available">Souple siyen pou wè des.</string>
+  <string name="sign_in_to_play_network_game">Souple siyen pou yo kòmanse yon jwèt en.</string>
+  <string name="sign_in_to_view_invites">Souple siyen pou wè envitasyon jwèt rezo.</string>
+  <string name="action_settings">Paramètres</string>
+  <string name="received_invite_from">Te resevwa envitasyon de %s.</string>
+  <string name="prompt_title_player_name">Rantre nan jwè non</string>
+  <string name="prompt_player_name">Non pou jwè %s</string>
+  <string name="label_player_x_name">Jwè X\ non</string>
+  <string name="label_player_o_name">Jwè O\ non</string>
+  <string name="chance_normal">Nòmal</string>
+  <string name="chance_chaotic">Kaotik</string>
+  <string name="chance_custom">Personnalisée</string>
+  <string name="chance_reverse">Ranvèse</string>
+  <string name="chance_label_my_marker">Marque ou</string>
+  <string name="chance_label_opponent_marker">Marque yo</string>
+  <string name="chance_label_remove_marker">Bonm</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Kòmansman jwèt</string>
+  <string name="account_settings">Paramètres compte</string>
+  <string name="choose_ai_mode_title">Chwazi lavil AYI jwèt mòd</string>
+  <string name="ai_level">Lavil AYI nivo</string>
+  <string name="ai_random">O aza</string>
+  <string name="ai_easy">Fasil</string>
+  <string name="ai_medium">Mwayen</string>
+  <string name="ai_hard">Di</string>
+  <string name="choose_local_game_mode_title">Chwazi mòd jwèt</string>
+  <string name="error_x_name">Rantre nan yon non pou X</string>
+  <string name="error_o_name">Rantre nan yon non pou ou menm</string>
+  <string name="unique_error_o_name">Rantre nan yon inik non pou ou menm</string>
+  <string name="choose_quick_game_mode_title">Chwazi rapide mòd jwèt</string>
+  <string name="choose_online_game_mode_title">Chwazi Online mòd jwèt</string>
+  <string name="choose_online_opponent">Jwenn zanmi</string>
+  <string name="select_opponent">Fè chwa Adversaire</string>
+  <string name="game_style_lbl">Mod jwèt</string>
+  <string name="chance_of_label">Chans</string>
+</resources>

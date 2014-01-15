@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">U slaat uw dagelijkse maximale bewegingen in een chaotische spel: %s</string>
+  <string name="beat_weekly_max">U slaat uw wekelijkse maximale bewegingen in een chaotische spel: %s</string>
+  <string name="beat_alltime_max">U slaat uw alle tijd maximale bewegingen in een chaotische spel: %s</string>
+  <string name="beat_daily_min">U uw dagelijkse minimumbewegingen verslaan in een chaotische spel: %s</string>
+  <string name="beat_weekly_min">U slaat uw per minimumbewegingen in een chaotische spel: %s</string>
+  <string name="beat_alltime_min">U slaat uw minimumbewegingen voor alle tijd in een chaotische spel: %s</string>
+  <string name="beat_daily_wins">U slaat uw dagelijkse maximale wint in een sessie: %s</string>
+  <string name="beat_weekly_wins">U slaat uw wekelijkse maximale wint in een sessie: %s</string>
+  <string name="beat_alltime_wins">U slaat uw alle tijd maximale wint in een sessie: %s</string>
+</resources>

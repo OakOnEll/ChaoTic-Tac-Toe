@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Logige sisse Google\'i jagada saavutusi ja mängida koos oma sõpradega.\'</string>
+  <string name="you_are_signed_in_as">Olete sisse logitud Google + kasutajana %s</string>
+  <string name="sign_out">Leia meid Facebook\'ist\'</string>
+  <string name="signing_in">Google Services</string>
+  <string name="signing_out">Orkutist välja logimata</string>
+  <string name="new_game_same_device">Pass \'N mängib\'</string>
+  <string name="new_game_vs_ai">Beat Bot</string>
+  <string name="new_quick_game">Uus kiire mäng</string>
+  <string name="new_game_live">Mängida koos sõbraga</string>
+  <string name="achievements">Vaade saavutused</string>
+  <string name="leaderboards">Vaade Edetabelid</string>
+  <string name="achievements_not_available">Saavutused vaatamiseks logige sisse.</string>
+  <string name="leaderboards_not_available">Leaderboards vaatamiseks logige sisse.</string>
+  <string name="sign_in_to_play_network_game">Palun logige sisse võrgustatud mängu alguses.</string>
+  <string name="sign_in_to_view_invites">Network mängu kutsed vaatamiseks logige sisse.</string>
+  <string name="action_settings">Seaded</string>
+  <string name="received_invite_from">Vastuvõetud kutse serverist %s.</string>
+  <string name="prompt_title_player_name">Sisestage mängija nimi</string>
+  <string name="prompt_player_name">Nime mängija %s</string>
+  <string name="label_player_x_name">Mängija X\ nimi</string>
+  <string name="label_player_o_name">Mängija O\ nimi</string>
+  <string name="chance_normal">Normaalne</string>
+  <string name="chance_chaotic">Kaootiline</string>
+  <string name="chance_custom">Kohandatud</string>
+  <string name="chance_label_my_marker">Teie Marker</string>
+  <string name="chance_label_opponent_marker">Nende Marker</string>
+  <string name="chance_label_remove_marker">Pomm</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Alusta mängu</string>
+  <string name="account_settings">Sätete muutmine</string>
+  <string name="choose_ai_mode_title">AI mäng režiimis valida</string>
+  <string name="ai_level">AI tase</string>
+  <string name="ai_random">Juhuslik</string>
+  <string name="ai_easy">Lihtne</string>
+  <string name="ai_medium">Keskmise</string>
+  <string name="ai_hard">Raske</string>
+  <string name="choose_local_game_mode_title">Vali mäng režiimis</string>
+  <string name="error_x_name">Sisestage X</string>
+  <string name="error_o_name">Sisestage nimi O</string>
+  <string name="unique_error_o_name">Sisestage unikaalne nimi O</string>
+  <string name="choose_quick_game_mode_title">Vali kiire mäng režiimis</string>
+  <string name="choose_online_game_mode_title">Vali Online mäng režiimis</string>
+  <string name="choose_online_opponent">Leia sõber</string>
+  <string name="select_opponent">Valige vastane</string>
+  <string name="game_style_lbl">Mängu stiil</string>
+  <string name="chance_of_label">Tõenäosus</string>
+</resources>

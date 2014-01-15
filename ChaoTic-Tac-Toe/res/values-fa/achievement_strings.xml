@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">دستاورد</string>
+  <string name="offline_achievement_only_xs_or_os">: تنها Xs یا سیستم عامل</string>
+  <string name="offline_achievement_chaotic_draw">هرج و مرج قرعه کشی: قرعه کشی در حالت هرج و مرج.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: بازی همان دولت در سه در یک بازی حرکت می کند.</string>
+  <string name="offline_achievement_long_haul">مسافت طولانی: بازی هرج و مرج با 20 حرکت می کند.</string>
+  <string name="offline_achievement_with_a_little_help">با کمک کمی از دوستان: پیروزی در 3 حرکت می کند.</string>
+  <string name="offline_achievement_clean_slate">تخته سنگ پاک: بازگشت به حالت اولیه پس از 5 حرکت می کند.</string>
+  <string name="offline_achievement_reverse_win">Reversi: معکوس پیروزی در بازی سبک.</string>
+  <string name="offline_achievement_the_good_samaritan">سامری نیکوکار: کمک به پیروزی حریف خود را در 3 حرکت می کند.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">دو پرنده با یک سنگ: پیروزی در بازی در دو جهت در یک بار.</string>
+  <string name="offline_achievement_good_sport">ورزش خوب: محل حرکت برنده برای حریف خود را مجبور.</string>
+  <string name="offline_achievement_fork_in_the_road">انشعاب در: برنده بازی در یکی از راه های متعدد.</string>
+  <string name="offline_achievement_oops">اوه: حرکت برنده هیچکدام برای حریف خود بازی.</string>
+  <string name="offline_achievement_friendly_fire">آتش دوستانه: دلیلی یکی از خود نشانگر بمب.</string>
+  <string name="offline_achievement_missed_opportunities">Opportunites از دست رفته: خانم برنده بازی حرکت می کند.</string>
+  <string name="offline_achievement_the_forced_hand">دست اجباری: بازی یکی از چند حرکت برنده اجباری را برای حریف خود را.</string>
+</resources>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">Saavutus</string>
+  <string name="offline_achievement_only_xs_or_os">: Vain Xs tai Os</string>
+  <string name="offline_achievement_chaotic_draw">Kaoottinen vetää: Vetää kaoottisessa tilassa.</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: Samaa peli tilassa kolme liikkuu peli.</string>
+  <string name="offline_achievement_long_haul">Pitkän matkan: Pelata kaoottinen 20 liikkuu.</string>
+  <string name="offline_achievement_with_a_little_help">Hieman apua ystäviltäsi: Win 3 liikkuu.</string>
+  <string name="offline_achievement_clean_slate">Puhtaalta pöydältä: Palata alkuperäiseen tilaan, kun 5 liikkuu.</string>
+  <string name="offline_achievement_reverse_win">Othello: Voittaa Reverse tyylinen peli.</string>
+  <string name="offline_achievement_the_good_samaritan">Laupias samarialainen: Auttaa vastustaja voittaa 3 liikkuu.</string>
+  <string name="offline_achievement_two_birds_with_one_stone">Kaksi kärpästä yhdellä iskulla: voittaa pelin kahteen suuntaan kerralla.</string>
+  <string name="offline_achievement_good_sport">Hyvää urheilua: Paikka pakotti voittoon johtavan siirron vastustajan.</string>
+  <string name="offline_achievement_fork_in_the_road">Tienhaarasta: voittaa pelin monin tavoin.</string>
+  <string name="offline_achievement_oops">Oho: Pelaa luontevasti voittoon johtavan siirron vastustaja.</string>
+  <string name="offline_achievement_friendly_fire">Friendly Fire: Turhaan pommi yksi omia merkkejä.</string>
+  <string name="offline_achievement_missed_opportunities">Jääneiden Opportunites: Miss pelissä voittaa siirtää.</string>
+  <string name="offline_achievement_the_forced_hand">Pakko käsi: Pelaa yksi useita pakko voittaa vastustaja.</string>
+</resources>

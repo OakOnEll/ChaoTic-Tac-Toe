@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Chaotisch-Tac-Toe</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nr.</string>
+  <string name="ok">Okay</string>
+  <string name="cancel">Abbrechen</string>
+  <string name="title_game">Chaotisch-Tac-Toe</string>
+  <string name="pref_sound_fx">Play Sound-Effekte</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

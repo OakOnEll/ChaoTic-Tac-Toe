@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="invalid_move_need_empty">Ua si nyob rau hauv kev npliag xwmfab.</string>
+  <string name="invalid_move_need_nonempty">Muab tej tus uas twb muaj lawm marker.</string>
+  <string name="button_send">Xa</string>
+  <string name="action_chat">Tsham</string>
+  <string name="player_won">%s yeej!</string>
+  <string name="draw">Kos cov kev ua si!</string>
+  <string name="play_again">Ua si dua?</string>
+  <string name="exit_waiting_play_again">Tawm mus</string>
+  <string name="opponent_left_exit_play_again">ua li</string>
+  <string name="waiting_for_opponent_to_decide_to_play_again">Tos %s txiav txim ua si dua.</string>
+  <string name="opponent_wants_to_play_again">%s xav ua si dua.</string>
+  <string name="opponent_does_not_want_to_play_again">%s doesn\'t xav mus ua si dua.\'</string>
+  <string name="opponent_is_thinking">%s xav.</string>
+  <string name="opponent_is_in_chat">%s uas yog nyob rau kev sib tham.</string>
+  <string name="peer_left_the_game">%s tau tom qab qhov kev ua si.</string>
+  <string name="leave_game_title">Lawm mas?</string>
+  <string name="leave_game_message">Tawm hauv qhov kev ua si nyob rau hauv kev kawm?</string>
+  <string name="local_player_name">Koj</string>
+  <string name="chat_title">Tsham nrog %s</string>
+  <string name="play_again_waiting">Tos %s</string>
+  <string name="online_setting_title">Nqis</string>
+  <string name="you_left_the_game">Koj tshuav qhov kev ua si.</string>
+  <string name="chat_actionbar_image_content">Sib tham txog cov tshuab raj</string>
+  <string name="num_move_lbl">Tsiv</string>
+  <string name="num_games_lbl">Ua si:</string>
+  <string name="game_stats_title">Qus txheeb cais</string>
+  <string name="player_stat_label">Neeg uas ua ntawv</string>
+  <string name="wins_stat_label">Yeej</string>
+  <string name="normal_game_help">Tic-Tac-Toe\nPlayer X tsoos plays Xs\nPlayer O plays Os.</string>
+  <string name="reverse_game_help">Tic-Tac-Toe\nPlayer ntxeev X plays Os\nPlayer O plays sau tug ntawv x.</string>
+  <string name="complex_game_help">Nyob rau txhua lub player\ tig, muaj sij hawm lawv can\nplay lawv cov marker\nplay opponent\ lub marker\ncan siv lub foob pob tawg ib marker rau ntawm lub Rooj Tswjhwm Saib cov uas twb muaj lawm.</string>
+  <string name="player_x_lbl">Neeg uas ua ntawv X</string>
+  <string name="player_o_lbl">Neeg uas ua ntawv O</string>
+  <plurals name="num_wins_with_label">
+    <item quantity="zero">No Wins</item>
+    <item quantity="one">1 Win</item>
+    <item quantity="other">%d Wins</item>
+  </plurals>
+  <plurals name="num_draws_with_label">
+    <item quantity="zero">No Draws</item>
+    <item quantity="one">1 Draw</item>
+    <item quantity="other">%d Draws</item>
+  </plurals>
+  <string name="onJoinedRoom">Pub ntxiv tshaj Room</string>
+  <string name="onRoomConnected">Txuas mus rau chav</string>
+  <string name="onRoomCreated">Tsim rov</string>
+  <string name="sendRealTimeMessage">Xa lus</string>
+  <string name="sendMove">Xa tawm</string>
+  <string name="communication_error">Yuam kev nyob hauv cov kev sib txuas lus:</string>
+  <string name="cannot_invite_non_tester">Can\'t caw cov-tester los ntawm ib tus account tester\'</string>
+</resources>

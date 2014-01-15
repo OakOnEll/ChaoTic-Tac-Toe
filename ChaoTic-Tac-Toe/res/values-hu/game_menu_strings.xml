@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="sign_in_why">Jelentkezzen be a Google eredmények és játszani a barátaival.</string>
+  <string name="you_are_signed_in_as">Be van jelentkezve a Google +-mint %s</string>
+  <string name="sign_out">Kijelentkezés</string>
+  <string name="signing_in">Bejelentkezik Google</string>
+  <string name="signing_out">Kijelentkezés</string>
+  <string name="new_game_same_device">Adja át a játék \'N\'</string>
+  <string name="new_game_vs_ai">Beat a Bot</string>
+  <string name="new_quick_game">Új gyors játék</string>
+  <string name="new_game_live">Játszani egy barát</string>
+  <string name="achievements">Teljesítmények megtekintése</string>
+  <string name="leaderboards">Ranglista megtekintése</string>
+  <string name="achievements_not_available">Kérjük jelentkezzen be eredmények megjelenítéséhez.</string>
+  <string name="leaderboards_not_available">Kérjük jelentkezzen be ranglista megtekintéséhez.</string>
+  <string name="sign_in_to_play_network_game">Jelentkezzen be a hálózati játék indításához.</string>
+  <string name="sign_in_to_view_invites">Kérjük, jelentkezzen be Nézd hálózat vad meghívások.</string>
+  <string name="action_settings">Beállítások</string>
+  <string name="received_invite_from">Kapott meghívást: %s.</string>
+  <string name="prompt_title_player_name">Adja meg a játékos neve</string>
+  <string name="prompt_player_name">Nevet a játékos: %s</string>
+  <string name="label_player_x_name">X\ játékos neve</string>
+  <string name="label_player_o_name">O játékos neve</string>
+  <string name="chance_normal">Normál</string>
+  <string name="chance_chaotic">Kaotikus</string>
+  <string name="chance_custom">Egyéni</string>
+  <string name="chance_reverse">Fordított</string>
+  <string name="chance_label_my_marker">A Marker</string>
+  <string name="chance_label_opponent_marker">A Marker</string>
+  <string-array name="chance_array">
+    <item>Normal</item>
+    <item>Reverse</item>
+    <item>Chaotic</item>
+    <item>Custom</item>
+  </string-array>
+  <string name="start">Start játék</string>
+  <string name="account_settings">Postafiók-beállítások</string>
+  <string name="choose_ai_mode_title">AI játék mód kiválasztása</string>
+  <string name="ai_level">AI szint</string>
+  <string name="ai_random">Véletlenszerű</string>
+  <string name="ai_easy">Könnyű</string>
+  <string name="ai_medium">Közepes</string>
+  <string name="ai_hard">Kemény</string>
+  <string name="choose_local_game_mode_title">Válassza ki a játék mód</string>
+  <string name="error_x_name">Adjon meg egy nevet az x-hez</string>
+  <string name="error_o_name">Adjon meg egy nevet az O</string>
+  <string name="unique_error_o_name">Adjon egy egyedi nevet az O</string>
+  <string name="choose_quick_game_mode_title">Válassza ki a gyors játék mód</string>
+  <string name="choose_online_game_mode_title">Online játék mód kiválasztása</string>
+  <string name="choose_online_opponent">Talál-barát</string>
+  <string name="select_opponent">Válassza ki az ellenfél</string>
+  <string name="game_style_lbl">Játékstílus</string>
+  <string name="chance_of_label">Esély a</string>
+</resources>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Kaotik-Tac-zòtèy</string>
+  <string name="yes">Wi</string>
+  <string name="ok">Oke</string>
+  <string name="cancel">Anile</string>
+  <string name="title_game">Kaotik-Tac-zòtèy</string>
+  <string name="pref_sound_fx">Jouer son efè</string>
+  <!--
+<string name="player_label">Player</string> ==>    
+    -->
+</resources>

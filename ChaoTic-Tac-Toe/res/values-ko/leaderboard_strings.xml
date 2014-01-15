@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">혼돈 게임에서 일일 최대 움직임을 이길: %s</string>
+  <string name="beat_weekly_max">혼돈 게임에서 주간 최대 움직임을 이길: %s</string>
+  <string name="beat_alltime_max">혼돈 게임에 당신의 모든 시간 최대 동작을 이길: %s</string>
+  <string name="beat_daily_min">혼돈 게임에서 당신의 매일 최소 동작을 이길: %s</string>
+  <string name="beat_weekly_min">혼돈 게임에서 당신의 주간 최소 동작을 이길: %s</string>
+  <string name="beat_alltime_min">혼돈 게임에 당신의 모든 시간 최소 동작을 이길: %s</string>
+  <string name="beat_daily_wins">세션에서 당신의 일일 최대 승리를 이길: %s</string>
+  <string name="beat_weekly_wins">세션에서 당신의 매주 최대 승리를 이길: %s</string>
+  <string name="beat_alltime_wins">세션에서 당신의 모든 시간 최대 승리를 이길: %s</string>
+</resources>

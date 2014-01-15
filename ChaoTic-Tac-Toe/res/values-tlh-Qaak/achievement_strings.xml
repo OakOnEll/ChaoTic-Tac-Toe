@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label"></string>
+  <string name="offline_achievement_only_xs_or_os">:    </string>
+  <string name="offline_achievement_chaotic_draw"> :    </string>
+  <string name="offline_achievement_deja_vu">:        </string>
+  <string name="offline_achievement_long_haul"> :     </string>
+  <string name="offline_achievement_with_a_little_help">   :   </string>
+  <string name="offline_achievement_clean_slate"> :        </string>
+  <string name="offline_achievement_reverse_win">:    </string>
+  <string name="offline_achievement_the_good_samaritan"> :      </string>
+  <string name="offline_achievement_two_birds_with_one_stone">   :     </string>
+  <string name="offline_achievement_good_sport"> :     </string>
+  <string name="offline_achievement_fork_in_the_road">   :      </string>
+  <string name="offline_achievement_oops">:     </string>
+  <string name="offline_achievement_friendly_fire"> :    </string>
+  <string name="offline_achievement_missed_opportunities"> :    </string>
+  <string name="offline_achievement_the_forced_hand"> :       </string>
+</resources>

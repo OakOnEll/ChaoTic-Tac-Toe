@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="beat_daily_max">Vous battez vos mouvements maximales quotidiennes dans un match chaotique : %s</string>
+  <string name="beat_weekly_max">Vous battez vos mouvements maximales hebdomadaires dans un match chaotique : %s</string>
+  <string name="beat_alltime_max">Vous battez vos mouvements maximale de tous les temps dans un match chaotique : %s</string>
+  <string name="beat_daily_min">Vous battez vos mouvements minimales quotidiennes dans un match chaotique : %s</string>
+  <string name="beat_weekly_min">Vous battez vos mouvements minimums hebdomadaires dans un match chaotique : %s</string>
+  <string name="beat_alltime_min">Vous battez vos mouvements minimale de tous les temps dans un match chaotique : %s</string>
+  <string name="beat_daily_wins">Vous battez vos victoires maximales quotidiennes dans une session : %s</string>
+  <string name="beat_weekly_wins">Vous battez vos victoires maximales hebdomadaires dans une session : %s</string>
+  <string name="beat_alltime_wins">Vous battez vos victoires maximale de tous les temps lors d\'une séance : %s\'</string>
+</resources>

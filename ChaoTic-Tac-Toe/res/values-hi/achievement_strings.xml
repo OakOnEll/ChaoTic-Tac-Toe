@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="offline_achievement_label">उपलब्धि</string>
+  <string name="offline_achievement_only_xs_or_os">: केवल Xs या ओएस</string>
+  <string name="offline_achievement_chaotic_draw">अराजक ड्रा: अराजक मोड में एक आकर्षित।</string>
+  <string name="offline_achievement_deja_vu">Deja Vu: एक खेल में एक ही खेल राज्य तीन ले जाता है।</string>
+  <string name="offline_achievement_long_haul">लंबी दौड़: 20 चाल के साथ एक अराजक खेल खेलते हैं।</string>
+  <string name="offline_achievement_with_a_little_help">अपने दोस्तों से थोड़ी मदद के साथ: 3 में जीत ले जाता है।</string>
+  <string name="offline_achievement_clean_slate">साफ स्लेट: 5 चालों के बाद प्रारंभिक स्थिति में वापस लाने।</string>
+  <string name="offline_achievement_reverse_win">रिवर्सी: एक रिवर्स शैली खेल जीत।</string>
+  <string name="offline_achievement_the_good_samaritan">अच्छा समारिटन: अपने प्रतिद्वंद्वी विन 3 चालें में मदद।</string>
+  <string name="offline_achievement_two_birds_with_one_stone">एक तीर से दो शिकार: एक बार में दो दिशाओं में एक खेल जीत।</string>
+  <string name="offline_achievement_good_sport">अच्छा खेल: जगह जीतने वाली चाल के लिए अपने प्रतिद्वंद्वी मजबूर किया।</string>
+  <string name="offline_achievement_fork_in_the_road">सड़क में कांटा: जीत कई मायनों में से एक में एक खेल।</string>
+  <string name="offline_achievement_oops">उफ़: एक unforced जीत कदम अपने प्रतिद्वंद्वी के लिए खेलते हैं।</string>
+  <string name="offline_achievement_friendly_fire">दोस्ताना आग: यूँ ही अपनी मार्करों के एक बम।</string>
+  <string name="offline_achievement_missed_opportunities">छूटी साफ्टवेयर: एक जीत बजाना मिस ले जाएँ।</string>
+  <string name="offline_achievement_the_forced_hand">मजबूर हाथ: एकाधिक जबरिया जीतने वाली चालों में से एक अपने प्रतिद्वंद्वी के लिए खेलते हैं।</string>
+</resources>
