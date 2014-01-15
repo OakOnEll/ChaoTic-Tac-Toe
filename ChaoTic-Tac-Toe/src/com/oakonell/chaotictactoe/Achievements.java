@@ -38,7 +38,7 @@ public class Achievements {
 			if (game.getMode() == GameMode.PASS_N_PLAY) {
 				return;
 			}
-			if (outcome.isDraw()) {
+			if (outcome.getWinner()==null) {
 				return;
 			}
 			if (outcome.getWinner().equals(game.getLocalPlayer())) {
