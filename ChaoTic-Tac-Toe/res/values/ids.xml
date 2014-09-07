@@ -2,7 +2,7 @@
 <resources>
 
     <string name="ga_trackingId" translatable="false">UA-41757713-1</string>
-    <string name="admob_id" translatable="false">a151bb00ebf21c9</string>
+    <string name="admob_id" translatable="false">ca-app-pub-5251465919255199/4784827066</string>
     <string name="app_id" translatable="false">901795740581</string>
     
 </resources>
