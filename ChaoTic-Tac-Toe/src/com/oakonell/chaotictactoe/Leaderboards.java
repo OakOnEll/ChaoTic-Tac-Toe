@@ -51,6 +51,11 @@ public class Leaderboards {
 		} else {
 			wins = score.getOWins();
 		}
+		
+		if (!gamesClient.isConnected()) {
+			return;
+		}
+		
 		submitMostWins(context, gamesClient, wins);
 		
 		if (!game.getMarkerChance().isChaotic()) {
