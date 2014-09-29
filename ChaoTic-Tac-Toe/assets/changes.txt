@@ -1,6 +1,6 @@
-Version 1.2
+Version 1.3
 ------------
-Fix keyboard issue
+Fix crash when winning a game and not logged in. 
 
 Version 1.10
 ------------
